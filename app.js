@@ -14,11 +14,17 @@ app.get('/', (req, res) => {
 
 // Ruta de ejemplo para recibir datos via POST
 app.post('/ejemplo', (req, res) => {
-    res.json('Datos recibidos');
     console.log(req.body);
+    res.json('Datos recibidos');
 });
 
-// Iniciar servidor
+// Ruta para Webhook
+app.post('/webhook', (req, res) => {
+    console.log('Webhook recibido:', req.body);
+    res.status(200).send('OK');
+});
+
+// Iniciar servidor (debe estar al final)
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);
 });
