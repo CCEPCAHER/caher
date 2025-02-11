@@ -601,21 +601,30 @@ document.addEventListener("DOMContentLoaded", function() {
     const filename = `pedido_${new Date().toISOString().slice(0, 10)}.xlsx`;
     XLSX.writeFile(workbook, filename);
   }
+function submitOrder() {
+  // Recoge los datos del carrito
+  const order = collectCartData();
+  if (!order) return;
 
-  function submitOrder() {
-    const order = collectCartData();
-    fetch("http://172.20.10.2:3000/ejemplo",{
+  console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
+
+  // Confirmación del usuario
+  if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
+    // Envía el pedido a Power Automate
+    fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ Prueba: 'Esto es una prueba de un POST'})
-    }).then(response => response.json()).then(informacion => console.log(informacion))
-    if (!order) return;
-    if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
-      exportToExcel(order);
+      // Se envía el arreglo de pedidos. Asegúrate de que el flujo de Power Automate tenga el esquema adecuado.
+      body: JSON.stringify(order)
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log("Pedido enviado a Power Automate:", data);
       alert("Pedido enviado con éxito. Gracias por tu compra.");
-      // Reiniciar carrito
+      
+      // Reiniciar el carrito
       document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
       updateTotalDisplay(0);
       document.querySelectorAll('.add-btn').forEach(btn => {
@@ -623,8 +632,13 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.style.backgroundColor = '#2c7a7b';
         btn.innerText = 'Agregar';
       });
-    }
+    })
+    .catch(error => {
+      console.error("Error al enviar el pedido:", error);
+      alert("Error al enviar el pedido.");
+    });
   }
+}
 
   // Muestra u oculta el modal del carrito
   function toggleCart() {
