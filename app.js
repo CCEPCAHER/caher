@@ -1,30 +1,30 @@
-import express from "express";
-import cors from "cors";
+// app.js o server.js
+import express from 'express';
+import cors from 'cors';
+import webhookRoutes from './routes/webhook.js';
 
 const app = express();
-const port = process.env.PORT || 8080; // Usar el puerto dinámico de Railway
+const port = process.env.PORT || 8080;
 
-app.use(cors());
+// Configurar CORS (ajusta el origen según corresponda)
+const corsOptions = {
+  origin: 'https://ccepcaher.github.io',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+};
+app.use(cors(corsOptions));
+
+// Middleware para procesar JSON
 app.use(express.json());
 
-// Ruta principal
+// Rutas
 app.get('/', (req, res) => {
-    res.send('Servidor escuchando!');
+  res.send('Servidor escuchando!');
 });
 
-// Ruta de ejemplo para recibir datos via POST
-app.post('/ejemplo', (req, res) => {
-    console.log(req.body);
-    res.json('Datos recibidos');
-});
+// Usa la ruta del webhook
+app.use(webhookRoutes);
 
-// Ruta para Webhook
-app.post('/webhook', (req, res) => {
-    console.log('Webhook recibido:', req.body);
-    res.status(200).send('OK');
-});
-
-// Iniciar servidor (debe estar al final)
 app.listen(port, () => {
-    console.log(`Servidor corriendo en el puerto ${port}`);
+  console.log(`Servidor corriendo en el puerto ${port}`);
 });
