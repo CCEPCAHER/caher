@@ -7,10 +7,9 @@ const port = process.env.PORT || 8080;
 // Configurar CORS para permitir solicitudes desde tu dominio
 const corsOptions = {
   origin: 'https://ccepcaher.github.io/caher/', // Asegúrate de que coincida exactamente con el origen de tu sitio
-  methods: ['GET', 'POST'],
+methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 };
-
 app.use(cors(corsOptions));
 
 // Middleware para procesar JSON en las solicitudes
