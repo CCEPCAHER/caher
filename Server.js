@@ -4,10 +4,10 @@ import cors from 'cors';
 const app = express();
 const port = process.env.PORT || 8080;
 
-// Configurar CORS para permitir solicitudes desde tu dominio
+// Configurar CORS para permitir solicitudes desde tu dominio (sin ruta)
 const corsOptions = {
-  origin: 'https://ccepcaher.github.io/caher/', // Asegúrate de que coincida exactamente con el origen de tu sitio
-methods: ['GET', 'POST'],
+  origin: 'https://ccepcaher.github.io',
+  methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 };
 app.use(cors(corsOptions));
