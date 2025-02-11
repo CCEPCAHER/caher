@@ -604,24 +604,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function submitOrder() {
   const order = collectCartData();
-  if (!order) return; // Si no hay pedido, no continúa
+
+  console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
+
+  if (!order || order.length === 0) {
+    alert("El pedido está vacío. Agrega productos antes de enviarlo.");
+    return;
+  }
 
   if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
-    // Envía el pedido a Power Automate usando la URL que proporcionaste
     fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      // Aquí enviamos el arreglo de pedidos; asegúrate de que el flujo de Power Automate tenga el esquema adecuado.
       body: JSON.stringify(order)
     })
     .then(response => response.text())
     .then(data => {
       console.log("Pedido enviado a Power Automate:", data);
-      // (Opcional) Exporta a Excel si lo deseas
-      exportToExcel(order);
       alert("Pedido enviado con éxito. Gracias por tu compra.");
+      exportToExcel(order);
+    })
+    .catch(error => {
+      console.error("Error al enviar el pedido:", error);
+      alert("Error al enviar el pedido.");
+    });
+  }
+}
       
       // Reinicia el carrito: vacía el contenedor y restablece el total y los botones de "Agregar"
       document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
