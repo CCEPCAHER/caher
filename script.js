@@ -603,35 +603,28 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function submitOrder() {
-  const order = collectCartData();
-
-  console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
-
-  if (!order || order.length === 0) {
-    alert("El pedido está vacío. Agrega productos antes de enviarlo.");
-    return;
-  }
-
-  if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
-    fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
+    const order = collectCartData();
+    fetch("http://172.20.10.2:3000/ejemplo",{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(order)
-    })
-    .then(response => response.text())
-    .then(data => {
-      console.log("Pedido enviado a Power Automate:", data);
-      alert("Pedido enviado con éxito. Gracias por tu compra.");
+      body: JSON.stringify({ Prueba: 'Esto es una prueba de un POST'})
+    }).then(response => response.json()).then(informacion => console.log(informacion))
+    if (!order) return;
+    if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
       exportToExcel(order);
-    })
-    .catch(error => {
-      console.error("Error al enviar el pedido:", error);
-      alert("Error al enviar el pedido.");
-    });
+      alert("Pedido enviado con éxito. Gracias por tu compra.");
+      // Reiniciar carrito
+      document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
+      updateTotalDisplay(0);
+      document.querySelectorAll('.add-btn').forEach(btn => {
+        btn.classList.remove('added');
+        btn.style.backgroundColor = '#2c7a7b';
+        btn.innerText = 'Agregar';
+      });
+    }
   }
-}
 
   // Muestra u oculta el modal del carrito
   function toggleCart() {
