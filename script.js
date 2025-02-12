@@ -673,34 +673,19 @@ function exportToExcel(order) {
 function submitOrder() {
   // Recoge los datos del carrito
   const orderItems = collectCartData();
-  if (!orderItems || orderItems.length === 0) {
-    alert("No hay productos en el carrito para enviar.");
-    return;
-  }
+  if (!orderItems) return;
 
-  // Verifica que el usuario haya iniciado sesión comprobando la clave "loggedIn"
-  if (localStorage.getItem("loggedIn") !== "true") {
-    alert("Error: No has iniciado sesión. Por favor, inicia sesión antes de enviar el pedido.");
-    return;
-  }
+  // Obtén el nombre del usuario que ha iniciado sesión
+  const loggedUser = localStorage.getItem("loggedInUser") || "Usuario no identificado";
 
-  // Obtén la información del almacén (tienda) del usuario desde localStorage
-  const userStore = localStorage.getItem("userStore") || null;
-  if (!userStore) {
-    alert("Error: No se encontró información de la tienda. Inicia sesión nuevamente.");
-    return;
-  }
-
-  // Crea el objeto del pedido en el formato requerido por Power Automate
-  // (Ajusta los nombres de las propiedades según lo que requiera tu flujo)
+  // Crea el objeto final del pedido, incluyendo la identidad del usuario
   const order = {
-    store: userStore,
-    products: orderItems
+    user: loggedUser,
+    items: orderItems
   };
 
   console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
 
-  // Confirmar antes de enviar el pedido
   if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
     // Envía el pedido a Power Automate
     fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
@@ -715,7 +700,7 @@ function submitOrder() {
       console.log("Pedido enviado a Power Automate:", data);
       alert("Pedido enviado con éxito. Gracias por tu compra.");
       
-      // Reinicia el carrito después de enviar el pedido
+      // Reiniciar el carrito
       document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
       updateTotalDisplay(0);
       document.querySelectorAll('.add-btn').forEach(btn => {
@@ -723,17 +708,14 @@ function submitOrder() {
         btn.style.backgroundColor = '#2c7a7b';
         btn.innerText = 'Agregar';
       });
-
-      // Opcional: limpiar el localStorage después de enviar el pedido (si es necesario)
-      // localStorage.removeItem("loggedIn");
-      // localStorage.removeItem("userStore");
     })
     .catch(error => {
       console.error("Error al enviar el pedido:", error);
-      alert("Error al enviar el pedido. Inténtalo de nuevo.");
+      alert("Error al enviar el pedido.");
     });
   }
 }
+
 // Muestra u oculta el modal del carrito
 function toggleCart() {
   document.getElementById("cart-modal").classList.toggle("active");
