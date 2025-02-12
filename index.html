@@ -43,25 +43,32 @@
     </div>
     <!-- Elemento de audio para notificar al agregar producto -->
     <audio id="add-sound" src="beep.mp3" preload="auto"></audio>
-    <!-- Aquí puedes incluir tus otros scripts, por ejemplo, para el carrito y funciones adicionales -->
     <script src="script.js"></script>
   </div>
 
-  <!-- Script de autenticación (puedes incluirlo al final del body) -->
+  <!-- Script de autenticación -->
   <script>
-    // Datos de usuario de ejemplo (no es seguro para producción)
-    const USER = {
-      username: "usuario",
-      password: "contraseña123"
-    };
+    // Array de usuarios válidos con contraseña única "1234"
+    const USERS = [
+      { username: "CCIPBCNCRD8", store: "Alcampo Sant Boi", password: "1234" },
+      { username: "ccipbcncrd4", store: "Alcampo Sant Quirze", password: "1234" },
+      { username: "800800800",   store: "Alcampo Esplugues",  password: "1234" },
+      { username: "USUARIO4",     store: "Alcampo Other1",      password: "1234" },
+      { username: "USUARIO5",     store: "Alcampo Other2",      password: "1234" }
+    ];
 
     document.getElementById("login-form").addEventListener("submit", function(e) {
       e.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      if(username === USER.username && password === USER.password) {
+      const usernameInput = document.getElementById("username").value.trim();
+      const passwordInput = document.getElementById("password").value.trim();
+      
+      // Buscar si existe un usuario que coincida con las credenciales
+      const userFound = USERS.find(user => user.username === usernameInput && user.password === passwordInput);
+      
+      if (userFound) {
         // Guarda el estado de autenticación en localStorage (opcional)
         localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("userStore", userFound.store);
         mostrarContenido();
       } else {
         alert("Credenciales incorrectas");
@@ -69,13 +76,19 @@
     });
 
     function mostrarContenido() {
-      if(localStorage.getItem("loggedIn") === "true") {
+      if (localStorage.getItem("loggedIn") === "true") {
         document.getElementById("login-container").style.display = "none";
         document.getElementById("contenido").style.display = "block";
+        // Opcional: mostrar el nombre del almacén en el header
+        const storeName = localStorage.getItem("userStore");
+        if(storeName){
+          const header = document.querySelector("header h1");
+          header.textContent += " - " + storeName;
+        }
       }
     }
 
-    // Ejecuta al cargar la página para mostrar u ocultar contenido según el estado de login
+    // Comprueba al cargar la página si ya hay un usuario autenticado
     mostrarContenido();
   </script>
 </body>
