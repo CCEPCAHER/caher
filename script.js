@@ -575,23 +575,48 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Recoge los datos del carrito y genera un arreglo para exportar a Excel
-  function collectCartData() {
-    const cartItems = document.querySelectorAll("#cart-items-modal .cart-item");
-    if (cartItems.length === 0 || (cartItems[0].innerText && cartItems[0].innerText.includes('No hay productos'))) {
-      alert("El carrito está vacío. No puedes enviar un pedido sin productos.");
-      return null;
-    }
-    const order = [];
-    cartItems.forEach(item => {
-      const parts = item.innerText.split(" - ");
-      const product = parts[0].trim();
-      const quantity = parseInt(parts[1].replace(" unidades", ""));
-      const price = parseFloat(parts[2].replace(" Precio: €", ""));
-      order.push({ product, quantity, price });
-    });
-    return order;
+function collectCartData() {
+  const cartItems = document.querySelectorAll("#cart-items-modal .cart-item");
+  if (
+    cartItems.length === 0 ||
+    (cartItems[0].innerText && cartItems[0].innerText.includes('No hay productos'))
+  ) {
+    alert("El carrito está vacío. No puedes enviar un pedido sin productos.");
+    return null;
   }
 
+  const order = [];
+
+  cartItems.forEach(item => {
+    // Limpia el texto eliminando saltos de línea y espacios extra
+    const text = item.innerText.replace(/\n/g, ' ').trim();
+    console.log("Texto crudo del item:", text);
+
+    // Se asume que el formato es:
+    // "Nombre del producto - X unidades - Precio: €Y"
+    // Usamos expresiones regulares para extraer cada parte.
+
+    // Extraer el nombre del producto (captura desde el inicio hasta el primer " -")
+    const productMatch = text.match(/^(.+?)\s*-\s*/);
+
+    // Extraer la cantidad (busca un número seguido de "unidades")
+    const quantityMatch = text.match(/-\s*(\d+)\s*unidades/);
+
+    // Extraer el precio (busca "Precio:" seguido de "€" y un número, permitiendo decimales)
+    const priceMatch = text.match(/Precio:\s*€([\d\.]+)/);
+
+    if (productMatch && quantityMatch && priceMatch) {
+      const product = productMatch[1].trim();
+      const quantity = parseInt(quantityMatch[1], 10);
+      const price = parseFloat(priceMatch[1]);
+      order.push({ product, quantity, price });
+    } else {
+      console.error("Error al parsear el item del carrito:", text);
+    }
+  });
+
+  return order;
+}
   // Exporta a Excel usando la librería XLSX
   function exportToExcel(order) {
     if (!order) return;
