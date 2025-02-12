@@ -678,20 +678,23 @@ function submitOrder() {
     return;
   }
 
-  // Obtén el usuario y la contraseña del localStorage
-  const loggedUser = localStorage.getItem("loggedInUser") || null;
-  const loggedPassword = localStorage.getItem("loggedInPassword") || null;
-
-  // Verifica si el usuario está correctamente identificado
-  if (!loggedUser || !loggedPassword) {
+  // Verifica que el usuario haya iniciado sesión comprobando la clave "loggedIn"
+  if (localStorage.getItem("loggedIn") !== "true") {
     alert("Error: No has iniciado sesión. Por favor, inicia sesión antes de enviar el pedido.");
     return;
   }
 
+  // Obtén la información del almacén (tienda) del usuario desde localStorage
+  const userStore = localStorage.getItem("userStore") || null;
+  if (!userStore) {
+    alert("Error: No se encontró información de la tienda. Inicia sesión nuevamente.");
+    return;
+  }
+
   // Crea el objeto del pedido en el formato requerido por Power Automate
+  // (Ajusta los nombres de las propiedades según lo que requiera tu flujo)
   const order = {
-    username: loggedUser,
-    password: loggedPassword,
+    store: userStore,
     products: orderItems
   };
 
@@ -712,7 +715,7 @@ function submitOrder() {
       console.log("Pedido enviado a Power Automate:", data);
       alert("Pedido enviado con éxito. Gracias por tu compra.");
       
-      // Reiniciar el carrito después de enviar el pedido
+      // Reinicia el carrito después de enviar el pedido
       document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
       updateTotalDisplay(0);
       document.querySelectorAll('.add-btn').forEach(btn => {
@@ -722,8 +725,8 @@ function submitOrder() {
       });
 
       // Opcional: limpiar el localStorage después de enviar el pedido (si es necesario)
-      // localStorage.removeItem("loggedInUser");
-      // localStorage.removeItem("loggedInPassword");
+      // localStorage.removeItem("loggedIn");
+      // localStorage.removeItem("userStore");
     })
     .catch(error => {
       console.error("Error al enviar el pedido:", error);
@@ -731,7 +734,6 @@ function submitOrder() {
     });
   }
 }
-
 // Muestra u oculta el modal del carrito
 function toggleCart() {
   document.getElementById("cart-modal").classList.toggle("active");
