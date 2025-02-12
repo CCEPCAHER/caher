@@ -670,17 +670,22 @@ function exportToExcel(order) {
   XLSX.writeFile(wb, filename);
 }
 
-// ------------------------------
-// Función para enviar el pedido
-// ------------------------------
 function submitOrder() {
   // Recoge los datos del carrito
-  const order = collectCartData();
-  if (!order) return;
+  const orderItems = collectCartData();
+  if (!orderItems) return;
+
+  // Obtén el nombre del usuario que ha iniciado sesión
+  const loggedUser = localStorage.getItem("loggedInUser") || "Usuario no identificado";
+
+  // Crea el objeto final del pedido, incluyendo la identidad del usuario
+  const order = {
+    user: loggedUser,
+    items: orderItems
+  };
 
   console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
 
-  // Confirmación del usuario
   if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
     // Envía el pedido a Power Automate
     fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
@@ -688,16 +693,12 @@ function submitOrder() {
       headers: {
         'Content-Type': 'application/json'
       },
-      // Se envía el arreglo de pedidos. Asegúrate de que el flujo de Power Automate tenga el esquema adecuado.
       body: JSON.stringify(order)
     })
     .then(response => response.text())
     .then(data => {
       console.log("Pedido enviado a Power Automate:", data);
       alert("Pedido enviado con éxito. Gracias por tu compra.");
-      
-      // Exportar el pedido a Excel (descarga local) con las columnas ajustadas
-      exportToExcel(order);
       
       // Reiniciar el carrito
       document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
