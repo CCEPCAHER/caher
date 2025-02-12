@@ -510,41 +510,42 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('modal-total').innerText = 'Total: €' + total.toFixed(2);
   }
 
-  // Agrega el producto al carrito, reproduce un sonido y actualiza el total  
   function addToCart(button, productName, productPrice) {
-    let input = button.parentElement.querySelector('input');
-    let quantity = parseInt(input.value);
-    if (isNaN(quantity) || quantity <= 0) {
-      alert("Por favor, ingresa una cantidad válida.");
-      return;
-    }
-    if (button.classList.contains('added')) {
-      alert("Este producto ya ha sido añadido.");
-      return;
-    }
-    button.classList.add('added');
-    button.style.backgroundColor = '#ffa500';
-    button.innerText = 'Añadido';
-
-    // Reproducir sonido (si está disponible)
-    const sound = document.getElementById("add-sound");
-    if (sound) {
-      sound.play().catch(error => console.error("Error al reproducir sonido:", error));
-    }
-
-    let cartItemsContainer = document.getElementById("cart-items-modal");
-    if (cartItemsContainer.innerText.trim() === 'No hay productos añadidos.') {
-      cartItemsContainer.innerHTML = '';
-    }
-    cartItemsContainer.innerHTML += `
-      <div class="cart-item" data-price="${(productPrice * quantity).toFixed(2)}">
-        ${productName} - ${quantity} unidades - Precio: €${(productPrice * quantity).toFixed(2)}
-        <button class="remove-btn" onclick="removeFromCart(this, '${button.id}')">Eliminar</button>
-      </div>
-    `;
-    updateTotalPrice();
-    showToast("Producto añadido: " + productName);
+  let input = button.parentElement.querySelector('input');
+  let quantity = parseInt(input.value);
+  if (isNaN(quantity) || quantity <= 0) {
+    alert("Por favor, ingresa una cantidad válida.");
+    return;
   }
+  if (button.classList.contains('added')) {
+    alert("Este producto ya ha sido añadido.");
+    return;
+  }
+  button.classList.add('added');
+  button.style.backgroundColor = '#ffa500';
+  button.innerText = 'Añadido';
+
+  // Reproducir sonido (si está disponible)
+  const sound = document.getElementById("add-sound");
+  if (sound) {
+    sound.play().catch(error => console.error("Error al reproducir sonido:", error));
+  }
+
+  let cartItemsContainer = document.getElementById("cart-items-modal");
+  if (cartItemsContainer.innerText.trim() === 'No hay productos añadidos.') {
+    cartItemsContainer.innerHTML = '';
+  }
+  
+  // Agregar el producto con el nombre dentro de un <span> con clase "cart-product-name"
+  cartItemsContainer.innerHTML += `
+    <div class="cart-item" data-price="${(productPrice * quantity).toFixed(2)}">
+      <span class="cart-product-name">${productName}</span> - ${quantity} unidades - Precio: €${(productPrice * quantity).toFixed(2)}
+      <button class="remove-btn" onclick="removeFromCart(this, '${button.id}')">Eliminar</button>
+    </div>
+  `;
+  updateTotalPrice();
+  showToast("Producto añadido: " + productName);
+}
 
   // Elimina el producto del carrito y actualiza el total
   function removeFromCart(button, buttonId) {
@@ -573,8 +574,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     updateTotalDisplay(total);
   }
-
-  // Recoge los datos del carrito y genera un arreglo para exportar a Excel
 function collectCartData() {
   const cartItems = document.querySelectorAll("#cart-items-modal .cart-item");
   if (
@@ -588,36 +587,26 @@ function collectCartData() {
   const order = [];
 
   cartItems.forEach(item => {
-    // Limpia el texto eliminando saltos de línea y espacios extra
-    const text = item.innerText.replace(/\n/g, ' ').trim();
-    console.log("Texto crudo del item:", text);
-
-    // Se asume que el formato es:
-    // "Nombre del producto - X unidades - Precio: €Y"
-    // Usamos expresiones regulares para extraer cada parte.
-
-    // Extraer el nombre del producto (captura desde el inicio hasta el primer " -")
-    const productMatch = text.match(/^(.+?)\s*-\s*/);
-
-    // Extraer la cantidad (busca un número seguido de "unidades")
-    const quantityMatch = text.match(/-\s*(\d+)\s*unidades/);
-
-    // Extraer el precio (busca "Precio:" seguido de "€" y un número, permitiendo decimales)
-    const priceMatch = text.match(/Precio:\s*€([\d\.]+)/);
-
-    if (productMatch && quantityMatch && priceMatch) {
-      const product = productMatch[1].trim();
+    // Obtener el nombre del producto del elemento <span>
+    const productElem = item.querySelector('.cart-product-name');
+    const product = productElem ? productElem.innerText.trim() : "";
+    
+    // Extraer la cantidad y el precio del texto del item
+    const quantityMatch = item.innerText.match(/-\s*(\d+)\s*unidades/);
+    const priceMatch = item.innerText.match(/Precio:\s*€([\d\.]+)/);
+    
+    if (product && quantityMatch && priceMatch) {
       const quantity = parseInt(quantityMatch[1], 10);
       const price = parseFloat(priceMatch[1]);
       order.push({ product, quantity, price });
     } else {
-      console.error("Error al parsear el item del carrito:", text);
+      console.error("Error al parsear el item del carrito:", item.innerText);
     }
   });
 
   return order;
 }
-  // Exporta a Excel usando la librería XLSX
+// Exporta a Excel usando la librería XLSX
   function exportToExcel(order) {
     if (!order) return;
     const worksheet = XLSX.utils.json_to_sheet(order);
