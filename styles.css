@@ -9,7 +9,7 @@
   --color-text: #333;
   --color-offer: #e53e3e;
   --transition: 0.3s ease;
-  --bg-light: #f0f4f8;  /* Fondo claro para elementos */
+  --bg-light: #f0f4f8;
   --font: 'Arial', sans-serif;
 }
 
@@ -21,7 +21,7 @@
 
 body {
   font-family: var(--font);
-  /* Fondo actualizado: degradado suave y atractivo */
+  /* Fondo general para el sitio */
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
   color: var(--color-text);
   padding-bottom: 120px; /* Espacio para elementos fijos */
@@ -141,7 +141,7 @@ header h1 {
   align-items: center;
   position: relative;
   transition: transform var(--transition), box-shadow var(--transition);
-  container-type: inline-size; /* Habilita container queries para este elemento */
+  container-type: inline-size;
 }
 
 .product:hover {
@@ -149,7 +149,6 @@ header h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Imagen del producto con altura fija a 190px */
 .product img {
   width: 100%;
   height: 190px;
@@ -160,15 +159,13 @@ header h1 {
   transition: opacity 0.3s;
 }
 
-/* Ajuste de títulos y descripciones para que queden uniformes */
-/* Se limita el número de líneas para evitar diferencias de altura */
 .product h3 {
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   margin-bottom: 4px;
   text-align: center;
   color: var(--color-primary);
   line-height: 1.3;
-  max-height: calc(1.1em * 1); /* Limita a 2 líneas */
+  max-height: calc(1.1em * 1);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -180,7 +177,7 @@ header h1 {
   margin-bottom: 8px;
   text-align: center;
   line-height: 1.3;
-  max-height: calc(1.3em * 2); /* Limita a 2 líneas, ajusta si es necesario */
+  max-height: calc(1.3em * 2);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -199,7 +196,7 @@ header h1 {
   position: absolute;
   top: 8px;
   left: 8px;
-  background: linear-gradient(45deg, #ff416c, #ff4b2b);  /* Degradado vibrante */
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
   color: #fff;
   padding: 4px 8px;
   border-radius: 4px;
@@ -308,10 +305,10 @@ header h1 {
 }
 
 #cart-items-modal {
-  max-height: 300px; /* Ajusta el valor según necesites */
+  max-height: 300px;
   overflow-y: auto;
   margin-bottom: 10px;
-  padding-right: 10px; /* Espacio para evitar el scroll sobre el borde */
+  padding-right: 10px;
 }
 
 .cart-item {
@@ -373,7 +370,6 @@ header h1 {
   transform: scale(1.02);
 }
 
-
 /* ========================
    BOTÓN DEL CARRITO (MOVIBLE)
 ========================= */
@@ -427,13 +423,72 @@ header h1 {
 
 /* ========================
    MEDIA QUERIES
-   (Se deja intacto)
 ========================= */
 @media (orientation: portrait) {
   .product img {
-    /* Permite que la imagen mantenga su proporción */
     height: auto;
-    max-height: 190px;  /* Ajusta este valor según convenga */
+    max-height: 190px;
     object-fit: contain;
   }
+}
+
+/* ========================
+   ESTILOS PARA LA PÁGINA DE LOGIN
+========================= */
+/* Aplica esta clase al <body> o a un contenedor principal en la página de login */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Fondo vibrante para la pantalla de login */
+  background: linear-gradient(135deg, #d50000, #8b0000);
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 320px;
+}
+
+.login-container h2 {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: var(--bg-light);
+  color: var(--color-text);
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background: var(--bg-light);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.login-container button:hover {
+  background: var(--color-primary-hover);
+  color: #fff;
+}
+
+.login-container input::placeholder {
+  color: #555;
+  opacity: 0.8;
 }
