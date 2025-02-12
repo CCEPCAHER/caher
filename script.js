@@ -442,8 +442,8 @@ document.addEventListener("DOMContentLoaded", function() {
           "Adsolut Sprite": [3, 5, 15]     
 };
 
-  // Función para crear cada sección en formato carrusel  
-  function createSection(sectionName, products) {
+ // Función para crear cada sección en formato carrusel  
+ function createSection(sectionName, products) {
   // Se utiliza un <h2> para el encabezado de la sección
   let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
   products.forEach((product, index) => {
@@ -471,46 +471,46 @@ document.addEventListener("DOMContentLoaded", function() {
   return sectionHTML;
 }
 
-  // Actualiza la lista de productos renderizando todas las secciones  
-  function updateProductList() {
-    const productListElem = document.getElementById("product-list");
-    productListElem.innerHTML = Object.entries(sections)
-      .map(([section, products]) => createSection(section, products))
-      .join('');
-    lazyLoadImages();
-  }
+// Actualiza la lista de productos renderizando todas las secciones  
+function updateProductList() {
+  const productListElem = document.getElementById("product-list");
+  productListElem.innerHTML = Object.entries(sections)
+    .map(([section, products]) => createSection(section, products))
+    .join('');
+  lazyLoadImages();
+}
 
-  // Función para agregar un producto a una sección (crea la sección si no existe)
-  function addProduct(sectionName, product) {
-    if (!sections[sectionName]) {
-      sections[sectionName] = [];
-    }
-    sections[sectionName].push(product);
-    // Si el producto no tiene sugerencias, asigna unas por defecto
-    if (!PRODUCT_QUANTITIES[product.name]) {
-      PRODUCT_QUANTITIES[product.name] = [1, 2, 3];
-    }
-    updateProductList();
+// Función para agregar un producto a una sección (crea la sección si no existe)
+function addProduct(sectionName, product) {
+  if (!sections[sectionName]) {
+    sections[sectionName] = [];
   }
-
-  // Función para asignar cantidad al input desde los botones rápidos
-  function setQuantity(button, value) {
-    let input = button.parentElement.querySelector('input');
-    input.value = value;
+  sections[sectionName].push(product);
+  // Si el producto no tiene sugerencias, asigna unas por defecto
+  if (!PRODUCT_QUANTITIES[product.name]) {
+    PRODUCT_QUANTITIES[product.name] = [1, 2, 3];
   }
+  updateProductList();
+}
 
-  // Validar que la cantidad no sea negativa
-  function validateInput(input) {
-    if (input.value < 0) input.value = 0;
-  }
+// Función para asignar cantidad al input desde los botones rápidos
+function setQuantity(button, value) {
+  let input = button.parentElement.querySelector('input');
+  input.value = value;
+}
 
-  // Actualiza el total en el display fijo y en el modal
-  function updateTotalDisplay(total) {
-    document.getElementById('total-display').innerText = 'Total: €' + total.toFixed(2);
-    document.getElementById('modal-total').innerText = 'Total: €' + total.toFixed(2);
-  }
+// Validar que la cantidad no sea negativa
+function validateInput(input) {
+  if (input.value < 0) input.value = 0;
+}
 
-  function addToCart(button, productName, productPrice) {
+// Actualiza el total en el display fijo y en el modal
+function updateTotalDisplay(total) {
+  document.getElementById('total-display').innerText = 'Total: €' + total.toFixed(2);
+  document.getElementById('modal-total').innerText = 'Total: €' + total.toFixed(2);
+}
+
+function addToCart(button, productName, productPrice) {
   let input = button.parentElement.querySelector('input');
   let quantity = parseInt(input.value);
   if (isNaN(quantity) || quantity <= 0) {
@@ -547,33 +547,34 @@ document.addEventListener("DOMContentLoaded", function() {
   showToast("Producto añadido: " + productName);
 }
 
-  // Elimina el producto del carrito y actualiza el total
-  function removeFromCart(button, buttonId) {
-    button.parentElement.remove();
-    const addButton = document.getElementById(buttonId);
-    if (addButton) {
-      addButton.classList.remove('added');
-      addButton.style.backgroundColor = '#2c7a7b';
-      addButton.innerText = 'Agregar';
-    }
-    let cartItemsContainer = document.getElementById("cart-items-modal");
-    if (cartItemsContainer.children.length === 0) {
-      cartItemsContainer.innerHTML = 'No hay productos añadidos.';
-    }
-    updateTotalPrice();
+// Elimina el producto del carrito y actualiza el total
+function removeFromCart(button, buttonId) {
+  button.parentElement.remove();
+  const addButton = document.getElementById(buttonId);
+  if (addButton) {
+    addButton.classList.remove('added');
+    addButton.style.backgroundColor = '#2c7a7b';
+    addButton.innerText = 'Agregar';
   }
+  let cartItemsContainer = document.getElementById("cart-items-modal");
+  if (cartItemsContainer.children.length === 0) {
+    cartItemsContainer.innerHTML = 'No hay productos añadidos.';
+  }
+  updateTotalPrice();
+}
 
-  // Recalcula el total sumando los precios de cada producto del carrito
-  function updateTotalPrice() {
-    let total = 0;
-    document.querySelectorAll('#cart-items-modal .cart-item').forEach(item => {
-      const itemPrice = parseFloat(item.getAttribute('data-price'));
-      if (!isNaN(itemPrice)) {
-        total += itemPrice;
-      }
-    });
-    updateTotalDisplay(total);
-  }
+// Recalcula el total sumando los precios de cada producto del carrito
+function updateTotalPrice() {
+  let total = 0;
+  document.querySelectorAll('#cart-items-modal .cart-item').forEach(item => {
+    const itemPrice = parseFloat(item.getAttribute('data-price'));
+    if (!isNaN(itemPrice)) {
+      total += itemPrice;
+    }
+  });
+  updateTotalDisplay(total);
+}
+
 function collectCartData() {
   const cartItems = document.querySelectorAll("#cart-items-modal .cart-item");
   if (
@@ -606,15 +607,72 @@ function collectCartData() {
 
   return order;
 }
-// Exporta a Excel usando la librería XLSX
-  function exportToExcel(order) {
-    if (!order) return;
-    const worksheet = XLSX.utils.json_to_sheet(order);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Pedido");
-    const filename = `pedido_${new Date().toISOString().slice(0, 10)}.xlsx`;
-    XLSX.writeFile(workbook, filename);
+
+// ------------------------------
+// Función para exportar a Excel
+// ------------------------------
+function exportToExcel(order) {
+  if (!order || order.length === 0) return;
+
+  // Definir la cabecera
+  const header = ["Producto", "Unidades", "Precio", "Valor"];
+
+  // Mapear cada producto para incluir el valor (cantidad * precio)
+  const rows = order.map(item => {
+    const valor = item.quantity * item.price;
+    return [item.product, item.quantity, item.price, valor];
+  });
+
+  // Calcular el total de euros gastados (sumando la columna "Valor")
+  const totalGastado = rows.reduce((acc, row) => acc + row[3], 0);
+  // Agregar una fila final con el total gastado.
+  // Puedes dejar vacías las columnas que no requieras; aquí se muestra "Total gastado" en la primera columna y el total en la columna "Valor".
+  rows.push(["Total gastado", "", "", totalGastado]);
+
+  // Combinar la cabecera y los datos en una matriz
+  const worksheetData = [header, ...rows];
+
+  // Crear la hoja de cálculo a partir del array de arrays
+  const ws = XLSX.utils.aoa_to_sheet(worksheetData);
+
+  // Ajustar el ancho de las columnas
+  ws["!cols"] = [
+    { wch: 30 }, // Columna "Producto"
+    { wch: 10 }, // Columna "Unidades"
+    { wch: 15 }, // Columna "Precio"
+    { wch: 15 }  // Columna "Valor"
+  ];
+
+  // Aplicar formato numérico a las columnas "Precio" y "Valor"
+  // Queremos que el número se muestre con dos decimales y el signo de euro a la derecha.
+  // Iteramos desde la fila 2 hasta el final (la fila 1 es la cabecera)
+  for (let R = 2; R <= worksheetData.length; R++) {
+    // Columna "Precio" (columna C)
+    let cellAddressPrecio = "C" + R;
+    if (ws[cellAddressPrecio] && typeof ws[cellAddressPrecio].v === "number") {
+      ws[cellAddressPrecio].z = '0.00 "€"';
+    }
+    // Columna "Valor" (columna D)
+    let cellAddressValor = "D" + R;
+    if (ws[cellAddressValor] && typeof ws[cellAddressValor].v === "number") {
+      ws[cellAddressValor].z = '0.00 "€"';
+    }
   }
+
+  // Crear el libro y agregar la hoja "Pedido"
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Pedido");
+
+  // Nombre del archivo con la fecha actual
+  const filename = `pedido_${new Date().toISOString().slice(0, 10)}.xlsx`;
+
+  // Escribir y descargar el archivo Excel
+  XLSX.writeFile(wb, filename);
+}
+
+// ------------------------------
+// Función para enviar el pedido
+// ------------------------------
 function submitOrder() {
   // Recoge los datos del carrito
   const order = collectCartData();
@@ -638,6 +696,9 @@ function submitOrder() {
       console.log("Pedido enviado a Power Automate:", data);
       alert("Pedido enviado con éxito. Gracias por tu compra.");
       
+      // Exportar el pedido a Excel (descarga local) con las columnas ajustadas
+      exportToExcel(order);
+      
       // Reiniciar el carrito
       document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
       updateTotalDisplay(0);
@@ -654,96 +715,96 @@ function submitOrder() {
   }
 }
 
-  // Muestra u oculta el modal del carrito
-  function toggleCart() {
-    document.getElementById("cart-modal").classList.toggle("active");
-  }
+// Muestra u oculta el modal del carrito
+function toggleCart() {
+  document.getElementById("cart-modal").classList.toggle("active");
+}
 
-  // Función para mostrar notificaciones tipo "toast"
-  function showToast(message) {
-    let toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerText = message;
-    document.body.appendChild(toast);
+// Función para mostrar notificaciones tipo "toast"
+function showToast(message) {
+  let toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerText = message;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('show');
     setTimeout(() => {
-      toast.classList.add('show');
+      toast.classList.remove('show');
       setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => {
-          document.body.removeChild(toast);
-        }, 500);
-      }, 2000);
-    }, 100);
+        document.body.removeChild(toast);
+      }, 500);
+    }, 2000);
+  }, 100);
+}
+
+// Función que implementa lazy loading usando IntersectionObserver
+function lazyLoadImages() {
+  const lazyImages = document.querySelectorAll('img.lazy');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.getAttribute('data-src');
+          img.classList.remove('lazy');
+          observer.unobserve(img);
+        }
+      });
+    });
+    lazyImages.forEach(img => observer.observe(img));
+  } else {
+    // Fallback para navegadores sin IntersectionObserver
+    lazyImages.forEach(img => {
+      img.src = img.getAttribute('data-src');
+      img.classList.remove('lazy');
+    });
+  }
+}
+
+// Inicialización: renderiza los productos y configura el lazy loading  
+updateProductList();
+
+// Funcionalidad para arrastrar el botón del carrito y distinguir entre click y drag
+const cartToggle = document.getElementById("cart-toggle");
+cartToggle.addEventListener('mousedown', function(e) {
+  e.preventDefault();
+  let startX = e.clientX, startY = e.clientY;
+  let shiftX = e.clientX - cartToggle.getBoundingClientRect().left;
+  let shiftY = e.clientY - cartToggle.getBoundingClientRect().top;
+  let dragged = false;
+
+  function moveAt(pageX, pageY) {
+    cartToggle.style.left = pageX - shiftX + 'px';
+    cartToggle.style.top = pageY - shiftY + 'px';
+    cartToggle.style.position = 'fixed';
   }
 
-  // Función que implementa lazy loading usando IntersectionObserver
-  function lazyLoadImages() {
-    const lazyImages = document.querySelectorAll('img.lazy');
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.getAttribute('data-src');
-            img.classList.remove('lazy');
-            observer.unobserve(img);
-          }
-        });
-      });
-      lazyImages.forEach(img => observer.observe(img));
-    } else {
-      // Fallback para navegadores sin IntersectionObserver
-      lazyImages.forEach(img => {
-        img.src = img.getAttribute('data-src');
-        img.classList.remove('lazy');
-      });
+  function onMouseMove(e) {
+    if (Math.abs(e.clientX - startX) > 5 || Math.abs(e.clientY - startY) > 5) {
+      dragged = true;
     }
+    moveAt(e.pageX, e.pageY);
   }
 
-  // Inicialización: renderiza los productos y configura el lazy loading  
-  updateProductList();
+  document.addEventListener('mousemove', onMouseMove);
 
-  // Funcionalidad para arrastrar el botón del carrito y distinguir entre click y drag
-  const cartToggle = document.getElementById("cart-toggle");
-  cartToggle.addEventListener('mousedown', function(e) {
-    e.preventDefault();
-    let startX = e.clientX, startY = e.clientY;
-    let shiftX = e.clientX - cartToggle.getBoundingClientRect().left;
-    let shiftY = e.clientY - cartToggle.getBoundingClientRect().top;
-    let dragged = false;
-
-    function moveAt(pageX, pageY) {
-      cartToggle.style.left = pageX - shiftX + 'px';
-      cartToggle.style.top = pageY - shiftY + 'px';
-      cartToggle.style.position = 'fixed';
+  document.addEventListener('mouseup', function(e) {
+    document.removeEventListener('mousemove', onMouseMove);
+    // Si no se arrastró, se trata como click
+    if (!dragged) {
+      toggleCart();
     }
+  }, {once: true});
+});
+cartToggle.ondragstart = function() { return false; };
 
-    function onMouseMove(e) {
-      if (Math.abs(e.clientX - startX) > 5 || Math.abs(e.clientY - startY) > 5) {
-        dragged = true;
-      }
-      moveAt(e.pageX, e.pageY);
-    }
-
-    document.addEventListener('mousemove', onMouseMove);
-
-    document.addEventListener('mouseup', function(e) {
-      document.removeEventListener('mousemove', onMouseMove);
-      // Si no se arrastró, se trata como click
-      if (!dragged) {
-        toggleCart();
-      }
-    }, {once: true});
-  });
-  cartToggle.ondragstart = function() { return false; };
-
-  // Exponer funciones globalmente para usar en atributos inline
-  window.toggleCart = toggleCart;
-  window.submitOrder = submitOrder;
-  window.addToCart = addToCart;
-  window.removeFromCart = removeFromCart;
-  window.setQuantity = setQuantity;
-  window.validateInput = validateInput;
-  window.addProduct = addProduct; // Para agregar nuevos productos dinámicamente
-  window.updateProductList = updateProductList;
+// Exponer funciones globalmente para usar en atributos inline
+window.toggleCart = toggleCart;
+window.submitOrder = submitOrder;
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.setQuantity = setQuantity;
+window.validateInput = validateInput;
+window.addProduct = addProduct; // Para agregar nuevos productos dinámicamente
+window.updateProductList = updateProductList;
 });
