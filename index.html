@@ -9,37 +9,74 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <header>
-    <h1>PEDIDOS</h1>
-  </header>
-
-  <main>
-    <!-- Contenedor de productos -->
-    <section id="product-list"></section>
-  </main>
-
-  <!-- Total siempre visible -->
-  <div id="total-display" aria-live="polite">Total: €0.00</div>
-
-  <!-- Botón flotante del carrito (movible) -->
-  <button id="cart-toggle" aria-label="Ver carrito">🛒</button>
-
-  <!-- Modal del carrito -->
-  <div id="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
-    <div id="cart-modal-content">
-      <button id="close-modal" aria-label="Cerrar carrito" onclick="toggleCart()">✖</button>
-      <h2 id="cart-modal-title">Tu Pedido</h2>
-      <div id="cart-items-modal">No hay productos añadidos.</div>
-      <div id="modal-total">Total: €0.00</div>
-      <button id="submit-order" onclick="submitOrder()">Enviar Pedido</button>
-    </div>
+  <!-- Formulario de login -->
+  <div id="login-container">
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Usuario" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <button type="submit">Iniciar Sesión</button>
+    </form>
   </div>
 
-  <!-- Elemento de audio para notificar al agregar producto -->
-  <audio id="add-sound" src="beep.mp3" preload="auto"></audio>
-  <!-- Librería XLSX para exportar a Excel -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <!-- Archivo JavaScript -->
-  <script src="script.js"></script>
+  <!-- Contenido protegido: solo se mostrará una vez que el usuario inicie sesión -->
+  <div id="contenido" style="display:none;">
+    <header>
+      <h1>PEDIDOS</h1>
+    </header>
+    <main>
+      <!-- Contenedor de productos -->
+      <section id="product-list"></section>
+    </main>
+    <!-- Total siempre visible -->
+    <div id="total-display" aria-live="polite">Total: €0.00</div>
+    <!-- Botón flotante del carrito (movible) -->
+    <button id="cart-toggle" aria-label="Ver carrito">🛒</button>
+    <!-- Modal del carrito -->
+    <div id="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
+      <div id="cart-modal-content">
+        <button id="close-modal" aria-label="Cerrar carrito" onclick="toggleCart()">✖</button>
+        <h2 id="cart-modal-title">Tu Pedido</h2>
+        <div id="cart-items-modal">No hay productos añadidos.</div>
+        <div id="modal-total">Total: €0.00</div>
+        <button id="submit-order" onclick="submitOrder()">Enviar Pedido</button>
+      </div>
+    </div>
+    <!-- Elemento de audio para notificar al agregar producto -->
+    <audio id="add-sound" src="beep.mp3" preload="auto"></audio>
+    <!-- Aquí puedes incluir tus otros scripts, por ejemplo, para el carrito y funciones adicionales -->
+    <script src="script.js"></script>
+  </div>
+
+  <!-- Script de autenticación (puedes incluirlo al final del body) -->
+  <script>
+    // Datos de usuario de ejemplo (no es seguro para producción)
+    const USER = {
+      username: "usuario",
+      password: "contraseña123"
+    };
+
+    document.getElementById("login-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      if(username === USER.username && password === USER.password) {
+        // Guarda el estado de autenticación en localStorage (opcional)
+        localStorage.setItem("loggedIn", "true");
+        mostrarContenido();
+      } else {
+        alert("Credenciales incorrectas");
+      }
+    });
+
+    function mostrarContenido() {
+      if(localStorage.getItem("loggedIn") === "true") {
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("contenido").style.display = "block";
+      }
+    }
+
+    // Ejecuta al cargar la página para mostrar u ocultar contenido según el estado de login
+    mostrarContenido();
+  </script>
 </body>
 </html>
