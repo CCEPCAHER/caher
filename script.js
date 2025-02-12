@@ -601,45 +601,65 @@ document.addEventListener("DOMContentLoaded", function() {
     const filename = `pedido_${new Date().toISOString().slice(0, 10)}.xlsx`;
     XLSX.writeFile(workbook, filename);
   }
-function submitOrder() {
-  // Recoge los datos del carrito
-  const order = collectCartData();
-  if (!order) return;
-
-  console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
-
-  // Confirmación del usuario
-  if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
-    // Envía el pedido a Power Automate
-    fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      // Se envía el arreglo de pedidos. Asegúrate de que el flujo de Power Automate tenga el esquema adecuado.
-      body: JSON.stringify(order)
-    })
-    .then(response => response.text())
-    .then(data => {
-      console.log("Pedido enviado a Power Automate:", data);
-      alert("Pedido enviado con éxito. Gracias por tu compra.");
-      
-      // Reiniciar el carrito
-      document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
-      updateTotalDisplay(0);
-      document.querySelectorAll('.add-btn').forEach(btn => {
-        btn.classList.remove('added');
-        btn.style.backgroundColor = '#2c7a7b';
-        btn.innerText = 'Agregar';
-      });
-    })
-    .catch(error => {
-      console.error("Error al enviar el pedido:", error);
-      alert("Error al enviar el pedido.");
+  function submitOrder() {
+    // Recoge los datos del carrito (se asume que collectCartData() retorna un array de productos)
+    let order = collectCartData();
+    if (!order) return;
+  
+    // Asegurarse de que el precio y la cantidad sean valores numéricos válidos para cada producto
+    order = order.map(item => {
+      // Convertir el precio a número. Si la conversión falla, se asigna 0.
+      let precio = parseFloat(item.precio);
+      if (isNaN(precio)) {
+        console.warn(`El precio del producto "${item.name}" no es válido. Se asigna 0.`);
+        precio = 0;
+      }
+  
+      // Convertir la cantidad a número. Si la conversión falla, se asigna 1.
+      let cantidad = parseInt(item.cantidad, 10);
+      if (isNaN(cantidad)) {
+        console.warn(`La cantidad del producto "${item.name}" no es válida. Se asigna 1.`);
+        cantidad = 1;
+      }
+  
+      // Retorna el producto con precio y cantidad corregidos
+      return { ...item, precio, cantidad };
     });
+  
+    console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
+  
+    // Confirmación del usuario
+    if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
+      // Envía el pedido a Power Automate
+      fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // Se envía el arreglo de pedidos con los precios y cantidades corregidos.
+        body: JSON.stringify(order)
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log("Pedido enviado a Power Automate:", data);
+        alert("Pedido enviado con éxito. Gracias por tu compra.");
+        
+        // Reiniciar el carrito
+        document.getElementById("cart-items-modal").innerHTML = 'No hay productos añadidos.';
+        updateTotalDisplay(0);
+        document.querySelectorAll('.add-btn').forEach(btn => {
+          btn.classList.remove('added');
+          btn.style.backgroundColor = '#2c7a7b';
+          btn.innerText = 'Agregar';
+        });
+      })
+      .catch(error => {
+        console.error("Error al enviar el pedido:", error);
+        alert("Error al enviar el pedido.");
+      });
+    }
   }
-}
-
+  
   // Muestra u oculta el modal del carrito
   function toggleCart() {
     document.getElementById("cart-modal").classList.toggle("active");
