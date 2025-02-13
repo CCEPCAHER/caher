@@ -17,7 +17,9 @@
       <button type="submit">Iniciar Sesión</button>
     </form>
   </div>
-
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  
   <!-- Contenido protegido: solo se mostrará una vez que el usuario inicie sesión -->
   <div id="contenido" style="display:none;">
     <header>
@@ -27,10 +29,13 @@
       <!-- Contenedor de productos -->
       <section id="product-list"></section>
     </main>
+    
     <!-- Total siempre visible -->
     <div id="total-display" aria-live="polite">Total: €0.00</div>
+    
     <!-- Botón flotante del carrito (movible) -->
     <button id="cart-toggle" aria-label="Ver carrito">🛒</button>
+    
     <!-- Modal del carrito -->
     <div id="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
       <div id="cart-modal-content">
@@ -41,13 +46,29 @@
         <button id="submit-order" onclick="submitOrder()">Enviar Pedido</button>
       </div>
     </div>
+    
     <!-- Elemento de audio para notificar al agregar producto -->
     <audio id="add-sound" src="beep.mp3" preload="auto"></audio>
+    
     <script src="script.js"></script>
   </div>
-
+  
   <!-- Script de autenticación -->
   <script>
+    // Definición de la función mostrarContenido
+    function mostrarContenido() {
+      if (localStorage.getItem("loggedIn") === "true") {
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("contenido").style.display = "block";
+        // Opcional: mostrar el nombre del almacén en el header
+        const storeName = localStorage.getItem("userStore");
+        if(storeName){
+          const header = document.querySelector("header h1");
+          header.textContent += " - " + storeName;
+        }
+      }
+    }
+
     // Array de usuarios válidos con contraseña única "1234"
     const USERS = [
       { username: "CCIPBCNCRD8", store: "Alcampo Sant Boi", password: "1234" },
@@ -66,27 +87,16 @@
       const userFound = USERS.find(user => user.username === usernameInput && user.password === passwordInput);
       
       if (userFound) {
-        // Guarda el estado de autenticación en localStorage (opcional)
+        // Guarda el estado de autenticación en localStorage
         localStorage.setItem("loggedIn", "true");
         localStorage.setItem("userStore", userFound.store);
+        localStorage.setItem("loggedInUser", userFound.username);
+        localStorage.setItem("loggedInPassword", userFound.password);
         mostrarContenido();
       } else {
         alert("Credenciales incorrectas");
       }
     });
-
-    function mostrarContenido() {
-      if (localStorage.getItem("loggedIn") === "true") {
-        document.getElementById("login-container").style.display = "none";
-        document.getElementById("contenido").style.display = "block";
-        // Opcional: mostrar el nombre del almacén en el header
-        const storeName = localStorage.getItem("userStore");
-        if(storeName){
-          const header = document.querySelector("header h1");
-          header.textContent += " - " + storeName;
-        }
-      }
-    }
 
     // Comprueba al cargar la página si ya hay un usuario autenticado
     mostrarContenido();
