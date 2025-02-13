@@ -607,12 +607,13 @@ function collectCartData() {
 
   return order;
 }
-
-// ------------------------------
-// Función para exportar a Excel
-// ------------------------------
 function exportToExcel(order) {
-  if (!order || order.length === 0) return;
+  if (!order || order.length === 0) {
+    alert("No hay productos en el pedido.");
+    return;
+  }
+
+  console.log("Exportando orden:", order);
 
   // Definir la cabecera
   const header = ["Producto", "Unidades", "Precio", "Valor"];
@@ -623,65 +624,68 @@ function exportToExcel(order) {
     return [item.product, item.quantity, item.price, valor];
   });
 
-  // Calcular el total de euros gastados (sumando la columna "Valor")
+  // Calcular el total gastado
   const totalGastado = rows.reduce((acc, row) => acc + row[3], 0);
-  // Agregar una fila final con el total gastado.
-  // Puedes dejar vacías las columnas que no requieras; aquí se muestra "Total gastado" en la primera columna y el total en la columna "Valor".
   rows.push(["Total gastado", "", "", totalGastado]);
 
-  // Combinar la cabecera y los datos en una matriz
+  // Combinar la cabecera y los datos
   const worksheetData = [header, ...rows];
 
-  // Crear la hoja de cálculo a partir del array de arrays
+  // Crear hoja y libro de Excel
   const ws = XLSX.utils.aoa_to_sheet(worksheetData);
+  ws["!cols"] = [{ wch: 30 }, { wch: 10 }, { wch: 15 }, { wch: 15 }];
 
-  // Ajustar el ancho de las columnas
-  ws["!cols"] = [
-    { wch: 30 }, // Columna "Producto"
-    { wch: 10 }, // Columna "Unidades"
-    { wch: 15 }, // Columna "Precio"
-    { wch: 15 }  // Columna "Valor"
-  ];
-
-  // Aplicar formato numérico a las columnas "Precio" y "Valor"
-  // Queremos que el número se muestre con dos decimales y el signo de euro a la derecha.
-  // Iteramos desde la fila 2 hasta el final (la fila 1 es la cabecera)
-  for (let R = 2; R <= worksheetData.length; R++) {
-    // Columna "Precio" (columna C)
-    let cellAddressPrecio = "C" + R;
-    if (ws[cellAddressPrecio] && typeof ws[cellAddressPrecio].v === "number") {
-      ws[cellAddressPrecio].z = '0.00 "€"';
-    }
-    // Columna "Valor" (columna D)
-    let cellAddressValor = "D" + R;
-    if (ws[cellAddressValor] && typeof ws[cellAddressValor].v === "number") {
-      ws[cellAddressValor].z = '0.00 "€"';
-    }
-  }
-
-  // Crear el libro y agregar la hoja "Pedido"
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Pedido");
 
-  // Nombre del archivo con la fecha actual
-  const filename = `pedido_${new Date().toISOString().slice(0, 10)}.xlsx`;
+  // Generar y descargar el archivo
+  try {
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([excelBuffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
 
-  // Escribir y descargar el archivo Excel
-  XLSX.writeFile(wb, filename);
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "pedido.xlsx";
+
+    document.body.appendChild(link);
+    link.click();
+
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    }, 100);
+  } catch (error) {
+    console.error("Error al exportar a Excel:", error);
+    alert("Hubo un error al generar el archivo Excel.");
+  }
 }
 
 function submitOrder() {
-  // Recoge los datos del carrito
+  // Obtener los datos del pedido (este es solo un ejemplo, ajusta según tus necesidades)
+  const order = [
+    { product: "SEMI PACK 12 lata CC (90x2)=180", quantity: 2, price: 24 },
+    { product: "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920", quantity: 2, price: 1440 },
+    { product: "Coca Cola pack 6 2L", quantity: 16, price: 96 }
+  ];
+  
+  // Lógica para enviar el pedido a Power Automate (debes reemplazar esto con tu propia lógica)
+  console.log("Pedido enviado a Power Automate");
+
+  // Descargar el Excel localmente después de enviar el pedido
+  exportToExcel(order);
+}
+
+
+function submitOrder() {
   const orderItems = collectCartData();
   if (!orderItems) return;
 
-  // Obtén el nombre del usuario que ha iniciado sesión
+  // Intenta obtener el usuario del localStorage
   const loggedUser = localStorage.getItem("loggedInUser") || "Usuario no identificado";
-  
-  // Obtener la contraseña, ya sea desde localStorage o establecerla de forma fija
   const loggedPassword = localStorage.getItem("loggedInPassword") || "1234";
 
-  // Crea el objeto final del pedido, usando las propiedades esperadas por el esquema
   const order = {
     username: loggedUser,
     password: loggedPassword,
@@ -691,7 +695,6 @@ function submitOrder() {
   console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
 
   if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
-    // Envía el pedido a Power Automate
     fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
       method: 'POST',
       headers: {
@@ -719,6 +722,7 @@ function submitOrder() {
     });
   }
 }
+
 // Muestra u oculta el modal del carrito
 function toggleCart() {
   document.getElementById("cart-modal").classList.toggle("active");
