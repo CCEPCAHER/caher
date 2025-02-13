@@ -677,11 +677,15 @@ function submitOrder() {
 
   // Obtén el nombre del usuario que ha iniciado sesión
   const loggedUser = localStorage.getItem("loggedInUser") || "Usuario no identificado";
+  
+  // Obtener la contraseña, ya sea desde localStorage o establecerla de forma fija
+  const loggedPassword = localStorage.getItem("loggedInPassword") || "1234";
 
-  // Crea el objeto final del pedido, incluyendo la identidad del usuario
+  // Crea el objeto final del pedido, usando las propiedades esperadas por el esquema
   const order = {
-    user: loggedUser,
-    items: orderItems
+    username: loggedUser,
+    password: loggedPassword,
+    products: orderItems
   };
 
   console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
@@ -715,7 +719,6 @@ function submitOrder() {
     });
   }
 }
-
 // Muestra u oculta el modal del carrito
 function toggleCart() {
   document.getElementById("cart-modal").classList.toggle("active");
