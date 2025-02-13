@@ -493,20 +493,23 @@ header h1 {
   opacity: 0.8;
 }
 /* ========================
-   ESTILOS PARA LA PÁGINA DE LOGIN
+   ESTILOS PARA EL LOGIN (solo para #login-container)
 ========================= */
-/* Aplica esta clase al <body> o a un contenedor principal en la página de login */
-.login-page {
+#login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #d50000, #8b0000);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  /* Fondo vibrante para la pantalla de login */
-  background: linear-gradient(135deg, #d50000, #8b0000);
+  z-index: 1500;
 }
 
-.login-container {
-  background: rgba(255, 255, 255, 0.9);
+#login-container #login-form {
+  background: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -514,12 +517,7 @@ header h1 {
   width: 320px;
 }
 
-.login-container h2 {
-  color: var(--color-text);
-  margin-bottom: 1rem;
-}
-
-.login-container input {
+#login-container #login-form input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -531,31 +529,24 @@ header h1 {
   transition: box-shadow var(--transition);
 }
 
-/* Efecto de foco para inputs */
-.login-container input:focus {
+#login-container #login-form input:focus {
   outline: none;
   box-shadow: 0 0 5px var(--color-primary);
 }
 
-.login-container button {
+#login-container #login-form button {
   width: 100%;
   padding: 10px;
-  background: var(--bg-light);
+  background: var(--color-primary);
   border: none;
   border-radius: 6px;
   font-size: 1rem;
   font-weight: bold;
-  color: var(--color-primary);
-  cursor: pointer;
-  transition: background var(--transition), color var(--transition);
-}
-
-.login-container button:hover {
-  background: var(--color-primary-hover);
   color: #fff;
+  cursor: pointer;
+  transition: background var(--transition);
 }
 
-.login-container input::placeholder {
-  color: #555;
-  opacity: 0.8;
+#login-container #login-form button:hover {
+  background: var(--color-primary-hover);
 }
