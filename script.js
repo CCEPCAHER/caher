@@ -663,29 +663,15 @@ function exportToExcel(order) {
 }
 
 function submitOrder() {
-  // Obtener los datos del pedido (este es solo un ejemplo, ajusta según tus necesidades)
-  const order = [
-    { product: "SEMI PACK 12 lata CC (90x2)=180", quantity: 2, price: 24 },
-    { product: "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920", quantity: 2, price: 1440 },
-    { product: "Coca Cola pack 6 2L", quantity: 16, price: 96 }
-  ];
-  
-  // Lógica para enviar el pedido a Power Automate (debes reemplazar esto con tu propia lógica)
-  console.log("Pedido enviado a Power Automate");
-
-  // Descargar el Excel localmente después de enviar el pedido
-  exportToExcel(order);
-}
-
-
-function submitOrder() {
+  // Recopilar los datos del carrito
   const orderItems = collectCartData();
   if (!orderItems) return;
 
-  // Intenta obtener el usuario del localStorage
+  // Obtener datos de usuario desde localStorage (ajusta según tus necesidades)
   const loggedUser = localStorage.getItem("loggedInUser") || "Usuario no identificado";
   const loggedPassword = localStorage.getItem("loggedInPassword") || "1234";
 
+  // Preparar el objeto de pedido
   const order = {
     username: loggedUser,
     password: loggedPassword,
@@ -715,6 +701,10 @@ function submitOrder() {
         btn.style.backgroundColor = '#2c7a7b';
         btn.innerText = 'Agregar';
       });
+      
+      // Descargar el Excel localmente
+      // Nota: exportToExcel espera un array de items, por ello pasamos order.products
+      exportToExcel(order.products);
     })
     .catch(error => {
       console.error("Error al enviar el pedido:", error);
@@ -722,6 +712,7 @@ function submitOrder() {
     });
   }
 }
+
 
 // Muestra u oculta el modal del carrito
 function toggleCart() {
