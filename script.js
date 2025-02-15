@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "SEMI BIPACK Coca Cola 2x2L", "price": 4.00, "offer": false },
     { "name": "Coca Cola Bipack 2L", "price": 2.00, "offer": false },
     { "name": "SEMI Coca Cola pet 2 L.", "price": 2.00, "offer": false },
-    { "name": "Coca Cola 2L", "price": 2.00, "offer": false },
+    { "name": "Coca-Cola Pet 2 L. ", "price": 2.00, "offer": false },
     { "name": "Coca Cola Bipack 1,25L", "price": 2.50, "offer": false },
     { "name": "SEMI Coca Cola pet 1,25 L.", "price": 1.25, "offer": false },
     { "name": "Coca Cola 1,25L", "price": 1.25, "offer": false },
@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "VNR P4 C6", "price": 4.00, "offer": false },
     { "name": "Coca-Cola Lata 33", "price": 1.00, "offer": false },
     { "name": "Bandeja Coca-Cola 33 cl. Pack 24", "price": 24.00, "offer": false },
-    { "name": "PACK 12 Lata 33", "price": 12.00, "offer": false },
-    { "name": "Minicam PACK 6X20 CL.", "price": 6.00, "offer": false }
+    { "name": "PACK 12 Coca-Cola  Lata 33", "price": 12.00, "offer": false },
+    { "name": "COCA-COLA  REGULAR LATA PACK 6X20 CL.", "price": 6.00, "offer": false }
   ],
   "Coca Cola Zero": [
     { "name": "SEMI PACK 12 CC Zero (90x2)=180", "price": 12.00, "offer": false },
@@ -40,10 +40,10 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "Coca Cola Zero pet500", "price": 0.50, "offer": false },
     { "name": "VNR 1L zero C6", "price": 1.00, "offer": false },
     { "name": "VNR zero P4 C6", "price": 4.00, "offer": false },
-    { "name": "zero Lata 33", "price": 0.95, "offer": false },
+    { "name": "Coca-Cola Zero lata 33 cl.", "price": 0.95, "offer": false },
     { "name": "Bandeja zero Pack 24", "price": 19.90, "offer": false },
-    { "name": "PACK 12 zero Lata 33", "price": 10.26, "offer": false },
-    { "name": "Minicam zero PACK 6X20 CL.", "price": 3.50, "offer": false }
+    { "name": "PACK 12 Coca-Cola Zero Lata 33", "price": 10.26, "offer": false },
+    { "name": "COCA-COLA ZERO LATA PACK 6X20 CL.", "price": 3.50, "offer": false }
   ],
   "coca cola light": [
     { "name": "Coca-Cola Light pack 4 2L", "price": 4.00, "offer": false },
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "Coca-Cola Light Lata 33", "price": 1.00, "offer": false },
     { "name": "Bandeja Coca-Cola Light 33 cl Pack 24", "price": 24.00, "offer": false },
     { "name": "SEMI Coca-Cola Light Lata 33 P9 SD120", "price": 1.50, "offer": false },
-    { "name": "PACK 9 Light Lata 33", "price": 9.00, "offer": false }
+    { "name": "PACK 9 Coca-Cola Light Lata 33", "price": 9.00, "offer": false }
   ],
   "Coca Cola Zero Zero": [
     { "name": "SEMI PACK 12 CC Zero Zero (90x2)=180", "price": 12.00, "offer": false },
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "Coca-Cola Zero Zero Bipack 1,25L", "price": 2.50, "offer": false },
     { "name": "Coca-Cola Zero Zero 1,25L", "price": 1.25, "offer": false },
     { "name": "Coca-Cola Zero Zero Pet500", "price": 0.50, "offer": false },
-    { "name": "Coca-Cola Zero Zero Lata 33", "price": 1.00, "offer": false },
+    { "name": "Coca Cola Zero Zero Lata 33cl", "price": 1.00, "offer": false },
     { "name": "Bandeja Coca-Cola Zero Zero 33 cl Pack 24", "price": 24.00, "offer": false },
     { "name": "PACK 12 Coca-Cola Zero Zero Lata 33", "price": 12.00, "offer": false },
     { "name": "COCA-COLA ZERO ZERO LATA PACK 6X20 CL.", "price": 6.00, "offer": false }
