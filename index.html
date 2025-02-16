@@ -22,11 +22,13 @@
   <div id="contenido" style="display:none;">
     <header>
       <h1>PEDIDOS</h1>
-      <!-- Botón para cambiar contraseña -->
+      <!-- Se ha ocultado el botón de cambiar contraseña -->
     </header>
     <main>
       <!-- Contenedor de productos -->
       <section id="product-list"></section>
+      <!-- Botón para enviar pedido a Power Automate -->
+      <button id="send-order-btn" onclick="enviarPedido()">Enviar Pedido a Power Automate</button>
     </main>
     
     <!-- Total siempre visible -->
@@ -52,13 +54,13 @@
     <script src="script.js"></script>
   </div>
   
-  <!-- Script de autenticación y gestión de contraseña -->
+  <!-- Script de autenticación, gestión de contraseña y envío de pedido -->
   <script>
     // Array de usuarios válidos (para este ejemplo, se gestiona localmente)
     const USERS = [
       { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Sant Boi", password: "1234" },
       { username: "ccipbcncrd4@grupocaher.com", store: "Alcampo Sant Quirze", password: "1234" },
-      { username: "ccipbcncrd8@grupocaher.com",   store: "Alcampo Esplugues",  password: "2022" },
+      { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Esplugues",  password: "2022" },
       { username: "USUARIO4",     store: "Alcampo Other1",    password: "1234" },
       { username: "USUARIO5",     store: "Alcampo Other2",    password: "1234" }
     ];
@@ -98,6 +100,7 @@
         // Guardar las credenciales en localStorage para que se recuerden en el futuro
         localStorage.setItem("savedUsername", usernameInput);
         localStorage.setItem("savedPassword", passwordInput);
+        // Guardamos el nombre del centro (store) para enviarlo a Power Automate
         localStorage.setItem("userStore", userFound.store);
         localStorage.setItem("loggedInUser", userFound.username);
         mostrarContenido();
@@ -106,29 +109,36 @@
       }
     });
 
-    // Botón para cambiar la contraseña
-    document.getElementById("change-password-btn").addEventListener("click", function() {
-      const newPassword = prompt("Introduce la nueva contraseña:");
-      if (newPassword) {
-        // Obtener el usuario actualmente logueado
-        const currentUsername = localStorage.getItem("loggedInUser");
-        if (!currentUsername) {
-          alert("No se ha identificado el usuario.");
-          return;
-        }
-        // Actualizar la contraseña en el localStorage para recordar el nuevo valor
-        localStorage.setItem("savedPassword", newPassword);
-        
-        // Actualizar la contraseña en el array USERS (solo para este ejemplo; en un entorno real, esto se haría en el servidor)
-        const userIndex = USERS.findIndex(user => user.username === currentUsername);
-        if (userIndex !== -1) {
-          USERS[userIndex].password = newPassword;
-          alert("Contraseña actualizada correctamente.");
-        } else {
-          alert("Error al actualizar la contraseña.");
-        }
-      }
-    });
+    // Función para enviar el pedido a Power Automate usando el nombre del centro (opción A)
+    function enviarPedido() {
+      // Recupera el nombre del centro desde localStorage
+      const storeName = localStorage.getItem("userStore");
+      
+      // Aquí puedes agregar los datos adicionales del pedido
+      const pedido = {
+        store: storeName,
+        total: document.getElementById("total-display").textContent,
+        // Agrega otros datos necesarios, por ejemplo, los productos seleccionados
+      };
+      
+      // Ejemplo de envío usando fetch (modifica la URL por la de tu flujo en Power Automate)
+      fetch("https://tu-endpoint-de-powerautomate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(pedido)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Pedido enviado correctamente:", data);
+        alert("Pedido enviado correctamente.");
+      })
+      .catch(error => {
+        console.error("Error al enviar el pedido:", error);
+        alert("Error al enviar el pedido.");
+      });
+    }
   </script>
 </body>
 </html>
