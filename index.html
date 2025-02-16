@@ -18,11 +18,12 @@
     </form>
   </div>
   
-  
-  <!-- Contenido protegido: solo se mostrará una vez que el usuario inicie sesión -->
+  <!-- Contenido protegido: se mostrará una vez que el usuario inicie sesión -->
   <div id="contenido" style="display:none;">
     <header>
       <h1>PEDIDOS</h1>
+      <!-- Botón para cambiar contraseña -->
+      <button id="change-password-btn">Cambiar Contraseña</button>
     </header>
     <main>
       <!-- Contenedor de productos -->
@@ -52,53 +53,83 @@
     <script src="script.js"></script>
   </div>
   
-  <!-- Script de autenticación -->
+  <!-- Script de autenticación y gestión de contraseña -->
   <script>
-    // Definición de la función mostrarContenido
+    // Array de usuarios válidos (para este ejemplo, se gestiona localmente)
+    const USERS = [
+      { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Sant Boi", password: "1234" },
+      { username: "ccipbcncrd4@grupocaher.com", store: "Alcampo Sant Quirze", password: "1234" },
+      { username: "ccipbcncrd8@grupocaher.com",   store: "Alcampo Esplugues",  password: "2022" },
+      { username: "USUARIO4",     store: "Alcampo Other1",    password: "1234" },
+      { username: "USUARIO5",     store: "Alcampo Other2",    password: "1234" }
+    ];
+
+    // Al cargar la página, si existen credenciales guardadas, prellenamos los campos.
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedUsername = localStorage.getItem("savedUsername");
+      const savedPassword = localStorage.getItem("savedPassword");
+      if (savedUsername && savedPassword) {
+        document.getElementById("username").value = savedUsername;
+        document.getElementById("password").value = savedPassword;
+      }
+    });
+
+    // Función para mostrar el contenido protegido tras el login
     function mostrarContenido() {
-      if (localStorage.getItem("loggedIn") === "true") {
-        document.getElementById("login-container").style.display = "none";
-        document.getElementById("contenido").style.display = "block";
-        // Opcional: mostrar el nombre del almacén en el header
-        const storeName = localStorage.getItem("userStore");
-        if(storeName){
-          const header = document.querySelector("header h1");
-          header.textContent += " - " + storeName;
-        }
+      document.getElementById("login-container").style.display = "none";
+      document.getElementById("contenido").style.display = "block";
+      // Mostrar el nombre del almacén en el header, si está almacenado
+      const storeName = localStorage.getItem("userStore");
+      if (storeName) {
+        const header = document.querySelector("header h1");
+        header.textContent += " - " + storeName;
       }
     }
 
-    // Array de usuarios válidos con contraseña única "1234"
-    const USERS = [
-      { username: "CCIPBCNCRD8", store: "Alcampo Sant Boi", password: "1234" },
-      { username: "ccipbcncrd4", store: "Alcampo Sant Quirze", password: "1234" },
-      { username: "800800800",   store: "Alcampo Esplugues",  password: "1234" },
-      { username: "USUARIO4",     store: "Alcampo Other1",      password: "1234" },
-      { username: "USUARIO5",     store: "Alcampo Other2",      password: "1234" }
-    ];
-
+    // Evento para el formulario de login
     document.getElementById("login-form").addEventListener("submit", function(e) {
       e.preventDefault();
       const usernameInput = document.getElementById("username").value.trim();
       const passwordInput = document.getElementById("password").value.trim();
       
-      // Buscar si existe un usuario que coincida con las credenciales
+      // Buscar usuario que coincida con las credenciales
       const userFound = USERS.find(user => user.username === usernameInput && user.password === passwordInput);
       
       if (userFound) {
-        // Guarda el estado de autenticación en localStorage
-        localStorage.setItem("loggedIn", "true");
+        // Guardar las credenciales en localStorage para que se recuerden en el futuro
+        localStorage.setItem("savedUsername", usernameInput);
+        localStorage.setItem("savedPassword", passwordInput);
         localStorage.setItem("userStore", userFound.store);
         localStorage.setItem("loggedInUser", userFound.username);
-        localStorage.setItem("loggedInPassword", userFound.password);
         mostrarContenido();
       } else {
         alert("Credenciales incorrectas");
       }
     });
 
-    // Comprueba al cargar la página si ya hay un usuario autenticado
-    mostrarContenido();
+    // Botón para cambiar la contraseña
+    document.getElementById("change-password-btn").addEventListener("click", function() {
+      const newPassword = prompt("Introduce la nueva contraseña:");
+      if (newPassword) {
+        // Obtener el usuario actualmente logueado
+        const currentUsername = localStorage.getItem("loggedInUser");
+        if (!currentUsername) {
+          alert("No se ha identificado el usuario.");
+          return;
+        }
+        // Actualizar la contraseña en el localStorage para recordar el nuevo valor
+        localStorage.setItem("savedPassword", newPassword);
+        
+        // Actualizar la contraseña en el array USERS (solo para este ejemplo; en un entorno real, esto se haría en el servidor)
+        const userIndex = USERS.findIndex(user => user.username === currentUsername);
+        if (userIndex !== -1) {
+          USERS[userIndex].password = newPassword;
+          alert("Contraseña actualizada correctamente.");
+        } else {
+          alert("Error al actualizar la contraseña.");
+        }
+      }
+    });
   </script>
 </body>
 </html>
