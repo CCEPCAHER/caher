@@ -61,8 +61,8 @@
       { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Sant Boi", password: "1234" },
       { username: "ccipbcncrd4@grupocaher.com", store: "Alcampo Sant Quirze", password: "1234" },
       { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Esplugues",  password: "2022" },
-      { username: "USUARIO4",     store: "Alcampo Other1",    password: "1234" },
-      { username: "USUARIO5",     store: "Alcampo Other2",    password: "1234" }
+      { username: "USUARIO4",                  store: "Alcampo Other1",    password: "1234" },
+      { username: "USUARIO5",                  store: "Alcampo Other2",    password: "1234" }
     ];
 
     // Al cargar la página, si existen credenciales guardadas, prellenamos los campos.
@@ -114,15 +114,21 @@
       // Recupera el nombre del centro desde localStorage
       const storeName = localStorage.getItem("userStore");
       
+      // Muestra en consola lo que se ha recuperado
+      console.log("storeName leído de localStorage:", storeName);
+
       // Aquí puedes agregar los datos adicionales del pedido
       const pedido = {
         store: storeName,
-        total: document.getElementById("total-display").textContent,
+        total: document.getElementById("total-display").textContent
         // Agrega otros datos necesarios, por ejemplo, los productos seleccionados
       };
       
-      // Ejemplo de envío usando fetch (modifica la URL por la de tu flujo en Power Automate)
-      fetch("https://tu-endpoint-de-powerautomate", {
+      // Muestra el objeto 'pedido' en la consola antes de enviarlo
+      console.log("Objeto 'pedido' que se enviará:", pedido);
+
+      // Ejemplo de envío usando fetch (se usa la URL de Power Automate proporcionada)
+      fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -131,7 +137,7 @@
       })
       .then(response => response.json())
       .then(data => {
-        console.log("Pedido enviado correctamente:", data);
+        console.log("Respuesta recibida del flujo:", data);
         alert("Pedido enviado correctamente.");
       })
       .catch(error => {
