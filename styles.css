@@ -46,16 +46,14 @@ header h1 {
 ========================= */
 #total-display {
   position: fixed;
-  top: 10px;
-  right: 10px;
-  background: var(--bg-light);
-  padding: 10px 15px;
-  border-radius: 8px;
-  font-size: 1.2em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  top: 60px; /* Ajusta según la altura de tu header */
+  right: 20px; /* Separación del borde derecho */
+  z-index: 9999; /* Para asegurarte de que quede por encima de otros elementos */
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
-
 /* ========================
    CONTENEDOR DE PRODUCTOS
 ========================= */
