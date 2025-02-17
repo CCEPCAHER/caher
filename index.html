@@ -22,7 +22,7 @@
   </div>
   
   <!-- Contenido protegido: se mostrará una vez que el usuario inicie sesión -->
-  <div id="contenido">
+  <div id="contenido" style="display:none;">
     <header>
       <h1>PEDIDOS</h1>
     </header>
@@ -62,15 +62,26 @@
   <script>
     // Array de usuarios válidos (para este ejemplo, se gestiona localmente)
     const USERS = [
-      { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Sant Boi", password: "1234" },
+      { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Sant Boi",     password: "1234" },
       { username: "ccipbcncrd4@grupocaher.com", store: "Alcampo Sant Quirze", password: "1234" },
-      { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Esplugues",  password: "2022" },
-      { username: "USUARIO4",                  store: "Alcampo Other1",    password: "1234" },
-      { username: "USUARIO5",                  store: "Alcampo Other2",    password: "1234" }
+      { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Esplugues",   password: "2022" },
+      { username: "USUARIO4",                   store: "Alcampo Other1",      password: "1234" },
+      { username: "USUARIO5",                   store: "Alcampo Other2",      password: "1234" }
     ];
 
     // Al cargar la página, si existen credenciales guardadas, prellenamos los campos.
     document.addEventListener("DOMContentLoaded", function() {
+      // Rellenar el combo de supermercados con valores únicos de "store"
+      const stores = [...new Set(USERS.map(user => user.store))];
+      const storeSelect = document.getElementById('store');
+      stores.forEach(store => {
+        const option = document.createElement('option');
+        option.value = store;
+        option.textContent = store;
+        storeSelect.appendChild(option);
+      });
+
+      // Cargar valores guardados
       const savedStore = localStorage.getItem("savedStore");
       const savedUsername = localStorage.getItem("savedUsername");
       const savedPassword = localStorage.getItem("savedPassword");
@@ -80,16 +91,6 @@
         document.getElementById("username").value = savedUsername;
         document.getElementById("password").value = savedPassword;
       }
-
-      // Llenar selector de supermercados
-      const stores = [...new Set(USERS.map(user => user.store))];
-      const storeSelect = document.getElementById('store');
-      stores.forEach(store => {
-        const option = document.createElement('option');
-        option.value = store;
-        option.textContent = store;
-        storeSelect.appendChild(option);
-      });
     });
 
     // Evento para el formulario de login
@@ -107,13 +108,15 @@
       );
       
       if (userFound) {
-        // Guardar las credenciales en localStorage para que se recuerden en el futuro
+        // Guardar las credenciales en localStorage
         localStorage.setItem("savedStore", storeInput);
         localStorage.setItem("savedUsername", usernameInput);
         localStorage.setItem("savedPassword", passwordInput);
-        // Guardamos el nombre del centro (store) para enviarlo a Power Automate
+        // Guardar el nombre del centro (store) para enviarlo a Power Automate
         localStorage.setItem("userStore", userFound.store);
         localStorage.setItem("loggedInUser", userFound.username);
+
+        // Mostrar el contenido
         mostrarContenido();
       } else {
         alert("Credenciales incorrectas o supermercado no válido");
@@ -132,12 +135,12 @@
       }
     }
 
-    // Función para enviar el pedido a Power Automate usando el nombre del centro (opción A)
+    // Función para enviar el pedido a Power Automate usando el nombre del centro
     function enviarPedido() {
       // Recupera los datos desde localStorage
       const username = localStorage.getItem("savedUsername");
       const password = localStorage.getItem("savedPassword");
-      const userStore = localStorage.getItem("userStore") || "";  // fallback en caso de null
+      const userStore = localStorage.getItem("userStore") || "";  // fallback si fuese null
 
       // Registra en consola lo que se ha recuperado
       console.log("Datos recuperados:", { username, password, userStore });
@@ -187,4 +190,4 @@
     }
   </script>
 </body>
-</html>
+</html> 
