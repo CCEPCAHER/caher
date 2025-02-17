@@ -667,14 +667,16 @@ function submitOrder() {
   const orderItems = collectCartData();
   if (!orderItems) return;
 
-  // Obtener datos de usuario desde localStorage (ajusta según tus necesidades)
+  // Obtener datos de usuario y el supermercado desde localStorage
   const loggedUser = localStorage.getItem("loggedInUser") || "Usuario no identificado";
   const loggedPassword = localStorage.getItem("loggedInPassword") || "1234";
+  const storeName = localStorage.getItem("userStore") || "Supermercado desconocido";
 
   // Preparar el objeto de pedido
   const order = {
     username: loggedUser,
     password: loggedPassword,
+    userStore: storeName,          // <-- Añadimos aquí la propiedad 'userStore'
     products: orderItems
   };
 
@@ -713,7 +715,6 @@ function submitOrder() {
   }
 }
 
-
 // Muestra u oculta el modal del carrito
 function toggleCart() {
   document.getElementById("cart-modal").classList.toggle("active");
@@ -735,7 +736,6 @@ function showToast(message) {
     }, 2000);
   }, 100);
 }
-
 // Función que implementa lazy loading usando IntersectionObserver
 function lazyLoadImages() {
   const lazyImages = document.querySelectorAll('img.lazy');
