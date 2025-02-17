@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     "Coca Cola": [
     { "name": "SEMI PACK 12 lata CC (90x2)=180", "price": 12.00, "offer": true },
     { "name": "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920", "price": 720.00, "offer": true },
-    { "name": "Coca Cola pack 6 2L", "price": 6.00, "offer": false },
+    { "name": "PACK X 6 Coca-Cola Regular 2 L.", "price": 6.00, "offer": false },
     { "name": "SEMI PACK 4 Coca-Cola 2 L.", "price": 8.00, "offer": false },
     { "name": "Coca Cola pack 4 2L", "price": 4.00, "offer": false },
     { "name": "BIPACK Coca-Cola Regular 2 L.", "price": 4.00, "offer": false },
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const PRODUCT_QUANTITIES = {
           "SEMI PACK 12 lata CC (90x2)=180": [2, 4],
           "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920": [2, 4],
-          "Coca Cola pack 6 2L": [16, 32],
+          "PACK X 6 Coca-Cola Regular 2 L.": [16, 32],
           "SEMI PACK 4 Coca-Cola 2 L.": [2, 4],
           "Coca Cola pack 4 2L": [9, 18],
           "SEMI BIPACK Coca Cola 2x2L": [2, 4],
