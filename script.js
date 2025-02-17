@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "VNR 1L zero C6", "price": 1.00, "offer": false },
     { "name": "VNR zero P4 C6", "price": 4.00, "offer": false },
     { "name": "Coca-Cola Zero lata 33 cl.", "price": 0.95, "offer": false },
-    { "name": "Bandeja zero Pack 24", "price": 19.90, "offer": false },
+    { "name": "Bandeja Coca-Cola Zero 33 cl. Pack 24", "price": 19.90, "offer": false },
     { "name": "PACK 12 Coca-Cola Zero Lata 33", "price": 10.26, "offer": false },
     { "name": "COCA-COLA ZERO LATA PACK 6X20 CL.", "price": 3.50, "offer": false }
   ],
@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function() {
           "VNR 1L zero C6": [17, 34],
           "VNR zero P4 C6": [12, 24],
           "zero Lata 33": [9, 18],
-          "Bandeja zero Pack 24": [108, 216],
+          "Bandeja Coca-Cola Zero 33 cl. Pack 24": [108, 216],
           "PACK 12 zero Lata 33": [18, 36],
           "Minicam zero PACK 6X20 CL.": [54, 108],
           "Coca-Cola Light pack 4 2L": [24, 48],
