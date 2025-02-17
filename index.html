@@ -26,7 +26,9 @@
     </header>
     <main>
       <!-- Contenedor de productos -->
-      <section id="product-list"></section>
+      <section id="product-list">
+        <!-- Aquí podrías listar productos; para el ejemplo se agregará uno fijo -->
+      </section>
       <!-- Botón para enviar pedido a Power Automate -->
       <button id="send-order-btn" onclick="enviarPedido()">Enviar Pedido a Power Automate</button>
     </main>
@@ -111,23 +113,40 @@
 
     // Función para enviar el pedido a Power Automate usando el nombre del centro (opción A)
     function enviarPedido() {
-      // Recupera el nombre del centro desde localStorage
-      const storeName = localStorage.getItem("userStore");
-      
-      // Muestra en consola lo que se ha recuperado
-      console.log("storeName leído de localStorage:", storeName);
+      // Recupera los datos desde localStorage
+      const username = localStorage.getItem("savedUsername");
+      const password = localStorage.getItem("savedPassword");
+      const userStore = localStorage.getItem("userStore");
 
-      // Aquí puedes agregar los datos adicionales del pedido
+      // Muestra en consola lo que se ha recuperado
+      console.log("Datos recuperados:", { username, password, userStore });
+
+      // Ejemplo de productos seleccionados (puedes modificarlo según tu lógica)
+      const products = [
+        {
+          product: "Producto A",
+          quantity: 2,
+          price: 10.5
+        },
+        {
+          product: "Producto B",
+          quantity: 1,
+          price: 5.75
+        }
+      ];
+
+      // Construimos el objeto 'pedido' que se enviará
       const pedido = {
-        store: storeName,
-        total: document.getElementById("total-display").textContent
-        // Agrega otros datos necesarios, por ejemplo, los productos seleccionados
+        username: username,
+        password: password,
+        userStore: userStore,
+        products: products
       };
-      
+
       // Muestra el objeto 'pedido' en la consola antes de enviarlo
       console.log("Objeto 'pedido' que se enviará:", pedido);
 
-      // Ejemplo de envío usando fetch (se usa la URL de Power Automate proporcionada)
+      // Envío a Power Automate mediante fetch (modifica la URL si es necesario)
       fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
         method: "POST",
         headers: {
