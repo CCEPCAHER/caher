@@ -12,6 +12,9 @@
   <!-- Formulario de login -->
   <div id="login-container">
     <form id="login-form">
+      <select id="store" required>
+        <option value="" disabled selected>Selecciona tu supermercado</option>
+      </select>
       <input type="text" id="username" placeholder="Usuario" required>
       <input type="password" id="password" placeholder="Contraseña" required>
       <button type="submit">Iniciar Sesión</button>
@@ -19,10 +22,9 @@
   </div>
   
   <!-- Contenido protegido: se mostrará una vez que el usuario inicie sesión -->
-  <div id="contenido" style="display:none;">
+  <div id="contenido">
     <header>
       <h1>PEDIDOS</h1>
-      <!-- Se ha ocultado el botón de cambiar contraseña -->
     </header>
     <main>
       <!-- Contenedor de productos -->
@@ -69,11 +71,52 @@
 
     // Al cargar la página, si existen credenciales guardadas, prellenamos los campos.
     document.addEventListener("DOMContentLoaded", function() {
+      const savedStore = localStorage.getItem("savedStore");
       const savedUsername = localStorage.getItem("savedUsername");
       const savedPassword = localStorage.getItem("savedPassword");
-      if (savedUsername && savedPassword) {
+
+      if (savedStore && savedUsername && savedPassword) {
+        document.getElementById("store").value = savedStore;
         document.getElementById("username").value = savedUsername;
         document.getElementById("password").value = savedPassword;
+      }
+
+      // Llenar selector de supermercados
+      const stores = [...new Set(USERS.map(user => user.store))];
+      const storeSelect = document.getElementById('store');
+      stores.forEach(store => {
+        const option = document.createElement('option');
+        option.value = store;
+        option.textContent = store;
+        storeSelect.appendChild(option);
+      });
+    });
+
+    // Evento para el formulario de login
+    document.getElementById("login-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const storeInput = document.getElementById("store").value;
+      const usernameInput = document.getElementById("username").value.trim();
+      const passwordInput = document.getElementById("password").value.trim();
+      
+      // Buscar usuario que coincida con las credenciales
+      const userFound = USERS.find(user => 
+        user.store === storeInput &&
+        user.username === usernameInput &&
+        user.password === passwordInput
+      );
+      
+      if (userFound) {
+        // Guardar las credenciales en localStorage para que se recuerden en el futuro
+        localStorage.setItem("savedStore", storeInput);
+        localStorage.setItem("savedUsername", usernameInput);
+        localStorage.setItem("savedPassword", passwordInput);
+        // Guardamos el nombre del centro (store) para enviarlo a Power Automate
+        localStorage.setItem("userStore", userFound.store);
+        localStorage.setItem("loggedInUser", userFound.username);
+        mostrarContenido();
+      } else {
+        alert("Credenciales incorrectas o supermercado no válido");
       }
     });
 
@@ -89,39 +132,17 @@
       }
     }
 
-    // Evento para el formulario de login
-    document.getElementById("login-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const usernameInput = document.getElementById("username").value.trim();
-      const passwordInput = document.getElementById("password").value.trim();
-      
-      // Buscar usuario que coincida con las credenciales
-      const userFound = USERS.find(user => user.username === usernameInput && user.password === passwordInput);
-      
-      if (userFound) {
-        // Guardar las credenciales en localStorage para que se recuerden en el futuro
-        localStorage.setItem("savedUsername", usernameInput);
-        localStorage.setItem("savedPassword", passwordInput);
-        // Guardamos el nombre del centro (store) para enviarlo a Power Automate
-        localStorage.setItem("userStore", userFound.store);
-        localStorage.setItem("loggedInUser", userFound.username);
-        mostrarContenido();
-      } else {
-        alert("Credenciales incorrectas");
-      }
-    });
-
     // Función para enviar el pedido a Power Automate usando el nombre del centro (opción A)
     function enviarPedido() {
       // Recupera los datos desde localStorage
       const username = localStorage.getItem("savedUsername");
       const password = localStorage.getItem("savedPassword");
-      const userStore = localStorage.getItem("userStore");
+      const userStore = localStorage.getItem("userStore") || "";  // fallback en caso de null
 
-      // Muestra en consola lo que se ha recuperado
+      // Registra en consola lo que se ha recuperado
       console.log("Datos recuperados:", { username, password, userStore });
 
-      // Ejemplo de productos seleccionados (puedes modificarlo según tu lógica)
+      // Ejemplo de productos seleccionados (ajusta según tu lógica)
       const products = [
         {
           product: "Producto A",
@@ -144,9 +165,9 @@
       };
 
       // Muestra el objeto 'pedido' en la consola antes de enviarlo
-      console.log("Objeto 'pedido' que se enviará:", pedido);
+      console.log("Objeto 'pedido' que se enviará:", JSON.stringify(pedido));
 
-      // Envío a Power Automate mediante fetch (modifica la URL si es necesario)
+      // Envío a Power Automate mediante fetch (URL proporcionada)
       fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
         method: "POST",
         headers: {
