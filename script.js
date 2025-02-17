@@ -231,9 +231,9 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "Agua Vilas del Turbón pet 1L", "price": 1.00, "offer": false }
   ],
   "Alcoholes": [
-    { "name": "Jack&Coke", "price": 3.00, "offer": false },
-    { "name": "Jack&Coke zero", "price": 3.00, "offer": false },
-    { "name": "Adsolut Sprite", "price": 3.00, "offer": false }
+    { "name": "Jack & Coke Lata 33 C12", "price": 3.00, "offer": false },
+    { "name": "Jack & Coke Zero Sin Cafeína Lata 33 C12", "price": 3.00, "offer": false },
+    { "name": "Absolut Sprite Lata 25 C12", "price": 3.00, "offer": false }
   ]
 
     };
@@ -437,9 +437,9 @@ document.addEventListener("DOMContentLoaded", function() {
           "Semi Aquabona 1,5 L (240x2)=480": [2, 4],
           "Abuabona Singular PET50 C12": [18, 36],
           "Agua Vilas del Turbón pet 1L": [9, 18],
-          "Jack&Coke": [3, 5, 15],
-          "Jack&Coke zero": [3, 5, 15],
-          "Adsolut Sprite": [3, 5, 15]     
+          "Jack & Coke Lata 33 C12": [3, 5, 15],
+          "Jack & Coke Zero Sin Cafeína Lata 33 C12": [3, 5, 15],
+          "Absolut Sprite Lata 25 C12": [3, 5, 15]     
 };
 
  // Función para crear cada sección en formato carrusel  
