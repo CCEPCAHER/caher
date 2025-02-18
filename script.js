@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
   "Coca Cola Zero": [
     { "name": "SEMI PACK 12 CC Zero (90x2)=180", "price": 12.00, "offer": false },
     { "name": "SEMI Coca Cola Zero lata 33 cl. (960x2)=1920", "price": 912.00, "offer": true },
-    { "name": "Coca Cola Zero pack 6 2L", "price": 6.00, "offer": false },
+    { "name": "PACK X 6 Coca-Cola Zero 2L", "price": 6.00, "offer": false },
     { "name": "SEMI PACK 4 Coca Zero 2 L.", "price": 8.00, "offer": false },
     { "name": "PACK X 4 Coca-Cola Zero 2 L.", "price": 4.00, "offer": false },
     { "name": "SEMI BIPACK Coca Cola Zero Pet 2x2 L.", "price": 4.00, "offer": false },
@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function() {
           "COCA-COLA  REGULAR LATA PACK 6X20 CL.": [54, 108],
           "SEMI PACK 12 CC Zero (90x2)=180": [2, 4],
           "SEMI Coca Cola Zero lata 33 cl. (960x2)=1920": [2, 4],
-          "Coca Cola Zero pack 6 2L": [16, 32],
+          "PACK X 6 Coca-Cola Zero 2L": [16, 32],
           "SEMI PACK 4 Coca Zero 2 L.": [2, 4],
           "PACK X 4 Coca-Cola Zero 2 L.": [24, 48],
           "SEMI BIPACK Coca Cola Zero Pet 2x2 L.": [2, 4],
