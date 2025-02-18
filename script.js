@@ -3,15 +3,15 @@ document.addEventListener("DOMContentLoaded", function() {
   // Puedes inicializarlo con dos, tres o más secciones; luego se podrán agregar dinámicamente.
   const sections = {
     "Coca Cola": [
-    { "name": "SEMI PACK 12 lata CC (90x2)=180", "price": 12.00, "offer": false },
+    { "name": "SEMI PACK 12 lata CC (90x2)=180", "price": 961.20, "offer": false },
     { "name": "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920", "price": 720.00, "offer": false },
-    { "name": "PACK X 6 Coca-Cola Regular 2 L.", "price": 6.00, "offer": false },
-    { "name": "SEMI PACK 4 Coca-Cola 2 L.", "price": 8.00, "offer": false },
-    { "name": "PACK X 4 Coca-Cola Regular 2 L.", "price": 4.00, "offer": false },
+    { "name": "PACK X 6 Coca-Cola Regular 2 L.", "price": 12.00, "offer": false },
+    { "name": "SEMI PACK 4 Coca-Cola 2 L.", "price": 384.48, "offer": false },
+    { "name": "PACK X 4 Coca-Cola Regular 2 L.", "price": 10.68, "offer": false },
     { "name": "BIPACK Coca-Cola Regular 2 L.", "price": 4.00, "offer": false },
-    { "name": "Coca Cola Bipack 2L", "price": 2.00, "offer": false },
-    { "name": "SEMI Coca Cola pet 2 L.", "price": 2.00, "offer": false },
-    { "name": "Coca-Cola Pet 2 L. ", "price": 2.00, "offer": false },
+    { "name": "Coca Cola Bipack 2L", "price": 4.74, "offer": false },
+    { "name": "SEMI Coca Cola pet 2 L.", "price": 370.50, "offer": false },
+    { "name": "Coca-Cola Pet 2 L. ", "price": 2.47, "offer": false },
     { "name": "Coca Cola Bipack 1,25L", "price": 2.50, "offer": false },
     { "name": "SEMI Coca Cola pet 1,25 L.", "price": 1.25, "offer": false },
     { "name": "Coca Cola 1,25L", "price": 1.25, "offer": false },
