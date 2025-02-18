@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "BIPACK Coca-Cola Regular 2 L.", "price": 4.00, "offer": false },
     { "name": "Coca Cola Bipack 2L", "price": 4.74, "offer": false },
     { "name": "SEMI Coca Cola pet 2 L.", "price": 370.50, "offer": false },
-    { "name": "Coca-Cola Pet 2 L. ", "price": 2.47, "offer": false },
+    { "name": "BIPACK Coca-Cola Regular 2 L.", "price": 2.47, "offer": false },
     { "name": "Coca Cola Bipack 1,25L", "price": 2.50, "offer": false },
     { "name": "SEMI Coca Cola pet 1,25 L.", "price": 1.25, "offer": false },
     { "name": "Coca Cola 1,25L", "price": 1.25, "offer": false },
