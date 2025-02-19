@@ -386,7 +386,7 @@ header h1 {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(53, 6, 6, 0.3);
   z-index: 1200;
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -428,123 +428,80 @@ header h1 {
     max-height: 190px;
     object-fit: contain;
   }
-}
-
-/* ========================
-   ESTILOS PARA LA PÁGINA DE LOGIN
+}/* ========================
+   ESTILOS PARA EL LOGIN
 ========================= */
-/* Aplica esta clase al <body> o a un contenedor principal en la página de login */
-.login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  /* Fondo vibrante para la pantalla de login */
-  background: linear-gradient(135deg, #d50000, #8b0000);
-}
 
-.login-container {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 320px;
-}
-
-.login-container h2 {
-  color: var(--color-text);
-  margin-bottom: 1rem;
-}
-
-.login-container input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  background: var(--bg-light);
-  color: var(--color-text);
-}
-
-.login-container button {
-  width: 100%;
-  padding: 10px;
-  background: var(--bg-light);
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--color-primary);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.login-container button:hover {
-  background: var(--color-primary-hover);
-  color: #fff;
-}
-
-.login-container input::placeholder {
-  color: #555;
-  opacity: 0.8;
-}
-/* ========================
-   ESTILOS PARA EL LOGIN (solo para #login-container)
-========================= */
 #login-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, #d50000, #8b0000);
+  background: url('images/fotoapp.jpg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1500;
 }
 
-#login-container #login-form {
-  background: #fff;
+/* Formulario de login centrado y con diseño moderno */
+#login-form {
+  background: rgba(199, 181, 181, 0.046);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(239, 232, 232, 0.002);
   text-align: center;
   width: 320px;
 }
 
-#login-container #login-form input {
+/* Título del formulario */
+#login-form h2 {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+/* Estilos para select, inputs y botón dentro del formulario */
+#login-form select,
+#login-form input,
+#login-form button {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: none;
   border-radius: 6px;
   font-size: 1rem;
-  background: var(--bg-light);
-  color: var(--color-text);
-  transition: box-shadow var(--transition);
+  transition: var(--transition);
 }
 
-#login-container #login-form input:focus {
+/* Estilos para los campos de entrada */
+#login-form select,
+#login-form input {
+  background: var(--bg-light);
+  color: var(--color-text);
+}
+
+/* Placeholder para inputs */
+#login-form input::placeholder {
+  color: #140e0e;
+  opacity: 0.8;
+}
+
+/* Efecto al enfocar un input */
+#login-form input:focus {
   outline: none;
   box-shadow: 0 0 5px var(--color-primary);
 }
 
-#login-container #login-form button {
-  width: 100%;
-  padding: 10px;
+/* Botón del formulario */
+#login-form button {
   background: var(--color-primary);
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  color: #170606;
   font-weight: bold;
-  color: #fff;
   cursor: pointer;
-  transition: background var(--transition);
 }
 
-#login-container #login-form button:hover {
+/* Efecto hover en el botón */
+#login-form button:hover {
   background: var(--color-primary-hover);
 }
