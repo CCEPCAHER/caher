@@ -65,8 +65,8 @@
       { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Sant Boi",     password: "1234" },
       { username: "ccipbcncrd4@grupocaher.com", store: "Alcampo Sant Quirze", password: "1234" },
       { username: "ccipbcncrd8@grupocaher.com", store: "Alcampo Esplugues",   password: "1234" },
-      { username: "ccipbcncrd4@grupocaher.com",                   store: "Carrefour Sant Cugat",      password: "1234" },
-      { username: "ccipbcncrd4@grupocaher.com",                   store: "Carrefour Barbera",      password: "1234" }
+      { username: "ccipbcncrd4@grupocaher.com", store: "Carrefour Sant Cugat", password: "1234" },
+      { username: "ccipbcncrd4@grupocaher.com", store: "Carrefour Barbera", password: "1234" }
     ];
 
     // Al cargar la página, si existen credenciales guardadas, prellenamos los campos.
@@ -116,7 +116,7 @@
         localStorage.setItem("userStore", userFound.store);
         localStorage.setItem("loggedInUser", userFound.username);
 
-        // Mostrar el contenido
+        // Mostrar el contenido protegido
         mostrarContenido();
       } else {
         alert("Credenciales incorrectas o supermercado no válido");
@@ -140,26 +140,16 @@
       // Recupera los datos desde localStorage
       const username = localStorage.getItem("savedUsername");
       const password = localStorage.getItem("savedPassword");
-      const userStore = localStorage.getItem("userStore") || "";  // fallback si fuese null
+      const userStore = localStorage.getItem("userStore") || "";
 
-      // Registra en consola lo que se ha recuperado
       console.log("Datos recuperados:", { username, password, userStore });
 
       // Ejemplo de productos seleccionados (ajusta según tu lógica)
       const products = [
-        {
-          product: "Producto A",
-          quantity: 2,
-          price: 10.5
-        },
-        {
-          product: "Producto B",
-          quantity: 1,
-          price: 5.75
-        }
+        { product: "Producto A", quantity: 2, price: 10.5 },
+        { product: "Producto B", quantity: 1, price: 5.75 }
       ];
 
-      // Construimos el objeto 'pedido' que se enviará
       const pedido = {
         username: username,
         password: password,
@@ -167,15 +157,11 @@
         products: products
       };
 
-      // Muestra el objeto 'pedido' en la consola antes de enviarlo
       console.log("Objeto 'pedido' que se enviará:", JSON.stringify(pedido));
 
-      // Envío a Power Automate mediante fetch (URL proporcionada)
       fetch("https://prod-241.westeurope.logic.azure.com:443/workflows/b86ee01c42c2495ca93cb2989e7ad4b3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QIyKPBTQZuH1uk0jhYoQ_fh-3DZWZpjR4hA80yPNxeg", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pedido)
       })
       .then(response => response.json())
@@ -190,4 +176,4 @@
     }
   </script>
 </body>
-</html> 
+</html>
