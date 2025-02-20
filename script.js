@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "PACK X 6 Coca-Cola Regular 2 L.", "price": 12.00, "offer": false },
     { "name": "SEMI PACK 4 Coca-Cola 2 L.", "price": 384.48, "offer": false },
     { "name": "PACK X 4 Coca-Cola Regular 2 L.", "price": 10.68, "offer": false },
-    { "name": "SEMI BIPACK  Coca Cola 2x2L", "price": 4.00, "offer": false },
+    { "name": "SEMI BIPACK Coca Cola 2x2L", "price": 4.00, "offer": false },
     { "name": "BIPACK Coca-Cola Regular 2 L.", "price": 4.74, "offer": false },
     { "name": "SEMI Coca Cola pet 2 L.", "price": 370.50, "offer": false },
     { "name": "BIPACK Coca-Cola Regular 2 L.", "price": 2.47, "offer": false },
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
   ],
   "Coca Cola Zero": [
     { "name": "SEMI PACK 12 CC Zero (90x2)=180", "price": 12.00, "offer": false },
-    { "name": "SEMI Coca Cola Zero lata 33 cl. (960x2)=1920", "price": 912.00, "offer": true },
+    { "name": "SEMI Coca Cola Zero lata 33 cl. (960x2)=1920", "price": 912.00, "offer": false },
     { "name": "PACK X 6 Coca-Cola Zero 2L", "price": 6.00, "offer": false },
     { "name": "SEMI PACK 4 Coca Zero 2 L.", "price": 8.00, "offer": false },
     { "name": "PACK X 4 Coca-Cola Zero 2 L.", "price": 4.00, "offer": false },
