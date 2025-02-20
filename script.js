@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "Aquarius Naranja Pet 500", "price": 0.50, "offer": false },
     { "name": "SEMI  Aquarius Limón Pet 1´5 l. (195x2)= 390", "price": 1.00, "offer": false },
     { "name": "Aquarius limón Pet 1,5 L.", "price": 1.50, "offer": false },
-    { "name": "Aquarius Naranja Pet 1,5 L.", "price": 1.50, "offer": false },
+    { "name": "Aquarius Naranjar Pet 1,5 L.", "price": 1.50, "offer": false },
     { "name": "Aquarius Limón Sin Azúcar Pet 1,5 L.", "price": 1.50, "offer": false },
     { "name": "Aquarius Naranja Sin Azúcar Pet 1,5 L.", "price": 1.50, "offer": false },
     { "name": "Aquarius Melocotón Rojo Pet 1.5L C6", "price": 1.50, "offer": false },
@@ -216,7 +216,8 @@ document.addEventListener("DOMContentLoaded", function() {
     { "name": "Pack x 4 Aquarius Naranja Pet 1,5 L.", "price": 6.00, "offer": false },
     { "name": "BIPACK Aquarius Limón Pet 1,5 L.", "price": 3.50, "offer": false },
     { "name": "BIPACK Aquarius Naranja Pet 1,5 L.", "price": 3.50, "offer": false },
-    { "name": "Aquarius Melocotón Rojo Lata 33", "price": 1.00, "offer": false }
+    { "name": "Aquarius Melocotón Rojo Lata 33", "price": 1.00, "offer": false },
+    { "name": "SEMI Aquarius Naranja Pet 1´5 l. (195x2)= 390", "price": 1.00, "offer": false }
   ],
   "Appletiser": [
     { "name": "Appletiser VNR75 C6", "price": 6.00, "offer": false },
@@ -429,6 +430,7 @@ document.addEventListener("DOMContentLoaded", function() {
           "BIPACK Aquarius Limón Pet 1,5 L.": [21, 42],
           "BIPACK Aquarius Naranja Pet 1,5 L.": [21, 42],
           "Aquarius Melocotón Rojo Lata 33": [9, 18],
+          "SEMI Aquarius Naranja Pet 1´5 l. (195x2)= 390": [2, 4],
           "Appletiser VNR75 C6": [17, 34],
           "Appletiser VNR275 P6 C4": [9, 18],
           "Appletiser LATA25 C12": [24, 48],
