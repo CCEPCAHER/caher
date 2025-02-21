@@ -492,7 +492,6 @@ header h1 {
   outline: none;
   box-shadow: 0 0 5px var(--color-primary);
 }
-
 /* Botón del formulario */
 #login-form button {
   background: #E41A1C; /* Rojo Coca Cola */
