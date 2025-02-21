@@ -495,13 +495,13 @@ header h1 {
 
 /* Botón del formulario */
 #login-form button {
-  background: var(--color-primary);
-  color: #170606;
+  background: #E41A1C; /* Rojo Coca Cola */
+  color: #FFFFFF;     /* Letras blancas */
   font-weight: bold;
   cursor: pointer;
 }
 
 /* Efecto hover en el botón */
 #login-form button:hover {
-  background: var(--color-primary-hover);
+  background: #C31A17; /* Tono ligeramente más oscuro al pasar el mouse */
 }
