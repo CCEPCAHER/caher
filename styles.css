@@ -247,18 +247,25 @@ header h1 {
 ========================= */
 .add-btn {
   width: 100%;
-  background: var(--color-primary);
-  color: #fff;
+  background: #E41A1C; /* Rojo Coca Cola */
+  color: #fff;         /* Letras blancas */
   border: none;
   border-radius: 8px;
   padding: 10px;
   font-size: 1.1em;
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .add-btn:hover {
-  background: var(--color-primary-hover);
+  background: #C31A17; /* Tono ligeramente más oscuro al pasar el mouse */
+}
+
+/* Estado: Agregado */
+.add-btn.added {
+  background: #28a745; /* Verde para indicar que está añadido */
+  color: #fff;
+  cursor: default;     /* Opcional: se puede cambiar para que no parezca clickeable */
 }
 
 /* ========================
@@ -314,7 +321,9 @@ header h1 {
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid #ddd;
+  background: #ffffff;         /* Fondo blanco, propio de una factura */
+  color: #333333;              /* Texto en gris oscuro para buena legibilidad */
+  border-bottom: 1px solid #E41A1C; /* Línea divisoria en rojo para un acento sutil */
   font-size: 1em;
 }
 
@@ -492,6 +501,7 @@ header h1 {
   outline: none;
   box-shadow: 0 0 5px var(--color-primary);
 }
+
 /* Botón del formulario */
 #login-form button {
   background: #E41A1C; /* Rojo Coca Cola */
@@ -503,4 +513,4 @@ header h1 {
 /* Efecto hover en el botón */
 #login-form button:hover {
   background: #C31A17; /* Tono ligeramente más oscuro al pasar el mouse */
-}
+}       
