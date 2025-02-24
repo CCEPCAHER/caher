@@ -173,7 +173,8 @@ document.addEventListener("DOMContentLoaded", function() {
       { "name": "Monster Ultra Gold Zero Lata 50 C24", "price": 24.00, "offer": false },
       { "name": "Monster Aussie Style Lemonade Lata 50 C24", "price": 24.00, "offer": false },
       { "name": "Monster Reserve Watermelon Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Reserve White Pineapple Lata 50 C24", "price": 24.00, "offer": false }
+      { "name": "Monster Reserve White Pineapple Lata 50 C24", "price": 24.00, "offer": false },
+      { "name": "MONSTER ULTRA STRAWBERRY DREAMS LA50 C24", "price": 24.00, "offer": false }
     ],
     "M.Maid": [
       { "name": "Limón&Nada Clásica 1 L.", "price": 1.00, "offer": false }
@@ -386,6 +387,7 @@ document.addEventListener("DOMContentLoaded", function() {
     "Monster Aussie Style Lemonade Lata 50 C24": [9, 18],
     "Monster Reserve Watermelon Lata 50 C24": [9, 18],
     "Monster Reserve White Pineapple Lata 50 C24": [9, 18],
+    "MONSTER ULTRA STRAWBERRY DREAMS LA50 C24": [9, 18],
     "Limón&Nada Clásica 1 L.": [25, 50],
     "Fuze Limón Lata 33": [9, 18],
     "Fuze Limón sin azúcar Lata 33": [9, 18],
