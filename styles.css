@@ -437,7 +437,8 @@ header h1 {
     max-height: 190px;
     object-fit: contain;
   }
-}/* ========================
+}
+/* ========================
    ESTILOS PARA EL LOGIN
 ========================= */
 
@@ -514,3 +515,66 @@ header h1 {
 #login-form button:hover {
   background: #C31A17; /* Tono ligeramente más oscuro al pasar el mouse */
 }       
+.discount-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: white;
+  font-size: 0.8em;
+  z-index: 2;
+}
+
+/* Colores diferentes por tipo de descuento */
+.discount-tag.second-unit-70 { background: #9c27b0; } /* Morado */
+.discount-tag[class*="2x1"] { background: #4caf50; } /* Verde */
+.discount-tag[class*="20"] { background: #ff9800; } /* Naranja */
+/* Estilo general para todas las etiquetas de descuento */
+.discount-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 0.8em;
+  z-index: 2;
+  margin-bottom: 2px;
+}
+
+/* Etiqueta para 2x1 */
+.discount-tag.twoXone {
+  background-color: #4caf50; /* Verde */
+}
+
+/* Etiqueta para 3x2 */
+.discount-tag.threeXtwo {
+  background-color: #2196f3; /* Azul */
+}
+
+/* Etiqueta para segunda unidad al 70% */
+.discount-tag.secondUnit70 {
+  background-color: #9c27b0; /* Morado */
+}
+
+/* Etiqueta para 20% de descuento */
+.discount-tag.twentyPercent {
+  background-color: #ff9800; /* Naranja */
+}
+/* ========================
+   LOGO DE OFERTA (SUPERMERCADO)
+========================= */
+.offer-logo {
+  position: absolute;
+  bottom: 8px;      /* Ajusta la distancia desde abajo */
+  left: 8px;        /* Ajusta la distancia desde la izquierda */
+  width: 50px;      /* Ajusta el tamaño del logo */
+  z-index: 3;       /* Asegura que el logo quede por encima de la imagen del producto */
+}
+
+.offer-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
