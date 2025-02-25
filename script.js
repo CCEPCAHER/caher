@@ -18,31 +18,31 @@ document.addEventListener("DOMContentLoaded", function() {
       { 
         "name": "PACK X 6 Coca-Cola Regular 2 L.", 
         "price": 12.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
         "name": "SEMI PACK 4 Coca-Cola 2 L.", 
         "price": 384.48, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
         "name": "PACK X 4 Coca-Cola Regular 2 L.", 
         "price": 10.68, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
         "name": "SEMI BIPACK Coca Cola 2x2L", 
         "price": 4.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
         "name": "BIPACK Coca-Cola Regular 2 L.", 
         "price": 4.74, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { 
         "name": "PACK X 6 Coca-Cola Zero 2L", 
         "price": 6.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { 
         "name": "BIPACK Coca-Cola Zero 2 L.", 
         "price": 2.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
