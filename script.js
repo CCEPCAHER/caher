@@ -2,239 +2,1231 @@ document.addEventListener("DOMContentLoaded", function() {
   // Objeto con secciones y productos
   const sections = {
     "Coca Cola": [
-      { "name": "SEMI PACK 12 lata CC (90x2)=180", "price": 961.20, "offer": false },
-      { "name": "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920", "price": 720.00, "offer": false },
-      { "name": "PACK X 6 Coca-Cola Regular 2 L.", "price": 12.00, "offer": true },
-      { "name": "SEMI PACK 4 Coca-Cola 2 L.", "price": 384.48, "offer": true },
-      { "name": "PACK X 4 Coca-Cola Regular 2 L.", "price": 10.68, "offer": true },
-      { "name": "SEMI BIPACK Coca Cola 2x2L", "price": 4.00, "offer": true },
-      { "name": "BIPACK Coca-Cola Regular 2 L.", "price": 4.74, "offer": true },
-      { "name": "SEMI Coca Cola pet 2 L.", "price": 370.50, "offer": false },
-      { "name": "Coca-Cola Pet 2 L.", "price": 2.47, "offer": false },
-      { "name": "COCA-COLA PET1,25L P2 C3", "price": 2.50, "offer": false },
-      { "name": "SEMI Coca Cola pet 1,25 L.", "price": 1.25, "offer": false },
-      { "name": "Coca Cola 1,25L", "price": 1.25, "offer": false },
-      { "name": "Coca Cola P4 Pet500", "price": 2.00, "offer": false },
-      { "name": "Coca Cola pet500", "price": 0.50, "offer": false },
-      { "name": "VNR 1L Coca-Cola C6 ", "price": 1.00, "offer": false },
-      { "name": "VNR Coca-Cola 20 cl P4 C6", "price": 4.00, "offer": false },
-      { "name": "Coca-Cola Lata 33", "price": 1.00, "offer": false },
-      { "name": "Bandeja Coca-Cola 33 cl. Pack 24", "price": 24.00, "offer": false },
-      { "name": "PACK 12 Coca-Cola  Lata 33", "price": 12.00, "offer": false },
-      { "name": "COCA-COLA  REGULAR LATA PACK 6X20 CL.", "price": 6.00, "offer": false }
+      { 
+        "name": "SEMI PACK 12 lata CC (90x2)=180", 
+        "price": 961.20, 
+        "offer": false,
+        // Se activa secondUnit70 porque originalmente tenía "second-unit-70"
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920", 
+        "price": 720.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK X 6 Coca-Cola Regular 2 L.", 
+        "price": 12.96, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI PACK 4 Coca-Cola 2 L.", 
+        "price": 384.48, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK X 4 Coca-Cola Regular 2 L.", 
+        "price": 8.84, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI BIPACK Coca Cola 2x2L", 
+        "price": 4.46, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Coca-Cola Regular 2 L.", 
+        "price": 4.74, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Coca Cola pet 2 L.", 
+        "price": 370.50, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Pet 2 L.", 
+        "price": 2.47, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "COCA-COLA PET1,25L P2 C3", 
+        "price": 2.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Coca Cola pet 1,25 L.", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola 1,25L", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola P4 Pet500", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola pet500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "VNR 1L Coca-Cola C6 ", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "VNR Coca-Cola 20 cl P4 C6", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Bandeja Coca-Cola 33 cl. Pack 24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK 12 Coca-Cola  Lata 33", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "COCA-COLA  REGULAR LATA PACK 6X20 CL.", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Coca Cola Zero": [
-      { "name": "SEMI PACK 12 CC Zero (90x2)=180", "price": 12.00, "offer": false },
-      { "name": "SEMI Coca Cola Zero lata 33 cl. (960x2)=1920", "price": 912.00, "offer": false },
-      { "name": "PACK X 6 Coca-Cola Zero 2L", "price": 6.00, "offer": true },
-      { "name": "SEMI PACK 4 Coca Zero 2 L.", "price": 8.00, "offer": true },
-      { "name": "PACK X 4 Coca-Cola Zero 2 L.", "price": 4.00, "offer": true },
-      { "name": "SEMI BIPACK Coca Cola Zero Pet 2x2 L.", "price": 4.00, "offer": true },
-      { "name": "BIPACK Coca-Cola Zero 2 L.", "price": 2.00, "offer": true },
-      { "name": "SEMI Coca Cola Zero Pet 2 L.", "price": 2.00, "offer": false },
-      { "name": "Coca Cola Zero Pet 2 L.", "price": 2.00, "offer": false },
-      { "name": "COCA-COLA ZERO PET1,25L P2 C3", "price": 2.50, "offer": false },
-      { "name": "Coca Cola Zero 1,25L", "price": 1.25, "offer": false },
-      { "name": "Coca Cola Zero P4 Pet500", "price": 2.00, "offer": false },
-      { "name": "Coca Cola Zero pet500", "price": 0.50, "offer": false },
-      { "name": "VNR 1L Coca-Cola ZER C6", "price": 1.00, "offer": false },
-      { "name": "VNR Coca-Cola Zero 20 cl P4 C6", "price": 4.00, "offer": false },
-      { "name": "Coca-Cola Zero lata 33 cl.", "price": 0.95, "offer": false },
-      { "name": "Bandeja Coca-Cola Zero 33 cl. Pack 24", "price": 19.90, "offer": false },
-      { "name": "PACK 12 Coca-Cola Zero Lata 33", "price": 10.26, "offer": false },
-      { "name": "COCA-COLA ZERO LATA PACK 6X20 CL.", "price": 3.50, "offer": false }
+      { 
+        "name": "SEMI PACK 12 CC Zero (90x2)=180", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Coca Cola Zero lata 33 cl. (960x2)=1920", 
+        "price": 912.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK X 6 Coca-Cola Zero 2L", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI PACK 4 Coca Zero 2 L.", 
+        "price": 8.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK X 4 Coca-Cola Zero 2 L.", 
+        "price": 4.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI BIPACK Coca Cola Zero Pet 2x2 L.", 
+        "price": 4.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Coca-Cola Zero 2 L.", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Coca Cola Zero Pet 2 L.", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola Zero Pet 2 L.", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "COCA-COLA ZERO PET1,25L P2 C3", 
+        "price": 2.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola Zero 1,25L", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola Zero P4 Pet500", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola Zero pet500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "VNR 1L Coca-Cola ZER C6", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "VNR Coca-Cola Zero 20 cl P4 C6", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Zero lata 33 cl.", 
+        "price": 0.95, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Bandeja Coca-Cola Zero 33 cl. Pack 24", 
+        "price": 19.90, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK 12 Coca-Cola Zero Lata 33", 
+        "price": 10.26, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "COCA-COLA ZERO LATA PACK 6X20 CL.", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "coca cola light": [
-      { "name": "Coca-Cola Light pack 4 2L", "price": 4.00, "offer": false },
-      { "name": "BIPACK Coca-Cola Light 2 L.", "price": 2.00, "offer": false },
-      { "name": "Coca-Cola Light Pet 2 L.", "price": 2.00, "offer": false },
-      { "name": "Coca-Cola Light 1,25L", "price": 1.25, "offer": false },
-      { "name": "Coca-Cola Light Pet500", "price": 0.50, "offer": false },
-      { "name": "Coca-Cola Light Lata 33", "price": 1.00, "offer": false },
-      { "name": "Bandeja Coca-Cola Light 33 cl Pack 24", "price": 24.00, "offer": false },
-      { "name": "SEMI Coca-Cola Light Lata 33 P9 SD120", "price": 1.50, "offer": false },
-      { "name": "PACK 9 Coca-Cola Light Lata 33", "price": 9.00, "offer": false }
+      { 
+        "name": "Coca-Cola Light pack 4 2L", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Coca-Cola Light 2 L.", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Light Pet 2 L.", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Light 1,25L", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Light Pet500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Light Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Bandeja Coca-Cola Light 33 cl Pack 24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Coca-Cola Light Lata 33 P9 SD120", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK 9 Coca-Cola Light Lata 33", 
+        "price": 9.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Coca Cola Zero Zero": [
-      { "name": "SEMI PACK 12 CC Zero Zero (90x2)=180", "price": 12.00, "offer": false },
-      { "name": "Coca-Cola Zero Zero pack 6 2L", "price": 6.00, "offer": false },
-      { "name": "SEMI PACK 4 Coca Zero Zero Regular 2 L.", "price": 8.00, "offer": false },
-      { "name": "PACK X 4 Coca-Cola Zero Zero 2L.", "price": 4.00, "offer": false },
-      { "name": "SEMI BIPACK CC Zero Zero Pet 2x2L", "price": 4.00, "offer": false },
-      { "name": "BIPACK Coca-Cola Zero-Zero", "price": 2.00, "offer": false },
-      { "name": "Coca Cola Zero Zero Pet 2 L", "price": 2.00, "offer": false },
-      { "name": "Coca-Cola Zero Zero Bipack 1,25L", "price": 2.50, "offer": false },
-      { "name": "Coca-Cola Zero Zero 1,25L", "price": 1.25, "offer": false },
-      { "name": "Coca-Cola Zero Zero Pet500", "price": 0.50, "offer": false },
-      { "name": "Coca Cola Zero Zero Lata 33cl", "price": 1.00, "offer": false },
-      { "name": "Bandeja Coca-Cola Zero Zero 33 cl Pack 24", "price": 24.00, "offer": false },
-      { "name": "PACK 12 Coca-Cola Zero Zero Lata 33", "price": 12.00, "offer": false },
-      { "name": "COCA-COLA ZERO ZERO LATA PACK 6X20 CL.", "price": 6.00, "offer": false }
+      { 
+        "name": "SEMI PACK 12 CC Zero Zero (90x2)=180", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Zero Zero pack 6 2L", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI PACK 4 Coca Zero Zero Regular 2 L.", 
+        "price": 8.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK X 4 Coca-Cola Zero Zero 2L.", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI BIPACK CC Zero Zero Pet 2x2L", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Coca-Cola Zero-Zero", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola Zero Zero Pet 2 L", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Zero Zero Bipack 1,25L", 
+        "price": 2.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Zero Zero 1,25L", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Zero Zero P4 Pet500", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Zero Zero Pet500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca Cola Zero Zero Lata 33cl", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Bandeja Coca-Cola Zero Zero 33 cl Pack 24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PACK 12 Coca-Cola Zero Zero Lata 33", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "COCA-COLA ZERO ZERO LATA PACK 6X20 CL.", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Coca Cola Sabores": [
-      { "name": "Coca-Cola Sin Cafeína Pet 2 L.", "price": 1.00, "offer": false },
-      { "name": "Coca-Cola Sin Cafeína Lata 33", "price": 1.00, "offer": false },
-      { "name": "Coca-Cola Light sin cafeína Pet 2 L.", "price": 1.00, "offer": false },
-      { "name": "Coca-Cola Light Sin cafeína Lata 33", "price": 1.00, "offer": false },
-      { "name": "Coca-Cola Zero Limón Lata 33", "price": 1.00, "offer": false },
-      { "name": "Coca-Cola Zero Lima Lata 33 CCO8 C24", "price": 24.00, "offer": false },
-      { "name": "Cherry Coke Zero Lata 33cl", "price": 1.00, "offer": false }
+      { 
+        "name": "Coca-Cola Sin Cafeína Pet 2 L.", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Sin Cafeína Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Light sin cafeína Pet 2 L.", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Light Sin cafeína Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Zero Limón Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Coca-Cola Zero Lima Lata 33 CCO8 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Cherry Coke Zero Lata 33cl", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Fanta naranja": [
-      { "name": "SEMI BIPACK Fanta Naranja 2X2L", "price": 3.50, "offer": false },
-      { "name": "BIPACK Fanta Naranja Pet 2 L.", "price": 3.50, "offer": false },
-      { "name": "SEMI Fanta Pet.2 L Naranja (150x2)=300", "price": 1.75, "offer": false },
-      { "name": "Fanta Naranja Pet 2 L.", "price": 1.75, "offer": false },
-      { "name": "Fanta Naranja Pet 1,25L", "price": 1.25, "offer": false },
-      { "name": "Fanta Naranja Pet 500", "price": 0.50, "offer": false },
-      { "name": "SEMI  PACK 9 lata Fanta Naranja (120x2)=240", "price": 9.00, "offer": true },
-      { "name": "Pack x 9 Fanta Naranja Lata 33 cl.", "price": 9.00, "offer": true },
-      { "name": "SEMI  Fanta Naranja lata (960x2)=1920", "price": 1.00, "offer": true },
-      { "name": "Fanta Naranja Lata 33 cl.", "price": 1.00, "offer": true },
-      { "name": "MINI LATA Fanta Naranja pack 6X20 CL", "price": 6.00, "offer": false },
-      { "name": "BIPACK Fanta Zero Nar 2 L.", "price": 3.50, "offer": false },
-      { "name": "Fanta Zero Nar 2 L.", "price": 1.75, "offer": false },
-      { "name": "Pack x 6 Fanta Zero Naranja Lata 33", "price": 6.00, "offer": false },
-      { "name": "Fanta Zero Naranja Lata 33", "price": 1.00, "offer": false }
+      { 
+        "name": "SEMI BIPACK Fanta Naranja 2X2L", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Fanta Naranja Pet 2 L.", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Fanta Pet.2 L Naranja (150x2)=300", 
+        "price": 1.75, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Naranja Pet 2 L.", 
+        "price": 1.75, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Naranja Pet 1,25L", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Naranja Pet 500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI  PACK 9 lata Fanta Naranja (120x2)=240", 
+        "price": 9.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Pack x 9 Fanta Naranja Lata 33 cl.", 
+        "price": 9.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "SEMI  Fanta Naranja lata (960x2)=1920", 
+        "price": 1.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Fanta Naranja Lata 33 cl.", 
+        "price": 1.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "MINI LATA Fanta Naranja pack 6X20 CL", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Fanta Zero Nar 2 L.", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Zero Nar 2 L.", 
+        "price": 1.75, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Pack x 6 Fanta Zero Naranja Lata 33", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Zero Naranja Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Fanta limón": [
-      { "name": "SEMI BIPACK Fanta Limón 2X2L", "price": 3.50, "offer": false },
-      { "name": "BIPACK Fanta limón Pet 2 L.", "price": 3.50, "offer": false },
-      { "name": "SEMI Fanta Pet.2 L Limón (150x2)=300", "price": 1.75, "offer": false },
-      { "name": "Fanta limón Pet 2 L.", "price": 1.75, "offer": false },
-      { "name": "Fanta limón Pet 1,25L", "price": 1.25, "offer": false },
-      { "name": "Fanta limón Pet 500", "price": 0.50, "offer": false },
-      { "name": "SEMI  PACK 9 lata Fanta Limón (120x2)=240", "price": 9.00, "offer": false },
-      { "name": "Pack x 9 Fanta limón Lata 33 cl.", "price": 9.00, "offer": false },
-      { "name": "SEMI  Fanta Limón lata (960x2)=1920", "price": 1.00, "offer": false },
-      { "name": "Fanta limón Lata 33 cl.", "price": 1.00, "offer": false },
-      { "name": "Fanta Zero lim 2 L.", "price": 1.75, "offer": false },
-      { "name": "Fanta Zero limón Lata 33", "price": 1.00, "offer": false }
+      { 
+        "name": "SEMI BIPACK Fanta Limón 2X2L", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Fanta limón Pet 2 L.", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Fanta Pet.2 L Limón (150x2)=300", 
+        "price": 1.75, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta limón Pet 2 L.", 
+        "price": 1.75, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta limón Pet 1,25L", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta limón Pet 500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI  PACK 9 lata Fanta Limón (120x2)=240", 
+        "price": 9.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Pack x 9 Fanta limón Lata 33 cl.", 
+        "price": 9.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI  Fanta Limón lata (960x2)=1920", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta limón Lata 33 cl.", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Zero lim 2 L.", 
+        "price": 1.75, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Zero limón Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Fanta sabores": [
-      { "name": "Fanta Sandía sin azúcar Pet 1.25L C6", "price": 1.25, "offer": false },
-      { "name": "Fanta Frambuesa sin azúcar Pet 1.25L C6", "price": 1.25, "offer": false },
-      { "name": "Fanta Sandía LATA 33", "price": 1.00, "offer": false },
-      { "name": "Fanta Frambuesa LATA 33", "price": 1.00, "offer": false }
+      { 
+        "name": "Fanta Sandía sin azúcar Pet 1.25L C6", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Frambuesa sin azúcar Pet 1.25L C6", 
+        "price": 1.25, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Sandía LATA 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fanta Frambuesa LATA 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Sprite": [
-      { "name": "Sprite Lata Pack 6X20 CL.", "price": 6.00, "offer": false },
-      { "name": "Sprite Pet 2 L.", "price": 2.00, "offer": false },
-      { "name": "BIPACK Sprite Pet 2 L.", "price": 3.50, "offer": false },
-      { "name": "Sprite Zero Pet 2 L", "price": 2.00, "offer": false },
-      { "name": "Sprite lata 33", "price": 1.00, "offer": false },
-      { "name": "Sprite Zero lata 33", "price": 1.00, "offer": false },
-      { "name": "Sprite lata 33 P9", "price": 9.00, "offer": false },
-      { "name": "Sprite Pet 500", "price": 0.50, "offer": false }
+      { 
+        "name": "Sprite Lata Pack 6X20 CL.", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Sprite Pet 2 L.", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Sprite Pet 2 L.", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Sprite Zero Pet 2 L", 
+        "price": 2.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Sprite lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Sprite Zero lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Sprite lata 33 P9", 
+        "price": 9.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Sprite Pet 500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Tónica": [
-      { "name": "Nordic Mist lata 250", "price": 0.50, "offer": true },
-      { "name": "Nordic Blue Lata 25 cl.", "price": 0.75, "offer": true },
-      { "name": "Royal Bliss Bitter Roso Cesta VNR20 P4 C6", "price": 4.00, "offer": false },
-      { "name": "Nordic Zero Lata 25 cl.", "price": 0.75, "offer": true },
-      { "name": "Nordic Mist Tónica 1L", "price": 1.00, "offer": false },
-      { "name": "Limca PET1L C12", "price": 1.00, "offer": false },
-      { "name": "Royal Bliss Berry Lata 25 C12", "price": 12.00, "offer": false },
-      { "name": "Royal Bliss Signature WTR Lata 25 C12", "price": 12.00, "offer": false },
-      { "name": "Royal Bliss Signature tónica Zero Lata 25 C12", "price": 12.00, "offer": false },
-      { "name": "Royal Bliss Lemon Mixer Lata 25 C12", "price": 12.00, "offer": false },
-      { "name": "Royal Bliss Berry CESTA VNR20 P4 C6", "price": 4.00, "offer": false },
-      { "name": "Royal Bliss Yuzu CESTA VNR20 P4 C6", "price": 4.00, "offer": false }
+      { 
+        "name": "Nordic Mist lata 250", 
+        "price": 0.50, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Nordic Blue Lata 25 cl.", 
+        "price": 0.75, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Royal Bliss Bitter Roso Cesta VNR20 P4 C6", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Nordic Zero Lata 25 cl.", 
+        "price": 0.75, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Nordic Mist Tónica 1L", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Limca PET1L C12", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Royal Bliss Berry Lata 25 C12", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Royal Bliss Signature WTR Lata 25 C12", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Royal Bliss Signature tónica Zero Lata 25 C12", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Royal Bliss Lemon Mixer Lata 25 C12", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Royal Bliss Berry CESTA VNR20 P4 C6", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Royal Bliss Yuzu CESTA VNR20 P4 C6", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Burn": [
-      { "name": "Burn Regular 0,5L", "price": 0.50, "offer": true },
-      { "name": "Burn Zero Peach Lata 50 C12", "price": 12.00, "offer": true },
-      { "name": "Burn Zero Raspberry LATA50 C12", "price": 12.00, "offer": true },
-      { "name": "Pack x 4 Burn Lata 50 C6", "price": 6.00, "offer": true }
+      { 
+        "name": "Burn Regular 0,5L", 
+        "price": 0.50, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Burn Zero Peach Lata 50 C12", 
+        "price": 12.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Burn Zero Raspberry LATA50 C12", 
+        "price": 12.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Pack x 4 Burn Lata 50 C6", 
+        "price": 6.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      }
     ],
     "Energéticas": [
-      { "name": "Monster Green Lata 50 cl.", "price": 1.50, "offer": false },
-      { "name": "Monster Green Zero Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Pack x 4 Monster Green x 500 ml", "price": 6.00, "offer": false },
-      { "name": "Monster LO - CARB 50 cl.", "price": 1.50, "offer": false },
-      { "name": "Monster Rehab Lata 50 cl.", "price": 1.50, "offer": false },
-      { "name": "MONSTER JUICED RIO PUNCH LATA50 C24", "price": 1.50, "offer": false },
-      { "name": "Monster Ultra Paradise Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Ultra Red Lata 50 T24", "price": 24.00, "offer": false },
-      { "name": "Monster Ultra White Lata 50 T24", "price": 24.00, "offer": false },
-      { "name": "Pack x 4 Monster Ultra White Zero Lata 50", "price": 6.00, "offer": false },
-      { "name": "Monster Ultra Fiesta Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Ultra Rosá Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Ultra Peachy Keen 50cl", "price": 1.50, "offer": false },
-      { "name": "Monster Bad Apple 50cl", "price": 1.50, "offer": false },
-      { "name": "Monster Punch 50cl.", "price": 1.50, "offer": false },
-      { "name": "Monster Mango Loco Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Pack x 4 Monster Mango Loco Lata 50 C6", "price": 6.00, "offer": false },
-      { "name": "Monster Monarch Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Nitro Super Dry Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Khaotic Juice Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Ultra Watermelon Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Lewis Hamilton Zero Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Ultra Gold Zero Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Aussie Style Lemonade Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Reserve Watermelon Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "Monster Reserve White Pineapple Lata 50 C24", "price": 24.00, "offer": false },
-      { "name": "MONSTER ULTRA STRAWBERRY DREAMS LA50 C24", "price": 24.00, "offer": false }
+      { 
+        "name": "Monster Green Lata 50 cl.", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Green Zero Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Pack x 4 Monster Green x 500 ml", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster LO - CARB 50 cl.", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Rehab Lata 50 cl.", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "MONSTER JUICED RIO PUNCH LATA50 C24", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Ultra Paradise Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Ultra Red Lata 50 T24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Ultra White Lata 50 T24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Pack x 4 Monster Ultra White Zero Lata 50", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Ultra Fiesta Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Ultra Rosá Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Ultra Peachy Keen 50cl", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Bad Apple 50cl", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Punch 50cl.", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Mango Loco Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Pack x 4 Monster Mango Loco Lata 50 C6", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Monarch Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Nitro Super Dry Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Khaotic Juice Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Ultra Watermelon Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Lewis Hamilton Zero Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Ultra Gold Zero Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Aussie Style Lemonade Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Reserve Watermelon Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Monster Reserve White Pineapple Lata 50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "MONSTER ULTRA STRAWBERRY DREAMS LA50 C24", 
+        "price": 24.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "M.Maid": [
-      { "name": "Limón&Nada Clásica 1 L.", "price": 1.00, "offer": false }
+      { 
+        "name": "Limón&Nada Clásica 1 L.", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "FUZE": [
-      { "name": "Fuze Limón Lata 33", "price": 1.00, "offer": false },
-      { "name": "Fuze Limón sin azúcar Lata 33", "price": 1.00, "offer": false },
-      { "name": "Fuze Limón Pet 50", "price": 0.50, "offer": false },
-      { "name": "Fuze Limón Pet 1,5L", "price": 1.50, "offer": false },
-      { "name": "Fuze Limón sin azúcar Pet 1,5L", "price": 1.50, "offer": true },
-      { "name": "Fuze Tea Peach Hibiscus PET1.5L", "price": 1.50, "offer": true },
-      { "name": "Fuze Tea Peach Hibiscus PET50", "price": 0.50, "offer": false }
+      { 
+        "name": "Fuze Limón Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fuze Limón sin azúcar Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fuze Limón Pet 50", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Fuze Limón Pet 1,5L", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Fuze Limón sin azúcar Pet 1,5L", 
+        "price": 1.50, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Fuze Tea Peach Hibiscus PET1.5L", 
+        "price": 1.50, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Fuze Tea Peach Hibiscus PET50", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Deportivas": [
-      { "name": "Powerade Ice Storm Pet 50", "price": 1.50, "offer": true },
-      { "name": "Powerade Zero Ice Storm PET50 C12", "price": 12.00, "offer": true },
-      { "name": "Powerade Citrus Charge Pet 50", "price": 1.50, "offer": true },
-      { "name": "Powerade Blood Orange Charge Pet 50", "price": 1.50, "offer": true },
-      { "name": "Reign Melon manía Lata 50 C12", "price": 1.50, "offer": false },
-      { "name": "Reign Razzle Berry Lata 50 C12", "price": 1.50, "offer": false }
+      { 
+        "name": "Powerade Ice Storm Pet 50", 
+        "price": 1.18, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Powerade Zero Ice Storm PET50 C12", 
+        "price": 1.18, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Powerade Citrus Charge Pet 50", 
+        "price": 1.18, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Powerade Blood Orange Charge Pet 50", 
+        "price": 1.18, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Reign Melon manía Lata 50 C12", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Reign Razzle Berry Lata 50 C12", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Isotónicas": [
-      { "name": "SEMI  Aquarius limón lata (960x2)=1920", "price": 1.00, "offer": false },
-      { "name": "Aquarius limón Lata 33 cl.", "price": 1.00, "offer": false },
-      { "name": "Aquarius Naranja Lata 33 cl.", "price": 1.00, "offer": false },
-      { "name": "Aquarius Sin Azúcar Limón Lata 33 cl.", "price": 1.00, "offer": true },
-      { "name": "Aquarius Sin Azúcar Naranja Lata 33 cl.", "price": 1.00, "offer": true },
-      { "name": "Pack x 9 Aquarius Limón Lata 33 cl.", "price": 9.00, "offer": false },
-      { "name": "Pack x 9 Aquarius Naranja Lata 33 cl.", "price": 9.00, "offer": false },
-      { "name": "Aquarius limón Pet 500", "price": 0.50, "offer": false },
-      { "name": "Aquarius Naranja Pet 500", "price": 0.50, "offer": false },
-      { "name": "SEMI  Aquarius Limón Pet 1´5 l. (195x2)= 390", "price": 1.00, "offer": false },
-      { "name": "Aquarius limón Pet 1,5 L.", "price": 1.50, "offer": false },
-      { "name": "Aquarius Naranjar Pet 1,5 L.", "price": 1.50, "offer": false },
-      { "name": "Aquarius Limón Sin Azúcar Pet 1,5 L.", "price": 1.50, "offer": false },
-      { "name": "Aquarius Naranja Sin Azúcar Pet 1,5 L.", "price": 1.50, "offer": false },
-      { "name": "Aquarius Melocotón Rojo Pet 1.5L C6", "price": 1.50, "offer": false },
-      { "name": "Pack x 4 Aquarius Limón Pet 1,5 L.", "price": 6.00, "offer": false },
-      { "name": "Pack x 4 Aquarius Naranja Pet 1,5 L.", "price": 6.00, "offer": false },
-      { "name": "BIPACK Aquarius Limón Pet 1,5 L.", "price": 3.50, "offer": false },
-      { "name": "BIPACK Aquarius Naranja Pet 1,5 L.", "price": 3.50, "offer": false },
-      { "name": "Aquarius Melocotón Rojo Lata 33", "price": 1.00, "offer": false },
-      { "name": "SEMI Aquarius Naranja Pet 1´5 l. (195x2)= 390", "price": 1.00, "offer": false }
+      { 
+        "name": "SEMI  Aquarius limón lata (960x2)=1920", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius limón Lata 33 cl.", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius Naranja Lata 33 cl.", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius Sin Azúcar Limón Lata 33 cl.", 
+        "price": 1.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Aquarius Sin Azúcar Naranja Lata 33 cl.", 
+        "price": 1.00, 
+        "offer": true,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": true }
+      },
+      { 
+        "name": "Pack x 9 Aquarius Limón Lata 33 cl.", 
+        "price": 9.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Pack x 9 Aquarius Naranja Lata 33 cl.", 
+        "price": 9.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius limón Pet 500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius Naranja Pet 500", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI  Aquarius Limón Pet 1´5 l. (195x2)= 390", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius limón Pet 1,5 L.", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius Naranjar Pet 1,5 L.", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius Limón Sin Azúcar Pet 1,5 L.", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius Naranja Sin Azúcar Pet 1,5 L.", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius Melocotón Rojo Pet 1.5L C6", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Pack x 4 Aquarius Limón Pet 1,5 L.", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Pack x 4 Aquarius Naranja Pet 1,5 L.", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Aquarius Limón Pet 1,5 L.", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "BIPACK Aquarius Naranja Pet 1,5 L.", 
+        "price": 3.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquarius Melocotón Rojo Lata 33", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "SEMI Aquarius Naranja Pet 1´5 l. (195x2)= 390", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Appletiser": [
-      { "name": "Appletiser VNR75 C6", "price": 6.00, "offer": false },
-      { "name": "Appletiser VNR275 P6 C4", "price": 4.00, "offer": false },
-      { "name": "Appletiser LATA25 C12", "price": 12.00, "offer": false }
+      { 
+        "name": "Appletiser VNR75 C6", 
+        "price": 6.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Appletiser VNR275 P6 C4", 
+        "price": 4.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Appletiser LATA25 C12", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Aquabona": [
-      { "name": "Aquabona Pet 0,5 L", "price": 0.50, "offer": false },
-      { "name": "Aquabona 1.5L", "price": 1.50, "offer": false },
-      { "name": "Semi Aquabona 1,5 L (240x2)=480", "price": 1.50, "offer": false },
-      { "name": "Abuabona Singular PET50 C12", "price": 12.00, "offer": false },
-      { "name": "Agua Vilas del Turbón pet 1L", "price": 1.00, "offer": false }
+      { 
+        "name": "Aquabona Pet 0,5 L", 
+        "price": 0.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Aquabona 1.5L", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Semi Aquabona 1,5 L (240x2)=480", 
+        "price": 1.50, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Abuabona Singular PET50 C12", 
+        "price": 12.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Agua Vilas del Turbón pet 1L", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ],
     "Alcoholes": [
-      { "name": "Jack & Coke Lata 33 C12", "price": 3.00, "offer": false },
-      { "name": "Jack & Coke Zero Sin Cafeína Lata 33 C12", "price": 3.00, "offer": false },
-      { "name": "Absolut Sprite Lata 25 C12", "price": 3.00, "offer": false }
+      { 
+        "name": "Jack & Coke Lata 33 C12", 
+        "price": 3.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Jack & Coke Zero Sin Cafeína Lata 33 C12", 
+        "price": 3.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "Absolut Sprite Lata 25 C12", 
+        "price": 3.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
     ]
   };
 
@@ -304,7 +1296,7 @@ document.addEventListener("DOMContentLoaded", function() {
     "PACK 12 Coca-Cola Zero Zero Lata 33": [18, 36],
     "COCA-COLA ZERO ZERO LATA PACK 6X20 CL.": [54, 108],
     "Coca-Cola Zero Limón Lata 33": [9, 18],
-    "Coca-Cola Zero Lima Lata 33 C24": [9, 18],
+    "Coca-Cola Zero Lima Lata 33 CCO8 C24": [9, 18],
     "SEMI BIPACK Fanta Naranja 2X2L": [2, 4],
     "BIPACK Fanta Naranja Pet 2 L.": [16, 32],
     "SEMI Fanta Pet.2 L Naranja (150x2)=300": [2, 4],
@@ -441,35 +1433,63 @@ document.addEventListener("DOMContentLoaded", function() {
     "Agua Vilas del Turbón pet 1L": [9, 18],
     "Jack & Coke Lata 33 C12": [3, 5, 15],
     "Jack & Coke Zero Sin Cafeína Lata 33 C12": [3, 5, 15],
-    "Absolut Sprite Lata 25 C12": [3, 5, 15]     
+    "Absolut Sprite Lata 25 C12": [3, 5, 15]
   };
 
-  // Función para crear cada sección en formato carrusel  
-  function createSection(sectionName, products) {
-    let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
-    products.forEach((product, index) => {
-      const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
-      const quantities = PRODUCT_QUANTITIES[product.name] || [1, 2, 3];
-      let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
-      sectionHTML += `
-        <div class="product">
-          ${product.offer ? '<div class="offer-tag">Oferta</div>' : ''}
-          <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
-          <h3>${product.name}</h3>
-          <p>Precio: ${product.offer 
-            ? '<s>€' + product.price.toFixed(2) + '</s> <strong>€' + product.price.toFixed(2) + '</strong>' 
-            : '€' + product.price.toFixed(2)}</p>
-          <div class="quantity-buttons">
-            ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
-            <input type="number" placeholder="Otro" oninput="validateInput(this)">
-          </div>
-          <button id="${buttonId}" class="add-btn" onclick="addToCart(this, '${product.name}', ${product.price})">Agregar</button>
+function createSection(sectionName, products) {
+  let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
+  products.forEach((product, index) => {
+    const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
+    const quantities = PRODUCT_QUANTITIES[product.name] || [1, 2, 3];
+    let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
+    
+    // Etiqueta de oferta y etiquetas de descuento (con clases específicas en español)
+    let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
+    let discountHTML = '';
+    if (product.discountOptions) {
+      if (product.discountOptions.twoXone) {
+        discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
+      }
+      if (product.discountOptions.threeXtwo) {
+        discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
+      }
+      if (product.discountOptions.secondUnit70) {
+        discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
+      }
+      if (product.discountOptions.twentyPercent) {
+        discountHTML += `<div class="discount-tag twentyPercent">50% descuento</div>`;
+      }
+    }
+    
+    // Si el producto está en oferta, agregamos un logo de supermercado
+    let offerLogoHTML = '';
+    if (product.offer) {
+      offerLogoHTML = `<div class="offer-logo">
+          <img src="images/logo_supermerc.png" alt="Logo Supermercado">
+        </div>`;
+    }
+    
+    sectionHTML += `
+      <div class="product">
+        ${offerHTML}
+        ${discountHTML}
+        ${offerLogoHTML}
+        <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
+        <h3>${product.name}</h3>
+        <p>Precio: ${product.offer 
+          ? '<s>€' + product.price.toFixed(2) + '</s> <strong>€' + product.price.toFixed(2) + '</strong>' 
+          : '€' + product.price.toFixed(2)}</p>
+        <div class="quantity-buttons">
+          ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
+          <input type="number" placeholder="Otro" oninput="validateInput(this)">
         </div>
-      `;
-    });
-    sectionHTML += `</div>`;
-    return sectionHTML;
-  }
+        <button id="${buttonId}" class="add-btn" onclick="addToCart(this, '${product.name}', ${product.price})">Agregar</button>
+      </div>
+    `;
+  });
+  sectionHTML += `</div>`;
+  return sectionHTML;
+}
 
   // Actualiza la lista de productos renderizando todas las secciones  
   function updateProductList() {
