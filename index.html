@@ -8,6 +8,15 @@
   <meta name="description" content="Compra en el mejor supermercado para teléfonos móviles.">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
+<!-- Contenedor de logos de supermercado -->
+<div id="supermarket-logos">
+  <!-- Puedes agregar uno o varios logos, aquí un ejemplo con un solo logo -->
+  <img src="images/logo_alcampo.png" alt="Alcampo" class="supermarket-logo">
+  <!-- Puedes agregar más logos, por ejemplo:
+  <img src="images/logo_carrefour.png" alt="Carrefour" class="supermarket-logo">
+  <img src="images/logo_caprabo.png" alt="Caprabo" class="supermarket-logo">
+  -->
+</div>
 <body>
   <!-- Formulario de login -->
   <div id="login-container">
@@ -27,9 +36,9 @@
       <h1>PEDIDOS</h1>
     </header>
     <main>
-      <!-- Contenedor de productos -->
+      <!-- Contenedor de productos generado dinámicamente (con etiquetas de oferta y descuento) -->
       <section id="product-list">
-        <!-- Aquí podrías listar productos; para el ejemplo se agregará uno fijo -->
+        <!-- Los productos se renderizan aquí desde script.js -->
       </section>
       <!-- Botón para enviar pedido a Power Automate -->
       <button id="send-order-btn" onclick="enviarPedido()">Enviar Pedido a Power Automate</button>
@@ -54,11 +63,13 @@
     
     <!-- Elemento de audio para notificar al agregar producto -->
     <audio id="add-sound" src="beep.mp3" preload="auto"></audio>
+    <!-- Librería para exportar a Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- Archivo de lógica de productos, carrito, descuentos, etc. -->
     <script src="script.js"></script>
   </div>
   
-  <!-- Script de autenticación, gestión de contraseña y envío de pedido -->
+  <!-- Script de autenticación, gestión de credenciales y envío de pedido -->
   <script>
     // Array de usuarios válidos (para este ejemplo, se gestiona localmente)
     const USERS = [
