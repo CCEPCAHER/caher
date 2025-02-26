@@ -192,12 +192,6 @@ document.addEventListener("DOMContentLoaded", function() {
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
-        "name": "Coca Cola Zero P4 Pet500", 
-        "price": 2.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
         "name": "Coca Cola Zero pet500", 
         "price": 0.50, 
         "offer": false,
@@ -1289,7 +1283,6 @@ document.addEventListener("DOMContentLoaded", function() {
     "Coca Cola Zero Zero Pet 2 L": [16, 32],
     "Coca-Cola Zero Zero Bipack 1,25L": [19, 38],
     "Coca-Cola Zero Zero 1,25L": [19, 38],
-    "Coca-Cola Zero Zero P4 Pet500": [9, 18],
     "Coca-Cola Zero Zero Pet500": [9, 18],
     "Coca Cola Zero Zero Lata 33cl": [9, 18],
     "Bandeja Coca-Cola Zero Zero 33 cl Pack 24": [108, 216],
