@@ -346,12 +346,6 @@ document.addEventListener("DOMContentLoaded", function() {
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
-        "name": "Coca-Cola Zero Zero P4 Pet500", 
-        "price": 2.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
         "name": "Coca-Cola Zero Zero Pet500", 
         "price": 0.50, 
         "offer": false,
