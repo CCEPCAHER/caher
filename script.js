@@ -258,11 +258,11 @@ const sections = {
     },
     { 
       "name": "COCA-COLA PET1,25L P2 C3", 
-      "price": 2.50, 
-      "previousPrice": 2.60,
-      "offer": false,
-      "focus1": false,
-      "focus2": false,
+       "price": 3.00,
+      "previousPrice": 3.99,
+      "offer": true,
+      "focus1": false,  
+      "focus2": true,
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
@@ -271,7 +271,7 @@ const sections = {
         "secondUnit70": false, 
         "twentyPercent": false,
         "fiftyPercent": false,
-        "gift": false,
+        "gift": true,
         "travel": false,
         "draw": false,
         "promoWeb": false 
@@ -281,16 +281,18 @@ const sections = {
          "condis": false,
          "carrefour": false,
          "caprabo": false,
+         "consum": false,
          "sorli": false
+
       }
     },
     { 
       "name": "SEMI Coca Cola pet 1,25 L.", 
-      "price": 1.25, 
-      "previousPrice": 1.40,
-      "offer": false,
-      "focus1": false,
-      "focus2": false,
+       "price": 1.50,
+      "previousPrice": 1.25,
+      "offer": true,
+      "focus1": false,  
+      "focus2": true,
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
@@ -299,20 +301,28 @@ const sections = {
         "secondUnit70": false, 
         "twentyPercent": false,
         "fiftyPercent": false,
-        "gift": false,
+        "gift": true,
         "travel": false,
         "draw": false,
         "promoWeb": false 
       },
-      "offerLogos": {}
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
     },
     { 
       "name": "Coca Cola 1,25L", 
-      "price": 1.25, 
-      "previousPrice": 1.30,
-      "offer": false,
-      "focus1": false,
-      "focus2": false,
+       "price": 3.00,
+      "previousPrice": 3.99,
+      "offer": true,
+      "focus1": false,  
+      "focus2": true,
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
@@ -321,12 +331,20 @@ const sections = {
         "secondUnit70": false, 
         "twentyPercent": false,
         "fiftyPercent": false,
-        "gift": false,
+        "gift": true,
         "travel": false,
         "draw": false,
         "promoWeb": false 
       },
-      "offerLogos": {}
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
     },
     { 
       "name": "Coca Cola P4 Pet500", 
@@ -643,32 +661,62 @@ const sections = {
     },
     { 
       "name": "COCA-COLA ZERO PET1,25L P2 C3", 
-      "price": 2.50, 
-      "offer": false,
-      "focus1": false,
-      "focus2": false,
+       "price": 3.00,
+      "previousPrice": 3.99,
+      "offer": true,
+      "focus1": false,  
+      "focus2": true,
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
         "twoXone": false, 
         "threeXtwo": false, 
         "secondUnit70": false, 
-        "twentyPercent": false 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": true,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
       }
     },
     { 
       "name": "Coca Cola Zero 1,25L", 
-      "price": 1.25, 
-      "offer": false,
-      "focus1": false,
-      "focus2": false,
+       "price": 3.00,
+      "previousPrice": 3.99,
+      "offer": true,
+      "focus1": false,  
+      "focus2": true,
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
         "twoXone": false, 
         "threeXtwo": false, 
         "secondUnit70": false, 
-        "twentyPercent": false 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": true,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
       }
     },
     { 
@@ -813,10 +861,34 @@ const sections = {
       },
       { 
         "name": "Coca-Cola Light 1,25L", 
-        "price": 1.25, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+         "price": 3.00,
+      "previousPrice": 3.99,
+      "offer": true,
+      "focus1": false,  
+      "focus2": true,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": true,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Coca-Cola Light Pet500", 
         "price": 0.50, 
@@ -893,16 +965,64 @@ const sections = {
       },
       { 
         "name": "Coca-Cola Zero Zero Bipack 1,25L", 
-        "price": 2.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+         "price": 3.00,
+      "previousPrice": 3.99,
+      "offer": true,
+      "focus1": false,  
+      "focus2": true,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": true,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Coca-Cola Zero Zero 1,25L", 
-        "price": 1.25, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+         "price": 3.00,
+      "previousPrice": 3.99,
+      "offer": true,
+      "focus1": false,  
+      "focus2": true,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": true,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Coca-Cola Zero Zero Pet500", 
         "price": 0.50, 
@@ -1513,22 +1633,94 @@ const sections = {
       },
       { 
         "name": "Fuze Limón Pet 1,5L", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+      "previousPrice": 1.25,
+      "offer": true,
+      "focus1": false,  
+      "focus2": false,
+      "focus3": true,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": true,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Fuze Limón sin azúcar Pet 1,5L", 
-        "price": 1.50, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+      "previousPrice": 1.25,
+      "offer": true,
+      "focus1": false,  
+      "focus2": false,
+      "focus3": true,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": true,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Fuze Tea Peach Hibiscus PET1.5L", 
-        "price": 1.50, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+      "previousPrice": 1.25,
+      "offer": true,
+      "focus1": false,  
+      "focus2": false,
+      "focus3": true,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": true,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Fuze Tea Peach Hibiscus PET50", 
         "price": 0.50, 
