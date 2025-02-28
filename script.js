@@ -1539,28 +1539,127 @@ const sections = {
     "Deportivas": [
       { 
         "name": "Powerade Ice Storm Pet 50", 
-        "price": 1.50, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      "price": 1.00,
+      "previousPrice": 1.20,
+      "offer": true,
+      "focus1": true,  
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": true,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Powerade Zero Ice Storm PET50 C12", 
-        "price": 12.00, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+         "name": "Powerade Ice Storm Pet 50", 
+      "price": 1.00,
+      "previousPrice": 1.20,
+      "offer": true,
+      "focus1": true,  
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": true,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Powerade Citrus Charge Pet 50", 
-        "price": 1.50, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "name": "Powerade Ice Storm Pet 50", 
+      "price": 1.00,
+      "previousPrice": 1.20,
+      "offer": true,
+      "focus1": true,  
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": true,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Powerade Blood Orange Charge Pet 50", 
-        "price": 1.50, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "name": "Powerade Ice Storm Pet 50", 
+      "price": 1.00,
+      "previousPrice": 1.20,
+      "offer": true,
+      "focus1": true,  
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
+      "offerLogos": {
+         "alcampo": true,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
+      }
+    },
       { 
         "name": "Reign Melon manía Lata 50 C12", 
         "price": 1.50, 
