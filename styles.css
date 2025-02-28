@@ -515,26 +515,14 @@ header h1 {
 #login-form button:hover {
   background: #C31A17; /* Tono ligeramente más oscuro al pasar el mouse */
 }       
-.discount-tag {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  border-radius: 3px;
-  color: white;
-  font-size: 0.8em;
-  z-index: 2;
-}
 
-/* Colores diferentes por tipo de descuento */
-.discount-tag.second-unit-70 { background: #9c27b0; } /* Morado */
-.discount-tag[class*="2x1"] { background: #4caf50; } /* Verde */
-.discount-tag[class*="20"] { background: #ff9800; } /* Naranja */
-/* Estilo general para todas las etiquetas de descuento */
+/* ========================
+   ETIQUETAS DE DESCUENTO
+========================= */
 .discount-tag {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 1px;
   padding: 5px 10px;
   border-radius: 3px;
   color: #fff;
@@ -543,38 +531,128 @@ header h1 {
   margin-bottom: 2px;
 }
 
-/* Etiqueta para 2x1 */
-.discount-tag.twoXone {
-  background-color: #4caf50; /* Verde */
+/* Colores específicos para cada tipo de descuento */
+.discount-tag.twoXone { background-color: #4caf50; }      /* Verde */
+.discount-tag.threeXtwo { background-color: #2196f3; }    /* Azul */
+.discount-tag.secondUnit70 { background-color: #9c27b0; } /* Morado */
+.discount-tag.twentyPercent { background-color: #ff9800; }/* Naranja */
+.discount-tag.fiftyPercent { background-color: #d32f2f; } /* Rojo oscuro */
+.discount-tag.gift { background-color: #e91e63; }         /* Rosa */
+.discount-tag.travel { background-color: #3f51b5; }       /* Azul oscuro */
+.discount-tag.draw { background-color: #f44336; }         /* Rojo */
+.discount-tag.promoWeb { background-color: #ff5722; }     /* Naranja profundo */
+
+
+/* ========================
+   CONTENEDOR DE IMAGEN
+========================= */
+.product-image-container {
+  position: relative;
+  display: inline-block;
 }
 
-/* Etiqueta para 3x2 */
-.discount-tag.threeXtwo {
-  background-color: #2196f3; /* Azul */
+.logo-container {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;                /* Espacio de 5px entre logos */
+  background: transparent; /* Fondo transparente */
+  padding: 0;              /* Sin padding adicional */
+  border-radius: 6px;
+  box-shadow: none;        /* Sin sombra */
 }
 
-/* Etiqueta para segunda unidad al 70% */
-.discount-tag.secondUnit70 {
-  background-color: #9c27b0; /* Morado */
+.logo-container img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin: 0;               /* Sin márgenes adicionales, o bien usa márgenes específicos si lo prefieres */
+  transition: transform 0.3s; /* Transición para efecto hover */
 }
 
-/* Etiqueta para 20% de descuento */
-.discount-tag.twentyPercent {
-  background-color: #ff9800; /* Naranja */
+.logo-container img:hover {
+  transform: scale(1.1);   /* Aumenta un poco el tamaño al pasar el cursor */
 }
 /* ========================
-   LOGO DE OFERTA (SUPERMERCADO)
+   BLOQUE FOCO (posición ajustada)
 ========================= */
-.offer-logo {
+.focus-logo {
   position: absolute;
-  bottom: 8px;      /* Ajusta la distancia desde abajo */
-  left: 8px;        /* Ajusta la distancia desde la izquierda */
-  width: 50px;      /* Ajusta el tamaño del logo */
-  z-index: 3;       /* Asegura que el logo quede por encima de la imagen del producto */
+  top: 80px;    /* Posición más estándar */
+  left: 70px;   /* Posición más estándar */
+  z-index: 2;   /* Asegura visibilidad */
 }
 
-.offer-logo img {
-  width: 100%;
-  height: auto;
-  display: block;
+.focus-text {
+  display: inline-block;
+  padding: 4px 8px;       /* Padding más ajustado */
+  font-size: 14px;        /* Tamaño reducido */
+  font-weight: bold;
+  border-radius: 3px;
+  animation: blink 1.5s infinite;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0,0,0,0.2); /* Borde más sutil */
+}
+
+/* Colores de foco optimizados */
+.foco1 .focus-text {
+  background-color: gold;
+  color: #333; /* Mejor contraste */
+}
+
+.foco2 .focus-text {
+  background-color: #6c757d; /* Gris más moderno */
+  color: white;
+}
+
+.foco3 .focus-text {
+  background-color: #cd7f32;
+  color: white;
+}
+
+.foco4 .focus-text {
+  background-color: #6f42c1; /* Violeta más vibrante */
+  color: white;
+}
+
+/* ========================
+   BOTÓN AÑADIR AL CARRITO
+========================= */
+.add-to-cart {
+  background-color: #28a745; /* Verde más moderno */
+  color: white;
+  padding: 8px 16px;         /* Tamaño más compacto */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.3s;
+  font-size: 14px;           /* Tamaño reducido */
+}
+
+.add-to-cart:hover {
+  background-color: #218838;
+  transform: translateY(-1px); /* Efecto más sutil */
+}
+
+/* ========================
+   DETALLES DEL PRODUCTO
+========================= */
+.product-details {
+  padding: 8px;
+  font-size: 0.9em;
+  animation: blink 1.5s ease-in-out infinite; /* Añade la animación */
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;  /* Comienza y termina totalmente visible */
+  }
+  50% {
+    opacity: 0;  /* Desaparece por completo a la mitad del ciclo */
+  }
 }
