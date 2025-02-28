@@ -1,239 +1,797 @@
 document.addEventListener("DOMContentLoaded", function() {
   // Objeto con secciones y productos
-  const sections = {
-    "Coca Cola": [
-      { 
-        "name": "SEMI PACK 12 lata CC (90x2)=180", 
-        "price": 961.20, 
-        "offer": false,
-        // Se activa secondUnit70 porque originalmente tenía "second-unit-70"
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+const sections = {
+  "Coca Cola": [
+    { 
+      "name": "SEMI PACK 12 lata CC (90x2)=180", 
+      "price": 961.20,
+      "previousPrice": 1000.00,
+      "offer": false,
+      "focus1": false,  
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
-      { 
-        "name": "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920", 
-        "price": 720.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "PACK X 6 Coca-Cola Regular 2 L.", 
-        "price": 12.00, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "SEMI PACK 4 Coca-Cola 2 L.", 
-        "price": 384.48, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "PACK X 4 Coca-Cola Regular 2 L.", 
-        "price": 10.68, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "SEMI BIPACK Coca Cola 2x2L", 
-        "price": 4.00, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "BIPACK Coca-Cola Regular 2 L.", 
-        "price": 4.74, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "SEMI Coca Cola pet 2 L.", 
-        "price": 370.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca-Cola Pet 2 L.", 
-        "price": 2.47, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "COCA-COLA PET1,25L P2 C3", 
-        "price": 2.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "SEMI Coca Cola pet 1,25 L.", 
-        "price": 1.25, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca Cola 1,25L", 
-        "price": 1.25, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca Cola P4 Pet500", 
-        "price": 2.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca Cola pet500", 
-        "price": 0.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "VNR 1L Coca-Cola C6 ", 
-        "price": 1.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "VNR Coca-Cola 20 cl P4 C6", 
-        "price": 4.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca-Cola Lata 33", 
-        "price": 1.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Bandeja Coca-Cola 33 cl. Pack 24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "PACK 12 Coca-Cola  Lata 33", 
-        "price": 12.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "COCA-COLA  REGULAR LATA PACK 6X20 CL.", 
-        "price": 6.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+
       }
-    ],
-    "Coca Cola Zero": [
-      { 
-        "name": "SEMI PACK 12 CC Zero (90x2)=180", 
-        "price": 12.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+    },
+    { 
+      "name": "SEMI Coca Cola Reg lata 33 cl. (960x2)=1920", 
+      "price": 720.00, 
+      "previousPrice": 750.00,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
       },
-      { 
-        "name": "SEMI Coca Cola Zero lata 33 cl. (960x2)=1920", 
-        "price": 912.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "PACK X 6 Coca-Cola Zero 2L", 
-        "price": 6.00, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "SEMI PACK 4 Coca Zero 2 L.", 
-        "price": 8.00, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "PACK X 4 Coca-Cola Zero 2 L.", 
-        "price": 4.00, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "SEMI BIPACK Coca Cola Zero Pet 2x2 L.", 
-        "price": 4.00, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "BIPACK Coca-Cola Zero 2 L.", 
-        "price": 2.00, 
-        "offer": true,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "SEMI Coca Cola Zero Pet 2 L.", 
-        "price": 2.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca Cola Zero Pet 2 L.", 
-        "price": 2.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "COCA-COLA ZERO PET1,25L P2 C3", 
-        "price": 2.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca Cola Zero 1,25L", 
-        "price": 1.25, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca Cola Zero pet500", 
-        "price": 0.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "VNR 1L Coca-Cola ZER C6", 
-        "price": 1.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "VNR Coca-Cola Zero 20 cl P4 C6", 
-        "price": 4.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Coca-Cola Zero lata 33 cl.", 
-        "price": 0.95, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Bandeja Coca-Cola Zero 33 cl. Pack 24", 
-        "price": 19.90, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "PACK 12 Coca-Cola Zero Lata 33", 
-        "price": 10.26, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "COCA-COLA ZERO LATA PACK 6X20 CL.", 
-        "price": 3.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
       }
-    ],
+    },
+    { 
+      "name": "PACK X 6 Coca-Cola Regular 2 L.", 
+      "price": 12.00, 
+      "previousPrice": 14.00,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
+      }
+    },
+    { 
+      "name": "SEMI PACK 4 Coca-Cola 2 L.", 
+      "price": 384.48, 
+      "previousPrice": 420.00,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
+      }
+    },
+    { 
+      "name": "PACK X 4 Coca-Cola Regular 2 L.", 
+      "price": 10.68, 
+      "previousPrice": 12.00,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
+      }
+    },
+    { 
+      "name": "SEMI BIPACK Coca Cola 2x2L", 
+      "price": 4.00, 
+      "previousPrice": 4.50,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
+      }
+    },
+    { 
+      "name": "BIPACK Coca-Cola Regular 2 L.", 
+      "price": 4.74, 
+      "previousPrice": 5.00,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
+      }
+    },
+    { 
+      "name": "SEMI Coca Cola pet 2 L.", 
+      "price": 370.50, 
+      "previousPrice": 400.00,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
+      }
+    },
+    { 
+      "name": "Coca-Cola Pet 2 L.", 
+      "price": 2.47, 
+      "previousPrice": 2.70,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
+      }
+    },
+    { 
+      "name": "COCA-COLA PET1,25L P2 C3", 
+      "price": 2.50, 
+      "previousPrice": 2.60,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": false,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "sorli": false
+      }
+    },
+    { 
+      "name": "SEMI Coca Cola pet 1,25 L.", 
+      "price": 1.25, 
+      "previousPrice": 1.40,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "Coca Cola 1,25L", 
+      "price": 1.25, 
+      "previousPrice": 1.30,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "Coca Cola P4 Pet500", 
+      "price": 2.00, 
+      "previousPrice": 2.20,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "Coca Cola pet500", 
+      "price": 0.50, 
+      "previousPrice": 0.55,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "VNR 1L Coca-Cola C6 ",
+      "price": 1.00, 
+      "previousPrice": 1.10,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "VNR Coca-Cola 20 cl P4 C6", 
+      "price": 4.00, 
+      "previousPrice": 4.50,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "Coca-Cola Lata 33", 
+      "price": 1.00, 
+      "previousPrice": 1.10,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "Bandeja Coca-Cola 33 cl. Pack 24", 
+      "price": 24.00, 
+      "previousPrice": 25.00,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "PACK 12 Coca-Cola  Lata 33", 
+      "price": 12.00, 
+      "previousPrice": 13.00,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    },
+    { 
+      "name": "COCA-COLA  REGULAR LATA PACK 6X20 CL.", 
+      "price": 6.00, 
+      "previousPrice": 6.50,
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": false,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {}
+    }
+  ],
+  "Coca Cola Zero": [
+    { 
+      "name": "SEMI PACK 12 CC Zero (90x2)=180", 
+      "price": 12.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "SEMI Coca Cola Zero lata 33 cl. (960x2)=1920", 
+      "price": 912.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "PACK X 6 Coca-Cola Zero 2L", 
+      "price": 6.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "SEMI PACK 4 Coca Zero 2 L.", 
+      "price": 8.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "PACK X 4 Coca-Cola Zero 2 L.", 
+      "price": 4.00, 
+      "offer": true,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "SEMI BIPACK Coca Cola Zero Pet 2x2 L.", 
+      "price": 4.00, 
+      "offer": true,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "BIPACK Coca-Cola Zero 2 L.", 
+      "price": 2.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "SEMI Coca Cola Zero Pet 2 L.", 
+      "price": 2.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "Coca Cola Zero Pet 2 L.", 
+      "price": 2.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "COCA-COLA ZERO PET1,25L P2 C3", 
+      "price": 2.50, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "Coca Cola Zero 1,25L", 
+      "price": 1.25, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "Coca Cola Zero P4 Pet500", 
+      "price": 2.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "Coca Cola Zero pet500", 
+      "price": 0.50, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "VNR 1L Coca-Cola ZER C6", 
+      "price": 1.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "VNR Coca-Cola Zero 20 cl P4 C6", 
+      "price": 4.00, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "Coca-Cola Zero lata 33 cl.", 
+      "price": 0.95, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "Bandeja Coca-Cola Zero 33 cl. Pack 24", 
+      "price": 19.90, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "PACK 12 Coca-Cola Zero Lata 33", 
+      "price": 10.26, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    },
+    { 
+      "name": "COCA-COLA ZERO LATA PACK 6X20 CL.", 
+      "price": 3.50, 
+      "offer": false,
+      "focus1": false,
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false 
+      }
+    }
+  ],
     "coca cola light": [
       { 
         "name": "Coca-Cola Light pack 4 2L", 
@@ -1425,13 +1983,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function createSection(sectionName, products) {
   let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
+  
   products.forEach((product, index) => {
     const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
     const quantities = PRODUCT_QUANTITIES[product.name] || [1, 2, 3];
     let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
     
-    // Etiqueta de oferta y etiquetas de descuento (con clases específicas en español)
+    // Etiqueta de oferta (si aplica)
     let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
+    
+    // Logos de supermercados - versión corregida
+let offerLogoHTML = '';
+if (product.offer && product.offerLogos) {
+  offerLogoHTML = `<div class="logo-container">`; // Contenedor principal
+  if (product.offerLogos.alcampo) {
+    offerLogoHTML += `<div class="offer-logo super1"><img src="images/logo_supermerc.png" alt="Alcampo"></div>`;
+  }
+  if (product.offerLogos.condis) {
+    offerLogoHTML += `<div class="offer-logo super2"><img src="images/logo_condis.png" alt="Condis"></div>`;
+  }
+  if (product.offerLogos.carrefour) {
+    offerLogoHTML += `<div class="offer-logo super3"><img src="images/logo_carrefour.png" alt="Carrefour"></div>`;
+  }
+  if (product.offerLogos.caprabo) {
+    offerLogoHTML += `<div class="offer-logo super4"><img src="images/logo_caprabo.png" alt="Caprabo"></div>`;
+  }
+  if (product.offerLogos.sorli) {
+    offerLogoHTML += `<div class="offer-logo super5"><img src="images/logo_sorli.png" alt="Sorli"></div>`;
+  }
+  if (product.offerLogos.consum) {
+    offerLogoHTML += `<div class="offer-logo super6"><img src="images/logo_consum.png" alt="Consum"></div>`;
+  }
+  offerLogoHTML += `</div>`; // Cierre del contenedor
+}
+    
+    // Generar las etiquetas de descuento según las opciones activadas
     let discountHTML = '';
     if (product.discountOptions) {
       if (product.discountOptions.twoXone) {
@@ -1444,28 +2030,53 @@ function createSection(sectionName, products) {
         discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
       }
       if (product.discountOptions.twentyPercent) {
-        discountHTML += `<div class="discount-tag twentyPercent">50% descuento</div>`;
+        discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
+      }
+      if (product.discountOptions.fiftyPercent) {
+        discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
+      }
+      if (product.discountOptions.gift) {
+        discountHTML += `<div class="discount-tag gift">Regalo</div>`;
+      }
+      if (product.discountOptions.travel) {
+        discountHTML += `<div class="discount-tag travel">Viaje</div>`;
+      }
+      if (product.discountOptions.draw) {
+        discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
+      }
+      if (product.discountOptions.promoWeb) {
+        discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
       }
     }
     
-    // Si el producto está en oferta, agregamos un logo de supermercado
-    let offerLogoHTML = '';
-    if (product.offer) {
-      offerLogoHTML = `<div class="offer-logo">
-          <img src="images/logo_supermerc.png" alt="Logo Supermercado">
-        </div>`;
+    // Precio: se muestra tachado el precio anterior si hay oferta
+    let priceHTML = '€' + product.price.toFixed(2);
+    if (product.offer && product.previousPrice) {
+      priceHTML =
+        `<s>€${product.previousPrice.toFixed(2)}</s> <strong>€${product.price.toFixed(2)}</strong>`;
+    }
+    
+    // Mostrar un único "logo" de foco (texto animado) según la propiedad de foco
+    let focusLogoHTML = '';
+    if (product.focus1) {
+      focusLogoHTML = `<div class="focus-logo foco1"><div class="focus-text">FOCO 1</div></div>`;
+    } else if (product.focus2) {
+      focusLogoHTML = `<div class="focus-logo foco2"><div class="focus-text">FOCO 2</div></div>`;
+    } else if (product.focus3) {
+      focusLogoHTML = `<div class="focus-logo foco3"><div class="focus-text">FOCO 3</div></div>`;
+    } else if (product.focus4) {
+      focusLogoHTML = `<div class="focus-logo foco4"><div class="focus-text">FOCO 4</div></div>`;
     }
     
     sectionHTML += `
       <div class="product">
+        ${offerLogoHTML}
         ${offerHTML}
         ${discountHTML}
-        ${offerLogoHTML}
+        ${focusLogoHTML}
         <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
         <h3>${product.name}</h3>
-        <p>Precio: ${product.offer 
-          ? '<s>€' + product.price.toFixed(2) + '</s> <strong>€' + product.price.toFixed(2) + '</strong>' 
-          : '€' + product.price.toFixed(2)}</p>
+        <p>Precio: ${priceHTML}</p>
         <div class="quantity-buttons">
           ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
           <input type="number" placeholder="Otro" oninput="validateInput(this)">
@@ -1474,11 +2085,12 @@ function createSection(sectionName, products) {
       </div>
     `;
   });
+  
   sectionHTML += `</div>`;
   return sectionHTML;
 }
 
-  // Actualiza la lista de productos renderizando todas las secciones  
+// Actualiza la lista de productos renderizando todas las secciones  
   function updateProductList() {
     const productListElem = document.getElementById("product-list");
     productListElem.innerHTML = Object.entries(sections)
@@ -1516,43 +2128,41 @@ function createSection(sectionName, products) {
     document.getElementById('modal-total').innerText = 'Total: €' + total.toFixed(2);
   }
 
-  // Agrega el producto al carrito, y limpia el input tras agregar
   function addToCart(button, productName, productPrice) {
-    let input = button.parentElement.querySelector('input');
-    let quantity = parseInt(input.value);
-    if (isNaN(quantity) || quantity <= 0) {
-      alert("Por favor, ingresa una cantidad válida.");
-      return;
-    }
-    if (button.classList.contains('added')) {
-      alert("Este producto ya ha sido añadido.");
-      return;
-    }
-    button.classList.add('added');
-    button.style.backgroundColor = '#ffa500';
-    button.innerText = 'Añadido';
+  let input = button.parentElement.querySelector('input');
+  let quantity = parseInt(input.value);
+  if (isNaN(quantity) || quantity <= 0) {
+    alert("Por favor, ingresa una cantidad válida.");
+    return;
+  }
+  if (button.classList.contains('added')) {
+    alert("Este producto ya ha sido añadido.");
+    return;
+  }
+  button.classList.add('added');
+  button.style.backgroundColor = '#ffa500';
+  button.innerText = 'Añadido';
 
-    const sound = document.getElementById("add-sound");
-    if (sound) {
-      sound.play().catch(error => console.error("Error al reproducir sonido:", error));
-    }
-
-    let cartItemsContainer = document.getElementById("cart-items-modal");
-    if (cartItemsContainer.innerText.trim() === 'No hay productos añadidos.') {
-      cartItemsContainer.innerHTML = '';
-    }
-    
-    cartItemsContainer.innerHTML += `
-      <div class="cart-item" data-price="${(productPrice * quantity).toFixed(2)}">
-        <span class="cart-product-name">${productName}</span> - ${quantity} unidades - Precio: €${(productPrice * quantity).toFixed(2)}
-        <button class="remove-btn" onclick="removeFromCart(this, '${button.id}')">Eliminar</button>
-      </div>
-    `;
-    updateTotalPrice();
-    showToast("Producto añadido: " + productName);
-    input.value = ""; // Limpiar el input tras agregar el producto
+  const sound = document.getElementById("add-sound");
+  if (sound) {
+    sound.play().catch(error => console.error("Error al reproducir sonido:", error));
   }
 
+  let cartItemsContainer = document.getElementById("cart-items-modal");
+  if (cartItemsContainer.innerText.trim() === 'No hay productos añadidos.') {
+    cartItemsContainer.innerHTML = '';
+  }
+  
+  cartItemsContainer.innerHTML += `
+    <div class="cart-item" data-price="${(productPrice * quantity).toFixed(2)}">
+      <span class="cart-product-name">${productName}</span> - ${quantity} unidades - Precio: €${(productPrice * quantity).toFixed(2)}
+      <button class="remove-btn" onclick="removeFromCart(this, '${button.id}')">Eliminar</button>
+    </div>
+  `;
+  updateTotalPrice();
+  showToast("Producto añadido: " + productName);
+  // input.value = ""; // Comenta o elimina esta línea para que la cantidad permanezca visible
+}
   // Elimina el producto del carrito, resetea el botón y limpia el input asociado
   function removeFromCart(button, buttonId) {
     button.parentElement.remove();
