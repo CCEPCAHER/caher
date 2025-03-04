@@ -1,12 +1,16 @@
 document.addEventListener("DOMContentLoaded", function() {
+  // ============================================
+  // Código existente para productos, carrito, etc.
+  // ============================================
+  
   // Objeto con secciones y productos
-const sections = {
+  const sections = {
   "Coca Cola": [
     { 
       "name": "SEMI PACK 12 lata CC (90x2)=180", 
       "price": 961.20,
       "previousPrice": 1000.00,
-      "offer": false,
+      "offer": true,
       "focus1": false,  
       "focus2": false,
       "focus3": false,
@@ -28,7 +32,7 @@ const sections = {
          "carrefour": false,
          "caprabo": false,
          "consum": false,
-         "sorli": false
+         "sorli": true
 
       }
     },
@@ -2272,189 +2276,164 @@ const sections = {
     "Absolut Sprite Lata 25 C12": [3, 5, 15]
   };
 
-function createSection(sectionName, products) {
-  let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
-  
-  products.forEach((product, index) => {
-    const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
-    const quantities = PRODUCT_QUANTITIES[product.name] || [1, 2, 3];
-    let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
-    
-    // Etiqueta de oferta (si aplica)
-    let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
-    
-    // Logos de supermercados - versión corregida
-let offerLogoHTML = '';
-if (product.offer && product.offerLogos) {
-  offerLogoHTML = `<div class="logo-container">`; // Contenedor principal
-  if (product.offerLogos.alcampo) {
-    offerLogoHTML += `<div class="offer-logo super1"><img src="images/logo_supermerc.png" alt="Alcampo"></div>`;
-  }
-  if (product.offerLogos.condis) {
-    offerLogoHTML += `<div class="offer-logo super2"><img src="images/logo_condis.png" alt="Condis"></div>`;
-  }
-  if (product.offerLogos.carrefour) {
-    offerLogoHTML += `<div class="offer-logo super3"><img src="images/logo_carrefour.png" alt="Carrefour"></div>`;
-  }
-  if (product.offerLogos.caprabo) {
-    offerLogoHTML += `<div class="offer-logo super4"><img src="images/logo_caprabo.png" alt="Caprabo"></div>`;
-  }
-  if (product.offerLogos.sorli) {
-    offerLogoHTML += `<div class="offer-logo super5"><img src="images/logo_sorli.png" alt="Sorli"></div>`;
-  }
-  if (product.offerLogos.consum) {
-    offerLogoHTML += `<div class="offer-logo super6"><img src="images/logo_consum.png" alt="Consum"></div>`;
-  }
-  offerLogoHTML += `</div>`; // Cierre del contenedor
-}
-    
-    // Generar las etiquetas de descuento según las opciones activadas
-    let discountHTML = '';
-    if (product.discountOptions) {
-      if (product.discountOptions.twoXone) {
-        discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
-      }
-      if (product.discountOptions.threeXtwo) {
-        discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
-      }
-      if (product.discountOptions.secondUnit70) {
-        discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
-      }
-      if (product.discountOptions.twentyPercent) {
-        discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
-      }
-      if (product.discountOptions.fiftyPercent) {
-        discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
-      }
-      if (product.discountOptions.gift) {
-        discountHTML += `<div class="discount-tag gift">Regalo</div>`;
-      }
-      if (product.discountOptions.travel) {
-        discountHTML += `<div class="discount-tag travel">Viaje</div>`;
-      }
-      if (product.discountOptions.draw) {
-        discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
-      }
-      if (product.discountOptions.promoWeb) {
-        discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
-      }
-    }
-    
-    // Precio: se muestra tachado el precio anterior si hay oferta
-    let priceHTML = '€' + product.price.toFixed(2);
-    if (product.offer && product.previousPrice) {
-      priceHTML =
-        `<s>€${product.previousPrice.toFixed(2)}</s> <strong>€${product.price.toFixed(2)}</strong>`;
-    }
-    
-    // Mostrar un único "logo" de foco (texto animado) según la propiedad de foco
-    let focusLogoHTML = '';
-    if (product.focus1) {
-      focusLogoHTML = `<div class="focus-logo foco1"><div class="focus-text">FOCO 1</div></div>`;
-    } else if (product.focus2) {
-      focusLogoHTML = `<div class="focus-logo foco2"><div class="focus-text">FOCO 2</div></div>`;
-    } else if (product.focus3) {
-      focusLogoHTML = `<div class="focus-logo foco3"><div class="focus-text">FOCO 3</div></div>`;
-    } else if (product.focus4) {
-      focusLogoHTML = `<div class="focus-logo foco4"><div class="focus-text">FOCO 4</div></div>`;
-    }
-    
-    sectionHTML += `
-      <div class="product">
-        ${offerLogoHTML}
-        ${offerHTML}
-        ${discountHTML}
-        ${focusLogoHTML}
-        <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
-        <h3>${product.name}</h3>
-        <p>Precio: ${priceHTML}</p>
-        <div class="quantity-buttons">
-          ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
-          <input type="number" placeholder="Otro" oninput="validateInput(this)">
-        </div>
-        <button id="${buttonId}" class="add-btn" onclick="addToCart(this, '${product.name}', ${product.price})">Agregar</button>
-      </div>
-    `;
-  });
-  
-  sectionHTML += `</div>`;
-  return sectionHTML;
-}
-
-// Actualiza la lista de productos renderizando todas las secciones  
+  // Función para actualizar el listado de productos (secciones)
   function updateProductList() {
     const productListElem = document.getElementById("product-list");
     productListElem.innerHTML = Object.entries(sections)
-      .map(([section, products]) => createSection(section, products))
+      .map(([sectionName, products]) => `<div class="section" data-section="${sectionName}">${createSection(sectionName, products)}</div>`)
       .join('');
     lazyLoadImages();
   }
 
-  // Función para agregar un producto a una sección (crea la sección si no existe)
-  function addProduct(sectionName, product) {
-    if (!sections[sectionName]) {
-      sections[sectionName] = [];
-    }
-    sections[sectionName].push(product);
-    if (!PRODUCT_QUANTITIES[product.name]) {
-      PRODUCT_QUANTITIES[product.name] = [1, 2, 3];
-    }
-    updateProductList();
+  function createSection(sectionName, products) {
+    let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
+    products.forEach((product, index) => {
+      const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
+      const quantities = PRODUCT_QUANTITIES[product.name] || [1, 2, 3];
+      let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
+      
+      let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
+      
+      let offerLogoHTML = '';
+      if (product.offer && product.offerLogos) {
+        offerLogoHTML = `<div class="logo-container">`;
+        if (product.offerLogos.alcampo) {
+          offerLogoHTML += `<div class="offer-logo super1"><img src="images/logo_supermerc.png" alt="Alcampo"></div>`;
+        }
+        if (product.offerLogos.condis) {
+          offerLogoHTML += `<div class="offer-logo super2"><img src="images/logo_condis.png" alt="Condis"></div>`;
+        }
+        if (product.offerLogos.carrefour) {
+          offerLogoHTML += `<div class="offer-logo super3"><img src="images/logo_carrefour.png" alt="Carrefour"></div>`;
+        }
+        if (product.offerLogos.caprabo) {
+          offerLogoHTML += `<div class="offer-logo super4"><img src="images/logo_caprabo.png" alt="Caprabo"></div>`;
+        }
+        if (product.offerLogos.sorli) {
+          offerLogoHTML += `<div class="offer-logo super5"><img src="images/logo_sorli.png" alt="Sorli"></div>`;
+        }
+        if (product.offerLogos.consum) {
+          offerLogoHTML += `<div class="offer-logo super6"><img src="images/logo_consum.png" alt="Consum"></div>`;
+        }
+        offerLogoHTML += `</div>`;
+      }
+      
+      let discountHTML = '';
+      if (product.discountOptions) {
+        if (product.discountOptions.twoXone) {
+          discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
+        }
+        if (product.discountOptions.threeXtwo) {
+          discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
+        }
+        if (product.discountOptions.secondUnit70) {
+          discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
+        }
+        if (product.discountOptions.twentyPercent) {
+          discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
+        }
+        if (product.discountOptions.fiftyPercent) {
+          discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
+        }
+        if (product.discountOptions.gift) {
+          discountHTML += `<div class="discount-tag gift">Regalo</div>`;
+        }
+        if (product.discountOptions.travel) {
+          discountHTML += `<div class="discount-tag travel">Viaje</div>`;
+        }
+        if (product.discountOptions.draw) {
+          discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
+        }
+        if (product.discountOptions.promoWeb) {
+          discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
+        }
+      }
+      
+      let priceHTML = '€' + product.price.toFixed(2);
+      if (product.offer && product.previousPrice) {
+        priceHTML =
+          `<s>€${product.previousPrice.toFixed(2)}</s> <strong>€${product.price.toFixed(2)}</strong>`;
+      }
+      
+      let focusLogoHTML = '';
+      if (product.focus1) {
+        focusLogoHTML = `<div class="focus-logo foco1"><div class="focus-text">FOCO 1</div></div>`;
+      } else if (product.focus2) {
+        focusLogoHTML = `<div class="focus-logo foco2"><div class="focus-text">FOCO 2</div></div>`;
+      } else if (product.focus3) {
+        focusLogoHTML = `<div class="focus-logo foco3"><div class="focus-text">FOCO 3</div></div>`;
+      } else if (product.focus4) {
+        focusLogoHTML = `<div class="focus-logo foco4"><div class="focus-text">FOCO 4</div></div>`;
+      }
+      
+      sectionHTML += `
+        <div class="product">
+          ${offerLogoHTML}
+          ${offerHTML}
+          ${discountHTML}
+          ${focusLogoHTML}
+          <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
+          <h3>${product.name}</h3>
+          <p>Precio: ${priceHTML}</p>
+          <div class="quantity-buttons">
+            ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
+            <input type="number" placeholder="Otro" oninput="validateInput(this)">
+          </div>
+          <button id="${buttonId}" class="add-btn" onclick="addToCart(this, '${product.name}', ${product.price})">Agregar</button>
+        </div>
+      `;
+    });
+    sectionHTML += `</div>`;
+    return sectionHTML;
   }
 
-  // Función para asignar cantidad al input desde los botones rápidos
+  // Funciones de carrito, totales, etc. (se mantienen sin cambios)
   function setQuantity(button, value) {
     let input = button.parentElement.querySelector('input');
     input.value = value;
   }
 
-  // Validar que la cantidad no sea negativa
   function validateInput(input) {
     if (input.value < 0) input.value = 0;
   }
 
-  // Actualiza el total en el display fijo y en el modal
   function updateTotalDisplay(total) {
     document.getElementById('total-display').innerText = 'Total: €' + total.toFixed(2);
     document.getElementById('modal-total').innerText = 'Total: €' + total.toFixed(2);
   }
 
   function addToCart(button, productName, productPrice) {
-  let input = button.parentElement.querySelector('input');
-  let quantity = parseInt(input.value);
-  if (isNaN(quantity) || quantity <= 0) {
-    alert("Por favor, ingresa una cantidad válida.");
-    return;
+    let input = button.parentElement.querySelector('input');
+    let quantity = parseInt(input.value);
+    if (isNaN(quantity) || quantity <= 0) {
+      alert("Por favor, ingresa una cantidad válida.");
+      return;
+    }
+    if (button.classList.contains('added')) {
+      alert("Este producto ya ha sido añadido.");
+      return;
+    }
+    button.classList.add('added');
+    button.style.backgroundColor = '#ffa500';
+    button.innerText = 'Añadido';
+    const sound = document.getElementById("add-sound");
+    if (sound) {
+      sound.play().catch(error => console.error("Error al reproducir sonido:", error));
+    }
+    let cartItemsContainer = document.getElementById("cart-items-modal");
+    if (cartItemsContainer.innerText.trim() === 'No hay productos añadidos.') {
+      cartItemsContainer.innerHTML = '';
+    }
+    cartItemsContainer.innerHTML += `
+      <div class="cart-item" data-price="${(productPrice * quantity).toFixed(2)}">
+        <span class="cart-product-name">${productName}</span> - ${quantity} unidades - Precio: €${(productPrice * quantity).toFixed(2)}
+        <button class="remove-btn" onclick="removeFromCart(this, '${button.id}')">Eliminar</button>
+      </div>
+    `;
+    updateTotalPrice();
+    showToast("Producto añadido: " + productName);
   }
-  if (button.classList.contains('added')) {
-    alert("Este producto ya ha sido añadido.");
-    return;
-  }
-  button.classList.add('added');
-  button.style.backgroundColor = '#ffa500';
-  button.innerText = 'Añadido';
 
-  const sound = document.getElementById("add-sound");
-  if (sound) {
-    sound.play().catch(error => console.error("Error al reproducir sonido:", error));
-  }
-
-  let cartItemsContainer = document.getElementById("cart-items-modal");
-  if (cartItemsContainer.innerText.trim() === 'No hay productos añadidos.') {
-    cartItemsContainer.innerHTML = '';
-  }
-  
-  cartItemsContainer.innerHTML += `
-    <div class="cart-item" data-price="${(productPrice * quantity).toFixed(2)}">
-      <span class="cart-product-name">${productName}</span> - ${quantity} unidades - Precio: €${(productPrice * quantity).toFixed(2)}
-      <button class="remove-btn" onclick="removeFromCart(this, '${button.id}')">Eliminar</button>
-    </div>
-  `;
-  updateTotalPrice();
-  showToast("Producto añadido: " + productName);
-  // input.value = ""; // Comenta o elimina esta línea para que la cantidad permanezca visible
-}
-  // Elimina el producto del carrito, resetea el botón y limpia el input asociado
   function removeFromCart(button, buttonId) {
     button.parentElement.remove();
     const addButton = document.getElementById(buttonId);
@@ -2474,7 +2453,6 @@ if (product.offer && product.offerLogos) {
     updateTotalPrice();
   }
 
-  // Recalcula el total sumando los precios de cada producto del carrito
   function updateTotalPrice() {
     let total = 0;
     document.querySelectorAll('#cart-items-modal .cart-item').forEach(item => {
@@ -2486,7 +2464,6 @@ if (product.offer && product.offerLogos) {
     updateTotalDisplay(total);
   }
 
-  // Recolecta los datos del carrito
   function collectCartData() {
     const cartItems = document.querySelectorAll("#cart-items-modal .cart-item");
     if (
@@ -2496,7 +2473,6 @@ if (product.offer && product.offerLogos) {
       alert("El carrito está vacío. No puedes enviar un pedido sin productos.");
       return null;
     }
-
     const order = [];
     cartItems.forEach(item => {
       const productElem = item.querySelector('.cart-product-name');
@@ -2514,7 +2490,6 @@ if (product.offer && product.offerLogos) {
     return order;
   }
 
-  // Exporta los datos del pedido a un archivo Excel
   function exportToExcel(order) {
     if (!order || order.length === 0) {
       alert("No hay productos en el pedido.");
@@ -2553,7 +2528,6 @@ if (product.offer && product.offerLogos) {
     }
   }
 
-  // Función para verificar si hay inputs pendientes sin agregar al carrito
   function checkPendingInputs() {
     const productDivs = document.querySelectorAll('.product');
     for (let div of productDivs) {
@@ -2568,9 +2542,7 @@ if (product.offer && product.offerLogos) {
     return false;
   }
 
-  // Función submitOrder que verifica inputs pendientes y envía el pedido
   function submitOrder() {
-    // Verificar si hay inputs pendientes sin agregar
     if (checkPendingInputs()) {
       return;
     }
@@ -2591,10 +2563,8 @@ if (product.offer && product.offerLogos) {
       pedidoInput.value = "";
       updateTotalPrice();
     }
-
     const orderItems = collectCartData();
     if (!orderItems) return;
-
     const loggedUser = localStorage.getItem("loggedInUser") || "Usuario no identificado";
     const loggedPassword = localStorage.getItem("loggedInPassword") || "1234";
     const storeName = localStorage.getItem("userStore") || "Supermercado desconocido";
@@ -2604,9 +2574,7 @@ if (product.offer && product.offerLogos) {
       userStore: storeName,
       products: orderItems
     };
-
     console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
-
     if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
       fetch("https://prod-84.westeurope.logic.azure.com:443/workflows/980fcc6db7fd4f21a5f97708af90ba71/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wc7W7PtqNjzOd6W0KZwL9fAMNciXfU9RLY2r-ahc1Ns", {
         method: 'POST',
@@ -2633,12 +2601,10 @@ if (product.offer && product.offerLogos) {
     }
   }
 
-  // Muestra u oculta el modal del carrito
   function toggleCart() {
     document.getElementById("cart-modal").classList.toggle("active");
   }
 
-  // Función para mostrar notificaciones tipo "toast"
   function showToast(message) {
     let toast = document.createElement('div');
     toast.className = 'toast';
@@ -2655,7 +2621,6 @@ if (product.offer && product.offerLogos) {
     }, 100);
   }
 
-  // Función que implementa lazy loading usando IntersectionObserver
   function lazyLoadImages() {
     const lazyImages = document.querySelectorAll('img.lazy');
     if ('IntersectionObserver' in window) {
@@ -2678,10 +2643,7 @@ if (product.offer && product.offerLogos) {
     }
   }
 
-  // Inicialización: renderiza los productos y configura el lazy loading  
-  updateProductList();
-
-  // Funcionalidad para arrastrar el botón del carrito y distinguir entre click y drag
+  // Funcionalidad para arrastrar el botón del carrito (sin cambios)
   const cartToggle = document.getElementById("cart-toggle");
   cartToggle.addEventListener('mousedown', function(e) {
     e.preventDefault();
@@ -2689,20 +2651,17 @@ if (product.offer && product.offerLogos) {
     let shiftX = e.clientX - cartToggle.getBoundingClientRect().left;
     let shiftY = e.clientY - cartToggle.getBoundingClientRect().top;
     let dragged = false;
-
     function moveAt(pageX, pageY) {
       cartToggle.style.left = pageX - shiftX + 'px';
       cartToggle.style.top = pageY - shiftY + 'px';
       cartToggle.style.position = 'fixed';
     }
-
     function onMouseMove(e) {
       if (Math.abs(e.clientX - startX) > 5 || Math.abs(e.clientY - startY) > 5) {
         dragged = true;
       }
       moveAt(e.pageX, e.pageY);
     }
-
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', function(e) {
       document.removeEventListener('mousemove', onMouseMove);
@@ -2713,7 +2672,82 @@ if (product.offer && product.offerLogos) {
   });
   cartToggle.ondragstart = function() { return false; };
 
-  // Exponer funciones globalmente para usar en atributos inline
+  // ============================================
+  // NUEVA FUNCIONALIDAD: Dropdown de Filtros
+  // ============================================
+  function createFilterDropdown() {
+    const filterContainer = document.getElementById("filter-container");
+    // Se limpia el contenedor (en caso de recarga)
+    filterContainer.innerHTML = "";
+    
+    // Se crea el contenedor del dropdown
+    const dropdownWrapper = document.createElement("div");
+    dropdownWrapper.classList.add("dropdown");
+    
+    // Botón que despliega el menú
+    const dropdownButton = document.createElement("button");
+    dropdownButton.classList.add("filter-dropdown-btn");
+    dropdownButton.textContent = "Filtrar por sección ▼";
+    dropdownButton.addEventListener("click", () => {
+      dropdownContent.classList.toggle("show");
+    });
+    dropdownWrapper.appendChild(dropdownButton);
+    
+    // Contenedor para las opciones
+    const dropdownContent = document.createElement("div");
+    dropdownContent.classList.add("dropdown-content");
+    
+    // Opción "Todos"
+    const allOption = document.createElement("a");
+    allOption.href = "#";
+    allOption.textContent = "Todos";
+    allOption.addEventListener("click", (e) => {
+      e.preventDefault();
+      filterSections("Todos");
+      dropdownContent.classList.remove("show");
+      dropdownButton.textContent = "Filtrar: Todos ▼";
+    });
+    dropdownContent.appendChild(allOption);
+    
+    // Opción para cada sección
+    Object.keys(sections).forEach(sectionName => {
+      const option = document.createElement("a");
+      option.href = "#";
+      option.textContent = sectionName;
+      option.addEventListener("click", (e) => {
+        e.preventDefault();
+        filterSections(sectionName);
+        dropdownContent.classList.remove("show");
+        dropdownButton.textContent = `Filtrar: ${sectionName} ▼`;
+      });
+      dropdownContent.appendChild(option);
+    });
+    
+    dropdownWrapper.appendChild(dropdownContent);
+    filterContainer.appendChild(dropdownWrapper);
+  }
+
+  // Función que filtra las secciones mostradas según la opción seleccionada
+  function filterSections(selectedSection) {
+    const sectionElements = document.querySelectorAll('.section');
+    sectionElements.forEach(elem => {
+      if (selectedSection === "Todos" || elem.getAttribute("data-section") === selectedSection) {
+        elem.style.display = "";
+      } else {
+        elem.style.display = "none";
+      }
+    });
+  }
+
+  // ============================================
+  // Inicialización: renderizar productos y crear dropdown de filtros
+  // ============================================
+  updateProductList();
+  createFilterDropdown();
+
+  // ============================================
+  // Exponer funciones globalmente (sin cambios)
+  // ============================================
   window.toggleCart = toggleCart;
   window.submitOrder = submitOrder;
   window.addToCart = addToCart;
