@@ -10,8 +10,6 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-  
-<body>
   <!-- Formulario de login -->
   <div id="login-container">
     <form id="login-form">
@@ -30,37 +28,38 @@
       <h1>PEDIDOS</h1>
     </header>
     <main>
+      <!-- Contenedor para el dropdown de filtros -->
+      <div id="filter-container"></div>
+      
       <!-- Contenedor de productos generado dinámicamente (con etiquetas de oferta y descuento) -->
       <section id="product-list">
         <!-- Los productos se renderizan aquí desde script.js -->
       </section>
-      <!-- Botón para enviar pedido a Power Automate -->
-      <button id="send-order-btn" onclick="enviarPedido()">Enviar Pedido a Power Automate</button>
-    </main>
-    
-    <!-- Total siempre visible -->
-    <div id="total-display" aria-live="polite">Total: €0.00</div>
-    
-    <!-- Botón flotante del carrito (movible) -->
-    <button id="cart-toggle" aria-label="Ver carrito">🛒</button>
-    
-    <!-- Modal del carrito -->
-    <div id="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
-      <div id="cart-modal-content">
-        <button id="close-modal" aria-label="Cerrar carrito" onclick="toggleCart()">✖</button>
-        <h2 id="cart-modal-title">Tu Pedido</h2>
-        <div id="cart-items-modal">No hay productos añadidos.</div>
-        <div id="modal-total">Total: €0.00</div>
-        <button id="submit-order" onclick="submitOrder()">Enviar Pedido</button>
+      
+      <!-- Total siempre visible -->
+      <div id="total-display" aria-live="polite">Total: €0.00</div>
+      
+      <!-- Botón flotante del carrito (movible) -->
+      <button id="cart-toggle" aria-label="Ver carrito">🛒</button>
+      
+      <!-- Modal del carrito -->
+      <div id="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
+        <div id="cart-modal-content">
+          <button id="close-modal" aria-label="Cerrar carrito" onclick="toggleCart()">✖</button>
+          <h2 id="cart-modal-title">Tu Pedido</h2>
+          <div id="cart-items-modal">No hay productos añadidos.</div>
+          <div id="modal-total">Total: €0.00</div>
+          <button id="submit-order" onclick="submitOrder()">Enviar Pedido</button>
+        </div>
       </div>
-    </div>
-    
-    <!-- Elemento de audio para notificar al agregar producto -->
-    <audio id="add-sound" src="beep.mp3" preload="auto"></audio>
-    <!-- Librería para exportar a Excel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <!-- Archivo de lógica de productos, carrito, descuentos, etc. -->
-    <script src="script.js"></script>
+      
+      <!-- Elemento de audio para notificar al agregar producto -->
+      <audio id="add-sound" src="beep.mp3" preload="auto"></audio>
+      <!-- Librería para exportar a Excel -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+      <!-- Archivo de lógica de productos, carrito, descuentos, etc. -->
+      <script src="script.js"></script>
+    </main>
   </div>
   
   <!-- Script de autenticación, gestión de credenciales y envío de pedido -->
