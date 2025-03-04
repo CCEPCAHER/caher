@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "name": "SEMI PACK 12 lata CC (90x2)=180", 
       "price": 961.20,
       "previousPrice": 1000.00,
-      "offer": true,
+      "offer": false,
       "focus1": false,  
       "focus2": false,
       "focus3": false,
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
          "carrefour": false,
          "caprabo": false,
          "consum": false,
-         "sorli": true
+         "sorli": false
 
       }
     },
