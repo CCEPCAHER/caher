@@ -1764,8 +1764,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     },
       { 
-        "name": "Powerade Zero Ice Storm PET50 C12", 
-         "name": "Powerade Ice Storm Pet 50", 
+        "name": "Powerade Zero Ice Storm PET50 C12",  
       "price": 1.00,
       "previousPrice": 1.20,
       "offer": true,
@@ -1795,8 +1794,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     },
       { 
-        "name": "Powerade Citrus Charge Pet 50", 
-        "name": "Powerade Ice Storm Pet 50", 
+        "name": "Powerade Citrus Charge Pet 50",  
       "price": 1.00,
       "previousPrice": 1.20,
       "offer": true,
@@ -1826,8 +1824,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     },
       { 
-        "name": "Powerade Blood Orange Charge Pet 50", 
-        "name": "Powerade Ice Storm Pet 50", 
+        "name": "Powerade Blood Orange Charge Pet 50",  
       "price": 1.00,
       "previousPrice": 1.20,
       "offer": true,
