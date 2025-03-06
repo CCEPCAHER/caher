@@ -2084,6 +2084,12 @@ document.addEventListener("DOMContentLoaded", function() {
         "price": 0.00, 
         "offer": false,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      {
+      "name": "CABECERA", 
+        "price": 0.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       }
     ],
 };
@@ -2293,7 +2299,8 @@ document.addEventListener("DOMContentLoaded", function() {
     "Absolut Sprite Lata 25 C12": [3, 5, 15],
 "PROMOCIONES": [0],
 "EEFF COCA-COLA":[0],
-"EEFF MONSTER": [0]
+"EEFF MONSTER": [0],
+"CABECERA":[0]
   };
 
   // Función para actualizar el listado de productos (secciones)
