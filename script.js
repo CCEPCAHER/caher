@@ -1794,7 +1794,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     },
       { 
-        "name": "Powerade Citrus Charge Pet 50",  
+        "name": "Powerade Citrus Charge Pet 50",        
       "price": 1.00,
       "previousPrice": 1.20,
       "offer": true,
@@ -1824,7 +1824,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     },
       { 
-        "name": "Powerade Blood Orange Charge Pet 50",  
+        "name": "Powerade Blood Orange Charge Pet 50",         
       "price": 1.00,
       "previousPrice": 1.20,
       "offer": true,
@@ -2065,8 +2065,28 @@ document.addEventListener("DOMContentLoaded", function() {
         "offer": false,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       }
-    ]
-  };
+    ],
+ "IMPLANTACIONES EEFF": [
+      { 
+        "name": "EEFF COCA-COLA", 
+        "price": 0.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "EEFF MONSTER", 
+        "price": 0.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+      { 
+        "name": "PROMOCIONES", 
+        "price": 0.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      }
+    ],
+};
 
   // Cantidades sugeridas para cada producto
   const PRODUCT_QUANTITIES = {
@@ -2270,7 +2290,10 @@ document.addEventListener("DOMContentLoaded", function() {
     "Agua Vilas del Turbón pet 1L": [9, 18],
     "Jack & Coke Lata 33 C12": [3, 5, 15],
     "Jack & Coke Zero Sin Cafeína Lata 33 C12": [3, 5, 15],
-    "Absolut Sprite Lata 25 C12": [3, 5, 15]
+    "Absolut Sprite Lata 25 C12": [3, 5, 15],
+"PROMOCIONES": [0],
+"EEFF COCA-COLA":[0],
+"EEFF MONSTER": [0]
   };
 
   // Función para actualizar el listado de productos (secciones)
@@ -2286,7 +2309,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
     products.forEach((product, index) => {
       const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
-      const quantities = PRODUCT_QUANTITIES[product.name] || [1, 2, 3];
+      const quantities = PRODUCT_QUANTITIES[product.name] || [0, 0, 0];
       let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
       
       let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
