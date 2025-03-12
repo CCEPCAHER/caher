@@ -2808,3 +2808,10 @@ if (product.offer && product.previousPrice && product.price !== 0) {
   window.addProduct = addProduct;
   window.updateProductList = updateProductList;
 });
+// Inicia la aplicación al cargar el DOM
+window.addEventListener('DOMContentLoaded', initializeApp);
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(() => console.log("Service Worker registrado"))
+    .catch(err => console.log("Error en Service Worker:", err));
+}
