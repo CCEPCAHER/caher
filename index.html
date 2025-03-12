@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
   <title>PEDIDOS</title>
   <!-- Llamada a la hoja de estilos externa -->
   <link rel="stylesheet" href="styles.css">
@@ -25,7 +26,7 @@
   <!-- Contenido protegido: se mostrará una vez que el usuario inicie sesión -->
   <div id="contenido" style="display:none;">
     <header>
-      <h1>PEDIDOS</h1>
+      <h1>CONSULTAS</h1>
     </header>
     <main>
       <!-- Contenedor para el dropdown de filtros -->
@@ -163,7 +164,7 @@
 
       console.log("Objeto 'pedido' que se enviará:", JSON.stringify(pedido));
 
-      fetch("https://prod-84.westeurope.logic.azure.com:443/workflows/980fcc6db7fd4f21a5f97708af90ba71/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wc7W7PtqNjzOd6W0KZwL9fAMNciXfU9RLY2r-ahc1Ns", {
+      fetch("", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pedido)
