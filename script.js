@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
          "caprabo": false,
          "consum": false,
          "sorli": false
-
       }
     },
     { 
@@ -264,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "name": "COCA-COLA PET1,25L P2 C3", 
        "price": 3.00,
       "previousPrice": 3.99,
-      "offer": true,
+      "offer": false,
       "focus1": false,  
       "focus2": true,
       "focus3": false,
@@ -591,7 +590,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { 
       "name": "PACK X 4 Coca-Cola Zero 2 L.", 
       "price": 4.00, 
-      "offer": true,
+      "offer": false,
       "focus1": false,
       "focus2": false,
       "focus3": false,
@@ -606,7 +605,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { 
       "name": "SEMI BIPACK Coca Cola Zero Pet 2x2 L.", 
       "price": 4.00, 
-      "offer": true,
+      "offer": false,
       "focus1": false,
       "focus2": false,
       "focus3": false,
@@ -2068,29 +2067,33 @@ document.addEventListener("DOMContentLoaded", function() {
     ],
  "IMPLANTACIONES EEFF": [
       { 
-        "name": "EEFF COCA-COLA", 
-        "price": 0.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "EEFF MONSTER", 
-        "price": 0.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "PROMOCIONES", 
-        "price": 0.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      {
-      "name": "CABECERA", 
-        "price": 0.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      }
+  "name": "EEFF COCA-COLA", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+},
+{ 
+  "name": "EEFF MONSTER", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+},
+{ 
+  "name": "PROMOCIONES", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+},
+{ 
+  "name": "CABECERA",  
+  "price": 0.00,
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+}
     ],
 };
 
@@ -2312,89 +2315,94 @@ document.addEventListener("DOMContentLoaded", function() {
     lazyLoadImages();
   }
 
-  function createSection(sectionName, products) {
-    let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
-    products.forEach((product, index) => {
-      const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
-      const quantities = PRODUCT_QUANTITIES[product.name] || [0, 0, 0];
-      let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
-      
-      let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
-      
-      let offerLogoHTML = '';
-      if (product.offer && product.offerLogos) {
-        offerLogoHTML = `<div class="logo-container">`;
-        if (product.offerLogos.alcampo) {
-          offerLogoHTML += `<div class="offer-logo super1"><img src="images/logo_supermerc.png" alt="Alcampo"></div>`;
-        }
-        if (product.offerLogos.condis) {
-          offerLogoHTML += `<div class="offer-logo super2"><img src="images/logo_condis.png" alt="Condis"></div>`;
-        }
-        if (product.offerLogos.carrefour) {
-          offerLogoHTML += `<div class="offer-logo super3"><img src="images/logo_carrefour.png" alt="Carrefour"></div>`;
-        }
-        if (product.offerLogos.caprabo) {
-          offerLogoHTML += `<div class="offer-logo super4"><img src="images/logo_caprabo.png" alt="Caprabo"></div>`;
-        }
-        if (product.offerLogos.sorli) {
-          offerLogoHTML += `<div class="offer-logo super5"><img src="images/logo_sorli.png" alt="Sorli"></div>`;
-        }
-        if (product.offerLogos.consum) {
-          offerLogoHTML += `<div class="offer-logo super6"><img src="images/logo_consum.png" alt="Consum"></div>`;
-        }
-        offerLogoHTML += `</div>`;
+function createSection(sectionName, products) {
+  let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
+  products.forEach((product, index) => {
+    const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
+    const quantities = PRODUCT_QUANTITIES[product.name] || [0, 0, 0];
+    let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
+
+    let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
+
+    let offerLogoHTML = '';
+    if (product.offer && product.offerLogos) {
+      offerLogoHTML = `<div class="logo-container">`;
+      if (product.offerLogos.alcampo) {
+        offerLogoHTML += `<div class="offer-logo super1"><img src="images/logo_supermerc.png" alt="Alcampo"></div>`;
       }
-      
-      let discountHTML = '';
-      if (product.discountOptions) {
-        if (product.discountOptions.twoXone) {
-          discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
-        }
-        if (product.discountOptions.threeXtwo) {
-          discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
-        }
-        if (product.discountOptions.secondUnit70) {
-          discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
-        }
-        if (product.discountOptions.twentyPercent) {
-          discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
-        }
-        if (product.discountOptions.fiftyPercent) {
-          discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
-        }
-        if (product.discountOptions.gift) {
-          discountHTML += `<div class="discount-tag gift">Regalo</div>`;
-        }
-        if (product.discountOptions.travel) {
-          discountHTML += `<div class="discount-tag travel">Viaje</div>`;
-        }
-        if (product.discountOptions.draw) {
-          discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
-        }
-        if (product.discountOptions.promoWeb) {
-          discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
-        }
+      if (product.offerLogos.condis) {
+        offerLogoHTML += `<div class="offer-logo super2"><img src="images/logo_condis.png" alt="Condis"></div>`;
       }
-      
-      let priceHTML = '€' + product.price.toFixed(2);
-      if (product.offer && product.previousPrice) {
-        priceHTML =
-          `<s>€${product.previousPrice.toFixed(2)}</s> <strong>€${product.price.toFixed(2)}</strong>`;
+      if (product.offerLogos.carrefour) {
+        offerLogoHTML += `<div class="offer-logo super3"><img src="images/logo_carrefour.png" alt="Carrefour"></div>`;
       }
-      
-      let focusLogoHTML = '';
-      if (product.focus1) {
-        focusLogoHTML = `<div class="focus-logo foco1"><div class="focus-text">FOCO 1</div></div>`;
-      } else if (product.focus2) {
-        focusLogoHTML = `<div class="focus-logo foco2"><div class="focus-text">FOCO 2</div></div>`;
-      } else if (product.focus3) {
-        focusLogoHTML = `<div class="focus-logo foco3"><div class="focus-text">FOCO 3</div></div>`;
-      } else if (product.focus4) {
-        focusLogoHTML = `<div class="focus-logo foco4"><div class="focus-text">FOCO 4</div></div>`;
+      if (product.offerLogos.caprabo) {
+        offerLogoHTML += `<div class="offer-logo super4"><img src="images/logo_caprabo.png" alt="Caprabo"></div>`;
       }
-      
+      if (product.offerLogos.sorli) {
+        offerLogoHTML += `<div class="offer-logo super5"><img src="images/logo_sorli.png" alt="Sorli"></div>`;
+      }
+      if (product.offerLogos.consum) {
+        offerLogoHTML += `<div class="offer-logo super6"><img src="images/logo_consum.png" alt="Consum"></div>`;
+      }
+      offerLogoHTML += `</div>`;
+    }
+
+    let discountHTML = '';
+    if (product.discountOptions) {
+      if (product.discountOptions.twoXone) {
+        discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
+      }
+      if (product.discountOptions.threeXtwo) {
+        discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
+      }
+      if (product.discountOptions.secondUnit70) {
+        discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
+      }
+      if (product.discountOptions.twentyPercent) {
+        discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
+      }
+      if (product.discountOptions.fiftyPercent) {
+        discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
+      }
+      if (product.discountOptions.gift) {
+        discountHTML += `<div class="discount-tag gift">Regalo</div>`;
+      }
+      if (product.discountOptions.travel) {
+        discountHTML += `<div class="discount-tag travel">Viaje</div>`;
+      }
+      if (product.discountOptions.draw) {
+        discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
+      }
+      if (product.discountOptions.promoWeb) {
+        discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
+      }
+    }
+
+    // Si el precio es 0, dejamos priceHTML vacío.
+let priceHTML = product.price === 0 ? "" : '€' + product.price.toFixed(2);
+
+// Si es un producto en oferta con precio anterior, se muestra la comparación (solo si el precio no es 0)
+if (product.offer && product.previousPrice && product.price !== 0) {
+  priceHTML =
+    `<s>€${product.previousPrice.toFixed(2)}</s> <strong>€${product.price.toFixed(2)}</strong>`;
+}
+
+    let focusLogoHTML = '';
+    if (product.focus1) {
+      focusLogoHTML = `<div class="focus-logo foco1"><div class="focus-text">FOCO 1</div></div>`;
+    } else if (product.focus2) {
+      focusLogoHTML = `<div class="focus-logo foco2"><div class="focus-text">FOCO 2</div></div>`;
+    } else if (product.focus3) {
+      focusLogoHTML = `<div class="focus-logo foco3"><div class="focus-text">FOCO 3</div></div>`;
+    } else if (product.focus4) {
+      focusLogoHTML = `<div class="focus-logo foco4"><div class="focus-text">FOCO 4</div></div>`;
+    }
+
+    // Si el producto es de solo oferta, no mostramos inputs ni botón de agregar.
+    if (product.staticOffer) {
       sectionHTML += `
-        <div class="product">
+        <div class="product static-offer">
           ${offerLogoHTML}
           ${offerHTML}
           ${discountHTML}
@@ -2402,17 +2410,33 @@ document.addEventListener("DOMContentLoaded", function() {
           <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
           <h3>${product.name}</h3>
           <p>Precio: ${priceHTML}</p>
-          <div class="quantity-buttons">
-            ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
-            <input type="number" placeholder="Otro" oninput="validateInput(this)">
-          </div>
-          <button id="${buttonId}" class="add-btn" onclick="addToCart(this, '${product.name}', ${product.price})">Agregar</button>
         </div>
       `;
-    });
-    sectionHTML += `</div>`;
-    return sectionHTML;
-  }
+    } else {
+      // Producto normal: se muestran los controles para agregar al carrito.
+      sectionHTML += `
+  <div class="product ${product.staticOffer ? 'static-offer' : ''}">
+    ${offerLogoHTML}
+    ${offerHTML}
+    ${discountHTML}
+    ${focusLogoHTML}
+    <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
+    <h3>${product.name}</h3>
+    ${priceHTML ? `<p>Precio: ${priceHTML}</p>` : ''}
+    ${!product.staticOffer ? `
+    <div class="quantity-buttons">
+      ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
+      <input type="number" placeholder="Otro" oninput="validateInput(this)">
+    </div>
+    <button id="${buttonId}" class="add-btn" onclick="addToCart(this, '${product.name}', ${product.price})">Agregar</button>
+    ` : ''}
+  </div>
+`;
+    }
+  });
+  sectionHTML += `</div>`;
+  return sectionHTML;
+}
 
   // Funciones de carrito, totales, etc. (se mantienen sin cambios)
   function setQuantity(button, value) {
