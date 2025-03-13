@@ -8,31 +8,35 @@ document.addEventListener("DOMContentLoaded", function() {
   "Coca Cola": [
     { 
       "name": "SEMI PACK 12 lata CC (90x2)=180", 
-      "price": 961.20,
-      "previousPrice": 1000.00,
-      "offer": false,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": false,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": false,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
+    "price": 961.20,
+    "previousPrice": 1000.00,
+    "offer": false,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": true
       }
     },
     { 
@@ -463,7 +467,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "name": "Bandeja Coca-Cola 33 cl. Pack 24", 
       "price": 24.00, 
       "previousPrice": 25.00,
-      "offer": false,
+      "offer": true,
       "focus1": false,
       "focus2": false,
       "focus3": false,
@@ -800,7 +804,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { 
       "name": "Bandeja Coca-Cola Zero 33 cl. Pack 24", 
       "price": 19.90, 
-      "offer": false,
+      "offer": true,
       "focus1": false,
       "focus2": false,
       "focus3": false,
@@ -907,7 +911,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { 
         "name": "Bandeja Coca-Cola Light 33 cl Pack 24", 
         "price": 24.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
@@ -1039,7 +1043,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { 
         "name": "Bandeja Coca-Cola Zero Zero 33 cl Pack 24", 
         "price": 24.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
@@ -1318,15 +1322,67 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "Sprite lata 33", 
-        "price": 1.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+         "price": 0.70,
+    "previousPrice": 1.00,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": true,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Sprite Zero lata 33", 
-        "price": 1.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+         "price": 0.70,
+    "previousPrice": 1.00,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": true,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false  }
       },
       { 
         "name": "Sprite lata 33 P9", 
@@ -1374,9 +1430,35 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "Limca PET1L C12", 
-        "price": 1.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 0.70,
+    "previousPrice": 1.00,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Royal Bliss Berry Lata 25 C12", 
@@ -1444,60 +1526,68 @@ document.addEventListener("DOMContentLoaded", function() {
     "Energéticas": [
       { 
       "name": "Monster Green Lata 50 cl.", 
-      "price": 1.75,
-      "previousPrice": 1.50,
-      "offer": true,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": true,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": true,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
+       "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false 
       }
       },
       { 
       "name": "Monster Green Zero Lata 50 C24", 
-      "price": 1.75,
-      "previousPrice": 1.50,
-      "offer": true,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": true,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": true,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
+      "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
       }
       },
       { 
@@ -1508,33 +1598,163 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "Monster LO - CARB 50 cl.", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Rehab Lata 50 cl.", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "MONSTER JUICED RIO PUNCH LATA50 C24", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Ultra Paradise Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Ultra Red Lata 50 T24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
       "name": "Monster Ultra White Lata 50 T24", 
@@ -1573,39 +1793,195 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "Monster Ultra Fiesta Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Ultra Rosá Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Ultra Peachy Keen 50cl", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Bad Apple 50cl", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Punch 50cl.", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Mango Loco Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Pack x 4 Monster Mango Loco Lata 50 C6", 
@@ -1615,39 +1991,195 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "Monster Monarch Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Nitro Super Dry Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Khaotic Juice Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Ultra Watermelon Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Lewis Hamilton Zero Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Ultra Gold Zero Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Aussie Style Lemonade Lata 50 C24", 
@@ -1657,21 +2189,99 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "Monster Reserve Watermelon Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Monster Reserve White Pineapple Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "MONSTER ULTRA STRAWBERRY DREAMS LA50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       }
     ],
     "M.Maid": [
@@ -1809,24 +2419,27 @@ document.addEventListener("DOMContentLoaded", function() {
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": false,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": true,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
-
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": true,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": true
       }
     },
       { 
@@ -1839,24 +2452,27 @@ document.addEventListener("DOMContentLoaded", function() {
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": false,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": true,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
-
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": true,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": true
       }
     },
       { 
@@ -1869,23 +2485,27 @@ document.addEventListener("DOMContentLoaded", function() {
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": false,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": true,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": true,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": true
 
       }
     },
@@ -1899,23 +2519,27 @@ document.addEventListener("DOMContentLoaded", function() {
       "focus3": false,
       "focus4": false,
       "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": false,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": true,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": true,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": true
 
       }
     },
@@ -2416,35 +3040,45 @@ function createSection(sectionName, products) {
     }
 
     let discountHTML = '';
-    if (product.discountOptions) {
-      if (product.discountOptions.twoXone) {
-        discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
-      }
-      if (product.discountOptions.threeXtwo) {
-        discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
-      }
-      if (product.discountOptions.secondUnit70) {
-        discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
-      }
-      if (product.discountOptions.twentyPercent) {
-        discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
-      }
-      if (product.discountOptions.fiftyPercent) {
-        discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
-      }
-      if (product.discountOptions.gift) {
-        discountHTML += `<div class="discount-tag gift">Regalo</div>`;
-      }
-      if (product.discountOptions.travel) {
-        discountHTML += `<div class="discount-tag travel">Viaje</div>`;
-      }
-      if (product.discountOptions.draw) {
-        discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
-      }
-      if (product.discountOptions.promoWeb) {
-        discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
-      }
-    }
+if (product.discountOptions) {
+  if (product.discountOptions.twoXone) {
+    discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
+  }
+  if (product.discountOptions.threeXtwo) {
+    discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
+  }
+  if (product.discountOptions.secondUnit70) {
+    discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
+  }
+  if (product.discountOptions.twentyPercent) {
+    discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
+  }
+  if (product.discountOptions.fiftyPercent) {
+    discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
+  }
+  if (product.discountOptions.gift) {
+    discountHTML += `<div class="discount-tag gift">Regalo</div>`;
+  }
+  if (product.discountOptions.travel) {
+    discountHTML += `<div class="discount-tag travel">Viaje</div>`;
+  }
+  if (product.discountOptions.draw) {
+    discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
+  }
+  // Nuevos descuentos:
+  if (product.discountOptions.clientCard25) {
+    discountHTML += `<div class="discount-tag client-card25">Tarjeta Cliente 25%</div>`;
+  }
+  if (product.discountOptions.clientCard15) {
+    discountHTML += `<div class="discount-tag client-card15">Tarjeta Cliente 15%</div>`;
+  }
+  if (product.discountOptions.secondUnit50) {
+    discountHTML += `<div class="discount-tag second-unit50">2da a mitad</div>`;
+  }
+  if (product.discountOptions.promoWeb) {
+    discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
+  }
+}
 
     // Si el precio es 0, dejamos priceHTML vacío.
 let priceHTML = product.price === 0 ? "" : '€' + product.price.toFixed(2);
@@ -2468,18 +3102,18 @@ if (product.offer && product.previousPrice && product.price !== 0) {
 
     // Si el producto es de solo oferta, no mostramos inputs ni botón de agregar.
     if (product.staticOffer) {
-      sectionHTML += `
-        <div class="product static-offer">
-          ${offerLogoHTML}
-          ${offerHTML}
-          ${discountHTML}
-          ${focusLogoHTML}
-          <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
-          <h3>${product.name}</h3>
-          <p>Precio: ${priceHTML}</p>
-        </div>
-      `;
-    } else {
+  sectionHTML += `
+    <div class="product static-offer">
+      ${offerLogoHTML}
+      ${offerHTML}
+      ${discountHTML}
+      ${focusLogoHTML}
+      <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
+      <h3>${product.name}</h3>
+      ${priceHTML ? `<p>Precio: ${priceHTML}</p>` : ''}
+    </div>
+  `;
+} else {
       // Producto normal: se muestran los controles para agregar al carrito.
       sectionHTML += `
   <div class="product ${product.staticOffer ? 'static-offer' : ''}">
