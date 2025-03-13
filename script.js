@@ -1444,8 +1444,8 @@ document.addEventListener("DOMContentLoaded", function() {
     "Energéticas": [
       { 
       "name": "Monster Green Lata 50 cl.", 
-      "price": 3.00,
-      "previousPrice": 3.99,
+      "price": 1.75,
+      "previousPrice": 1.50,
       "offer": true,
       "focus1": false,  
       "focus2": false,
@@ -1455,15 +1455,15 @@ document.addEventListener("DOMContentLoaded", function() {
         "twoXone": false, 
         "threeXtwo": false, 
         "secondUnit70": false, 
-        "twentyPercent": true,
-        "fiftyPercent": false,
+        "twentyPercent": false,
+        "fiftyPercent": true,
         "gift": false,
         "travel": false,
         "draw": false,
         "promoWeb": false 
       },
       "offerLogos": {
-         "alcampo": false,
+         "alcampo": true,
          "condis": false,
          "carrefour": false,
          "caprabo": false,
@@ -1472,10 +1472,33 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       },
       { 
-        "name": "Monster Green Zero Lata 50 C24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      "name": "Monster Green Zero Lata 50 C24", 
+      "price": 1.75,
+      "previousPrice": 1.50,
+      "offer": true,
+      "focus1": false,  
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": true,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": true,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+      }
       },
       { 
         "name": "Pack x 4 Monster Green x 500 ml", 
@@ -1514,10 +1537,33 @@ document.addEventListener("DOMContentLoaded", function() {
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
-        "name": "Monster Ultra White Lata 50 T24", 
-        "price": 24.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      "name": "Monster Ultra White Lata 50 T24", 
+      "price": 1.75,
+      "previousPrice": 1.50,
+      "offer": true,
+      "focus1": false,  
+      "focus2": false,
+      "focus3": false,
+      "focus4": false,
+      "discountOptions": { 
+        "twoXone": false, 
+        "threeXtwo": false, 
+        "secondUnit70": false, 
+        "twentyPercent": false,
+        "fiftyPercent": true,
+        "gift": false,
+        "travel": false,
+        "draw": false,
+        "promoWeb": false 
+      },
+      "offerLogos": {
+         "alcampo": true,
+         "condis": false,
+         "carrefour": false,
+         "caprabo": false,
+         "consum": false,
+         "sorli": false
+      }
       },
       { 
         "name": "Pack x 4 Monster Ultra White Zero Lata 50", 
