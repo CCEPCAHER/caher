@@ -2295,15 +2295,67 @@ document.addEventListener("DOMContentLoaded", function() {
     "FUZE": [
       { 
         "name": "Fuze Limón Lata 33", 
-        "price": 1.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 0.75,
+    "previousPrice": 1.00,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": true, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Fuze Limón sin azúcar Lata 33", 
-        "price": 1.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 0.75,
+    "previousPrice": 1.00,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": true, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       },
       { 
         "name": "Fuze Limón Pet 50", 
@@ -2545,15 +2597,67 @@ document.addEventListener("DOMContentLoaded", function() {
     },
       { 
         "name": "Reign Melon manía Lata 50 C12", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.00,
+    "previousPrice": 1.50,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": true,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": true }
       },
       { 
         "name": "Reign Razzle Berry Lata 50 C12", 
-        "price": 1.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 1.00,
+    "previousPrice": 1.50,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": true,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": true }
       }
     ],
     "Isotónicas": [
