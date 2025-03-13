@@ -1298,9 +1298,35 @@ document.addEventListener("DOMContentLoaded", function() {
     "Sprite": [
       { 
         "name": "Sprite Lata Pack 6X20 CL.", 
-        "price": 6.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 5.25,
+    "previousPrice": 6.00,
+    "offer": false,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": true,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false  }
       },
       { 
         "name": "Sprite Pet 2 L.", 
@@ -1386,9 +1412,35 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "Sprite lata 33 P9", 
-        "price": 9.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 5.25,
+    "previousPrice": 6.00,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": true,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": true,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false  }
       },
       { 
         "name": "Sprite Pet 500", 
@@ -2860,7 +2912,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       }
     ],
- "IMPLANTACIONES EEFF": [
+ "FEM ALCAMPO": [
       { 
   "name": "EEFF COCA-COLA", 
   "price": 0.00, 
@@ -2884,6 +2936,27 @@ document.addEventListener("DOMContentLoaded", function() {
 },
 { 
   "name": "CABECERA",  
+  "price": 0.00,
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+},
+{ 
+  "name": "CABECERA PASILLO CENTRAL",  
+  "price": 0.00,
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+},
+{
+"name": "SEGUNDA CABECERA",  
+  "price": 0.00,
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+},
+{
+"name": "OTROS",  
   "price": 0.00,
   "offer": false,
   "staticOffer": true,
