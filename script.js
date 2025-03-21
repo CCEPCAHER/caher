@@ -2515,8 +2515,8 @@ document.addEventListener("DOMContentLoaded", function() {
     "Deportivas": [
       { 
         "name": "Powerade Ice Storm Pet 50", 
-      "price": 1.00,
-      "previousPrice": 1.20,
+      "price": 1.56,
+      "previousPrice": 1.60,
       "offer": true,
       "focus1": true,  
       "focus2": false,
@@ -2649,41 +2649,17 @@ document.addEventListener("DOMContentLoaded", function() {
     },
       { 
         "name": "Reign Melon manía Lata 50 C12", 
-        "price": 1.00,
-    "previousPrice": 1.50,
-    "offer": true,
-    "focus1": false,  
-    "focus2": false,
-    "focus3": false,
-    "focus4": false,
-    "discountOptions": { 
-      "twoXone": false, 
-      "threeXtwo": false, 
-      "secondUnit70": false,
-      "clientCard25": true,       
-      "clientCard15": false,      
-      "secondUnit50": false,       
-      "twentyPercent": false,
-      "fiftyPercent": false,
-      "gift": false,
-      "travel": false,
-      "draw": false,
-      "promoWeb": false 
-    },
-    "offerLogos": {
-      "alcampo": true,
-      "condis": false,
-      "carrefour": false,
-      "caprabo": false,
-      "consum": false,
-      "sorli": false,
-      "sclat": true }
-      },
+    "price": 0.00,
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+},
       { 
         "name": "Reign Razzle Berry Lata 50 C12", 
         "price": 1.00,
     "previousPrice": 1.50,
-    "offer": true,
+    "offer": false,
+  "staticOffer": true,
     "focus1": false,  
     "focus2": false,
     "focus3": false,
@@ -2692,7 +2668,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "twoXone": false, 
       "threeXtwo": false, 
       "secondUnit70": false,
-      "clientCard25": true,       
+      "clientCard25": false,       
       "clientCard15": false,      
       "secondUnit50": false,       
       "twentyPercent": false,
@@ -2709,7 +2685,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "caprabo": false,
       "consum": false,
       "sorli": false,
-      "sclat": true }
+      "sclat": false }
       }
     ],
     "Isotónicas": [
@@ -3126,8 +3102,8 @@ document.addEventListener("DOMContentLoaded", function() {
     "Powerade Zero Ice Storm PET50 C12": [9, 18],
     "Powerade Citrus Charge Pet 50": [9, 18],
     "Powerade Blood Orange Charge Pet 50": [9, 18],
-    "Reign Melon manía Lata 50 C12": [3, 5],
-    "Reign Razzle Berry Lata 50 C12": [3, 5],
+    "Reign Melon manía Lata 50 C12": [0],
+    "Reign Razzle Berry Lata 50 C12": [0],
     "SEMI  Aquarius limón lata (960x2)=1920": [2, 4],
     "Aquarius limón Lata 33 cl.": [9, 18],
     "Aquarius Naranja Lata 33 cl.": [9, 18],
