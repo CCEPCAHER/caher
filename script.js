@@ -3374,51 +3374,65 @@ document.addEventListener("DOMContentLoaded", function() {
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       }
     ],
- "FEM ALCAMPO": [
+"FEM ALCAMPO": [
       { 
-  "name": "EEFF COCA-COLA", 
+  "name": "", 
+  "price": 0.00, 
+"startDate": "2024-03-25",
+      "endDate": "2024-04-10",
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
   "price": 0.00, 
   "offer": false,
   "staticOffer": true,
-  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
 },
 { 
-  "name": "EEFF MONSTER", 
+  "name": "", 
   "price": 0.00, 
   "offer": false,
   "staticOffer": true,
-  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
 },
 { 
-  "name": "PROMOCIONES", 
+  "name": "", 
   "price": 0.00, 
   "offer": false,
   "staticOffer": true,
-  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
 },
 { 
-  "name": "CABECERA",  
-  "price": 0.00,
+  "name": "", 
+  "price": 0.00, 
   "offer": false,
   "staticOffer": true,
-  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
 },
 { 
-  "name": "CABECERA PASILLO CENTRAL",  
-  "price": 0.00,
+  "name": "", 
+  "price": 0.00, 
   "offer": false,
   "staticOffer": true,
-  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
 },
-{
-"name": "SEGUNDA CABECERA",  
-  "price": 0.00,
+{ 
+  "name": "", 
+  "price": 0.00, 
   "offer": false,
   "staticOffer": true,
-  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
 },
-{
-"name": "OTROS",  
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "",  
   "price": 0.00,
   "offer": false,
   "staticOffer": true,
