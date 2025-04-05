@@ -816,3 +816,50 @@ header h2 {
   overflow-y: auto;
   font-size: 0.95em;
 }
+.date-range-tag {
+  position: absolute;
+  top: -2px; /* Posición sobre la foto */
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(145deg, #4a5568, #2d3748);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 0 0 15px 15px;
+  font-size: 12px;
+  z-index: 3; /* Mayor z-index que la imagen */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  animation: float 3s ease-in-out infinite, pulse 2s infinite;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+
+/* Asegurar que el contenedor del producto tenga posición relativa */
+.product {
+  position: relative;
+  overflow: visible; /* Para que la etiqueta sea visible fuera del contenedor */
+}
+
+.date-range-tag::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: #48bb78;
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+  filter: drop-shadow(0 0 3px #48bb78);
+}
+
+@keyframes float {
+  0% { transform: translate(-50%, -15px); }
+  50% { transform: translate(-50%, -5px); }
+  100% { transform: translate(-50%, -15px); }
+}
+
+/* Resto de animaciones igual */
