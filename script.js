@@ -3380,7 +3380,7 @@ document.addEventListener("DOMContentLoaded", function() {
   "price": 0.00, 
 "startDate": "2024-03-25",
       "endDate": "2024-04-10",
-  "offer": false,
+  "offer": true,
   "staticOffer": true,
 },
 { 
@@ -3651,13 +3651,13 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   // Función para actualizar el listado de productos (secciones)
-  function updateProductList() {
-    const productListElem = document.getElementById("product-list");
-    productListElem.innerHTML = Object.entries(sections)
-      .map(([sectionName, products]) => `<div class="section" data-section="${sectionName}">${createSection(sectionName, products)}</div>`)
-      .join('');
-    lazyLoadImages();
-  }
+function updateProductList() {
+  const productListElem = document.getElementById("product-list");
+  productListElem.innerHTML = Object.entries(sections)
+    .map(([sectionName, products]) => `<div class="section" data-section="${sectionName}">${createSection(sectionName, products)}</div>`)
+    .join('');
+  lazyLoadImages();
+}
 
 function createSection(sectionName, products) {
   let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
@@ -3667,6 +3667,13 @@ function createSection(sectionName, products) {
     let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
 
     let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
+
+    let dateRangeHTML = '';
+    if (product.startDate && product.endDate) {
+      const startDate = new Date(product.startDate).toLocaleDateString('es-ES');
+      const endDate = new Date(product.endDate).toLocaleDateString('es-ES');
+      dateRangeHTML = `<div class="date-range-tag">${startDate} - ${endDate}</div>`;
+    }
 
     let offerLogoHTML = '';
     if (product.offer && product.offerLogos) {
@@ -3693,54 +3700,42 @@ function createSection(sectionName, products) {
     }
 
     let discountHTML = '';
-if (product.discountOptions) {
-  if (product.discountOptions.twoXone) {
-    discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
-  }
-  if (product.discountOptions.threeXtwo) {
-    discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
-  }
-  if (product.discountOptions.secondUnit70) {
-    discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
-  }
-  if (product.discountOptions.twentyPercent) {
-    discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
-  }
-  if (product.discountOptions.fiftyPercent) {
-    discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
-  }
-  if (product.discountOptions.gift) {
-    discountHTML += `<div class="discount-tag gift">Regalo</div>`;
-  }
-  if (product.discountOptions.travel) {
-    discountHTML += `<div class="discount-tag travel">Viaje</div>`;
-  }
-  if (product.discountOptions.draw) {
-    discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
-  }
-  // Nuevos descuentos:
-  if (product.discountOptions.clientCard25) {
-    discountHTML += `<div class="discount-tag client-card25">Tarjeta Cliente 25%</div>`;
-  }
-  if (product.discountOptions.clientCard15) {
-    discountHTML += `<div class="discount-tag client-card15">Tarjeta Cliente 15%</div>`;
-  }
-  if (product.discountOptions.secondUnit50) {
-    discountHTML += `<div class="discount-tag second-unit50">2da a mitad</div>`;
-  }
-  if (product.discountOptions.promoWeb) {
-    discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
-  }
-}
+    if (product.discountOptions) {
+      if (product.discountOptions.twoXone) {
+        discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
+      }
+      if (product.discountOptions.threeXtwo) {
+        discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
+      }
+      if (product.discountOptions.secondUnit70) {
+        discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
+      }
+      if (product.discountOptions.twentyPercent) {
+        discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
+      }
+      if (product.discountOptions.fiftyPercent) {
+        discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
+      }
+      if (product.discountOptions.gift) {
+        discountHTML += `<div class="discount-tag gift">Regalo</div>`;
+      }
+      if (product.discountOptions.travel) {
+        discountHTML += `<div class="discount-tag travel">Viaje</div>`;
+      }
+      if (product.discountOptions.draw) {
+        discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
+      }
+      if (product.discountOptions.promoWeb) {
+        discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
+      }
+    }
 
-    // Si el precio es 0, dejamos priceHTML vacío.
-let priceHTML = product.price === 0 ? "" : '€' + product.price.toFixed(2);
-
-// Si es un producto en oferta con precio anterior, se muestra la comparación (solo si el precio no es 0)
-if (product.offer && product.previousPrice && product.price !== 0) {
-  priceHTML =
-    `<s>€${product.previousPrice.toFixed(2)}</s> <strong>€${product.price.toFixed(2)}</strong>`;
-}
+    let priceHTML = "";
+    if (!product.staticOffer && product.price !== 0) {
+      priceHTML = product.offer && product.previousPrice 
+        ? `<s>€${product.previousPrice.toFixed(2)}</s> <strong>€${product.price.toFixed(2)}</strong>`
+        : `€${product.price.toFixed(2)}`;
+    }
 
     let focusLogoHTML = '';
     if (product.focus1) {
@@ -3753,45 +3748,42 @@ if (product.offer && product.previousPrice && product.price !== 0) {
       focusLogoHTML = `<div class="focus-logo foco4"><div class="focus-text">FOCO 4</div></div>`;
     }
 
-    // Si el producto es de solo oferta, no mostramos inputs ni botón de agregar.
     if (product.staticOffer) {
-  sectionHTML += `
-    <div class="product static-offer">
-      ${offerLogoHTML}
-      ${offerHTML}
-      ${discountHTML}
-      ${focusLogoHTML}
-      <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
-      <h3>${product.name}</h3>
-      ${priceHTML ? `<p>Precio: ${priceHTML}</p>` : ''}
-    </div>
-  `;
-} else {
-      // Producto normal: se muestran los controles para agregar al carrito.
       sectionHTML += `
-  <div class="product ${product.staticOffer ? 'static-offer' : ''}">
-    ${offerLogoHTML}
-    ${offerHTML}
-    ${discountHTML}
-    ${focusLogoHTML}
-    <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
-    <h3>${product.name}</h3>
-    ${priceHTML ? `<p>Precio: ${priceHTML}</p>` : ''}
-    ${!product.staticOffer ? `
-    <div class="quantity-buttons">
-      ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
-      <input type="number" placeholder="Otro" oninput="validateInput(this)">
-    </div>
-    <button id="${buttonId}" class="add-btn" onclick="addToCart(this, '${product.name}', ${product.price})">Agregar</button>
-    ` : ''}
-  </div>
-`;
+        <div class="product static-offer">
+          ${offerLogoHTML}
+          ${offerHTML}
+          ${dateRangeHTML}
+          ${discountHTML}
+          ${focusLogoHTML}
+          <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
+          <h3>${product.name}</h3>
+        </div>
+      `;
+    } else {
+      sectionHTML += `
+        <div class="product">
+          ${offerLogoHTML}
+          ${offerHTML}
+          ${dateRangeHTML}
+          ${discountHTML}
+          ${focusLogoHTML}
+          <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
+          <h3>${product.name}</h3>
+          ${priceHTML ? `<p class="price">${priceHTML}</p>` : ''}
+          <div class="quantity-buttons">
+            ${quantities.map(value => `<button onclick="setQuantity(this, ${value})">${value}</button>`).join('')}
+            <input type="number" placeholder="Otro" oninput="validateInput(this)">
+          </div>
+          <button id="${buttonId}" class="add-btn" onclick="addToCart(this, '${product.name}', ${product.price})">Agregar</button>
+        </div>
+      `;
     }
   });
   sectionHTML += `</div>`;
   return sectionHTML;
 }
-
+ 
   // Funciones de carrito, totales, etc. (se mantienen sin cambios)
   function setQuantity(button, value) {
     let input = button.parentElement.querySelector('input');
