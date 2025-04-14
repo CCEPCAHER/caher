@@ -594,7 +594,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { 
       "name": "PACK X 4 Coca-Cola Zero 2 L.", 
       "price": 4.00, 
-      "offer": false,
+      "offer": true,
       "focus1": false,
       "focus2": false,
       "focus3": false,
@@ -624,7 +624,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { 
       "name": "BIPACK Coca-Cola Zero 2 L.", 
       "price": 2.00, 
-      "offer": false,
+      "offer": true,
       "focus1": false,
       "focus2": false,
       "focus3": false,
@@ -638,7 +638,7 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     { 
       "name": "SEMI Coca Cola Zero Pet 2 L.", 
-      "price": 2.00, 
+      "price": 1.99, 
       "offer": false,
       "focus1": false,
       "focus2": false,
@@ -804,7 +804,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { 
       "name": "Bandeja Coca-Cola Zero 33 cl. Pack 24", 
       "price": 19.90, 
-      "offer": true,
+      "offer": false,
       "focus1": false,
       "focus2": false,
       "focus3": false,
@@ -1070,7 +1070,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "name": "Coca-Cola Sin Cafeína Lata 33", 
         "price": 1.00,
     "previousPrice": 1.50,
-    "offer": true,
+    "offer": false,
   "staticOffer": false,
     "focus1": false,  
     "focus2": false,
@@ -1082,7 +1082,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "secondUnit70": false,
       "clientCard25": false,       
       "clientCard15": false,      
-      "secondUnit50": true,       
+      "secondUnit50": false,       
       "twentyPercent": false,
       "fiftyPercent": false,
       "gift": false,
@@ -1109,7 +1109,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "name": "Coca-Cola Light Sin cafeína Lata 33", 
         "price": 1.00,
     "previousPrice": 1.50,
-    "offer": true,
+    "offer": false,
   "staticOffer": false,
     "focus1": false,  
     "focus2": false,
@@ -1142,7 +1142,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "name": "Coca-Cola Zero Limón Lata 33", 
         "price": 1.00,
     "previousPrice": 1.50,
-    "offer": true,
+    "offer": false,
   "staticOffer": false,
     "focus1": false,  
     "focus2": false,
@@ -1175,7 +1175,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "name": "Coca-Cola Zero Lima Lata 33 CCO8 C24", 
         "price": 1.00,
     "previousPrice": 1.50,
-    "offer": true,
+    "offer": false,
   "staticOffer": false,
     "focus1": false,  
     "focus2": false,
@@ -1208,7 +1208,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "name": "Cherry Coke Zero Lata 33cl", 
         "price": 1.00,
     "previousPrice": 1.50,
-    "offer": true,
+    "offer": false,
   "staticOffer": false,
     "focus1": false,  
     "focus2": false,
@@ -1278,25 +1278,25 @@ document.addEventListener("DOMContentLoaded", function() {
       { 
         "name": "SEMI  PACK 9 lata Fanta Naranja (120x2)=240", 
         "price": 9.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
         "name": "Pack x 9 Fanta Naranja Lata 33 cl.", 
         "price": 9.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
         "name": "SEMI  Fanta Naranja lata (960x2)=1920", 
         "price": 1.00, 
-        "offer": false,
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
         "name": "Fanta Naranja Lata 33 cl.", 
-        "price": 1.00, 
-        "offer": false,
+        "price": 0.75, 
+        "offer": true,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       },
       { 
@@ -1958,7 +1958,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "name": "Monster Green Lata 50 cl.", 
        "price": 1.50,
     "previousPrice": 1.75,
-    "offer": false,
+    "offer": true,
     "focus1": false,  
     "focus2": false,
     "focus3": false,
@@ -1969,7 +1969,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "secondUnit70": false,
       "clientCard25": false,       
       "clientCard15": false,      
-      "secondUnit50": false,       
+      "secondUnit50": true,       
       "twentyPercent": false,
       "fiftyPercent": false,
       "gift": false,
@@ -1991,7 +1991,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "name": "Monster Green Zero Lata 50 C24", 
       "price": 1.50,
     "previousPrice": 1.75,
-    "offer": false,
+    "offer": true,
     "focus1": false,  
     "focus2": false,
     "focus3": false,
@@ -2002,7 +2002,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "secondUnit70": false,
       "clientCard25": false,       
       "clientCard15": false,      
-      "secondUnit50": false,       
+      "secondUnit50": true,       
       "twentyPercent": false,
       "fiftyPercent": false,
       "gift": false,
@@ -2022,9 +2022,36 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "Pack x 4 Monster Green x 500 ml", 
-        "price": 6.00, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+        "price": 6.00,
+    "previousPrice": 1.75,
+    "offer": true,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": true,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+      }
       },
       { 
         "name": "Monster LO - CARB 50 cl.", 
@@ -2452,36 +2479,10 @@ document.addEventListener("DOMContentLoaded", function() {
       "sclat": false }
       },
       { 
-        "name": "Monster Nitro Super Dry Lata 50 C24", 
-        "price": 1.50,
-    "previousPrice": 1.75,
-    "offer": false,
-    "focus1": false,  
-    "focus2": false,
-    "focus3": false,
-    "focus4": false,
-    "discountOptions": { 
-      "twoXone": false, 
-      "threeXtwo": false, 
-      "secondUnit70": false,
-      "clientCard25": false,       
-      "clientCard15": false,      
-      "secondUnit50": false,       
-      "twentyPercent": false,
-      "fiftyPercent": false,
-      "gift": false,
-      "travel": false,
-      "draw": false,
-      "promoWeb": false 
-    },
-    "offerLogos": {
-      "alcampo": false,
-      "condis": false,
-      "carrefour": false,
-      "caprabo": false,
-      "consum": false,
-      "sorli": false,
-      "sclat": false }
+         "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
       },
       { 
         "name": "Monster Khaotic Juice Lata 50 C24", 
@@ -3565,10 +3566,10 @@ document.addEventListener("DOMContentLoaded", function() {
     "Nordic Zero Lata 25 cl.": [10, 20],
     "Nordic Mist Tónica 1L": [10, 20],
     "Limca PET1L C12": [10, 20],
-    "Royal Bliss Berry Lata 25 C12": [24, 48],
-    "Royal Bliss Signature WTR Lata 25 C12": [24, 48],
-    "Royal Bliss Signature tónica Zero Lata 25 C12": [24, 48],
-    "Royal Bliss Lemon Mixer Lata 25 C12": [24, 48],
+    "Royal Bliss Berry Lata 25 C12": [25, 50],
+    "Royal Bliss Signature WTR Lata 25 C12": [25, 50],
+    "Royal Bliss Signature tónica Zero Lata 25 C12": [25, 50],
+    "Royal Bliss Lemon Mixer Lata 25 C12": [25, 50],
     "Royal Bliss Berry CESTA VNR20 P4 C6": [12, 24],
     "Royal Bliss Yuzu CESTA VNR20 P4 C6": [12, 24],
     "Burn Regular 0,5L": [18, 36],
@@ -3593,7 +3594,6 @@ document.addEventListener("DOMContentLoaded", function() {
     "Monster Mango Loco Lata 50 C24": [9, 18],
     "Pack x 4 Monster Mango Loco Lata 50 C6": [9, 18],
     "Monster Monarch Lata 50 C24": [9, 18],
-    "Monster Nitro Super Dry Lata 50 C24": [9, 18],
     "Monster Khaotic Juice Lata 50 C24": [9, 18],
     "Monster Ultra Watermelon Lata 50 C24": [9, 18],
     "Monster Lewis Hamilton Zero Lata 50 C24": [9, 18],
@@ -3712,35 +3712,38 @@ function createSection(sectionName, products) {
     }
 
     let discountHTML = '';
-    if (product.discountOptions) {
-      if (product.discountOptions.twoXone) {
-        discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
-      }
-      if (product.discountOptions.threeXtwo) {
-        discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
-      }
-      if (product.discountOptions.secondUnit70) {
-        discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
-      }
-      if (product.discountOptions.twentyPercent) {
-        discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
-      }
-      if (product.discountOptions.fiftyPercent) {
-        discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
-      }
-      if (product.discountOptions.gift) {
-        discountHTML += `<div class="discount-tag gift">Regalo</div>`;
-      }
-      if (product.discountOptions.travel) {
-        discountHTML += `<div class="discount-tag travel">Viaje</div>`;
-      }
-      if (product.discountOptions.draw) {
-        discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
-      }
-      if (product.discountOptions.promoWeb) {
-        discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
-      }
-    }
+if (product.discountOptions) {
+  if (product.discountOptions.twoXone) {
+    discountHTML += `<div class="discount-tag twoXone">2x1</div>`;
+  }
+  if (product.discountOptions.threeXtwo) {
+    discountHTML += `<div class="discount-tag threeXtwo">3x2</div>`;
+  }
+  if (product.discountOptions.secondUnit70) {
+    discountHTML += `<div class="discount-tag secondUnit70">70% descuento 2da</div>`;
+  }
+  if (product.discountOptions.secondUnit50) {
+    discountHTML += `<div class="discount-tag second-unit50">50% descuento 2da</div>`;
+  }
+  if (product.discountOptions.twentyPercent) {
+    discountHTML += `<div class="discount-tag twentyPercent">20% descuento</div>`;
+  }
+  if (product.discountOptions.fiftyPercent) {
+    discountHTML += `<div class="discount-tag fiftyPercent">50% descuento</div>`;
+  }
+  if (product.discountOptions.gift) {
+    discountHTML += `<div class="discount-tag gift">Regalo</div>`;
+  }
+  if (product.discountOptions.travel) {
+    discountHTML += `<div class="discount-tag travel">Viaje</div>`;
+  }
+  if (product.discountOptions.draw) {
+    discountHTML += `<div class="discount-tag draw">Sorteo</div>`;
+  }
+  if (product.discountOptions.promoWeb) {
+    discountHTML += `<div class="discount-tag promoWeb">Promo Web</div>`;
+  }
+}
 
     let priceHTML = "";
     if (!product.staticOffer && product.price !== 0) {
