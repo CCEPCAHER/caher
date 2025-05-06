@@ -5,6 +5,131 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // Objeto con secciones y productos
   const sections = {
+"FEM ALCAMPO": [
+      { 
+  "name": "", 
+  "price": 0.00, 
+"startDate": "2024-05-06",
+      "endDate": "2024-05-19",
+  "offer": true,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+  { 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "", 
+  "price": 0.00, 
+  "offer": false,
+  "staticOffer": true,
+},
+{ 
+  "name": "",  
+  "price": 0.00,
+  "offer": false,
+  "staticOffer": true,
+  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+}
+    ],
   "Coca Cola": [
     { 
       "name": "SEMI PACK 12 lata CC (90x2)=180", 
@@ -3455,83 +3580,6 @@ document.addEventListener("DOMContentLoaded", function() {
         "offer": false,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       }
-    ],
-"FEM ALCAMPO": [
-      { 
-  "name": "", 
-  "price": 0.00, 
-"startDate": "2024-05-06",
-      "endDate": "2024-05-19",
-  "offer": true,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-  { 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-},
-{ 
-  "name": "",  
-  "price": 0.00,
-  "offer": false,
-  "staticOffer": true,
-  "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-}
     ],
 };
 
