@@ -1600,6 +1600,12 @@ document.addEventListener("DOMContentLoaded", function() {
         "price": 1.00, 
         "offer": false,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+{ 
+        "name": "FANTA ZER TUTTI FRUTTI LATA33 C24", 
+        "price": 0.80, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       }
     ],
     "Sprite": [
@@ -3634,6 +3640,7 @@ document.addEventListener("DOMContentLoaded", function() {
     "Fanta Frambuesa sin azúcar Pet 1.25L C6": [19, 38],
     "Fanta Sandía LATA 33": [9, 18],
     "Fanta Frambuesa LATA 33": [9, 18],
+"FANTA ZER TUTTI FRUTTI LATA33 C24": [9, 18],
     "Sprite Lata Pack 6X20 CL.": [54, 108],
     "Sprite Pet 2 L.": [16, 32],
     "BIPACK Sprite Pet 2 L.": [16, 32],
