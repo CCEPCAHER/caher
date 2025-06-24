@@ -2687,7 +2687,7 @@ document.addEventListener("DOMContentLoaded", function() {
          "name": "", 
   "price": 0.00, 
   "offer": false,
-  "staticOffer": false,
+  "staticOffer": true,
       },
       { 
         "name": "Monster Khaotic Juice Lata 50 C24", 
