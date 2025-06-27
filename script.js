@@ -2923,9 +2923,9 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     ],
     "FUZE": [
-      { 
-        "name": "Fuze Limón Lata 33", 
-        "price": 0.75,
+  { 
+    "name": "Fuze Limón Lata 33", 
+    "price": 0.75,
     "previousPrice": 1.00,
     "offer": false,
     "focus1": false,  
@@ -2953,11 +2953,12 @@ document.addEventListener("DOMContentLoaded", function() {
       "caprabo": false,
       "consum": false,
       "sorli": false,
-      "sclat": false }
-      },
-      { 
-        "name": "Fuze Limón sin azúcar Lata 33", 
-        "price": 0.75,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "Fuze Limón sin azúcar Lata 33", 
+    "price": 0.75,
     "previousPrice": 1.00,
     "offer": false,
     "focus1": false,  
@@ -2985,111 +2986,250 @@ document.addEventListener("DOMContentLoaded", function() {
       "caprabo": false,
       "consum": false,
       "sorli": false,
-      "sclat": false }
-      },
-      { 
-        "name": "Fuze Limón Pet 50", 
-        "price": 0.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      },
-      { 
-        "name": "Fuze Limón Pet 1,5L", 
-        "price": 1.50,
-      "previousPrice": 1.25,
-      "offer": false,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": false,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": false,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
-
-      }
+      "sclat": false
+    }
+  },
+  { 
+    "name": "Fuze Limón Pet 50", 
+    "price": 0.50,
+    "previousPrice": 0.50,
+    "offer": false,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false,
+      "threeXtwo": false,
+      "secondUnit70": false,
+      "twentyPercent": false 
     },
-      { 
-        "name": "Fuze Limón sin azúcar Pet 1,5L", 
-        "price": 1.50,
-      "previousPrice": 1.25,
-      "offer": false,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": false,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": false,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
-
-      }
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "Fuze Limón Pet 1,5L", 
+    "price": 1.50,
+    "previousPrice": 1.25,
+    "offer": false,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
     },
-      { 
-        "name": "Fuze Tea Peach Hibiscus PET1.5L", 
-        "price": 1.50,
-      "previousPrice": 1.25,
-      "offer": false,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-        "twoXone": false, 
-        "threeXtwo": false, 
-        "secondUnit70": false, 
-        "twentyPercent": false,
-        "fiftyPercent": false,
-        "gift": false,
-        "travel": false,
-        "draw": false,
-        "promoWeb": false 
-      },
-      "offerLogos": {
-         "alcampo": false,
-         "condis": false,
-         "carrefour": false,
-         "caprabo": false,
-         "consum": false,
-         "sorli": false
-
-      }
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "Fuze Limón sin azúcar Pet 1,5L", 
+    "price": 1.50,
+    "previousPrice": 1.25,
+    "offer": false,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
     },
-      { 
-        "name": "Fuze Tea Peach Hibiscus PET50", 
-        "price": 0.50, 
-        "offer": false,
-        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
-      }
-    ],
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "Fuze Tea Peach Hibiscus PET1.5L", 
+    "price": 1.50,
+    "previousPrice": 1.25,
+    "offer": false,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "Fuze Tea Peach Hibiscus PET50", 
+    "price": 0.50,
+    "previousPrice": 0.50,
+    "offer": false,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "FUZE TE VERDE MARACUYA LATA33 CCO8 C24", 
+    "price": 0.80,
+    "previousPrice": 0.80,
+    "offer": false,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "FUZE TE VERDE MARACUYA PET1.5L C6", 
+    "price": 1.50,
+    "previousPrice": 1.50,
+    "offer": false,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "FUZE LIMON PET1.5L P2 C3", 
+    "price": 2.50,
+    "previousPrice": 2.50,
+    "offer": false,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  },
+  { 
+    "name": "FUZE LIMON S/A PET1.5L P2 C3", 
+    "price": 2.50,
+    "previousPrice": 2.50,
+    "offer": false,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
+  }
+],
     "Deportivas": [
       { 
         "name": "Powerade Ice Storm Pet 50", 
