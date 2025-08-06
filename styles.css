@@ -1,14 +1,7 @@
-/* ===================================================================
-   OPTIMIZADO PARA MÓVILES (Mobile-First)
-   Fecha de optimización: 6 de agosto de 2025
-   Descripción: Refactorizado con enfoque Mobile-First, unidades 
-   relativas (rem), tipografía fluida (clamp) y media queries para 
-   una experiencia de usuario profesional en todos los dispositivos.
-=================================================================== */
-
-/* ========================
+/* ==============================================================
    VARIABLES Y RESET
-========================= */
+   (se mantienen sin cambios para compatibilidad general)
+============================================================== */
 :root {
   --color-primary: #2c7a7b;
   --color-primary-hover: #285e61;
@@ -19,120 +12,113 @@
   --transition: 0.3s ease;
   --bg-light: #f0f4f8;
   --font: 'Arial', sans-serif;
-  
-  /* OPTIMIZACIÓN: Variable para la altura del header para cálculos dinámicos */
-  --header-height: 85px; 
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* OPTIMIZACIÓN: Ajustes de zoom seguro y suavizado de fuentes */
+/* =================================================================
+   BASE & USABILIDAD ― suave para la vista y “finger-friendly”
+================================================================= */
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;            /* evita gestos no deseados */
+  scroll-behavior: smooth;               /* desplazamiento agradable */
 }
 
 body {
   font-family: var(--font);
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
   color: var(--color-text);
-  /* OPTIMIZACIÓN: Espacio para elementos fijos con unidad relativa */
-  padding-bottom: 7.5rem; 
+  padding-bottom: 120px;                 /* espacio para elementos fijos */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========================
-   HEADER
-========================= */
+/* ==============================================================
+   HEADER (MEJORADO)
+============================================================== */
 header {
   background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   text-align: center;
-  /* OPTIMIZACIÓN: Padding relativo para adaptarse a pantallas */
-  padding: 1rem;
+  padding: 24px 16px;
   color: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   border-bottom: 3px solid var(--color-primary-hover);
-  min-height: var(--header-height);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 header h1 {
-  /* OPTIMIZACIÓN: clamp() asegura un tamaño perfecto en cualquier pantalla */
-  font-size: clamp(1.8rem, 5vw, 2.4rem);
-  margin-bottom: 0.25rem;
+  font-size: clamp(2rem, 4vw, 2.4rem);
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 header h2 {
-  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
   color: #e0e0e0;
 }
 
-/* ========================
-   TOTAL VISIBLE FIJO
-========================= */
+/* ==============================================================
+   TOTAL VISIBLE FIJO (estilo caja registradora)
+============================================================== */
 #total-display {
   position: fixed;
-  /* OPTIMIZACIÓN: Se posiciona dinámicamente bajo el header */
-  top: calc(var(--header-height) + 10px); 
-  right: 1rem;
-  z-index: 999;
+  top: 100px;
+  right: 20px;
+  z-index: 9999;
   background: linear-gradient(to bottom, #2e2e2e, #1a1a1a);
-  /* OPTIMIZACIÓN: Padding relativo */
-  padding: 0.5rem 1rem;
+  padding: 10px 16px;
   border: 1px solid #0f0;
   border-radius: 5px;
   font-family: 'Digital-7', 'Courier New', monospace;
-  font-size: 1.2rem; /* Tamaño base legible en móvil */
+  font-size: 1em;
   color: #0f0;
   letter-spacing: 1px;
   text-shadow: 0 0 4px #0f0;
   box-shadow: inset 0 0 6px #0f0, 0 4px 8px rgba(0, 255, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 #total-display:hover {
   transform: translateY(-3px);
   box-shadow: inset 0 0 6px #0f0, 0 6px 12px rgba(0, 255, 0, 0.5);
 }
 
-/* ========================
-   CONTENEDOR DE PRODUCTOS Y SECCIONES
-========================= */
+/* ==============================================================
+   CONTENEDOR DE PRODUCTOS
+============================================================== */
 #product-list {
-  /* OPTIMIZACIÓN: Padding en los lados para que el contenido no pegue a los bordes */
-  padding: 0.5rem;
+  padding: 10px;
 }
 
+/* ==============================================================
+   SECCIONES Y TÍTULOS
+============================================================== */
 .section-title {
-  font-size: clamp(1.4rem, 4vw, 1.6rem);
+  font-size: 1.6em;
   background: var(--color-primary);
   color: #fff;
-  padding: 0.75rem;
+  padding: 12px;
   border-radius: 8px;
   text-align: center;
-  margin: 1.25rem 0 0.75rem;
+  margin: 20px 0 10px;
 }
 
-/* Fondos personalizados para cada sección (sin cambios, es estilístico) */
-.section-title:nth-of-type(1) { background: #c0392b; }
-.section-title:nth-of-type(2) { background: #34495e; }
-.section-title:nth-of-type(3) { background: #7f8c8d; }
-.section-title:nth-of-type(4) { background: #8e44ad; }
-.section-title:nth-of-type(5) { background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); }
-.section-title:nth-of-type(6) { background: #e67e22; }
-.section-title:nth-of-type(7) { background: #f1c40f; }
-.section-title:nth-of-type(8) { background: linear-gradient(45deg, pink, violet, magenta); }
-.section-title:nth-of-type(9) { background: #27ae60; }
+/* ——— Colores personalizados por sección ——— */
+.section-title:nth-of-type(1)  { background: #c0392b; }
+.section-title:nth-of-type(2)  { background: #34495e; }
+.section-title:nth-of-type(3)  { background: #7f8c8d; }
+.section-title:nth-of-type(4)  { background: #8e44ad; }
+.section-title:nth-of-type(5)  { background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); }
+.section-title:nth-of-type(6)  { background: #e67e22; }
+.section-title:nth-of-type(7)  { background: #f1c40f; }
+.section-title:nth-of-type(8)  { background: linear-gradient(45deg, pink, violet, magenta); }
+.section-title:nth-of-type(9)  { background: #27ae60; }
 .section-title:nth-of-type(10) { background: #bdc3c7; }
 .section-title:nth-of-type(11) { background: #2c3e50; }
 .section-title:nth-of-type(12) { background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); }
@@ -144,333 +130,229 @@ header h2 {
 .section-title:nth-of-type(18) { background: #87ceeb; }
 .section-title:nth-of-type(19) { background: repeating-linear-gradient(45deg, #000, #000 5px, #008000 5px, #008000 10px); }
 
-/* ========================
+/* ==============================================================
    CARRUSEL DE PRODUCTOS
-========================= */
+============================================================== */
 .carousel-container {
   display: flex;
   overflow-x: auto;
-  gap: 0.75rem;
-  padding: 0.25rem 0.5rem 0.75rem; /* Padding inferior para la barra de scroll */
-  scrollbar-width: thin; /* Para Firefox */
-  scrollbar-color: var(--color-primary) transparent;
+  gap: 10px;
+  padding-bottom: 10px;
 }
-
 .carousel-container::-webkit-scrollbar {
   height: 6px;
 }
-
 .carousel-container::-webkit-scrollbar-thumb {
   background: var(--color-primary);
   border-radius: 3px;
 }
 
-/* ========================
+/* ==============================================================
    TARJETAS DE PRODUCTO
-========================= */
+============================================================== */
 .product {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 0.5rem;
-  /* OPTIMIZACIÓN: Ancho flexible para evitar desbordamiento */
-  flex: 0 0 180px; 
+  padding: 8px;
+  flex: 0 0 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   transition: transform var(--transition), box-shadow var(--transition);
-  overflow: visible; /* Para que etiquetas absolutas no se corten */
 }
-
 .product:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
-
-.product-image-container {
-  position: relative;
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
-
 .product img {
   width: 100%;
-  /* OPTIMIZACIÓN: aspect-ratio evita la deformación de la imagen */
-  aspect-ratio: 4 / 5;
+  height: 190px;
   object-fit: cover;
   border-radius: 8px;
+  margin-bottom: 8px;
   background: var(--bg-light);
   transition: opacity 0.3s;
 }
-
 .product h3 {
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-  margin-bottom: 0.25rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-bottom: 4px;
   text-align: center;
   color: var(--color-primary);
   line-height: 1.3;
-  /* Elipsis para títulos largos, excelente para móvil */
-  height: calc(1.3em * 2);
+  max-height: calc(1.1em * 2);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-
 .product p {
   font-size: clamp(0.9rem, 2vw, 1rem);
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   text-align: center;
   line-height: 1.3;
-  height: calc(1.3em * 2);
+  max-height: calc(1.3em * 2);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-
 .product p s {
   color: #888;
-  margin-right: 0.25rem;
+  margin-right: 4px;
 }
 
-
-/* ========================
-   ETIQUETAS (OFERTA, DESCUENTO, FECHAS, ETC.)
-========================= */
+/* ==============================================================
+   ETIQUETA DE OFERTA
+============================================================== */
 .offer-tag {
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: 8px;
+  left: 8px;
   background: linear-gradient(45deg, #ff416c, #ff4b2b);
   color: #fff;
-  padding: 0.25rem 0.5rem;
+  padding: 4px 8px;
   border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: bold;
+  font-size: 0.8em;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4);
   transition: transform 0.3s, box-shadow 0.3s;
 }
-
 .offer-tag:hover {
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0,0,0,0.6);
 }
 
-.discount-tag {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 3px;
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: bold;
-  z-index: 2;
-}
-
-.discount-tag.twoXone      { background-color: #4caf50; }
-.discount-tag.threeXtwo    { background-color: #2196f3; }
-.discount-tag.secondUnit70 { background-color: #9c27b0; }
-.discount-tag.twentyPercent{ background-color: #ff9800; }
-.discount-tag.fiftyPercent { background-color: #d32f2f; }
-.discount-tag.gift         { background-color: #e91e63; }
-.discount-tag.travel       { background-color: #3f51b5; }
-.discount-tag.draw         { background-color: #f44336; }
-.discount-tag.promoWeb     { background-color: #ff5722; }
-.discount-tag.client-card25 { background-color: #00bcd4; border: 1px solid #fff; }
-.discount-tag.client-card15 { background-color: #0097a7; border: 1px solid #fff; }
-.discount-tag.second-unit50 { background-color: #ffeb3b; color: #000; border: 1px solid #fff; }
-
-.date-range-tag {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(145deg, #4a5568, #2d3748);
-    color: white;
-    padding: 0.5rem 1.25rem;
-    border-radius: 0 0 15px 15px;
-    font-size: 0.75rem;
-    z-index: 3;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    animation: float 3s ease-in-out infinite, pulse-date-tag 2s infinite;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(3px);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    white-space: nowrap;
-    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
-}
-
-.date-range-tag::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    background: #48bb78;
-    border-radius: 50%;
-    animation: blink 1.5s infinite;
-    filter: drop-shadow(0 0 3px #48bb78);
-}
-
-
-/* ========================
-   CONTROLES DE PRODUCTO (CANTIDAD, BOTONES)
-========================= */
+/* ==============================================================
+   CONTROLES DE CANTIDAD
+============================================================== */
 .quantity-buttons {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  gap: 6px;
+  margin-bottom: 8px;
 }
-
 .quantity-buttons button {
   background: var(--color-primary);
   color: #fff;
   border: none;
   border-radius: 6px;
-  /* OPTIMIZACIÓN: Padding adecuado para toque */
-  padding: 0.6rem 0.8rem;
-  font-size: 1rem;
+  padding: 8px 12px;
+  font-size: 1em;
   cursor: pointer;
   transition: background var(--transition);
 }
-
 .quantity-buttons button:hover {
   background: var(--color-primary-hover);
 }
-
 .quantity-buttons input {
   width: 50px;
-  padding: 0.5rem;
+  padding: 8px;
   text-align: center;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
-.add-btn, .add-to-cart {
+/* ==============================================================
+   BOTÓN AGREGAR
+============================================================== */
+.add-btn {
   width: 100%;
   background: #E41A1C;
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 0.75rem;
-  font-size: 1rem;
-  font-weight: bold;
+  padding: 10px;
+  font-size: 1.1em;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  margin-top: auto; /* Empuja el botón al final de la tarjeta flex */
+  transition: background 0.3s ease, color 0.3s ease;
 }
-
-.add-btn:hover, .add-to-cart:hover {
+.add-btn:hover {
   background: #C31A17;
-  transform: translateY(-2px);
 }
-
-.add-btn:active, .add-to-cart:active {
-  transform: translateY(0);
-}
-
 .add-btn.added {
   background: #28a745;
+  color: #fff;
   cursor: default;
 }
 
-
-/* ========================
+/* ==============================================================
    MODAL DEL CARRITO
-========================= */
+============================================================== */
 #cart-modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
+  transform: translate(-50%, -50%) scale(0.8);
   background: #fff;
-  /* OPTIMIZACIÓN: Ancho responsivo por defecto */
-  width: 92%;
+  width: 90%;
   max-width: 500px;
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  padding: 1.25rem;
+  padding: 20px;
   z-index: 1100;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  transition: transform 0.4s, opacity 0.4s;
   opacity: 0;
   pointer-events: none;
 }
-
 #cart-modal.active {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   pointer-events: auto;
 }
-
-#cart-modal-content {
-  position: relative;
-}
-
+#cart-modal-content { position: relative; }
 #close-modal {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 20px;
+  right: 10px;
   background: transparent;
   border: none;
-  font-size: 1.8rem;
+  font-size: 1.5em;
   cursor: pointer;
   color: var(--color-text);
-  padding: 0.5rem;
 }
-
 #cart-items-modal {
-  /* OPTIMIZACIÓN: Altura máxima con unidades de viewport */
-  max-height: 50vh; 
+  max-height: 300px;
   overflow-y: auto;
-  margin-bottom: 1rem;
-  padding-right: 0.5rem;
+  margin-bottom: 10px;
+  padding-right: 10px;
 }
-
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0.25rem;
-  border-bottom: 1px solid #eee;
-  font-size: 1rem;
+  padding: 8px 0;
+  background: #ffffff;
+  color: #333333;
+  border-bottom: 1px solid #E41A1C;
+  font-size: 1em;
 }
-
-.cart-item:last-child {
-  border-bottom: none;
-}
-
+.cart-item:last-child { border-bottom: none; }
 .remove-btn {
   background: var(--color-error);
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 0.3rem 0.6rem;
+  padding: 4px 8px;
   cursor: pointer;
   transition: background var(--transition);
 }
-
-.remove-btn:hover {
-  background: #c82333;
-}
-
+.remove-btn:hover { background: #c82333; }
 #modal-total {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.2em;
   font-weight: bold;
   color: var(--color-offer);
-  padding: 0.75rem;
-  background: #fff0f0;
+  padding: 10px;
+  background: #ffccbc;
   border-radius: 8px;
-  margin: 1rem 0;
+  margin: 12px 0;
 }
 
+/* ==============================================================
+   BOTÓN "ENVIAR PEDIDO"
+============================================================== */
 #submit-order {
   display: block;
   width: 100%;
@@ -478,33 +360,30 @@ header h2 {
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 1rem;
-  font-size: 1.2rem;
-  font-weight: bold;
+  padding: 16px;
+  font-size: 1.3em;
   cursor: pointer;
   transition: background var(--transition), transform var(--transition);
 }
-
 #submit-order:hover {
   background: var(--color-primary-hover);
   transform: scale(1.02);
 }
 
-/* ========================
-   BOTÓN DEL CARRITO FLOTANTE
-========================= */
+/* ==============================================================
+   BOTÓN DEL CARRITO (MOVIBLE)
+============================================================== */
 #cart-toggle {
   position: fixed;
-  /* OPTIMIZACIÓN: Posicionamiento relativo y tamaño reducido para móviles */
-  bottom: 1.25rem;
-  right: 1.25rem;
-  width: 75px; 
-  height: 75px;
+  bottom: 60px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: radial-gradient(circle at 65% 35%, rgba(255, 255, 255, 0.9) 5%, rgba(255, 215, 0, 0.3) 30%, rgba(255, 255, 255, 0.2) 70%);
   color: gold;
   border: 3px solid rgba(255, 215, 0, 0.8);
-  font-size: 2.5rem; /* Reducido para el nuevo tamaño */
+  font-size: 3em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -513,18 +392,15 @@ header h2 {
   z-index: 1200;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   backdrop-filter: blur(5px);
-  animation: pulse-cart 2s infinite;
+  animation: pulse 2s infinite;
 }
-
 #cart-toggle:hover {
-  transform: scale(1.1) rotate(10deg);
+  transform: scale(1.15) rotate(10deg);
   box-shadow: 0 0 30px 8px rgba(255, 215, 0, 0.6), 0 6px 20px rgba(0, 0, 0, 0.4);
+  background: radial-gradient(circle at 65% 35%, rgba(255, 255, 255, 1) 10%, rgba(255, 215, 0, 0.5) 40%, rgba(255, 255, 255, 0.3) 70%);
+  filter: brightness(1.1);
 }
-
-#cart-toggle:active {
-  transform: scale(0.95);
-}
-
+#cart-toggle:active { transform: scale(0.95); }
 .cart-quantity {
   position: absolute;
   top: -5px;
@@ -532,44 +408,57 @@ header h2 {
   background: #ff4444;
   color: white;
   border-radius: 50px;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.8rem;
+  padding: 8px 12px;
+  font-size: 0.9em;
   font-weight: 700;
   border: 2px solid white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  min-width: 26px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  min-width: 28px;
   text-align: center;
 }
+@keyframes pulse {
+  0%   { box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.4); }
+  50%  { box-shadow: 0 0 25px 10px rgba(255, 215, 0, 0.5); }
+  100% { box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.4); }
+}
 
-/* ========================
+/* ==============================================================
    NOTIFICACIÓN TOAST
-========================= */
+============================================================== */
 .toast {
   position: fixed;
-  bottom: 8rem; /* Posicionado por encima del botón del carrito */
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%) translateY(100%);
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.8);
   color: #fff;
-  padding: 0.75rem 1.5rem;
+  padding: 12px 24px;
   border-radius: 30px;
-  font-size: 1rem;
+  font-size: 1em;
   opacity: 0;
   transition: opacity 0.5s, transform 0.5s;
   z-index: 1300;
-  pointer-events: none;
 }
-
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
+/* ==============================================================
+   MEDIA‐QUERIES BASE ORIGINALES
+============================================================== */
+@media (orientation: portrait) {
+  .product img {
+    height: auto;
+    max-height: 190px;
+    object-fit: contain;
+  }
+}
 
-/* ========================
-   LOGIN
-========================= */
+/* ==============================================================
+   ESTILOS PARA EL LOGIN
+============================================================== */
 #login-container {
   position: fixed;
   top: 0;
@@ -580,113 +469,182 @@ header h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
   z-index: 1500;
 }
-
-/* MODIFICACIÓN: Se quita fondo, blur y sombra para transparencia total */
 #login-form {
-  background: transparent; /* Fondo totalmente transparente */
+  background: rgba(199, 181, 181, 0.046);
   padding: 2rem;
   border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(239, 232, 232, 0.002);
   text-align: center;
-  width: 100%;
-  max-width: 340px;
+  width: 320px;
 }
-
-/* MODIFICACIÓN: Texto en blanco con sombra para legibilidad */
-#login-form h2 {
-  color: #FFFFFF;
-  margin-bottom: 1.5rem;
-  font-size: 2rem; /* Un poco más grande para destacar */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-}
-
-/* MODIFICACIÓN: Campos con fondo semitransparente y texto blanco */
+#login-form h2 { color: var(--color-text); margin-bottom: 1rem; }
 #login-form select,
-#login-form input {
+#login-form input,
+#login-form button {
   width: 100%;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.5); /* Borde blanco semitransparente */
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
   border-radius: 6px;
   font-size: 1rem;
   transition: var(--transition);
-  background: rgba(0, 0, 0, 0.25); /* Fondo oscuro semitransparente */
-  color: #FFFFFF; /* Texto blanco */
 }
-
-/* MODIFICACIÓN: Placeholder en color claro */
-#login-form input::placeholder {
-  color: #e0e0e0;
-  opacity: 1;
+#login-form select,
+#login-form input {
+  background: var(--bg-light);
+  color: var(--color-text);
 }
-
-#login-form input:focus {
-  outline: none;
-  border-color: #fff; /* Borde blanco al enfocar */
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-}
-
+#login-form input::placeholder { color: #140e0e; opacity: 0.8; }
+#login-form input:focus { outline: none; box-shadow: 0 0 5px var(--color-primary); }
 #login-form button {
   background: #E41A1C;
   color: #FFFFFF;
   font-weight: bold;
   cursor: pointer;
-  border: none;
-  width: 100%;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
+}
+#login-form button:hover { background: #C31A17; }
+
+/* ==============================================================
+   ETIQUETAS DE DESCUENTO
+============================================================== */
+.discount-tag {               /* estilo base */
+  position: absolute;
+  top: 8px;
+  right: 1px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 0.8em;
+  z-index: 2;
+  margin-bottom: 2px;
+}
+.discount-tag.twoXone      { background-color: #4caf50; }
+.discount-tag.threeXtwo    { background-color: #2196f3; }
+.discount-tag.secondUnit70 { background-color: #9c27b0; }
+.discount-tag.twentyPercent{ background-color: #ff9800; }
+.discount-tag.fiftyPercent { background-color: #d32f2f; }
+.discount-tag.gift         { background-color: #e91e63; }
+.discount-tag.travel       { background-color: #3f51b5; }
+.discount-tag.draw         { background-color: #f44336; }
+.discount-tag.promoWeb     { background-color: #ff5722; }
+
+/* ——— Nuevos descuentos ——— */
+.discount-tag.client-card25 { background-color: #00bcd4; border: 1px solid #fff; font-weight: bold; padding: 4px 8px; border-radius: 5px; }
+.discount-tag.client-card15 { background-color: #0097a7; border: 1px solid #fff; font-weight: bold; padding: 4px 8px; border-radius: 5px; }
+.discount-tag.second-unit50{ background-color: #ffeb3b; color: #000; border: 1px solid #fff; font-weight: bold; padding: 4px 8px; border-radius: 5px; }
+
+/* ==============================================================
+   CONTENEDOR DE IMAGEN
+============================================================== */
+.product-image-container { position: relative; display: inline-block; }
+.logo-container {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  padding: 0;
   border-radius: 6px;
-  font-size: 1rem;
-  transition: var(--transition);
+  box-shadow: none;
+}
+.logo-container img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin: 0;
+  transition: transform 0.3s;
+}
+.logo-container img:hover { transform: scale(1.1); }
+
+/* ==============================================================
+   BLOQUE FOCO
+============================================================== */
+.focus-logo { position: absolute; top: 80px; left: 70px; z-index: 2; }
+.focus-text {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 3px;
+  animation: blink 1.5s infinite;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.foco1 .focus-text { background-color: gold;    color: #333; }
+.foco2 .focus-text { background-color: #6c757d; color: white; }
+.foco3 .focus-text { background-color: #cd7f32; color: white; }
+.foco4 .focus-text { background-color: #6f42c1; color: white; }
+
+/* ==============================================================
+   BOTÓN AÑADIR AL CARRITO
+============================================================== */
+.add-to-cart {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+.add-to-cart:hover { background-color: #218838; transform: translateY(-1px); }
+
+/* ==============================================================
+   DETALLES DEL PRODUCTO
+============================================================== */
+.product-details {
+  padding: 8px;
+  font-size: 0.9em;
+  animation: blink 1.5s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
 }
 
-#login-form button:hover {
-  background: #C31A17;
-  transform: scale(1.03); /* Pequeño efecto al pasar el ratón */
-}
-
-/* ========================
-   DROPDOWN FILTRO
-========================= */
+/* ==============================================================
+   DROPDOWN FILTRO COMPACTO
+============================================================== */
 .dropdown-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 1.5rem auto;
-  padding: 1rem;
+  padding: 1.2rem;
   background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 14px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  width: 92%;
-  max-width: 400px; /* Ancho máximo para consistencia */
+  width: 95%;
+  max-width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-
+.dropdown { position: relative; display: inline-block; width: 100%; max-width: 320px; }
 .filter-dropdown-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+  padding: 16px 28px;
+  background: linear-gradient(135deg, var(--color-primary, #2a6df5) 0%, var(--color-secondary, #1a5de8) 100%);
   color: #fff;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
+  letter-spacing: 0.15px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 6px rgba(42, 109, 245, 0.2);
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -698,119 +656,142 @@ header h2 {
   border-radius: 10px;
   z-index: 1000;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  margin-top: 0.5rem;
-  padding: 0.5rem 0;
+  margin-top: 10px;
+  padding: 8px 0;
 }
-
 .dropdown-content a {
   color: #2d3748;
-  padding: 0.9rem 1.5rem;
-  font-size: 1rem;
+  padding: 14px 24px;
+  font-size: 0.9375rem;
   font-weight: 600;
+  line-height: 1.5;
   text-align: center;
-  display: block; /* Simplificado de flex para este caso */
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .dropdown-content a:hover,
-.dropdown-content a:focus {
-  background: #f8fafc;
-  color: var(--color-primary);
-}
-
-/* OPTIMIZACIÓN: Efecto de toque para móviles */
+.dropdown-content a:focus   { background: #f8fafc; transform: translateX(3px); }
 @media (hover: none) {
-  .dropdown-content a:active {
-    background: #f1f5f9;
-    transform: scale(0.98);
-  }
+  .dropdown-content a:hover   { background: inherit; transform: none; }
+  .dropdown-content a:active  { background: #f1f5f9; transform: scale(0.98); }
 }
-
-.dropdown-content.show {
-  display: block;
-  animation: slideIn 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* ========================
-   ANIMACIONES (CONSOLIDADAS)
-========================= */
-@keyframes pulse-cart {
-  0% { box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.4); }
-  50% { box-shadow: 0 0 25px 10px rgba(255, 215, 0, 0.5); }
-  100% { box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.4); }
-}
-
-@keyframes pulse-date-tag {
-  0% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.05); }
-  100% { transform: translateX(-50%) scale(1); }
-}
-
-@keyframes float {
-  0% { transform: translate(-50%, -10px); }
-  50% { transform: translate(-50%, -5px); }
-  100% { transform: translate(-50%, -10px); }
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.dropdown-content.show { display: block; animation: slideIn 0.3s cubic-bezier(0.23, 1, 0.32, 1); }
+@media (max-width: 768px) {
+  .filter-dropdown-btn { font-size: 1.125rem; padding: 18px 32px; min-height: 44px; }
+  .dropdown-content a  { font-size: 1rem; padding: 16px 24px; }
+  .dropdown-container  { padding: 1rem; margin: 1rem auto; }
 }
 
-
-/* =============================================================
-   MEDIA QUERIES - Adaptación a pantallas más grandes
-============================================================= */
-
-/* Para Tablets (y móviles en horizontal) */
-@media (min-width: 600px) {
-  .product {
-    /* Hacemos las tarjetas un poco más grandes */
-    flex-basis: 220px; 
-  }
-
-  .product h3 {
-    font-size: 1.2rem;
-  }
+/* ==============================================================
+   AUXILIAR
+============================================================== */
+#store { max-height: 180px; overflow-y: auto; font-size: 0.95em; }
+.date-range-tag {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(145deg, #4a5568, #2d3748);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 0 0 15px 15px;
+  font-size: 12px;
+  z-index: 3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  animation: float 3s ease-in-out infinite, pulse 2s infinite;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+.product { position: relative; overflow: visible; }
+.date-range-tag::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: #48bb78;
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+  filter: drop-shadow(0 0 3px #48bb78);
+}
+@keyframes float {
+  0%   { transform: translate(-50%, -15px); }
+  50%  { transform: translate(-50%, -5px);  }
+  100% { transform: translate(-50%, -15px); }
+}
+@media (orientation: landscape) {
+  .product img { max-height: 250px; object-fit: contain; }
+  .product     { flex: 0 0 280px; }
 }
 
-/* Para Portátiles y Escritorios */
-@media (min-width: 992px) {
-  :root {
-    /* El header puede ser un poco más alto en pantallas grandes */
-    --header-height: 95px; 
-  }
+/* ==============================================================
+   ——— OPTIMIZACIONES EXTRA PARA DISPOSITIVOS MÓVILES ———
+   (Todo lo anterior se mantiene.  Solo sobreescribimos donde
+    realmente mejora la experiencia táctil y evitamos “zoom”)
+============================================================== */
+@media (max-width: 600px) {
 
-  #product-list {
-    /* Más espacio en los lados en pantallas grandes */
-    padding: 1.5rem 2rem;
-  }
-  
-  /* Contenedor principal para centrar el contenido */
-  .main-container {
-      max-width: 1400px;
-      margin: 0 auto;
-  }
+  /* Tamaños de texto base ligeramente mayores */
+  body, input, select, button { font-size: 16px; }
 
+  /* Cabecera más compacta */
+  header          { padding: 20px 14px; }
+  header h1       { font-size: 1.9rem; }
+  header h2       { font-size: 1rem;  }
+
+  /* Carrusel con snapping para deslizamiento con dedo */
   .carousel-container {
-    /* Permitimos que más productos se vean a la vez */
-    justify-content: center;
-    flex-wrap: wrap; /* El carrusel se convierte en una cuadrícula */
+    padding-left: 6px;
+    gap: 8px;
+    scroll-snap-type: x mandatory;
   }
+  .product               { flex: 0 0 170px; padding: 6px; }
+  .product img           { height: 150px; }
+  .product, .offer-tag,
+  .discount-tag          { scroll-snap-align: start; }
 
+  /* Botones “finger-friendly” (mín. 44 px alto) */
+  .add-btn,
+  .add-to-cart,
+  .quantity-buttons button,
+  #submit-order,
+  .filter-dropdown-btn   { min-height: 44px; font-size: 1rem; }
+
+  /* Inputs de cantidad más cómodos */
+  .quantity-buttons input{ width: 56px; padding: 10px; font-size: 1rem; }
+
+  /* Botón flotante del carrito: versión compacta */
   #cart-toggle {
-    /* Botón del carrito más grande en escritorio */
-    width: 90px;
-    height: 90px;
-    font-size: 3rem;
+    width: 72px;
+    height: 72px;
+    font-size: 2.2em;
+    bottom: 24px;
+    right: 16px;
   }
 
+  /* Display total más pequeño y no flotante cuando se toca */
   #total-display {
-    font-size: 1.5rem;
-    padding: 0.75rem 1.25rem;
+    right: 12px;
+    top: 80px;
+    padding: 6px 10px;
   }
+  #total-display:hover { transform: none; }
+
+  /* Modal ocupa casi toda la pantalla vertical en móvil */
+  #cart-modal              { width: 95%; max-width: 95%; }
+  #cart-items-modal        { max-height: 45vh; }
 }
+
+/* ==============================================================
+   FIN DEL CSS — listo para copiar y pegar
+============================================================== */
