@@ -3230,142 +3230,40 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 ],
-    "Deportivas": [
-      { 
-        "name": "Powerade Ice Storm Pet 50", 
+  "Deportivas": [
+    {
+      "name": "Powerade Ice Storm Pet 50",
       "price": 1.56,
-      "previousPrice": 1.60,
-      "offer": false,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-      "twoXone": false, 
-      "threeXtwo": false, 
-      "secondUnit70": false,
-      "clientCard25": false,       
-      "clientCard15": false,      
-      "secondUnit50": false,       
-      "twentyPercent": false,
-      "fiftyPercent": false,
-      "gift": false,
-      "travel": false,
-      "draw": false,
-      "promoWeb": false 
+      "previousPrice": 1.60
     },
-    "offerLogos": {
-      "alcampo": false,
-      "condis": false,
-      "carrefour": false,
-      "caprabo": false,
-      "consum": false,
-      "sorli": false,
-      "sclat": false
-      }
-    },
-      { 
-        "name": "Powerade Zero Ice Storm PET50 C12",  
+    {
+      "name": "Powerade Zero Ice Storm PET50 C12",
       "price": 1.00,
-      "previousPrice": 1.20,
-      "offer": false,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-      "twoXone": false, 
-      "threeXtwo": false, 
-      "secondUnit70": false,
-      "clientCard25": false,       
-      "clientCard15": false,      
-      "secondUnit50": false,       
-      "twentyPercent": false,
-      "fiftyPercent": false,
-      "gift": false,
-      "travel": false,
-      "draw": false,
-      "promoWeb": false 
+      "previousPrice": 1.20
     },
-    "offerLogos": {
-      "alcampo": false,
-      "condis": false,
-      "carrefour": false,
-      "caprabo": false,
-      "consum": false,
-      "sorli": false,
-      "sclat": false
-      }
-    },
-      { 
-        "name": "POWERADE GOLDEN MANGO PET50 C12",        
+    {
+      "name": "POWERADE GOLDEN MANGO PET50 C12",
       "price": 1.00,
-      "previousPrice": 1.20,
-      "offer": false,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-      "twoXone": false, 
-      "threeXtwo": false, 
-      "secondUnit70": false,
-      "clientCard25": false,       
-      "clientCard15": false,      
-      "secondUnit50": false,       
-      "twentyPercent": false,
-      "fiftyPercent": false,
-      "gift": false,
-      "travel": false,
-      "draw": false,
-      "promoWeb": false 
+      "previousPrice": 1.20
     },
-    "offerLogos": {
-      "alcampo": false,
-      "condis": false,
-      "carrefour": false,
-      "caprabo": false,
-      "consum": false,
-      "sorli": false,
-      "sclat": false
-
-      }
-    },
-      { 
-        "name": "Powerade Blood Orange Charge Pet 50",         
+    {
+      "name": "Powerade Blood Orange Charge Pet 50",
       "price": 1.00,
-      "previousPrice": 1.20,
-      "offer": false,
-      "focus1": false,  
-      "focus2": false,
-      "focus3": false,
-      "focus4": false,
-      "discountOptions": { 
-      "twoXone": false, 
-      "threeXtwo": false, 
-      "secondUnit70": false,
-      "clientCard25": false,       
-      "clientCard15": false,      
-      "secondUnit50": false,       
-      "twentyPercent": false,
-      "fiftyPercent": false,
-      "gift": false,
-      "travel": false,
-      "draw": false,
-      "promoWeb": false 
+      "previousPrice": 1.20
+    }
+  ],
+  "Bebidas1L": [
+    {
+      "name": "POWERADE ICE STORM PET 1L",
+      "price": 1.00,
+      "previousPrice": 1.20
     },
-    "offerLogos": {
-      "alcampo": false,
-      "condis": false,
-      "carrefour": false,
-      "caprabo": false,
-      "consum": false,
-      "sorli": false,
-      "sclat": false
-
-      }
-}
-    ],
+    {
+      "name": "POWERADE GOLDEN MANGO PET 1L",
+      "price": 1.00,
+      "previousPrice": 1.20
+    }
+  ],
     "Isotónicas": [
       { 
         "name": "SEMI  Aquarius limón lata (960x2)=1920", 
