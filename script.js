@@ -3250,9 +3250,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "name": "Powerade Blood Orange Charge Pet 50",
       "price": 1.00,
       "previousPrice": 1.20
-    }
-  ],
-  "Bebidas1L": [
+    },
     {
       "name": "POWERADE ICE STORM PET 1L",
       "price": 1.00,
