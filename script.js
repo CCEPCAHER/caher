@@ -3105,7 +3105,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   },
   { 
-    "name": "Fuze Tea Peach Hibiscus PET50", 
+    "name": "FUZE GTM PET50 C24", 
     "price": 0.50,
     "previousPrice": 0.50,
     "offer": false,
@@ -3728,7 +3728,7 @@ document.addEventListener("DOMContentLoaded", function() {
     "Fuze Limón Pet 1,5L": [21, 42],
     "Fuze Limón sin azúcar Pet 1,5L": [21, 42],
     "Fuze Tea Peach Hibiscus PET1.5L": [21, 42],
-    "Fuze Tea Peach Hibiscus PET50": [9, 18],
+    "FUZE GTM PET50 C24": [9, 18],
     "FUZE TE VERDE MARACUYA LATA33 CCO8 C24": [9, 18],
     "FUZE TE VERDE MARACUYA PET1.5L C6": [21, 42],
     "FUZE LIMON PET1.5L P2 C3": [21, 42],
@@ -3737,8 +3737,8 @@ document.addEventListener("DOMContentLoaded", function() {
     "Powerade Zero Ice Storm PET50 C12": [9, 18],
     "POWERADE GOLDEN MANGO PET50 C12": [9, 18],
     "Powerade Blood Orange Charge Pet 50": [9, 18],
-    "POWERADE ICE STORM PET 1L": [21, 42],
-    "POWERADE GOLDEN MANGO PET 1L": [21, 42],
+    "POWERADE ICE STORM PET 1L": [12, 24],
+    "POWERADE GOLDEN MANGO PET 1L": [12, 24],
     "SEMI  Aquarius limón lata (960x2)=1920": [2, 4],
     "Aquarius limón Lata 33 cl.": [9, 18],
     "Aquarius Naranja Lata 33 cl.": [9, 18],
