@@ -3737,6 +3737,8 @@ document.addEventListener("DOMContentLoaded", function() {
     "Powerade Zero Ice Storm PET50 C12": [9, 18],
     "POWERADE GOLDEN MANGO PET50 C12": [9, 18],
     "Powerade Blood Orange Charge Pet 50": [9, 18],
+    "POWERADE ICE STORM PET 1L": [21, 42],
+    "POWERADE GOLDEN MANGO PET 1L": [21, 42],
     "SEMI  Aquarius limón lata (960x2)=1920": [2, 4],
     "Aquarius limón Lata 33 cl.": [9, 18],
     "Aquarius Naranja Lata 33 cl.": [9, 18],
