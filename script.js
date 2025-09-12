@@ -3228,6 +3228,31 @@ document.addEventListener("DOMContentLoaded", function() {
       "sorli": false,
       "sclat": false
     }
+  },
+  { 
+    "name": "FUZE MP PET 1,5L C6", 
+    "price": 2.50,
+    "previousPrice": 2.50,
+    "offer": false,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
   }
 ],
   "Deportivas": [
@@ -3733,6 +3758,7 @@ document.addEventListener("DOMContentLoaded", function() {
     "FUZE TE VERDE MARACUYA PET1.5L C6": [21, 42],
     "FUZE LIMON PET1.5L P2 C3": [21, 42],
     "FUZE LIMON S/A PET1.5L P2 C3": [21, 42],
+    "FUZE MP PET 1,5L C6": [21, 42],
     "Powerade Ice Storm Pet 50": [9, 18],
     "Powerade Zero Ice Storm PET50 C12": [9, 18],
     "POWERADE GOLDEN MANGO PET50 C12": [9, 18],
