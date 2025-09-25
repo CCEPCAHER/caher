@@ -2683,6 +2683,38 @@ document.addEventListener("DOMContentLoaded", function() {
       "sorli": false,
       "sclat": false }
       },
+{ 
+        "name": "MONSTER REHAB MELOCOTÓN LATA50 C12", 
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": false,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
+      },
       { 
         "name": "Monster Khaotic Juice Lata 50 C24", 
         "price": 1.50,
@@ -2909,38 +2941,6 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       { 
         "name": "MONSTER LANDO NORRIS LATA50 C12", 
-        "price": 1.50,
-    "previousPrice": 1.75,
-    "offer": false,
-    "focus1": false,  
-    "focus2": false,
-    "focus3": false,
-    "focus4": false,
-    "discountOptions": { 
-      "twoXone": false, 
-      "threeXtwo": false, 
-      "secondUnit70": false,
-      "clientCard25": false,       
-      "clientCard15": false,      
-      "secondUnit50": false,       
-      "twentyPercent": false,
-      "fiftyPercent": false,
-      "gift": false,
-      "travel": false,
-      "draw": false,
-      "promoWeb": false 
-    },
-    "offerLogos": {
-      "alcampo": false,
-      "condis": false,
-      "carrefour": false,
-      "caprabo": false,
-      "consum": false,
-      "sorli": false,
-      "sclat": false }
-      },
-{ 
-        "name": "MONSTER REHAB MELOCOTÓN LATA50 C12", 
         "price": 1.50,
     "previousPrice": 1.75,
     "offer": false,
