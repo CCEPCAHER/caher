@@ -2684,12 +2684,6 @@ document.addEventListener("DOMContentLoaded", function() {
       "sclat": false }
       },
       { 
-         "name": "", 
-  "price": 0.00, 
-  "offer": false,
-  "staticOffer": true,
-      },
-      { 
         "name": "Monster Khaotic Juice Lata 50 C24", 
         "price": 1.50,
     "previousPrice": 1.75,
@@ -2912,7 +2906,72 @@ document.addEventListener("DOMContentLoaded", function() {
       "consum": false,
       "sorli": false,
       "sclat": false }
+      },
+      { 
+        "name": "MONSTER LANDO NORRIS LATA50 C12", 
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": false,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
+      },
+{ 
+        "name": "MONSTER REHAB MELOCOTÓN LATA50 C12", 
+        "price": 1.50,
+    "previousPrice": 1.75,
+    "offer": false,
+    "focus1": false,  
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false,
+      "clientCard25": false,       
+      "clientCard15": false,      
+      "secondUnit50": false,       
+      "twentyPercent": false,
+      "fiftyPercent": false,
+      "gift": false,
+      "travel": false,
+      "draw": false,
+      "promoWeb": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false }
       }
+
     ],
     "M.Maid": [
       { 
@@ -3253,8 +3312,34 @@ document.addEventListener("DOMContentLoaded", function() {
       "sorli": false,
       "sclat": false
     }
+  },
+{ 
+    "name": "FUZE TEA LIMON LATA33 P6", 
+    "price": 2.50,
+    "previousPrice": 2.50,
+    "offer": false,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "discountOptions": { 
+      "twoXone": false, 
+      "threeXtwo": false, 
+      "secondUnit70": false, 
+      "twentyPercent": false 
+    },
+    "offerLogos": {
+      "alcampo": false,
+      "condis": false,
+      "carrefour": false,
+      "caprabo": false,
+      "consum": false,
+      "sorli": false,
+      "sclat": false
+    }
   }
 ],
+
   "Deportivas": [
     {
       "name": "Powerade Ice Storm Pet 50",
@@ -3285,7 +3370,23 @@ document.addEventListener("DOMContentLoaded", function() {
       "name": "POWERADE GOLDEN MANGO PET 1L",
       "price": 1.00,
       "previousPrice": 1.20
+    },
+{
+      "name": "BODYARMOR LYTE WATERMELON PET575 C12",
+      "price": 1.00,
+      "previousPrice": 1.20
+    },
+{
+      "name": "BODYARMOR LYTE COCONUT LEMON PET575 C12",
+      "price": 1.00,
+      "previousPrice": 1.20
+    },
+{
+      "name": "BODYARMOR LYTE CITRUS PET575 C12",
+      "price": 1.00,
+      "previousPrice": 1.20
     }
+
   ],
     "Isotónicas": [
       { 
@@ -3467,7 +3568,14 @@ document.addEventListener("DOMContentLoaded", function() {
         "price": 1.00, 
         "offer": false,
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
+      },
+{
+"name": "Aquarius MEL Rojo Pet 500 ", 
+        "price": 1.00, 
+        "offer": false,
+        "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       }
+
     ],
     "Appletiser": [
       { 
@@ -3595,6 +3703,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "discountOptions": { "twoXone": false, "threeXtwo": false, "secondUnit70": false, "twentyPercent": false }
       }
     ],
+
 };
 
   // Cantidades sugeridas para cada producto
@@ -3746,6 +3855,9 @@ document.addEventListener("DOMContentLoaded", function() {
     "Monster Reserve Watermelon Lata 50 C24": [9, 18],
     "Monster Reserve White Pineapple Lata 50 C24": [18],
     "MONSTER ULTRA STRAWBERRY DREAMS LA50 C24": [18],
+"MONSTER REHAB MELOCOTÓN LATA50 C12": [9, 18],
+"MONSTER LANDO NORRIS LATA50 C12": [9, 18],
+
     "Limón&Nada Clásica 1 L.": [25, 50],
     "Fuze Limón Lata 33": [9, 18],
     "Fuze Limón sin azúcar Lata 33": [9, 18],
@@ -3759,12 +3871,16 @@ document.addEventListener("DOMContentLoaded", function() {
     "FUZE LIMON PET1.5L P2 C3": [21, 42],
     "FUZE LIMON S/A PET1.5L P2 C3": [21, 42],
     "FUZE MP PET 1,5L C6": [21, 42],
+"FUZE TEA LIMON LATA33 P6": [36, 72],
     "Powerade Ice Storm Pet 50": [9, 18],
     "Powerade Zero Ice Storm PET50 C12": [9, 18],
     "POWERADE GOLDEN MANGO PET50 C12": [9, 18],
     "Powerade Blood Orange Charge Pet 50": [9, 18],
     "POWERADE ICE STORM PET 1L": [12, 24],
     "POWERADE GOLDEN MANGO PET 1L": [12, 24],
+"BODYARMOR LYTE WATERMELON PET575 C12": [9, 18],
+"BODYARMOR LYTE COCONUT LEMON PET575 C12": [9, 18],
+"BODYARMOR LYTE CITRUS PET575 C12": [9, 18],
     "SEMI  Aquarius limón lata (960x2)=1920": [2, 4],
     "Aquarius limón Lata 33 cl.": [9, 18],
     "Aquarius Naranja Lata 33 cl.": [9, 18],
@@ -3774,6 +3890,7 @@ document.addEventListener("DOMContentLoaded", function() {
     "Pack x 9 Aquarius Naranja Lata 33 cl.": [24, 48],
     "Aquarius limón Pet 500": [9, 18],
     "Aquarius Naranja Pet 500": [9, 18],
+"Aquarius MEL Rojo Pet 500 ": [9, 18],
     "SEMI  Aquarius Limón Pet 1´5 l. (195x2)= 390": [2, 4],
     "Aquarius limón Pet 1,5 L.": [21, 42],
     "SEMI Aquarius naranja Pet 1,5 L.(195x2)=390": [2, 4],
