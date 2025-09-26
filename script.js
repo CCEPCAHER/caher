@@ -1,6 +1,68 @@
+// ==========================================
+// APLICACIÓN MODERNA DE CARRITO DE COMPRAS
+// Versión híbrida que mantiene funcionalidad original
+// con mejoras de rendimiento y arquitectura ES6+
+// ==========================================
+
+// Sistema de notificaciones moderno
+class NotificationSystem {
+  static show(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      z-index: 10000;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 0.3s ease;
+    `;
+    
+    if (type === 'success') {
+      notification.style.background = '#10b981';
+      notification.style.color = 'white';
+    } else if (type === 'error') {
+      notification.style.background = '#ef4444';
+      notification.style.color = 'white';
+    }
+    
+    document.body.appendChild(notification);
+    
+    // Animación de entrada
+    requestAnimationFrame(() => {
+      notification.style.opacity = '1';
+      notification.style.transform = 'translateX(0)';
+    });
+    
+    // Auto-remove después de 3 segundos
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => document.body.removeChild(notification), 300);
+    }, 3000);
+  }
+}
+
+// Búsqueda con debounce para mejor rendimiento
+const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(null, args), delay);
+  };
+};
+
 document.addEventListener("DOMContentLoaded", function() {
+  // Variables globales para compatibilidad
+  let pedidoAgregado = false;
+
   // ============================================
-  // Código existente para productos, carrito, etc.
+  // ESTRUCTURA ORIGINAL DE DATOS (PRESERVADA)
   // ============================================
   
   // Objeto con secciones y productos
@@ -4424,7 +4486,62 @@ if (product.discountOptions) {
   createFilterDropdown();
 
   // ============================================
-  // Exponer funciones globalmente (sin cambios)
+  // FUNCIONES ADICIONALES MODERNAS
+  // ============================================
+  
+  // Búsqueda mejorada con debounce
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    const debouncedSearch = debounce((query) => {
+      searchProducts(query);
+    }, 300);
+    
+    searchInput.addEventListener('input', (e) => {
+      debouncedSearch(e.target.value);
+    });
+  }
+  
+  function searchProducts(query) {
+    const sectionElements = document.querySelectorAll('.section');
+    const lowerQuery = query.toLowerCase();
+    
+    if (!query.trim()) {
+      sectionElements.forEach(section => {
+        section.style.display = '';
+      });
+      return;
+    }
+    
+    sectionElements.forEach(section => {
+      const sectionName = section.getAttribute('data-section').toLowerCase();
+      const products = section.querySelectorAll('.product h3');
+      let hasMatchingProduct = false;
+      
+      products.forEach(product => {
+        const productCard = product.closest('.product');
+        if (product.textContent.toLowerCase().includes(lowerQuery)) {
+          productCard.style.display = '';
+          hasMatchingProduct = true;
+        } else {
+          productCard.style.display = 'none';
+        }
+      });
+      
+      if (sectionName.includes(lowerQuery) || hasMatchingProduct) {
+        section.style.display = '';
+      } else {
+        section.style.display = 'none';
+      }
+    });
+  }
+  
+  // Mejorar showToast con el nuevo sistema de notificaciones
+  function showToast(message) {
+    NotificationSystem.show(message, 'success');
+  }
+  
+  // ============================================
+  // Exponer funciones globalmente
   // ============================================
   window.toggleCart = toggleCart;
   window.submitOrder = submitOrder;
@@ -4432,13 +4549,18 @@ if (product.discountOptions) {
   window.removeFromCart = removeFromCart;
   window.setQuantity = setQuantity;
   window.validateInput = validateInput;
-  window.addProduct = addProduct;
   window.updateProductList = updateProductList;
+  window.searchProducts = searchProducts;
+  window.showToast = showToast;
+  
+  // Inicialización final
+  console.log('🚀 Aplicación de carrito modernizada cargada correctamente');
+  console.log(`📦 ${Object.keys(sections).length} secciones de productos disponibles`);
 });
-// Inicia la aplicación al cargar el DOM
-window.addEventListener('DOMContentLoaded', initializeApp);
+
+// Service Worker para PWA
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
-    .then(() => console.log("Service Worker registrado"))
-    .catch(err => console.log("Error en Service Worker:", err));
+    .then(() => console.log("✅ Service Worker registrado correctamente"))
+    .catch(err => console.log("❌ Error en Service Worker:", err));
 }
