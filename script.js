@@ -4316,7 +4316,7 @@ if (product.discountOptions) {
     };
     console.log("Contenido del pedido antes de enviar:", JSON.stringify(order, null, 2));
     if (confirm("¿Estás seguro de que deseas finalizar el pedido?")) {
-      fetch("https://prod-162.westeurope.logic.azure.com:443/workflows/79872dbf1e784ab4a14ac4c6a16005bf/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=DnDQPO8sCL2o-T0Sok92ORAwQcMyM_jLh22OGizCGAw", {
+      fetch("https://default5de1ad115fc044658141812fd19b17.a2.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/79872dbf1e784ab4a14ac4c6a16005bf/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bvbhPFOxe7FNN8Qi7TdfDC9cHk1R4osbPjVZMkJ1C-E", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(order)
