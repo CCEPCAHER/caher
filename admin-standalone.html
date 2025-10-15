@@ -1,999 +1,737 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Control - Gestión de Productos</title>
-  <!-- Supabase -->
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Gestión de Productos</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .container {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      padding: 40px;
-      width: 100%;
-      max-width: 500px;
-      margin: 20px;
-    }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px;
+        }
 
-    .login-form {
-      text-align: center;
-    }
+        .login-form {
+            text-align: center;
+        }
 
-    .admin-panel {
-      display: none;
-    }
+        .admin-panel {
+            display: none;
+        }
 
-    h1 {
-      color: #333;
-      margin-bottom: 30px;
-      font-size: 2em;
-    }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
 
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #555;
-      font-weight: 600;
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
 
-    input[type="email"], input[type="password"], input[type="text"], input[type="number"], select, textarea {
-      width: 100%;
-      padding: 12px 15px;
-      border: 2px solid #e1e5e9;
-      border-radius: 8px;
-      font-size: 1em;
-      transition: all 0.3s ease;
-      background: #fafafa;
-    }
+        input[type="email"], input[type="password"], input[type="text"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
 
-    input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: #667eea;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
 
+        .btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
 
-    .btn {
-      width: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-size: 1em;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 15px;
-    }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e1e5e9;
+        }
 
-    .credentials-info {
-      text-align: center;
-      font-size: 0.9em;
-      color: #6c757d;
-      margin-top: 20px;
-    }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
 
-    .warning {
-      background: #fff3cd;
-      border: 1px solid #ffeaa7;
-      color: #856404;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 15px;
-      font-size: 0.8em;
-    }
+        .tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
 
-    .tabs {
-      display: flex;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #e1e5e9;
-    }
+        .tab-content {
+            display: none;
+        }
 
-    .tab {
-      padding: 10px 20px;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: all 0.3s ease;
-    }
+        .tab-content.active {
+            display: block;
+        }
 
-    .tab.active {
-      border-bottom-color: #667eea;
-      color: #667eea;
-      font-weight: 600;
-    }
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
 
-    .tab-content {
-      display: none;
-    }
+        .form-row .form-group {
+            flex: 1;
+        }
 
-    .tab-content.active {
-      display: block;
-    }
+        .product-list, .notification-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+        }
 
-    .form-row {
-      display: flex;
-      gap: 15px;
-    }
+        .product-item, .notification-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #dee2e6;
+        }
 
-    .form-row .form-group {
-      flex: 1;
-    }
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
 
-    .product-list, .notification-list {
-      max-height: 300px;
-      overflow-y: auto;
-      border: 1px solid #e1e5e9;
-      border-radius: 8px;
-      padding: 10px;
-      margin-top: 15px;
-    }
+        .delete-btn:hover {
+            background: #c0392b;
+        }
 
-    .product-item, .notification-item {
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      padding: 15px;
-      margin-bottom: 12px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid #dee2e6;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 600;
+        }
 
-    .product-item:hover, .notification-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border-color: #667eea;
-    }
-
-    .delete-btn {
-      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.8em;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
-    }
-
-    .delete-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(231, 76, 60, 0.4);
-    }
-
-    .logout-btn {
-      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
-    }
-
-    .logout-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(231, 76, 60, 0.4);
-    }
-  </style>
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Formulario de Login -->
-    <div id="login-form" class="login-form">
-      <h1>🔐 Acceso Administrativo</h1>
-      <form onsubmit="adminLogin(); return false;">
-        <div class="form-group">
-          <label for="admin-email">Usuario Administrador</label>
-          <input type="email" id="admin-email" value="ccipbcncrd4@grupocaher.com" required>
+    <div class="container">
+        <!-- Formulario de Login -->
+        <div id="login-form" class="login-form">
+            <h1>Acceso Administrativo</h1>
+            <form onsubmit="adminLogin(); return false;">
+                <div class="form-group">
+                    <label for="admin-email">Usuario Administrador</label>
+                    <input type="email" id="admin-email" value="ccipbcncrd4@grupocaher.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Contraseña</label>
+                    <input type="password" id="admin-password" placeholder="Tu contraseña de Supabase" required>
+                </div>
+                <button type="submit" class="btn">Acceder al Panel</button>
+            </form>
+            
+            <div style="text-align: center; font-size: 0.9em; color: #6c757d; margin-top: 20px;">
+                <p><strong>Acceso Restringido</strong></p>
+                <p>Usuario autorizado: ccipbcncrd4@grupocaher.com</p>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="admin-password">Contraseña</label>
-          <input type="password" id="admin-password" placeholder="Tu contraseña de Supabase" required>
+
+        <!-- Panel de Administración -->
+        <div id="admin-panel" class="admin-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h1>Panel de Control</h1>
+                <button class="logout-btn" onclick="adminLogout()">Cerrar Sesión</button>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('products')">Productos</div>
+                <div class="tab" onclick="showTab('notifications')">Notificaciones</div>
+                <div class="tab" onclick="showTab('settings')">Configuración</div>
+            </div>
+
+            <!-- Tab de Productos -->
+            <div id="products-tab" class="tab-content active">
+                <h3>Añadir Producto</h3>
+                <form id="product-form" onsubmit="addProduct(); return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-name">Nombre del Producto</label>
+                            <input type="text" id="product-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-section">Sección</label>
+                            <select id="product-section" required>
+                                <option value="">Seleccionar sección</option>
+                                <option value="FEM ALCAMPO">FEM ALCAMPO</option>
+                                <option value="Coca Cola">Coca Cola</option>
+                                <option value="Coca Cola Zero">Coca Cola Zero</option>
+                                <option value="coca cola light">Coca Cola Light</option>
+                                <option value="Coca Cola Zero Zero">Coca Cola Zero Zero</option>
+                                <option value="Coca Cola Sabores">Coca Cola Sabores</option>
+                                <option value="Fanta naranja">Fanta Naranja</option>
+                                <option value="Fanta limón">Fanta Limón</option>
+                                <option value="Fanta sabores">Fanta Sabores</option>
+                                <option value="Sprite">Sprite</option>
+                                <option value="Tónica">Tónica</option>
+                                <option value="Burn">Burn</option>
+                                <option value="Energéticas">Energéticas</option>
+                                <option value="M.Maid">M.Maid</option>
+                                <option value="FUZE">FUZE</option>
+                                <option value="Deportivas">Deportivas</option>
+                                <option value="Isotónicas">Isotónicas</option>
+                                <option value="Appletiser">Appletiser</option>
+                                <option value="Aquabona">Aquabona</option>
+                                <option value="Alcoholes">Alcoholes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-price">Precio (€)</label>
+                            <input type="number" id="product-price" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-previous-price">Precio Anterior (€)</label>
+                            <input type="number" id="product-previous-price" step="0.01" min="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="product-is-new"> Producto Nuevo
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="product-has-alert"> Alerta de Cantidad
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="min-quantity-group" style="display: none;">
+                        <label for="product-min-quantity">Cantidad Mínima</label>
+                        <input type="number" id="product-min-quantity" min="1" value="1">
+                    </div>
+                    <button type="submit" class="btn">Añadir Producto</button>
+                </form>
+
+                <h3>Productos Actuales</h3>
+                <div id="product-list" class="product-list">
+                    <p>Cargando productos...</p>
+                </div>
+            </div>
+
+            <!-- Tab de Notificaciones -->
+            <div id="notifications-tab" class="tab-content">
+                <h3>Añadir Notificación</h3>
+                <form id="notification-form" onsubmit="addNotification(); return false;">
+                    <div class="form-group">
+                        <label for="notification-title">Título</label>
+                        <input type="text" id="notification-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notification-message">Mensaje</label>
+                        <textarea id="notification-message" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="notification-type">Tipo</label>
+                        <select id="notification-type">
+                            <option value="info">Información</option>
+                            <option value="warning">Advertencia</option>
+                            <option value="success">Éxito</option>
+                            <option value="error">Error</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Añadir Notificación</button>
+                </form>
+
+                <h3>Notificaciones Actuales</h3>
+                <div id="notification-list" class="notification-list">
+                    <p>Cargando notificaciones...</p>
+                </div>
+            </div>
+
+            <!-- Tab de Configuración -->
+            <div id="settings-tab" class="tab-content">
+                <h3>Diagnóstico</h3>
+                <div class="form-group">
+                    <button class="btn" onclick="testSupabaseConnection()" style="background: #f39c12;">Probar Conexión Supabase</button>
+                </div>
+                <div class="form-group">
+                    <button class="btn" onclick="showDebugInfo()" style="background: #9b59b6;">Información de Debug</button>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn" style="
-          width: 100%;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
-          border: none;
-          padding: 12px 25px;
-          border-radius: 8px;
-          font-size: 1em;
-          font-weight: 600;
-          cursor: pointer;
-          margin-bottom: 15px;
-        ">🚀 Acceder al Panel</button>
-      </form>
-      
-      <div class="credentials-info">
-        <p><strong>🔐 Acceso Restringido</strong></p>
-        <p>Usuario autorizado:</p>
-        <p>Email: <code>ccipbcncrd4@grupocaher.com</code></p>
-        <div class="warning">
-          ⚠️ <strong>IMPORTANTE:</strong> Solo este usuario puede acceder al panel de administración
-        </div>
-      </div>
     </div>
 
-    <!-- Panel de Administración -->
-    <div id="admin-panel" class="admin-panel">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h1>🎛️ Panel de Control</h1>
-        <button class="logout-btn" onclick="adminLogout()">🚪 Cerrar Sesión</button>
-      </div>
+    <script>
+        // Configuración de Supabase
+        const SUPABASE_CONFIG = {
+            url: 'https://fhotsfpgzuuiftfadskv.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZob3RzZnBnenV1aWZ0ZmFkc2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NjQ4MjIsImV4cCI6MjA3NjA0MDgyMn0.84mj_bPceuIwO96Ugcykh3fyK3GuP2pQ1UywU3Inr0I'
+        };
 
-      <div class="tabs">
-        <div class="tab active" onclick="showTab('products')">📦 Productos</div>
-        <div class="tab" onclick="showTab('notifications')">🔔 Notificaciones</div>
-        <div class="tab" onclick="showTab('settings')">⚙️ Configuración</div>
-      </div>
-
-      <!-- Tab de Productos -->
-      <div id="products-tab" class="tab-content active">
-        <h3>➕ Añadir Producto</h3>
-        <form id="product-form" onsubmit="addProduct(); return false;">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="product-name">Nombre del Producto</label>
-              <input type="text" id="product-name" required>
-            </div>
-            <div class="form-group">
-              <label for="product-section">Sección</label>
-              <select id="product-section" required>
-                <option value="">Seleccionar sección</option>
-                <option value="FEM ALCAMPO">FEM ALCAMPO</option>
-                <option value="Coca Cola">Coca Cola</option>
-                <option value="Coca Cola Zero">Coca Cola Zero</option>
-                <option value="coca cola light">Coca Cola Light</option>
-                <option value="Coca Cola Zero Zero">Coca Cola Zero Zero</option>
-                <option value="Coca Cola Sabores">Coca Cola Sabores</option>
-                <option value="Fanta naranja">Fanta Naranja</option>
-                <option value="Fanta limón">Fanta Limón</option>
-                <option value="Fanta sabores">Fanta Sabores</option>
-                <option value="Sprite">Sprite</option>
-                <option value="Tónica">Tónica</option>
-                <option value="Burn">Burn</option>
-                <option value="Energéticas">Energéticas</option>
-                <option value="M.Maid">M.Maid</option>
-                <option value="FUZE">FUZE</option>
-                <option value="Deportivas">Deportivas</option>
-                <option value="Isotónicas">Isotónicas</option>
-                <option value="Appletiser">Appletiser</option>
-                <option value="Aquabona">Aquabona</option>
-                <option value="Alcoholes">Alcoholes</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="product-price">Precio (€)</label>
-              <input type="number" id="product-price" step="0.01" min="0" required>
-            </div>
-            <div class="form-group">
-              <label for="product-previous-price">Precio Anterior (€)</label>
-              <input type="number" id="product-previous-price" step="0.01" min="0">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>
-                <input type="checkbox" id="product-is-new"> 🆕 Producto Nuevo
-              </label>
-            </div>
-            <div class="form-group">
-              <label>
-                <input type="checkbox" id="product-has-alert"> ⚠️ Alerta de Cantidad
-              </label>
-            </div>
-          </div>
-          <div class="form-group" id="min-quantity-group" style="display: none;">
-            <label for="product-min-quantity">Cantidad Mínima</label>
-            <input type="number" id="product-min-quantity" min="1" value="1">
-          </div>
-          <button type="submit" class="btn">➕ Añadir Producto</button>
-        </form>
-
-        <h3>📋 Productos Actuales</h3>
-        <div id="product-list" class="product-list">
-          <p>Cargando productos...</p>
-        </div>
-      </div>
-
-      <!-- Tab de Notificaciones -->
-      <div id="notifications-tab" class="tab-content">
-        <h3>🔔 Añadir Notificación</h3>
-        <form id="notification-form" onsubmit="addNotification(); return false;">
-          <div class="form-group">
-            <label for="notification-title">Título</label>
-            <input type="text" id="notification-title" required>
-          </div>
-          <div class="form-group">
-            <label for="notification-message">Mensaje</label>
-            <textarea id="notification-message" rows="3" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="notification-type">Tipo</label>
-            <select id="notification-type">
-              <option value="info">ℹ️ Información</option>
-              <option value="warning">⚠️ Advertencia</option>
-              <option value="success">✅ Éxito</option>
-              <option value="error">❌ Error</option>
-            </select>
-          </div>
-          <button type="submit" class="btn">🔔 Añadir Notificación</button>
-        </form>
-
-        <h3>📋 Notificaciones Actuales</h3>
-        <div id="notification-list" class="notification-list">
-          <p>Cargando notificaciones...</p>
-        </div>
-      </div>
-
-      <!-- Tab de Configuración -->
-      <div id="settings-tab" class="tab-content">
-        <h3>🔐 Seguridad</h3>
-        <div class="form-group">
-          <label for="new-email">Nuevo Email</label>
-          <input type="email" id="new-email" placeholder="nuevo@email.com">
-        </div>
-        <div class="form-group">
-          <label for="new-password">Nueva Contraseña</label>
-          <input type="password" id="new-password" placeholder="Nueva contraseña">
-        </div>
-        <button class="btn" onclick="changeCredentials()">🔐 Cambiar Credenciales</button>
-
-        <h3>👥 Usuarios Autorizados</h3>
-        <div class="form-group">
-          <label for="authorized-email">Email a Autorizar</label>
-          <input type="email" id="authorized-email" placeholder="usuario@ejemplo.com">
-        </div>
-        <button class="btn" onclick="addAuthorizedUser()">➕ Autorizar Usuario</button>
+        // Variables globales
+        let supabase = null;
+        let currentUser = null;
         
-        <h4>Usuarios Actualmente Autorizados:</h4>
-        <div id="authorized-users-list" class="product-list">
-          <p>Cargando usuarios autorizados...</p>
-        </div>
+        // Lista de usuarios autorizados
+        const AUTHORIZED_USERS = [
+            'ccipbcncrd4@grupocaher.com'
+        ];
 
-        <h3>🔄 Sincronización</h3>
-        <div class="form-group">
-          <button class="btn" onclick="syncWithMainApp()">🔄 Sincronizar con App Principal</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Configuración de Supabase
-    const SUPABASE_CONFIG = {
-      url: 'https://fhotsfpgzuuiftfadskv.supabase.co',
-      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZob3RzZnBnenV1aWZ0ZmFkc2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NjQ4MjIsImV4cCI6MjA3NjA0MDgyMn0.84mj_bPceuIwO96Ugcykh3fyK3GuP2pQ1UywU3Inr0I'
-    };
-
-    // Variables globales
-    let supabase = null;
-    let currentUser = null;
-    
-    // Lista de usuarios autorizados (solo estos pueden acceder)
-    const AUTHORIZED_USERS = [
-      'ccipbcncrd4@grupocaher.com',  // Usuario autorizado
-    ];
-
-    // Inicializar Supabase
-    function initSupabase() {
-      try {
-        supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
-        console.log('✅ Cliente Supabase inicializado correctamente');
-        return true;
-      } catch (error) {
-        console.error('❌ Error al inicializar Supabase:', error);
-        return false;
-      }
-    }
-
-    // Función de login
-    async function adminLogin() {
-      const email = document.getElementById('admin-email').value;
-      const password = document.getElementById('admin-password').value;
-      
-      if (!email || !password) {
-        alert('Por favor, completa todos los campos');
-        return;
-      }
-
-      // Inicializar Supabase si no está inicializado
-      if (!supabase) {
-        if (!initSupabase()) {
-          alert('Error al inicializar Supabase');
-          return;
+        // Inicializar Supabase
+        function initSupabase() {
+            try {
+                supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+                console.log('Cliente Supabase inicializado correctamente');
+                return true;
+            } catch (error) {
+                console.error('Error al inicializar Supabase:', error);
+                return false;
+            }
         }
-      }
 
-      try {
-        // Intentar autenticación con Supabase
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: email,
-          password: password
+        // Función de login
+        async function adminLogin() {
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            
+            if (!email || !password) {
+                alert('Por favor, completa todos los campos');
+                return;
+            }
+
+            if (!supabase) {
+                if (!initSupabase()) {
+                    alert('Error al inicializar Supabase');
+                    return;
+                }
+            }
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) {
+                    console.error('Error de autenticación:', error);
+                    alert('Credenciales incorrectas: ' + error.message);
+                    return;
+                }
+
+                if (data.user) {
+                    if (!AUTHORIZED_USERS.includes(data.user.email)) {
+                        alert('Acceso denegado. Tu email no está autorizado.');
+                        await supabase.auth.signOut();
+                        return;
+                    }
+                    
+                    currentUser = data.user;
+                    console.log('Login exitoso:', currentUser.email);
+                    showAdminPanel();
+                }
+            } catch (error) {
+                console.error('Error en login:', error);
+                alert('Error al iniciar sesión: ' + error.message);
+            }
+        }
+
+        // Mostrar panel de administración
+        function showAdminPanel() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+            
+            testSupabaseConnection();
+            loadProducts();
+            loadNotifications();
+        }
+
+        // Probar conexión con Supabase
+        async function testSupabaseConnection() {
+            if (!supabase) {
+                console.error('Supabase no está inicializado');
+                alert('Error: No se pudo conectar con Supabase');
+                return false;
+            }
+
+            try {
+                console.log('Probando conexión con Supabase...');
+                
+                // Probar conexión con una consulta simple
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('id, name')
+                    .limit(1);
+
+                if (error) {
+                    console.error('Error de conexión con Supabase:', error);
+                    alert('Error de conexión: ' + error.message + '\n\nPosibles causas:\n1. Las tablas no existen\n2. Problemas de RLS (Row Level Security)\n3. Usuario no autenticado');
+                    return false;
+                }
+
+                console.log('Conexión con Supabase exitosa');
+                alert('Conectado a Supabase correctamente\n\nProductos encontrados: ' + (data ? data.length : 0));
+                return true;
+            } catch (error) {
+                console.error('Error inesperado en conexión:', error);
+                alert('Error de conexión: ' + error.message);
+                return false;
+            }
+        }
+
+        // Cerrar sesión
+        async function adminLogout() {
+            if (supabase && currentUser) {
+                await supabase.auth.signOut();
+            }
+            currentUser = null;
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('admin-panel').style.display = 'none';
+        }
+
+        // Mostrar tab
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Añadir producto
+        async function addProduct() {
+            const name = document.getElementById('product-name').value;
+            const section = document.getElementById('product-section').value;
+            const price = parseFloat(document.getElementById('product-price').value);
+            const previousPrice = parseFloat(document.getElementById('product-previous-price').value) || null;
+            const isNew = document.getElementById('product-is-new').checked;
+            const hasAlert = document.getElementById('product-has-alert').checked;
+            const minQuantity = parseInt(document.getElementById('product-min-quantity').value) || 0;
+
+            if (!supabase) {
+                alert('Supabase no está inicializado');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('products')
+                    .insert([
+                        {
+                            name: name,
+                            section: section,
+                            price: price,
+                            previous_price: previousPrice,
+                            is_new: isNew,
+                            has_quantity_alert: hasAlert,
+                            min_quantity: minQuantity
+                        }
+                    ]);
+
+                if (error) {
+                    console.error('Error al añadir producto:', error);
+                    alert('Error al añadir producto: ' + error.message);
+                    return;
+                }
+
+                alert('Producto añadido correctamente');
+                document.getElementById('product-form').reset();
+                loadProducts();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al añadir producto: ' + error.message);
+            }
+        }
+
+        // Cargar productos
+        async function loadProducts() {
+            if (!supabase) return;
+
+            try {
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('Error al cargar productos:', error);
+                    return;
+                }
+
+                const productList = document.getElementById('product-list');
+                if (data && data.length > 0) {
+                    productList.innerHTML = data.map(product => `
+                        <div class="product-item">
+                            <div>
+                                <strong>${product.name}</strong><br>
+                                <small>Sección: ${product.section} | Precio: €${product.price}</small>
+                                ${product.is_new ? '<br><span style="color: #27ae60;">NUEVO</span>' : ''}
+                                ${product.has_quantity_alert ? `<br><span style="color: #e74c3c;">MIN: ${product.min_quantity}</span>` : ''}
+                            </div>
+                            <button class="delete-btn" onclick="deleteProduct('${product.id}')">Eliminar</button>
+                        </div>
+                    `).join('');
+                } else {
+                    productList.innerHTML = '<p>No hay productos añadidos</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Eliminar producto
+        async function deleteProduct(id) {
+            console.log('Intentando eliminar producto ID:', id);
+            
+            if (!supabase) {
+                console.error('Supabase no está inicializado');
+                alert('Error: Supabase no está inicializado');
+                return;
+            }
+            
+            if (!confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+                console.log('Usuario canceló la eliminación');
+                return;
+            }
+
+            try {
+                console.log('Enviando petición de eliminación a Supabase...');
+                
+                const { data, error } = await supabase
+                    .from('products')
+                    .delete()
+                    .eq('id', id)
+                    .select();
+
+                if (error) {
+                    console.error('Error al eliminar producto:', error);
+                    alert('Error al eliminar producto: ' + error.message);
+                    return;
+                }
+
+                console.log('Producto eliminado correctamente:', data);
+                alert('Producto eliminado correctamente');
+                loadProducts();
+            } catch (error) {
+                console.error('Error inesperado:', error);
+                alert('Error al eliminar producto: ' + error.message);
+            }
+        }
+
+        // Añadir notificación
+        async function addNotification() {
+            const title = document.getElementById('notification-title').value;
+            const message = document.getElementById('notification-message').value;
+            const type = document.getElementById('notification-type').value;
+
+            if (!supabase) {
+                alert('Supabase no está inicializado');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('notifications')
+                    .insert([
+                        {
+                            title: title,
+                            message: message,
+                            type: type
+                        }
+                    ]);
+
+                if (error) {
+                    console.error('Error al añadir notificación:', error);
+                    alert('Error al añadir notificación: ' + error.message);
+                    return;
+                }
+
+                alert('Notificación añadida correctamente');
+                document.getElementById('notification-form').reset();
+                loadNotifications();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al añadir notificación: ' + error.message);
+            }
+        }
+
+        // Cargar notificaciones
+        async function loadNotifications() {
+            if (!supabase) return;
+
+            try {
+                const { data, error } = await supabase
+                    .from('notifications')
+                    .select('*')
+                    .eq('is_active', true)
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('Error al cargar notificaciones:', error);
+                    return;
+                }
+
+                const notificationList = document.getElementById('notification-list');
+                if (data && data.length > 0) {
+                    notificationList.innerHTML = data.map(notification => `
+                        <div class="notification-item">
+                            <div>
+                                <strong>${notification.title}</strong><br>
+                                <small>${notification.message}</small><br>
+                                <span style="color: #666;">Tipo: ${notification.type}</span>
+                            </div>
+                            <button class="delete-btn" onclick="deleteNotification('${notification.id}')">Eliminar</button>
+                        </div>
+                    `).join('');
+                } else {
+                    notificationList.innerHTML = '<p>No hay notificaciones activas</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Eliminar notificación
+        async function deleteNotification(id) {
+            console.log('Intentando eliminar notificación ID:', id);
+            
+            if (!supabase) {
+                console.error('Supabase no está inicializado');
+                alert('Error: Supabase no está inicializado');
+                return;
+            }
+            
+            if (!confirm('¿Estás seguro de que quieres eliminar esta notificación?')) {
+                console.log('Usuario canceló la eliminación');
+                return;
+            }
+
+            try {
+                console.log('Enviando petición de eliminación a Supabase...');
+                
+                const { data, error } = await supabase
+                    .from('notifications')
+                    .delete()
+                    .eq('id', id)
+                    .select();
+
+                if (error) {
+                    console.error('Error al eliminar notificación:', error);
+                    alert('Error al eliminar notificación: ' + error.message);
+                    return;
+                }
+
+                console.log('Notificación eliminada correctamente:', data);
+                alert('Notificación eliminada correctamente');
+                loadNotifications();
+            } catch (error) {
+                console.error('Error inesperado:', error);
+                alert('Error al eliminar notificación: ' + error.message);
+            }
+        }
+
+        // Mostrar información de debug
+        function showDebugInfo() {
+            const debugInfo = {
+                'Supabase Inicializado': supabase ? 'Sí' : 'No',
+                'Usuario Actual': currentUser ? currentUser.email : 'No hay sesión',
+                'URL Supabase': SUPABASE_CONFIG.url,
+                'Usuario Autorizado': currentUser && AUTHORIZED_USERS.includes(currentUser.email) ? 'Sí' : 'No',
+                'Timestamp': new Date().toLocaleString()
+            };
+
+            const debugText = Object.entries(debugInfo)
+                .map(([key, value]) => `${key}: ${value}`)
+                .join('\n');
+
+            console.log('Información de Debug:', debugInfo);
+            alert(`Información de Debug:\n\n${debugText}`);
+        }
+
+        // Mostrar/ocultar campo de cantidad mínima
+        document.getElementById('product-has-alert').addEventListener('change', function() {
+            const minQuantityGroup = document.getElementById('min-quantity-group');
+            if (this.checked) {
+                minQuantityGroup.style.display = 'block';
+            } else {
+                minQuantityGroup.style.display = 'none';
+            }
         });
 
-        if (error) {
-          console.error('Error de autenticación:', error);
-          alert('Credenciales incorrectas: ' + error.message);
-          return;
-        }
-
-        if (data.user) {
-          // Verificar si el usuario está autorizado
-          if (!AUTHORIZED_USERS.includes(data.user.email)) {
-            alert('❌ Acceso denegado. Tu email no está autorizado para acceder al panel de administración.');
-            await supabase.auth.signOut();
-            return;
-          }
-          
-          currentUser = data.user;
-          console.log('✅ Login exitoso:', currentUser.email);
-          showAdminPanel();
-        }
-      } catch (error) {
-        console.error('Error en login:', error);
-        alert('Error al iniciar sesión: ' + error.message);
-      }
-    }
-
-    // Mostrar panel de administración
-    function showAdminPanel() {
-      document.getElementById('login-form').style.display = 'none';
-      document.getElementById('admin-panel').style.display = 'block';
-      loadProducts();
-      loadNotifications();
-      loadAuthorizedUsers();
-    }
-
-    // Cerrar sesión
-    async function adminLogout() {
-      if (supabase && currentUser) {
-        await supabase.auth.signOut();
-      }
-      currentUser = null;
-      document.getElementById('login-form').style.display = 'block';
-      document.getElementById('admin-panel').style.display = 'none';
-    }
-
-    // Mostrar tab
-    function showTab(tabName) {
-      // Ocultar todos los tabs
-      document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-
-      // Mostrar tab seleccionado
-      document.getElementById(tabName + '-tab').classList.add('active');
-      event.target.classList.add('active');
-    }
-
-    // Añadir producto
-    async function addProduct() {
-      const name = document.getElementById('product-name').value;
-      const section = document.getElementById('product-section').value;
-      const price = parseFloat(document.getElementById('product-price').value);
-      const previousPrice = parseFloat(document.getElementById('product-previous-price').value) || null;
-      const isNew = document.getElementById('product-is-new').checked;
-      const hasAlert = document.getElementById('product-has-alert').checked;
-      const minQuantity = parseInt(document.getElementById('product-min-quantity').value) || 0;
-
-      if (!supabase) {
-        alert('Supabase no está inicializado');
-        return;
-      }
-
-      try {
-        const { data, error } = await supabase
-          .from('products')
-          .insert([
-            {
-              name: name,
-              section: section,
-              price: price,
-              previous_price: previousPrice,
-              is_new: isNew,
-              has_quantity_alert: hasAlert,
-              min_quantity: minQuantity
-            }
-          ]);
-
-        if (error) {
-          console.error('Error al añadir producto:', error);
-          alert('Error al añadir producto: ' + error.message);
-          return;
-        }
-
-        showNotification('✅ Producto añadido correctamente', 'success');
-        document.getElementById('product-form').reset();
-        loadProducts();
-      } catch (error) {
-        console.error('Error:', error);
-        showNotification('Error al añadir producto: ' + error.message, 'error');
-      }
-    }
-
-    // Cargar productos
-    async function loadProducts() {
-      if (!supabase) return;
-
-      try {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*')
-          .order('created_at', { ascending: false });
-
-        if (error) {
-          console.error('Error al cargar productos:', error);
-          return;
-        }
-
-        const productList = document.getElementById('product-list');
-        if (data && data.length > 0) {
-          productList.innerHTML = data.map(product => `
-            <div class="product-item">
-              <div>
-                <strong>${product.name}</strong><br>
-                <small>Sección: ${product.section} | Precio: €${product.price}</small>
-                ${product.is_new ? '<br><span style="color: #27ae60;">🆕 NUEVO</span>' : ''}
-                ${product.has_quantity_alert ? `<br><span style="color: #e74c3c;">⚠️ MÍN: ${product.min_quantity}</span>` : ''}
-              </div>
-              <button class="delete-btn" onclick="deleteProduct(${product.id})">🗑️</button>
-            </div>
-          `).join('');
-        } else {
-          productList.innerHTML = '<p>No hay productos añadidos</p>';
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-
-    // Eliminar producto
-    async function deleteProduct(id) {
-      if (!supabase) return;
-      
-      if (!showConfirmDialog('Eliminar Producto', '¿Estás seguro de que quieres eliminar este producto? Esta acción no se puede deshacer.')) {
-        return;
-      }
-
-      try {
-        showLoading('Eliminando producto...');
-        
-        const { error } = await supabase
-          .from('products')
-          .delete()
-          .eq('id', id);
-
-        hideLoading();
-
-        if (error) {
-          console.error('Error al eliminar producto:', error);
-          showNotification('Error al eliminar producto: ' + error.message, 'error');
-          return;
-        }
-
-        showNotification('✅ Producto eliminado correctamente', 'success');
-        loadProducts();
-      } catch (error) {
-        hideLoading();
-        console.error('Error:', error);
-        showNotification('Error al eliminar producto: ' + error.message, 'error');
-      }
-    }
-
-    // Añadir notificación
-    async function addNotification() {
-      const title = document.getElementById('notification-title').value;
-      const message = document.getElementById('notification-message').value;
-      const type = document.getElementById('notification-type').value;
-
-      if (!supabase) {
-        alert('Supabase no está inicializado');
-        return;
-      }
-
-      try {
-        const { data, error } = await supabase
-          .from('notifications')
-          .insert([
-            {
-              title: title,
-              message: message,
-              type: type
-            }
-          ]);
-
-        if (error) {
-          console.error('Error al añadir notificación:', error);
-          alert('Error al añadir notificación: ' + error.message);
-          return;
-        }
-
-        showNotification('✅ Notificación añadida correctamente', 'success');
-        document.getElementById('notification-form').reset();
-        loadNotifications();
-      } catch (error) {
-        console.error('Error:', error);
-        showNotification('Error al añadir notificación: ' + error.message, 'error');
-      }
-    }
-
-    // Cargar notificaciones
-    async function loadNotifications() {
-      if (!supabase) return;
-
-      try {
-        const { data, error } = await supabase
-          .from('notifications')
-          .select('*')
-          .eq('is_active', true)
-          .order('created_at', { ascending: false });
-
-        if (error) {
-          console.error('Error al cargar notificaciones:', error);
-          return;
-        }
-
-        const notificationList = document.getElementById('notification-list');
-        if (data && data.length > 0) {
-          notificationList.innerHTML = data.map(notification => `
-            <div class="notification-item">
-              <div>
-                <strong>${notification.title}</strong><br>
-                <small>${notification.message}</small><br>
-                <span style="color: #666;">Tipo: ${notification.type}</span>
-              </div>
-              <button class="delete-btn" onclick="deleteNotification(${notification.id})">🗑️</button>
-            </div>
-          `).join('');
-        } else {
-          notificationList.innerHTML = '<p>No hay notificaciones activas</p>';
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-
-    // Eliminar notificación
-    async function deleteNotification(id) {
-      if (!supabase) return;
-      
-      // Mostrar modal de confirmación profesional
-      if (!showConfirmDialog('Eliminar Notificación', '¿Estás seguro de que quieres eliminar esta notificación? Esta acción no se puede deshacer.')) {
-        return;
-      }
-
-      try {
-        // Mostrar loading
-        showLoading('Eliminando notificación...');
-        
-        const { error } = await supabase
-          .from('notifications')
-          .delete()
-          .eq('id', id);
-
-        hideLoading();
-
-        if (error) {
-          console.error('Error al eliminar notificación:', error);
-          showNotification('Error al eliminar notificación: ' + error.message, 'error');
-          return;
-        }
-
-        showNotification('✅ Notificación eliminada correctamente', 'success');
-        loadNotifications();
-      } catch (error) {
-        hideLoading();
-        console.error('Error:', error);
-        showNotification('Error al eliminar notificación: ' + error.message, 'error');
-      }
-    }
-
-    // Cambiar credenciales
-    async function changeCredentials() {
-      const newEmail = document.getElementById('new-email').value;
-      const newPassword = document.getElementById('new-password').value;
-
-      if (!newEmail && !newPassword) {
-        alert('Por favor, introduce al menos un campo para cambiar');
-        return;
-      }
-
-      if (!supabase || !currentUser) {
-        alert('No hay sesión activa');
-        return;
-      }
-
-      try {
-        const updates = {};
-        if (newEmail) updates.email = newEmail;
-        if (newPassword) updates.password = newPassword;
-
-        const { error } = await supabase.auth.updateUser(updates);
-
-        if (error) {
-          console.error('Error al cambiar credenciales:', error);
-          alert('Error al cambiar credenciales: ' + error.message);
-          return;
-        }
-
-        alert('✅ Credenciales actualizadas correctamente');
-        document.getElementById('new-email').value = '';
-        document.getElementById('new-password').value = '';
-      } catch (error) {
-        console.error('Error:', error);
-        alert('Error al cambiar credenciales: ' + error.message);
-      }
-    }
-
-    // Sincronizar con app principal
-    function syncWithMainApp() {
-      alert('🔄 Sincronización completada. Los cambios se verán reflejados en la aplicación principal.');
-    }
-
-    // Añadir usuario autorizado
-    function addAuthorizedUser() {
-      const email = document.getElementById('authorized-email').value;
-      
-      if (!email) {
-        alert('Por favor, introduce un email');
-        return;
-      }
-
-      if (AUTHORIZED_USERS.includes(email)) {
-        alert('Este usuario ya está autorizado');
-        return;
-      }
-
-      AUTHORIZED_USERS.push(email);
-      document.getElementById('authorized-email').value = '';
-      loadAuthorizedUsers();
-      alert('✅ Usuario autorizado correctamente');
-    }
-
-    // Cargar usuarios autorizados
-    function loadAuthorizedUsers() {
-      const userList = document.getElementById('authorized-users-list');
-      if (AUTHORIZED_USERS.length > 0) {
-        userList.innerHTML = AUTHORIZED_USERS.map((email, index) => `
-          <div class="product-item">
-            <div>
-              <strong>${email}</strong>
-              ${email === currentUser?.email ? '<br><span style="color: #27ae60;">👤 Usuario actual</span>' : ''}
-            </div>
-            ${email !== currentUser?.email ? `<button class="delete-btn" onclick="removeAuthorizedUser(${index})">🗑️</button>` : ''}
-          </div>
-        `).join('');
-      } else {
-        userList.innerHTML = '<p>No hay usuarios autorizados</p>';
-      }
-    }
-
-    // Eliminar usuario autorizado
-    function removeAuthorizedUser(index) {
-      const email = AUTHORIZED_USERS[index];
-      if (!confirm(`¿Estás seguro de que quieres desautorizar a ${email}?`)) return;
-
-      AUTHORIZED_USERS.splice(index, 1);
-      loadAuthorizedUsers();
-      alert('✅ Usuario desautorizado correctamente');
-    }
-
-    // Mostrar/ocultar campo de cantidad mínima
-    document.getElementById('product-has-alert').addEventListener('change', function() {
-      const minQuantityGroup = document.getElementById('min-quantity-group');
-      if (this.checked) {
-        minQuantityGroup.style.display = 'block';
-      } else {
-        minQuantityGroup.style.display = 'none';
-      }
-    });
-
-    // Funciones auxiliares para UI profesional
-    function showConfirmDialog(title, message) {
-      return confirm(`🔔 ${title}\n\n${message}`);
-    }
-
-    function showNotification(message, type = 'info') {
-      // Crear elemento de notificación
-      const notification = document.createElement('div');
-      notification.className = `notification-toast notification-${type}`;
-      notification.innerHTML = `
-        <div class="notification-content">
-          <span class="notification-icon">${getNotificationIcon(type)}</span>
-          <span class="notification-message">${message}</span>
-          <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
-        </div>
-      `;
-      
-      // Añadir estilos si no existen
-      if (!document.getElementById('notification-styles')) {
-        const styles = document.createElement('style');
-        styles.id = 'notification-styles';
-        styles.textContent = `
-          .notification-toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 10000;
-            min-width: 300px;
-            max-width: 400px;
-            animation: slideIn 0.3s ease-out;
-          }
-          .notification-content {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            gap: 10px;
-          }
-          .notification-icon {
-            font-size: 1.2em;
-          }
-          .notification-message {
-            flex: 1;
-            font-size: 0.9em;
-          }
-          .notification-close {
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #666;
-            padding: 0;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .notification-close:hover {
-            color: #333;
-          }
-          .notification-info { border-left: 4px solid #3498db; }
-          .notification-success { border-left: 4px solid #27ae60; }
-          .notification-warning { border-left: 4px solid #f39c12; }
-          .notification-error { border-left: 4px solid #e74c3c; }
-          @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-          }
-        `;
-        document.head.appendChild(styles);
-      }
-      
-      document.body.appendChild(notification);
-      
-      // Auto-remove después de 5 segundos
-      setTimeout(() => {
-        if (notification.parentElement) {
-          notification.remove();
-        }
-      }, 5000);
-    }
-
-    function getNotificationIcon(type) {
-      const icons = {
-        'info': 'ℹ️',
-        'success': '✅',
-        'warning': '⚠️',
-        'error': '❌'
-      };
-      return icons[type] || icons['info'];
-    }
-
-    function showLoading(message = 'Cargando...') {
-      // Crear overlay de loading
-      const loading = document.createElement('div');
-      loading.id = 'loading-overlay';
-      loading.innerHTML = `
-        <div class="loading-content">
-          <div class="loading-spinner"></div>
-          <div class="loading-message">${message}</div>
-        </div>
-      `;
-      
-      // Añadir estilos si no existen
-      if (!document.getElementById('loading-styles')) {
-        const styles = document.createElement('style');
-        styles.id = 'loading-styles';
-        styles.textContent = `
-          #loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-          }
-          .loading-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-          }
-          .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-          }
-          .loading-message {
-            color: #333;
-            font-size: 1em;
-          }
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        `;
-        document.head.appendChild(styles);
-      }
-      
-      document.body.appendChild(loading);
-    }
-
-    function hideLoading() {
-      const loading = document.getElementById('loading-overlay');
-      if (loading) {
-        loading.remove();
-      }
-    }
-
-    // Inicializar cuando se carga la página
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('🚀 Panel de administración cargado');
-    });
-  </script>
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Panel de administración cargado');
+        });
+    </script>
 </body>
 </html>
