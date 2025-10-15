@@ -1,17 +1,36 @@
 {
-  "name": "public",
+  "name": "caher-pedidos-system",
   "version": "1.0.0",
-  "type": "module",
-  "main": "app.js",
+  "description": "Sistema moderno de gestión de pedidos con panel de administración y base de datos en Supabase",
+  "main": "index.html",
   "scripts": {
-    "start": "node app.js"
+    "start": "python -m http.server 8000",
+    "dev": "npx http-server -p 8000 -o",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "echo 'Deploy to your preferred hosting service'"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "pedidos",
+    "carrito",
+    "supabase",
+    "pwa",
+    "admin-panel",
+    "caher"
+  ],
+  "author": "Grupo Caher",
+  "license": "MIT",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "mongodb": "^6.13.0"
-  }
+    "@supabase/supabase-js": "^2.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-usuario/caher-pedidos-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tu-usuario/caher-pedidos-system/issues"
+  },
+  "homepage": "https://tu-usuario.github.io/caher-pedidos-system"
 }
