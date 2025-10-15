@@ -4770,22 +4770,24 @@ function displayAdminNotifications() {
           border-radius: 50%;
           animation: pulse-dot 2s infinite;
         "></div>
-        <div style="
+        <div class="close-btn" style="
           position: absolute;
           top: 8px;
           right: 24px;
-          width: 20px;
-          height: 20px;
-          background: rgba(255,255,255,0.2);
+          width: 28px;
+          height: 28px;
+          background: rgba(255,255,255,0.3);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          font-size: 12px;
+          font-size: 16px;
           color: white;
           transition: all 0.2s ease;
-        " onclick="closeNotification(${index})" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+          border: 2px solid rgba(255,255,255,0.5);
+          z-index: 10;
+        " onclick="closeNotification(${index})" onmouseover="this.style.background='rgba(255,255,255,0.5)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'" ontouchstart="this.style.background='rgba(255,255,255,0.6)'" ontouchend="this.style.background='rgba(255,255,255,0.3)'">
           ×
         </div>
       </div>
@@ -4799,14 +4801,32 @@ function closeNotification(index) {
   console.log('🔴 adminNotifications:', adminNotifications);
   console.log('🔴 Longitud:', adminNotifications ? adminNotifications.length : 'undefined');
   
-  if (adminNotifications && adminNotifications.length > index) {
+  // Verificar que el índice sea válido
+  if (typeof index !== 'number' || index < 0) {
+    console.log('🔴 Índice inválido:', index);
+    return;
+  }
+  
+  if (adminNotifications && Array.isArray(adminNotifications) && adminNotifications.length > index) {
     console.log('🔴 Eliminando notificación en índice:', index);
-    adminNotifications.splice(index, 1);
+    
+    // Eliminar la notificación del array
+    const removedNotification = adminNotifications.splice(index, 1)[0];
+    console.log('🔴 Notificación eliminada:', removedNotification);
     console.log('🔴 adminNotifications después de eliminar:', adminNotifications);
+    
+    // Actualizar la visualización
     displayAdminNotifications();
     console.log('🔴 Notificaciones actualizadas');
+    
+    // Mostrar confirmación visual
+    showNotification('Notificación cerrada', 'success');
   } else {
     console.log('🔴 No se pudo eliminar la notificación - índice inválido o array vacío');
+    console.log('🔴 adminNotifications es:', typeof adminNotifications);
+    console.log('🔴 Es array:', Array.isArray(adminNotifications));
+    console.log('🔴 Longitud:', adminNotifications ? adminNotifications.length : 'undefined');
+    console.log('🔴 Índice solicitado:', index);
   }
 }
 
