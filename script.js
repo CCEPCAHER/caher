@@ -4795,9 +4795,9 @@ function displayAdminNotifications() {
   }).join('');
 }
 
-// Función para cerrar una notificación específica
+// Función para cerrar una notificación específica - VERSIÓN ACTUALIZADA
 function closeNotification(index) {
-  console.log('🔴 Intentando cerrar notificación:', index);
+  console.log('🔴 [VERSIÓN ACTUALIZADA] Intentando cerrar notificación:', index);
   console.log('🔴 adminNotifications:', adminNotifications);
   console.log('🔴 Longitud:', adminNotifications ? adminNotifications.length : 'undefined');
   
