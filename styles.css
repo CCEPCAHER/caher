@@ -69,8 +69,8 @@ header h2 {
 ============================================================== */
 #total-display {
   position: fixed;
-  top: 100px;
-  right: 20px;
+  bottom: 20px;
+  left: 20px;
   z-index: 9999;
   background: linear-gradient(to bottom, #2e2e2e, #1a1a1a);
   padding: 10px 16px;
@@ -771,48 +771,6 @@ header h2 {
 
   /* Inputs de cantidad más cómodos */
   .quantity-buttons input{ width: 56px; padding: 10px; font-size: 1rem; }
-  
-  /* Mejorar espaciado en productos para evitar solapamiento */
-  .product {
-    padding: 10px 8px;
-    min-height: 320px;
-  }
-  
-  .product h3 {
-    font-size: 0.9rem;
-    line-height: 1.2;
-    margin-bottom: 6px;
-    min-height: 2.4em;
-    max-height: 2.4em;
-  }
-  
-  .product p {
-    font-size: 0.85rem;
-    line-height: 1.2;
-    margin-bottom: 8px;
-    min-height: 2.4em;
-    max-height: 2.4em;
-  }
-  
-  /* Espaciado mejorado para botones de cantidad */
-  .quantity-buttons {
-    margin: 8px 0;
-    gap: 4px;
-  }
-  
-  .quantity-buttons button {
-    padding: 6px 8px;
-    font-size: 0.9rem;
-    min-height: 36px;
-  }
-  
-  /* Botón agregar con mejor espaciado */
-  .add-btn {
-    margin-top: 8px;
-    padding: 12px 8px;
-    font-size: 1rem;
-    min-height: 44px;
-  }
 
   /* Botón flotante del carrito: versión compacta */
   #cart-toggle {
@@ -825,8 +783,8 @@ header h2 {
 
   /* Display total más pequeño y no flotante cuando se toca */
   #total-display {
-    right: 12px;
-    top: 80px;
+    left: 12px;
+    bottom: 16px;
     padding: 6px 10px;
   }
   #total-display:hover { transform: none; }
