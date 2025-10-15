@@ -578,6 +578,14 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
+        .image-rename-section {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
         .image-info {
             flex: 1;
         }
@@ -1086,6 +1094,51 @@
                                         <h4 id="uploaded-image-name">Imagen cargada</h4>
                                         <p id="uploaded-image-size">Tamaño: -</p>
                                         <p id="uploaded-image-status">Estado: Procesando...</p>
+                                        
+                                        <!-- Campo para renombrar manualmente -->
+                                        <div class="image-rename-section">
+                                            <label for="custom-image-name" style="font-weight: 600; color: #2d3748; margin-bottom: 8px; display: block;">
+                                                📝 Nombre personalizado (opcional):
+                                            </label>
+                                            <div style="display: flex; gap: 10px; align-items: center;">
+                                                <input 
+                                                    type="text" 
+                                                    id="custom-image-name" 
+                                                    placeholder="ej: coca_cola_especial_1.jpg"
+                                                    style="
+                                                        flex: 1;
+                                                        padding: 8px 12px;
+                                                        border: 2px solid #e2e8f0;
+                                                        border-radius: 8px;
+                                                        font-size: 14px;
+                                                        transition: border-color 0.3s ease;
+                                                    "
+                                                    onfocus="this.style.borderColor='#4299e1'"
+                                                    onblur="this.style.borderColor='#e2e8f0'"
+                                                >
+                                                <button 
+                                                    type="button" 
+                                                    onclick="resetImageName()"
+                                                    style="
+                                                        padding: 8px 12px;
+                                                        background: #f7fafc;
+                                                        border: 2px solid #e2e8f0;
+                                                        border-radius: 8px;
+                                                        cursor: pointer;
+                                                        font-size: 12px;
+                                                        color: #4a5568;
+                                                        transition: all 0.3s ease;
+                                                    "
+                                                    onmouseover="this.style.background='#edf2f7'"
+                                                    onmouseout="this.style.background='#f7fafc'"
+                                                >
+                                                    🔄 Auto
+                                                </button>
+                                            </div>
+                                            <small style="color: #718096; margin-top: 4px; display: block;">
+                                                💡 Deja vacío para usar el nombre automático, o escribe un nombre personalizado
+                                            </small>
+                                        </div>
                                     </div>
                                     <button type="button" class="remove-image-btn" onclick="removeUploadedImage()">🗑️</button>
                                 </div>
@@ -2497,8 +2550,14 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                         // Crear un DataURL más pequeño para almacenamiento
                         const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
                         
-                        // Generar un ID único para la imagen
-                        const imageId = 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        // Obtener el nombre final de la imagen (manual o automático)
+                        const finalImageName = getFinalImageName();
+                        if (!finalImageName) {
+                            reject(new Error('No se pudo generar nombre para la imagen'));
+                            return;
+                        }
+                        
+                        const imageId = finalImageName.replace(/\.(jpg|jpeg|png|gif|webp)$/i, '');
                         
                         // Almacenar en localStorage como respaldo
                         try {
@@ -2511,6 +2570,7 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                             blob: blob,
                             dataUrl: dataUrl,
                             imageId: imageId,
+                            fileName: finalImageName,
                             width: width,
                             height: height,
                             size: blob.size
@@ -2530,11 +2590,28 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             const previewName = document.getElementById('uploaded-image-name');
             const previewSize = document.getElementById('uploaded-image-size');
 
+            // Obtener la sección seleccionada para mostrar el nombre que se generará
+            const sectionSelect = document.getElementById('product-section');
+            const selectedSection = sectionSelect ? sectionSelect.value : 'general';
+            
+            // Generar nombre automático para mostrar
+            const imageInfo = generateImageName(selectedSection, file.name);
+            
+            // Establecer el nombre automático en el campo personalizado
+            const customNameInput = document.getElementById('custom-image-name');
+            if (customNameInput) {
+                customNameInput.value = imageInfo.fileName;
+            }
+
             // Mostrar preview inmediato
             const reader = new FileReader();
             reader.onload = function(e) {
                 previewImg.src = e.target.result;
-                previewName.textContent = file.name;
+                previewName.innerHTML = `
+                    <strong>Archivo original:</strong> ${file.name}<br>
+                    <strong>Nombre automático:</strong> ${imageInfo.fileName}<br>
+                    <small style="color: #666;">Producto #${imageInfo.nextNumber} en sección "${selectedSection}"</small>
+                `;
                 previewSize.textContent = `Tamaño original: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
                 preview.style.display = 'block';
             };
@@ -2623,6 +2700,71 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             }
         });
 
+        // Función para contar productos existentes por sección
+        function countProductsInSection(sectionName) {
+            let count = 0;
+            
+            // Contar productos en el script.js original
+            if (window.sections && window.sections[sectionName]) {
+                count += window.sections[sectionName].length;
+                console.log(`Productos en script.js para "${sectionName}": ${window.sections[sectionName].length}`);
+            }
+            
+            // Contar productos del admin en localStorage
+            try {
+                const adminProducts = JSON.parse(localStorage.getItem('admin_products') || '[]');
+                const adminCount = adminProducts.filter(product => 
+                    product.section && product.section.toLowerCase() === sectionName.toLowerCase()
+                ).length;
+                count += adminCount;
+                console.log(`Productos en localStorage para "${sectionName}": ${adminCount}`);
+            } catch (e) {
+                console.warn('Error contando productos del admin:', e);
+            }
+            
+            // Contar productos de Supabase (si están cargados)
+            if (window.adminProducts && Array.isArray(window.adminProducts)) {
+                const supabaseCount = window.adminProducts.filter(product => 
+                    product.section && product.section.toLowerCase() === sectionName.toLowerCase()
+                ).length;
+                count += supabaseCount;
+                console.log(`Productos en Supabase para "${sectionName}": ${supabaseCount}`);
+            }
+            
+            console.log(`Total de productos para "${sectionName}": ${count}`);
+            return count;
+        }
+
+        // Función para generar nombre único de imagen
+        function generateImageName(sectionName, originalFileName) {
+            // Limpiar el nombre de la sección para el archivo
+            const cleanSectionName = sectionName
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '') // Remover caracteres especiales
+                .replace(/\s+/g, '_'); // Reemplazar espacios con guiones bajos
+            
+            // Obtener extensión del archivo original
+            const extension = originalFileName.split('.').pop().toLowerCase();
+            const finalExtension = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension) ? 'jpg' : 'jpg';
+            
+            // Contar productos existentes en la sección
+            const existingCount = countProductsInSection(sectionName);
+            
+            // Generar número secuencial (empezar desde el siguiente)
+            const nextNumber = existingCount + 1;
+            
+            // Crear nombre único
+            const imageName = `${cleanSectionName}_${nextNumber}.${finalExtension}`;
+            
+            console.log(`Generando nombre de imagen: ${imageName} (sección: ${sectionName}, productos existentes: ${existingCount})`);
+            
+            return {
+                fileName: imageName,
+                sectionCount: existingCount,
+                nextNumber: nextNumber
+            };
+        }
+
         // Función para volver a la pantalla principal
         function goBackToMain() {
             // Cerrar sesión del admin
@@ -2632,11 +2774,129 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             window.location.href = 'index.html';
         }
 
+        // Función para actualizar el preview cuando cambie la sección
+        function updateImagePreviewOnSectionChange() {
+            const sectionSelect = document.getElementById('product-section');
+            if (sectionSelect && uploadedImageData) {
+                // Re-procesar el preview con la nueva sección
+                const fileInput = document.getElementById('product-image');
+                if (fileInput && fileInput.files && fileInput.files[0]) {
+                    showImagePreview(fileInput.files[0]);
+                }
+            }
+        }
+
+        // Función para resetear el nombre de imagen al automático
+        function resetImageName() {
+            const customNameInput = document.getElementById('custom-image-name');
+            const sectionSelect = document.getElementById('product-section');
+            const fileInput = document.getElementById('product-image');
+            
+            if (customNameInput && sectionSelect && fileInput && fileInput.files && fileInput.files[0]) {
+                const selectedSection = sectionSelect.value || 'general';
+                const imageInfo = generateImageName(selectedSection, fileInput.files[0].name);
+                customNameInput.value = imageInfo.fileName;
+                
+                // Actualizar el preview
+                showImagePreview(fileInput.files[0]);
+            }
+        }
+
+        // Función para validar nombre de imagen personalizado
+        function validateCustomImageName(customName) {
+            if (!customName || customName.trim() === '') {
+                return { valid: true, message: 'Usando nombre automático' };
+            }
+            
+            // Validar formato básico
+            const validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+            const extension = customName.split('.').pop().toLowerCase();
+            
+            if (!validExtensions.includes(extension)) {
+                return { 
+                    valid: false, 
+                    message: 'Extensión no válida. Use: jpg, jpeg, png, gif, webp' 
+                };
+            }
+            
+            // Validar caracteres
+            const validChars = /^[a-zA-Z0-9._-]+$/;
+            const nameWithoutExt = customName.substring(0, customName.lastIndexOf('.'));
+            
+            if (!validChars.test(nameWithoutExt)) {
+                return { 
+                    valid: false, 
+                    message: 'Solo se permiten letras, números, puntos, guiones y guiones bajos' 
+                };
+            }
+            
+            // Validar longitud
+            if (customName.length > 100) {
+                return { 
+                    valid: false, 
+                    message: 'El nombre es demasiado largo (máximo 100 caracteres)' 
+                };
+            }
+            
+            return { valid: true, message: 'Nombre válido' };
+        }
+
+        // Función para obtener el nombre final de la imagen
+        function getFinalImageName() {
+            const customNameInput = document.getElementById('custom-image-name');
+            const customName = customNameInput ? customNameInput.value.trim() : '';
+            
+            if (customName) {
+                const validation = validateCustomImageName(customName);
+                if (!validation.valid) {
+                    showNotification(validation.message, 'error');
+                    return null;
+                }
+                return customName;
+            }
+            
+            // Usar nombre automático
+            const sectionSelect = document.getElementById('product-section');
+            const fileInput = document.getElementById('product-image');
+            
+            if (sectionSelect && fileInput && fileInput.files && fileInput.files[0]) {
+                const selectedSection = sectionSelect.value || 'general';
+                const imageInfo = generateImageName(selectedSection, fileInput.files[0].name);
+                return imageInfo.fileName;
+            }
+            
+            return null;
+        }
+
         // Inicializar cuando se carga la página
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Panel de administración cargado');
             setupDragAndDrop();
             cleanupOldImages(); // Limpiar imágenes antiguas del localStorage
+            
+            // Añadir evento para actualizar preview cuando cambie la sección
+            const sectionSelect = document.getElementById('product-section');
+            if (sectionSelect) {
+                sectionSelect.addEventListener('change', updateImagePreviewOnSectionChange);
+            }
+            
+            // Añadir evento para validar nombre personalizado en tiempo real
+            const customNameInput = document.getElementById('custom-image-name');
+            if (customNameInput) {
+                customNameInput.addEventListener('input', function() {
+                    const customName = this.value.trim();
+                    if (customName) {
+                        const validation = validateCustomImageName(customName);
+                        if (validation.valid) {
+                            this.style.borderColor = '#48bb78';
+                        } else {
+                            this.style.borderColor = '#f56565';
+                        }
+                    } else {
+                        this.style.borderColor = '#e2e8f0';
+                    }
+                });
+            }
         });
     </script>
 </body>
