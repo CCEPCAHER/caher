@@ -3993,7 +3993,11 @@ document.addEventListener("DOMContentLoaded", function() {
   // Función para actualizar el listado de productos (secciones)
 function updateProductList() {
   const productListElem = document.getElementById("product-list");
-  productListElem.innerHTML = Object.entries(sections)
+  
+  // Combinar productos originales con productos del admin
+  const combinedSections = combineProductsWithAdmin(sections);
+  
+  productListElem.innerHTML = Object.entries(combinedSections)
     .map(([sectionName, products]) => `<div class="section" data-section="${sectionName}">${createSection(sectionName, products)}</div>`)
     .join('');
   lazyLoadImages();
@@ -4080,6 +4084,15 @@ if (product.discountOptions) {
         : `€${product.price.toFixed(2)}`;
     }
 
+    // Añadir indicadores para productos del admin
+    let adminIndicatorsHTML = '';
+    if (product.isNew) {
+      adminIndicatorsHTML += '<div class="admin-indicator new-product">🆕 NUEVO</div>';
+    }
+    if (product.hasQuantityAlert) {
+      adminIndicatorsHTML += `<div class="admin-indicator quantity-alert">⚠️ Mín. ${product.minQuantity}</div>`;
+    }
+
     let focusLogoHTML = '';
     if (product.focus1) {
       focusLogoHTML = `<div class="focus-logo foco1"><div class="focus-text">FOCO 1</div></div>`;
@@ -4099,6 +4112,7 @@ if (product.discountOptions) {
           ${dateRangeHTML}
           ${discountHTML}
           ${focusLogoHTML}
+          ${adminIndicatorsHTML}
           <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
           <h3>${product.name}</h3>
         </div>
@@ -4111,6 +4125,7 @@ if (product.discountOptions) {
           ${dateRangeHTML}
           ${discountHTML}
           ${focusLogoHTML}
+          ${adminIndicatorsHTML}
           <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
           <h3>${product.name}</h3>
           ${priceHTML ? `<p class="price">${priceHTML}</p>` : ''}
@@ -4605,9 +4620,14 @@ async function initSupabase() {
 
 // Cargar datos del panel de administración
 async function loadAdminData() {
-  if (!supabase) return;
+  if (!supabase) {
+    console.warn('⚠️ Supabase no está inicializado');
+    return;
+  }
   
   try {
+    console.log('🔄 Cargando datos del panel de administración...');
+    
     // Cargar productos del admin
     const { data: products, error: productsError } = await supabase
       .from('products')
@@ -4615,10 +4635,15 @@ async function loadAdminData() {
       .order('created_at', { ascending: false });
     
     if (productsError) {
-      console.warn('⚠️ Error al cargar productos del admin:', productsError);
+      console.error('❌ Error al cargar productos del admin:', productsError);
     } else {
       adminProducts = products || [];
-      console.log(`📦 ${adminProducts.length} productos del panel de administración cargados`);
+      console.log(`✅ ${adminProducts.length} productos del panel de administración cargados:`, adminProducts);
+      
+      // Mostrar detalles de cada producto
+      adminProducts.forEach((product, index) => {
+        console.log(`  ${index + 1}. ${product.name} - €${product.price} - Sección: ${product.section} - Nuevo: ${product.is_new} - Alerta: ${product.has_quantity_alert}`);
+      });
     }
     
     // Cargar notificaciones del admin
@@ -4629,18 +4654,25 @@ async function loadAdminData() {
       .order('created_at', { ascending: false });
     
     if (notificationsError) {
-      console.warn('⚠️ Error al cargar notificaciones del admin:', notificationsError);
+      console.error('❌ Error al cargar notificaciones del admin:', notificationsError);
     } else {
       adminNotifications = notifications || [];
-      console.log(`🔔 ${adminNotifications.length} notificaciones del panel de administración cargadas`);
+      console.log(`✅ ${adminNotifications.length} notificaciones del panel de administración cargadas:`, adminNotifications);
+      
+      // Mostrar detalles de cada notificación
+      adminNotifications.forEach((notification, index) => {
+        console.log(`  ${index + 1}. ${notification.title} - Tipo: ${notification.type} - Mensaje: ${notification.message}`);
+      });
+      
       displayAdminNotifications();
     }
     
     // Actualizar la lista de productos
+    console.log('🔄 Actualizando lista de productos...');
     updateProductList();
     
   } catch (error) {
-    console.warn('⚠️ Error al cargar datos del admin:', error);
+    console.error('❌ Error al cargar datos del admin:', error);
   }
 }
 
@@ -4664,23 +4696,58 @@ function displayAdminNotifications() {
   }
   
   const container = document.getElementById('admin-notifications');
-  container.innerHTML = adminNotifications.map(notification => `
-    <div class="admin-notification" style="
-      background: ${getNotificationColor(notification.type)};
-      color: white;
-      padding: 10px 15px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      font-size: 0.9em;
-    ">
-      <strong>${notification.title}</strong><br>
-      ${notification.message}
-    </div>
-  `).join('');
+  container.innerHTML = adminNotifications.map(notification => {
+    const emoji = getNotificationEmoji(notification.type);
+    const bgColor = getNotificationBgColor(notification.type);
+    const textColor = getNotificationTextColor(notification.type);
+    const pulseClass = getNotificationPulseClass(notification.type);
+    
+    return `
+      <div class="admin-notification ${pulseClass}" style="
+        border-left: 6px solid ${bgColor};
+        background: linear-gradient(135deg, ${bgColor}20, ${bgColor}10);
+        box-shadow: 0 4px 15px ${bgColor}30;
+        color: ${textColor};
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        font-size: 0.9em;
+        position: relative;
+        overflow: hidden;
+      ">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+          <span style="font-size: 1.2em; animation: bounce 2s infinite;">${emoji}</span>
+          <strong>${notification.title}</strong>
+          <span style="
+            background: ${bgColor};
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          ">${notification.type.toUpperCase()}</span>
+        </div>
+        <div style="color: ${textColor}80; line-height: 1.4;">
+          ${notification.message}
+        </div>
+        <div style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, transparent 30%, ${bgColor}10 50%, transparent 70%);
+          pointer-events: none;
+          animation: shimmer 3s infinite;
+        "></div>
+      </div>
+    `;
+  }).join('');
 }
 
-// Obtener color según el tipo de notificación
+// Obtener color según el tipo de notificación (función legacy)
 function getNotificationColor(type) {
   const colors = {
     'info': '#3498db',
@@ -4691,9 +4758,106 @@ function getNotificationColor(type) {
   return colors[type] || colors['info'];
 }
 
+// Función para obtener emoji según el tipo de notificación
+function getNotificationEmoji(type) {
+  const emojis = {
+    'info': '📢',
+    'warning': '⚠️',
+    'error': '❌',
+    'success': '✅',
+    'push': '🚀',
+    'new': '🆕',
+    'urgent': '🔥',
+    'sale': '💰',
+    'stock': '📦',
+    'discount': '🏷️',
+    'promotion': '🎉',
+    'maintenance': '🔧',
+    'update': '🔄',
+    'security': '🔒',
+    'delivery': '🚚',
+    'quality': '⭐',
+    'price': '💲',
+    'offer': '🎁',
+    'limited': '⏰',
+    'exclusive': '👑'
+  };
+  return emojis[type] || '📢';
+}
+
+// Función para obtener color de fondo según el tipo de notificación
+function getNotificationBgColor(type) {
+  const colors = {
+    'info': '#007bff',        // Azul
+    'warning': '#ffc107',     // Amarillo
+    'error': '#dc3545',       // Rojo
+    'success': '#28a745',     // Verde
+    'push': '#17a2b8',        // Azul claro
+    'new': '#28a745',         // Verde
+    'urgent': '#dc3545',      // Rojo
+    'sale': '#ffc107',        // Amarillo
+    'stock': '#6f42c1',       // Morado
+    'discount': '#fd7e14',    // Naranja
+    'promotion': '#e83e8c',   // Rosa
+    'maintenance': '#6c757d', // Gris
+    'update': '#20c997',      // Verde azulado
+    'security': '#343a40',    // Negro
+    'delivery': '#17a2b8',    // Azul claro
+    'quality': '#ffc107',     // Amarillo
+    'price': '#28a745',       // Verde
+    'offer': '#e83e8c',       // Rosa
+    'limited': '#dc3545',     // Rojo
+    'exclusive': '#6f42c1'    // Morado
+  };
+  return colors[type] || '#007bff';
+}
+
+// Función para obtener color de texto según el tipo de notificación
+function getNotificationTextColor(type) {
+  const textColors = {
+    'info': '#004085',        // Azul oscuro
+    'warning': '#856404',     // Amarillo oscuro
+    'error': '#721c24',       // Rojo oscuro
+    'success': '#155724',     // Verde oscuro
+    'push': '#0c5460',        // Azul oscuro
+    'new': '#155724',         // Verde oscuro
+    'urgent': '#721c24',      // Rojo oscuro
+    'sale': '#856404',        // Amarillo oscuro
+    'stock': '#4a2c7a',       // Morado oscuro
+    'discount': '#a0522d',    // Naranja oscuro
+    'promotion': '#8e2a5c',   // Rosa oscuro
+    'maintenance': '#495057', // Gris oscuro
+    'update': '#0f5132',      // Verde oscuro
+    'security': '#212529',    // Negro
+    'delivery': '#0c5460',    // Azul oscuro
+    'quality': '#856404',     // Amarillo oscuro
+    'price': '#155724',       // Verde oscuro
+    'offer': '#8e2a5c',       // Rosa oscuro
+    'limited': '#721c24',     // Rojo oscuro
+    'exclusive': '#4a2c7a'    // Morado oscuro
+  };
+  return textColors[type] || '#004085';
+}
+
+// Función para obtener clase de animación según el tipo de notificación
+function getNotificationPulseClass(type) {
+  const pulseClasses = {
+    'urgent': 'pulse-urgent',
+    'error': 'pulse-error',
+    'limited': 'pulse-limited',
+    'exclusive': 'pulse-exclusive',
+    'new': 'pulse-new',
+    'sale': 'pulse-sale',
+    'promotion': 'pulse-promotion',
+    'offer': 'pulse-offer'
+  };
+  return pulseClasses[type] || '';
+}
+
 // Función para combinar productos originales con productos del admin
-function combineProductsWithAdmin(originalProducts) {
-  const combined = [...originalProducts];
+function combineProductsWithAdmin(originalSections) {
+  // Crear una copia profunda de las secciones originales
+  const combined = JSON.parse(JSON.stringify(originalSections));
   
   // Agregar productos del admin a sus respectivas secciones
   adminProducts.forEach(adminProduct => {
@@ -4701,22 +4865,57 @@ function combineProductsWithAdmin(originalProducts) {
       name: adminProduct.name,
       price: adminProduct.price,
       previousPrice: adminProduct.previous_price,
+      offer: false, // Los productos del admin no tienen ofertas por defecto
       isNew: adminProduct.is_new,
       hasQuantityAlert: adminProduct.has_quantity_alert,
-      minQuantity: adminProduct.min_quantity
+      minQuantity: adminProduct.min_quantity,
+      // Añadir propiedades adicionales para compatibilidad
+      focus1: false,
+      focus2: false,
+      focus3: false,
+      focus4: false,
+      discountOptions: {
+        twoXone: false,
+        threeXtwo: false,
+        secondUnit70: false,
+        clientCard25: false,
+        clientCard15: false,
+        secondUnit50: false,
+        twentyPercent: false,
+        fiftyPercent: false,
+        gift: false,
+        travel: false,
+        draw: false,
+        promoWeb: false
+      },
+      offerLogos: {}
     };
     
     // Buscar la sección correspondiente
-    if (sections[adminProduct.section]) {
-      sections[adminProduct.section].push(product);
+    if (combined[adminProduct.section]) {
+      combined[adminProduct.section].push(product);
     } else {
       // Si la sección no existe, crearla
-      sections[adminProduct.section] = [product];
+      combined[adminProduct.section] = [product];
     }
   });
   
   return combined;
 }
+
+// Función para forzar recarga de datos del admin (útil para debug)
+function reloadAdminData() {
+  console.log('🔄 Forzando recarga de datos del admin...');
+  if (supabase) {
+    loadAdminData();
+  } else {
+    console.warn('⚠️ Supabase no está inicializado, intentando inicializar...');
+    initSupabase();
+  }
+}
+
+// Hacer la función global para poder llamarla desde la consola
+window.reloadAdminData = reloadAdminData;
 
 // Inicializar Supabase cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {
