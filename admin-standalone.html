@@ -13,22 +13,32 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: 0;
+            padding: 0;
+            color: #2d3748;
         }
 
         .container {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            padding: 0;
             width: 100%;
-            max-width: 500px;
-            margin: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .admin-panel {
+            display: none;
+            min-height: 80vh;
+        }
+
+        .admin-panel.active {
+            display: block;
         }
 
         .login-form {
@@ -94,21 +104,51 @@
 
         .tabs {
             display: flex;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e1e5e9;
+            margin-bottom: 40px;
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 8px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
         }
 
         .tab {
-            padding: 10px 20px;
+            flex: 1;
+            padding: 15px 25px;
             cursor: pointer;
-            border-bottom: 2px solid transparent;
+            border-radius: 12px;
             transition: all 0.3s ease;
+            font-weight: 600;
+            text-align: center;
+            color: #64748b;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
         }
 
         .tab.active {
-            border-bottom-color: #667eea;
-            color: #667eea;
-            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .tab.active::before {
+            opacity: 1;
+        }
+
+        .tab span {
+            position: relative;
+            z-index: 1;
         }
 
         .tab-content {
@@ -156,10 +196,689 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.8em;
+            transition: all 0.3s ease;
         }
 
         .delete-btn:hover {
             background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        /* Estilos para alertas llamativas */
+        .notification-item {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notification-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .notification-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .notification-item:hover::before {
+            transform: translateX(100%);
+        }
+
+        .product-item {
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Animación para productos nuevos */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+
+        .product-item[style*="border-left: 4px solid #28a745"] {
+            animation: pulse 2s infinite;
+        }
+
+        /* Animación para alertas urgentes */
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        .notification-item[style*="border-left: 4px solid #dc3545"] {
+            animation: blink 1s infinite;
+        }
+
+        /* Estilos mejorados para notificaciones */
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .notification-emoji {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .notification-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notification-message {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+
+        .notification-meta {
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        /* Animaciones específicas para cada tipo */
+        .pulse-urgent {
+            animation: pulse-urgent 1.5s infinite;
+        }
+
+        .pulse-error {
+            animation: pulse-error 2s infinite;
+        }
+
+        .pulse-limited {
+            animation: pulse-limited 1s infinite;
+        }
+
+        .pulse-exclusive {
+            animation: pulse-exclusive 3s infinite;
+        }
+
+        .pulse-new {
+            animation: pulse-new 2.5s infinite;
+        }
+
+        .pulse-sale {
+            animation: pulse-sale 2s infinite;
+        }
+
+        .pulse-promotion {
+            animation: pulse-promotion 1.8s infinite;
+        }
+
+        .pulse-offer {
+            animation: pulse-offer 2.2s infinite;
+        }
+
+        /* Keyframes para animaciones */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse-urgent {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+
+        @keyframes pulse-error {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes pulse-limited {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes pulse-exclusive {
+            0% { box-shadow: 0 0 0 0 rgba(111, 66, 193, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(111, 66, 193, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(111, 66, 193, 0); }
+        }
+
+        @keyframes pulse-new {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse-sale {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        @keyframes pulse-promotion {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(1deg); }
+            75% { transform: rotate(-1deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes pulse-offer {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Header profesional */
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-header .logo {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .admin-content {
+            padding: 40px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Sistema de carga de imágenes */
+        .image-upload-area {
+            margin-top: 20px;
+        }
+
+        .upload-zone {
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .upload-zone:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateY(-2px);
+        }
+
+        .upload-zone.dragover {
+            border-color: #667eea;
+            background: #e6f3ff;
+            transform: scale(1.02);
+        }
+
+        .upload-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin: 0;
+        }
+
+        .upload-subtext {
+            font-size: 0.9rem;
+            color: #718096;
+            margin: 0;
+        }
+
+        .image-preview-container {
+            margin-top: 20px;
+        }
+
+        .image-preview {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #e6fffa;
+            border: 1px solid #81e6d9;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .image-preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .image-info {
+            flex: 1;
+        }
+
+        .image-info h4 {
+            margin: 0 0 8px 0;
+            color: #234e52;
+            font-size: 1.1rem;
+        }
+
+        .image-info p {
+            margin: 4px 0;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .remove-image-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .remove-image-btn:hover {
+            background: #c53030;
+            transform: scale(1.1);
+        }
+
+        /* Estilos para configuración */
+        .config-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .config-section h4 {
+            margin: 0 0 15px 0;
+            color: #2d3748;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 15px;
+        }
+
+        .status-indicator {
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.connected {
+            color: #28a745;
+        }
+
+        .status-indicator.error {
+            color: #dc3545;
+        }
+
+        .system-info, .image-config {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .info-item strong {
+            color: #4a5568;
+            margin-right: 10px;
+        }
+
+        .info-item span {
+            color: #2d3748;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Estilos para gestión de usuarios */
+        .user-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .user-section h4 {
+            margin: 0 0 20px 0;
+            color: #2d3748;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-controls, .auth-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .users-list, .authenticated-users {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            min-height: 100px;
+            padding: 15px;
+        }
+
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .user-item:hover {
+            background: #edf2f7;
+            transform: translateX(5px);
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-info h5 {
+            margin: 0 0 5px 0;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .user-info p {
+            margin: 2px 0;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .user-role {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .user-role.admin {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .user-role.manager {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+
+        .user-role.user {
+            background: #c6f6d5;
+            color: #2f855a;
+        }
+
+        .user-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .user-status.active {
+            background: #c6f6d5;
+            color: #2f855a;
+        }
+
+        .user-status.inactive {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .user-action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .user-action-btn.edit {
+            background: #4299e1;
+            color: white;
+        }
+
+        .user-action-btn.delete {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .user-action-btn.toggle {
+            background: #38a169;
+            color: white;
+        }
+
+        .user-action-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .authenticated-user {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #e6fffa;
+            border: 1px solid #81e6d9;
+            border-radius: 8px;
+        }
+
+        .auth-info {
+            flex: 1;
+        }
+
+        .auth-info h6 {
+            margin: 0 0 3px 0;
+            color: #234e52;
+            font-size: 0.9rem;
+        }
+
+        .auth-info p {
+            margin: 0;
+            color: #4a5568;
+            font-size: 0.8rem;
+        }
+
+        .session-time {
+            color: #718096;
+            font-size: 0.8rem;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .image-item {
+            position: relative;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .image-item:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .image-item.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-name {
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
+            background: #f7fafc;
+            color: #4a5568;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .selected-image {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e6fffa;
+            border: 1px solid #81e6d9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .selected-image img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .selected-image-info {
+            flex: 1;
+        }
+
+        .selected-image-info h4 {
+            margin: 0 0 5px 0;
+            color: #234e52;
+        }
+
+        .selected-image-info p {
+            margin: 0;
+            color: #4a5568;
+            font-size: 14px;
         }
 
         .logout-btn {
@@ -203,15 +922,36 @@
 
         <!-- Panel de Administración -->
         <div id="admin-panel" class="admin-panel">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h1>Panel de Control</h1>
-                <button class="logout-btn" onclick="adminLogout()">Cerrar Sesión</button>
+            <div class="admin-header">
+                <h1>
+                    <div class="logo">⚙️</div>
+                    Panel de Administración Caher
+                </h1>
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">A</div>
+                    <div>
+                        <div id="user-name">Administrador</div>
+                        <div style="font-size: 12px; opacity: 0.8;" id="user-email">admin@caher.com</div>
+                    </div>
+                    <button class="logout-btn" onclick="adminLogout()">🚪 Cerrar Sesión</button>
+                </div>
             </div>
+            
+            <div class="admin-content">
 
             <div class="tabs">
-                <div class="tab active" onclick="showTab('products')">Productos</div>
-                <div class="tab" onclick="showTab('notifications')">Notificaciones</div>
-                <div class="tab" onclick="showTab('settings')">Configuración</div>
+                <div class="tab active" onclick="showTab('products')">
+                    <span>📦 Productos</span>
+                </div>
+                <div class="tab" onclick="showTab('notifications')">
+                    <span>🔔 Notificaciones</span>
+                </div>
+                <div class="tab" onclick="showTab('users')">
+                    <span>👥 Usuarios</span>
+                </div>
+                <div class="tab" onclick="showTab('settings')">
+                    <span>⚙️ Configuración</span>
+                </div>
             </div>
 
             <!-- Tab de Productos -->
@@ -227,26 +967,7 @@
                             <label for="product-section">Sección</label>
                             <select id="product-section" required>
                                 <option value="">Seleccionar sección</option>
-                                <option value="FEM ALCAMPO">FEM ALCAMPO</option>
-                                <option value="Coca Cola">Coca Cola</option>
-                                <option value="Coca Cola Zero">Coca Cola Zero</option>
-                                <option value="coca cola light">Coca Cola Light</option>
-                                <option value="Coca Cola Zero Zero">Coca Cola Zero Zero</option>
-                                <option value="Coca Cola Sabores">Coca Cola Sabores</option>
-                                <option value="Fanta naranja">Fanta Naranja</option>
-                                <option value="Fanta limón">Fanta Limón</option>
-                                <option value="Fanta sabores">Fanta Sabores</option>
-                                <option value="Sprite">Sprite</option>
-                                <option value="Tónica">Tónica</option>
-                                <option value="Burn">Burn</option>
-                                <option value="Energéticas">Energéticas</option>
-                                <option value="M.Maid">M.Maid</option>
-                                <option value="FUZE">FUZE</option>
-                                <option value="Deportivas">Deportivas</option>
-                                <option value="Isotónicas">Isotónicas</option>
-                                <option value="Appletiser">Appletiser</option>
-                                <option value="Aquabona">Aquabona</option>
-                                <option value="Alcoholes">Alcoholes</option>
+                                <!-- Las secciones se cargarán dinámicamente desde Supabase -->
                             </select>
                         </div>
                     </div>
@@ -263,12 +984,12 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>
-                                <input type="checkbox" id="product-is-new"> Producto Nuevo
+                                <input type="checkbox" id="product-is-new"> 🆕 Producto Nuevo
                             </label>
                         </div>
                         <div class="form-group">
                             <label>
-                                <input type="checkbox" id="product-has-alert"> Alerta de Cantidad
+                                <input type="checkbox" id="product-has-alert"> ⚠️ Alerta de Cantidad
                             </label>
                         </div>
                     </div>
@@ -276,7 +997,34 @@
                         <label for="product-min-quantity">Cantidad Mínima</label>
                         <input type="number" id="product-min-quantity" min="1" value="1">
                     </div>
-                    <button type="submit" class="btn">Añadir Producto</button>
+                    
+                    <!-- Carga de Imagen -->
+                    <div class="form-group">
+                        <label>🖼️ Imagen del Producto</label>
+                        <div class="image-upload-area">
+                            <input type="file" id="image-upload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                            <div class="upload-zone" onclick="document.getElementById('image-upload').click()">
+                                <div class="upload-content">
+                                    <div class="upload-icon">📷</div>
+                                    <p class="upload-text">Haz clic para cargar una imagen</p>
+                                    <p class="upload-subtext">PNG, JPG, JPEG (se convertirá automáticamente a JPG 500x500)</p>
+                                </div>
+                            </div>
+                            <div id="image-preview-container" class="image-preview-container" style="display: none;">
+                                <div class="image-preview">
+                                    <img id="uploaded-image-preview" src="" alt="Vista previa">
+                                    <div class="image-info">
+                                        <h4 id="uploaded-image-name">Imagen cargada</h4>
+                                        <p id="uploaded-image-size">Tamaño: -</p>
+                                        <p id="uploaded-image-status">Estado: Procesando...</p>
+                                    </div>
+                                    <button type="button" class="remove-image-btn" onclick="removeUploadedImage()">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">➕ Añadir Producto</button>
                 </form>
 
                 <h3>Productos Actuales</h3>
@@ -300,10 +1048,26 @@
                     <div class="form-group">
                         <label for="notification-type">Tipo</label>
                         <select id="notification-type">
-                            <option value="info">Información</option>
-                            <option value="warning">Advertencia</option>
-                            <option value="success">Éxito</option>
-                            <option value="error">Error</option>
+                            <option value="info">📢 Información</option>
+                            <option value="warning">⚠️ Advertencia</option>
+                            <option value="success">✅ Éxito</option>
+                            <option value="error">❌ Error</option>
+                            <option value="push">🚀 Empuje (Pedir más productos)</option>
+                            <option value="new">🆕 Producto Nuevo</option>
+                            <option value="urgent">🔥 Urgente</option>
+                            <option value="sale">💰 Oferta</option>
+                            <option value="stock">📦 Stock</option>
+                            <option value="discount">🏷️ Descuento</option>
+                            <option value="promotion">🎉 Promoción</option>
+                            <option value="maintenance">🔧 Mantenimiento</option>
+                            <option value="update">🔄 Actualización</option>
+                            <option value="security">🔒 Seguridad</option>
+                            <option value="delivery">🚚 Entrega</option>
+                            <option value="quality">⭐ Calidad</option>
+                            <option value="price">💲 Precio</option>
+                            <option value="offer">🎁 Oferta Especial</option>
+                            <option value="limited">⏰ Tiempo Limitado</option>
+                            <option value="exclusive">👑 Exclusivo</option>
                         </select>
                     </div>
                     <button type="submit" class="btn">Añadir Notificación</button>
@@ -315,14 +1079,169 @@
                 </div>
             </div>
 
+            <!-- Tab de Usuarios -->
+            <div id="users-tab" class="tab-content">
+                <h3>👥 Gestión de Usuarios</h3>
+                
+                <!-- Crear Nuevo Usuario -->
+                <div class="user-section">
+                    <h4>➕ Crear Nuevo Usuario</h4>
+                    <form id="user-form" onsubmit="createUser(); return false;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="user-name">Nombre Completo</label>
+                                <input type="text" id="user-name" required placeholder="Ej: Juan Pérez">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-email">Email</label>
+                                <input type="email" id="user-email" required placeholder="usuario@empresa.com">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="user-password">Contraseña</label>
+                                <input type="password" id="user-password" required placeholder="Mínimo 6 caracteres">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-role">Rol</label>
+                                <select id="user-role" required>
+                                    <option value="admin">👑 Administrador</option>
+                                    <option value="manager">👨‍💼 Gestor</option>
+                                    <option value="user">👤 Usuario</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="user-active"> ✅ Usuario Activo
+                            </label>
+                        </div>
+                        <button type="submit" class="btn">👤 Crear Usuario</button>
+                    </form>
+                </div>
+
+                <!-- Lista de Usuarios -->
+                <div class="user-section">
+                    <h4>📋 Usuarios Registrados</h4>
+                    <div class="user-controls">
+                        <button class="btn" onclick="loadUsers()" style="background: #667eea;">
+                            🔄 Actualizar Lista
+                        </button>
+                        <button class="btn" onclick="exportUsers()" style="background: #27ae60;">
+                            📤 Exportar Usuarios
+                        </button>
+                    </div>
+                    <div id="users-list" class="users-list">
+                        <p>Cargando usuarios...</p>
+                    </div>
+                </div>
+
+                <!-- Usuarios Autenticados -->
+                <div class="user-section">
+                    <h4>🔐 Usuarios Autenticados</h4>
+                    <div class="auth-controls">
+                        <button class="btn" onclick="checkAuthenticatedUsers()" style="background: #f39c12;">
+                            🔍 Verificar Sesiones
+                        </button>
+                        <button class="btn" onclick="logoutAllUsers()" style="background: #e74c3c;">
+                            🚪 Cerrar Todas las Sesiones
+                        </button>
+                    </div>
+                    <div id="authenticated-users" class="authenticated-users">
+                        <p>Verificando sesiones activas...</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Tab de Configuración -->
             <div id="settings-tab" class="tab-content">
-                <h3>Diagnóstico</h3>
-                <div class="form-group">
-                    <button class="btn" onclick="testSupabaseConnection()" style="background: #f39c12;">Probar Conexión Supabase</button>
+                <h3>⚙️ Configuración del Sistema</h3>
+                
+                <!-- Estado de Conexión -->
+                <div class="config-section">
+                    <h4>🔗 Estado de Conexión</h4>
+                    <div class="connection-status" id="connection-status">
+                        <div class="status-indicator" id="status-indicator">⚪</div>
+                        <span id="status-text">Verificando conexión...</span>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn" onclick="testSupabaseConnection()" style="background: #f39c12;">
+                            🔍 Probar Conexión Supabase
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button class="btn" onclick="showDebugInfo()" style="background: #9b59b6;">Información de Debug</button>
+
+                <!-- Información del Sistema -->
+                <div class="config-section">
+                    <h4>📊 Información del Sistema</h4>
+                    <div class="system-info">
+                        <div class="info-item">
+                            <strong>URL Supabase:</strong> 
+                            <span id="supabase-url-display">https://fhotsfpgzuuiftfadskv.supabase.co</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Usuario Actual:</strong> 
+                            <span id="current-user-display">No autenticado</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Estado RLS:</strong> 
+                            <span id="rls-status">Verificando...</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn" onclick="showDebugInfo()" style="background: #9b59b6;">
+                            🐛 Información de Debug Completa
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Configuración de Imágenes -->
+                <div class="config-section">
+                    <h4>🖼️ Configuración de Imágenes</h4>
+                    <div class="image-config">
+                        <div class="info-item">
+                            <strong>Tamaño máximo:</strong> 500x500 píxeles
+                        </div>
+                        <div class="info-item">
+                            <strong>Formato:</strong> JPG (calidad 85%)
+                        </div>
+                        <div class="info-item">
+                            <strong>Peso máximo:</strong> 10MB (se comprime automáticamente)
+                        </div>
+                        <div class="info-item">
+                            <strong>Almacenamiento:</strong> localStorage (temporal)
+                        </div>
+                        <div class="info-item">
+                            <strong>Calidad:</strong> 70% (optimizado para tamaño)
+                        </div>
+                        <div class="info-item" id="image-columns-status">
+                            <strong>Estado de columnas:</strong> <span id="columns-status-text">Verificando...</span>
+                        </div>
+                    </div>
+                    <div id="database-update-notice" style="display: none; margin-top: 15px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
+                        <h5 style="margin: 0 0 10px 0; color: #856404;">⚠️ Actualización de Base de Datos Requerida</h5>
+                        <p style="margin: 0 0 10px 0; color: #856404;">
+                            Para usar las imágenes correctamente, necesitas ejecutar el script SQL en Supabase.
+                        </p>
+                        <button class="btn" onclick="showDatabaseUpdateInstructions()" style="background: #f39c12; color: white;">
+                            📋 Ver Instrucciones
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Acciones del Sistema -->
+                <div class="config-section">
+                    <h4>🔧 Acciones del Sistema</h4>
+                    <div class="form-group">
+                        <button class="btn" onclick="clearAllData()" style="background: #e74c3c;">
+                            🗑️ Limpiar Todos los Datos
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn" onclick="exportData()" style="background: #27ae60;">
+                            📤 Exportar Datos
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -407,21 +1326,36 @@
             document.getElementById('login-form').style.display = 'none';
             document.getElementById('admin-panel').style.display = 'block';
             
+            // Actualizar información del usuario en el header
+            if (currentUser) {
+                document.getElementById('user-email').textContent = currentUser.email;
+                document.getElementById('user-name').textContent = currentUser.email.split('@')[0];
+                document.getElementById('user-avatar').textContent = currentUser.email.charAt(0).toUpperCase();
+            }
+            
+            // Actualizar información del sistema
+            updateSystemInfo();
+            
             testSupabaseConnection();
+            loadSections();
             loadProducts();
             loadNotifications();
+            loadUsers();
+            checkAuthenticatedUsers();
         }
 
         // Probar conexión con Supabase
         async function testSupabaseConnection() {
             if (!supabase) {
                 console.error('Supabase no está inicializado');
+                updateConnectionStatus(false, 'Supabase no inicializado');
                 alert('Error: No se pudo conectar con Supabase');
                 return false;
             }
 
             try {
                 console.log('Probando conexión con Supabase...');
+                updateConnectionStatus(false, 'Probando conexión...');
                 
                 // Probar conexión con una consulta simple
                 const { data, error } = await supabase
@@ -431,15 +1365,18 @@
 
                 if (error) {
                     console.error('Error de conexión con Supabase:', error);
+                    updateConnectionStatus(false, 'Error: ' + error.message);
                     alert('Error de conexión: ' + error.message + '\n\nPosibles causas:\n1. Las tablas no existen\n2. Problemas de RLS (Row Level Security)\n3. Usuario no autenticado');
                     return false;
                 }
 
                 console.log('Conexión con Supabase exitosa');
-                alert('Conectado a Supabase correctamente\n\nProductos encontrados: ' + (data ? data.length : 0));
+                updateConnectionStatus(true, 'Conectado correctamente');
+                alert('✅ Conectado a Supabase correctamente\n\nProductos encontrados: ' + (data ? data.length : 0));
                 return true;
             } catch (error) {
                 console.error('Error inesperado en conexión:', error);
+                updateConnectionStatus(false, 'Error inesperado');
                 alert('Error de conexión: ' + error.message);
                 return false;
             }
@@ -484,33 +1421,131 @@
             }
 
             try {
+                const productData = {
+                    name: name,
+                    section: section,
+                    price: price,
+                    previous_price: previousPrice,
+                    is_new: isNew,
+                    has_quantity_alert: hasAlert,
+                    min_quantity: minQuantity
+                };
+
+                // Añadir imagen si está cargada (solo metadatos y ID, no la imagen completa)
+                if (processedImageUrl && uploadedImageData) {
+                    // Solo almacenar metadatos básicos y ID de la imagen
+                    const imageMetadata = {
+                        imageId: uploadedImageData.imageId,
+                        width: uploadedImageData.width,
+                        height: uploadedImageData.height,
+                        size: uploadedImageData.size,
+                        format: 'jpg',
+                        quality: 70,
+                        hasImage: true,
+                        storedIn: 'localStorage'
+                    };
+                    
+                    if (hasImageColumns) {
+                        // Usar las columnas dedicadas si existen
+                        productData.image_url = uploadedImageData.imageId; // Solo el ID, no la imagen completa
+                        productData.image_data = imageMetadata;
+                    } else {
+                        // Usar el campo quantities como almacenamiento temporal
+                        const imageInfo = {
+                            image_id: uploadedImageData.imageId,
+                            image_metadata: imageMetadata
+                        };
+                        
+                        // Si ya hay quantities, las mantenemos, si no, creamos un array vacío
+                        const existingQuantities = productData.quantities || [];
+                        productData.quantities = [...existingQuantities, imageInfo];
+                    }
+                }
+
                 const { data, error } = await supabase
                     .from('products')
-                    .insert([
-                        {
-                            name: name,
-                            section: section,
-                            price: price,
-                            previous_price: previousPrice,
-                            is_new: isNew,
-                            has_quantity_alert: hasAlert,
-                            min_quantity: minQuantity
-                        }
-                    ]);
+                    .insert([productData]);
 
                 if (error) {
                     console.error('Error al añadir producto:', error);
-                    alert('Error al añadir producto: ' + error.message);
+                    alert('❌ Error al añadir producto: ' + error.message);
                     return;
                 }
 
-                alert('Producto añadido correctamente');
+                alert('✅ Producto añadido correctamente' + (processedImageUrl ? ' con imagen' : ''));
                 document.getElementById('product-form').reset();
+                
+                // Limpiar imagen cargada
+                removeUploadedImage();
+                
                 loadProducts();
             } catch (error) {
                 console.error('Error:', error);
                 alert('Error al añadir producto: ' + error.message);
             }
+        }
+
+        // Función para cargar secciones desde Supabase
+        async function loadSections() {
+            try {
+                const { data, error } = await supabase
+                    .from('sections')
+                    .select('*')
+                    .eq('is_active', true)
+                    .order('name', { ascending: true });
+
+                if (error) {
+                    console.error('Error al cargar secciones:', error);
+                    // Si hay error, usar secciones por defecto
+                    loadDefaultSections();
+                    return;
+                }
+
+                const sectionSelect = document.getElementById('product-section');
+                if (data && data.length > 0) {
+                    // Limpiar opciones existentes (excepto la primera)
+                    sectionSelect.innerHTML = '<option value="">Seleccionar sección</option>';
+                    
+                    // Añadir secciones desde Supabase
+                    data.forEach(section => {
+                        const option = document.createElement('option');
+                        option.value = section.name;
+                        option.textContent = section.display_name || section.name;
+                        sectionSelect.appendChild(option);
+                    });
+                    
+                    console.log(`✅ ${data.length} secciones cargadas desde Supabase`);
+                } else {
+                    console.warn('⚠️ No se encontraron secciones en Supabase, usando secciones por defecto');
+                    loadDefaultSections();
+                }
+            } catch (error) {
+                console.error('Error al cargar secciones:', error);
+                loadDefaultSections();
+            }
+        }
+
+        // Función para cargar secciones por defecto (fallback)
+        function loadDefaultSections() {
+            const defaultSections = [
+                'FEM ALCAMPO', 'Coca Cola', 'Coca Cola Zero', 'coca cola light',
+                'Coca Cola Zero Zero', 'Coca Cola Sabores', 'Fanta naranja',
+                'Fanta limón', 'Fanta sabores', 'Sprite', 'Tónica', 'Burn',
+                'Energéticas', 'M.Maid', 'FUZE', 'Deportivas', 'Isotónicas',
+                'Appletiser', 'Aquabona', 'Alcoholes'
+            ];
+
+            const sectionSelect = document.getElementById('product-section');
+            sectionSelect.innerHTML = '<option value="">Seleccionar sección</option>';
+            
+            defaultSections.forEach(section => {
+                const option = document.createElement('option');
+                option.value = section;
+                option.textContent = section;
+                sectionSelect.appendChild(option);
+            });
+            
+            console.log(`✅ ${defaultSections.length} secciones por defecto cargadas`);
         }
 
         // Cargar productos
@@ -530,19 +1565,52 @@
 
                 const productList = document.getElementById('product-list');
                 if (data && data.length > 0) {
-                    productList.innerHTML = data.map(product => `
-                        <div class="product-item">
-                            <div>
-                                <strong>${product.name}</strong><br>
-                                <small>Sección: ${product.section} | Precio: €${product.price}</small>
-                                ${product.is_new ? '<br><span style="color: #27ae60;">NUEVO</span>' : ''}
-                                ${product.has_quantity_alert ? `<br><span style="color: #e74c3c;">MIN: ${product.min_quantity}</span>` : ''}
+                    productList.innerHTML = data.map(product => {
+                        let indicators = '';
+                        if (product.is_new) indicators += '🆕 ';
+                        if (product.has_quantity_alert) indicators += '⚠️ ';
+                        if (product.previous_price && product.previous_price > product.price) indicators += '💰 ';
+                        
+                        // Verificar si tiene imagen
+                        let imageHtml = '';
+                        let imageId = null;
+                        
+                        if (hasImageColumns && product.image_url) {
+                            imageId = product.image_url;
+                        } else if (product.quantities && Array.isArray(product.quantities)) {
+                            const imageInfo = product.quantities.find(q => q.image_id || q.image_url);
+                            if (imageInfo) {
+                                imageId = imageInfo.image_id || imageInfo.image_url;
+                            }
+                        }
+                        
+                        if (imageId) {
+                            const imageData = getImageFromStorage(imageId);
+                            if (imageData) {
+                                imageHtml = `<div style="margin: 10px 0;"><img src="${imageData}" alt="${product.name}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;"></div>`;
+                            } else {
+                                imageHtml = '<div style="margin: 10px 0; color: #999; font-size: 12px;">🖼️ Imagen no disponible</div>';
+                            }
+                        }
+                        
+                        return `
+                            <div class="product-item" style="border-left: 4px solid ${product.is_new ? '#28a745' : product.has_quantity_alert ? '#ffc107' : '#007bff'};">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    ${imageHtml}
+                                    <div style="flex: 1;">
+                                        <strong>${indicators}${product.name}</strong><br>
+                                        <small>💰 Precio: €${product.price} | 📂 Sección: ${product.section}</small>
+                                        ${product.is_new ? '<br><span style="color: #28a745; font-weight: bold;">🆕 PRODUCTO NUEVO</span>' : ''}
+                                        ${product.has_quantity_alert ? `<br><span style="color: #ffc107; font-weight: bold;">⚠️ ALERTA: Mínimo ${product.min_quantity} unidades</span>` : ''}
+                                        ${product.previous_price ? `<br><span style="color: #6c757d; font-size: 12px;">📉 Precio anterior: €${product.previous_price}</span>` : ''}
+                                    </div>
+                                </div>
+                                <button class="delete-btn" onclick="deleteProduct('${product.id}')">🗑️ Eliminar</button>
                             </div>
-                            <button class="delete-btn" onclick="deleteProduct('${product.id}')">Eliminar</button>
-                        </div>
-                    `).join('');
+                        `;
+                    }).join('');
                 } else {
-                    productList.innerHTML = '<p>No hay productos añadidos</p>';
+                    productList.innerHTML = '<p>📦 No hay productos añadidos</p>';
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -643,18 +1711,38 @@
 
                 const notificationList = document.getElementById('notification-list');
                 if (data && data.length > 0) {
-                    notificationList.innerHTML = data.map(notification => `
-                        <div class="notification-item">
-                            <div>
-                                <strong>${notification.title}</strong><br>
-                                <small>${notification.message}</small><br>
-                                <span style="color: #666;">Tipo: ${notification.type}</span>
+                    notificationList.innerHTML = data.map(notification => {
+                        const emoji = getNotificationEmoji(notification.type);
+                        const bgColor = getNotificationBgColor(notification.type);
+                        const textColor = getNotificationTextColor(notification.type);
+                        const pulseClass = getNotificationPulseClass(notification.type);
+                        
+                        return `
+                            <div class="notification-item ${pulseClass}" style="border-left: 6px solid ${bgColor}; background: linear-gradient(135deg, ${bgColor}20, ${bgColor}10); box-shadow: 0 4px 15px ${bgColor}30;">
+                                <div class="notification-content">
+                                    <div class="notification-header">
+                                        <span class="notification-emoji">${emoji}</span>
+                                        <strong style="color: ${textColor};">${notification.title}</strong>
+                                        <span class="notification-badge" style="background: ${bgColor}; color: white;">${notification.type.toUpperCase()}</span>
+                                    </div>
+                                    <div class="notification-message" style="color: ${textColor}80;">
+                                        ${notification.message}
+                                    </div>
+                                    <div class="notification-meta">
+                                        <span style="color: #666; font-size: 11px;">
+                                            📅 ${new Date(notification.created_at).toLocaleDateString()} 
+                                            🕒 ${new Date(notification.created_at).toLocaleTimeString()}
+                                        </span>
+                                    </div>
+                                </div>
+                                <button class="delete-btn" onclick="deleteNotification('${notification.id}')" style="background: ${bgColor};">
+                                    🗑️
+                                </button>
                             </div>
-                            <button class="delete-btn" onclick="deleteNotification('${notification.id}')">Eliminar</button>
-                        </div>
-                    `).join('');
+                        `;
+                    }).join('');
                 } else {
-                    notificationList.innerHTML = '<p>No hay notificaciones activas</p>';
+                    notificationList.innerHTML = '<p>📭 No hay notificaciones activas</p>';
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -707,7 +1795,11 @@
                 'Usuario Actual': currentUser ? currentUser.email : 'No hay sesión',
                 'URL Supabase': SUPABASE_CONFIG.url,
                 'Usuario Autorizado': currentUser && AUTHORIZED_USERS.includes(currentUser.email) ? 'Sí' : 'No',
-                'Timestamp': new Date().toLocaleString()
+                'Imagen Cargada': uploadedImageData ? 'Sí' : 'No',
+                'Navegador': navigator.userAgent,
+                'Timestamp': new Date().toLocaleString(),
+                'Resolución': `${screen.width}x${screen.height}`,
+                'Idioma': navigator.language
             };
 
             const debugText = Object.entries(debugInfo)
@@ -715,7 +1807,741 @@
                 .join('\n');
 
             console.log('Información de Debug:', debugInfo);
-            alert(`Información de Debug:\n\n${debugText}`);
+            alert(`Información de Debug Completa:\n\n${debugText}`);
+        }
+
+        // Función para limpiar todos los datos
+        async function clearAllData() {
+            if (!confirm('⚠️ ¿Estás seguro de que quieres eliminar TODOS los productos y notificaciones?\n\nEsta acción no se puede deshacer.')) {
+                return;
+            }
+
+            try {
+                // Eliminar todos los productos
+                const { error: productsError } = await supabase
+                    .from('products')
+                    .delete()
+                    .neq('id', '00000000-0000-0000-0000-000000000000'); // Eliminar todos
+
+                // Eliminar todas las notificaciones
+                const { error: notificationsError } = await supabase
+                    .from('notifications')
+                    .delete()
+                    .neq('id', '00000000-0000-0000-0000-000000000000'); // Eliminar todos
+
+                if (productsError || notificationsError) {
+                    throw new Error(productsError?.message || notificationsError?.message);
+                }
+
+                alert('✅ Todos los datos han sido eliminados correctamente');
+                loadProducts();
+                loadNotifications();
+            } catch (error) {
+                console.error('Error eliminando datos:', error);
+                alert('❌ Error al eliminar datos: ' + error.message);
+            }
+        }
+
+        // Función para exportar datos
+        async function exportData() {
+            try {
+                // Obtener productos
+                const { data: products, error: productsError } = await supabase
+                    .from('products')
+                    .select('*');
+
+                // Obtener notificaciones
+                const { data: notifications, error: notificationsError } = await supabase
+                    .from('notifications')
+                    .select('*');
+
+                if (productsError || notificationsError) {
+                    throw new Error(productsError?.message || notificationsError?.message);
+                }
+
+                const exportData = {
+                    timestamp: new Date().toISOString(),
+                    products: products || [],
+                    notifications: notifications || [],
+                    totalProducts: products?.length || 0,
+                    totalNotifications: notifications?.length || 0
+                };
+
+                // Crear y descargar archivo JSON
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `caher-backup-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                alert('✅ Datos exportados correctamente');
+            } catch (error) {
+                console.error('Error exportando datos:', error);
+                alert('❌ Error al exportar datos: ' + error.message);
+            }
+        }
+
+        // Función para actualizar el estado de conexión
+        function updateConnectionStatus(isConnected, message) {
+            const indicator = document.getElementById('status-indicator');
+            const text = document.getElementById('status-text');
+            
+            if (isConnected) {
+                indicator.textContent = '🟢';
+                indicator.className = 'status-indicator connected';
+                text.textContent = message || 'Conectado correctamente';
+            } else {
+                indicator.textContent = '🔴';
+                indicator.className = 'status-indicator error';
+                text.textContent = message || 'Error de conexión';
+            }
+        }
+
+        // Función para actualizar información del sistema
+        function updateSystemInfo() {
+            if (currentUser) {
+                document.getElementById('current-user-display').textContent = currentUser.email;
+            }
+            
+            // Verificar estado RLS
+            document.getElementById('rls-status').textContent = 'RLS activado (verificar en Supabase)';
+            
+            // Verificar si las columnas de imagen existen
+            checkImageColumns();
+        }
+
+        // Función para verificar si las columnas de imagen existen
+        async function checkImageColumns() {
+            try {
+                // Intentar hacer una consulta que incluya las columnas de imagen
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('id, name, image_url, image_data')
+                    .limit(1);
+
+                const statusText = document.getElementById('columns-status-text');
+                const updateNotice = document.getElementById('database-update-notice');
+
+                if (error) {
+                    // Si hay error, probablemente las columnas no existen
+                    hasImageColumns = false;
+                    statusText.textContent = '❌ No disponibles (usando método alternativo)';
+                    statusText.style.color = '#dc3545';
+                    updateNotice.style.display = 'block';
+                    console.log('Columnas de imagen no disponibles, usando método alternativo');
+                } else {
+                    hasImageColumns = true;
+                    statusText.textContent = '✅ Disponibles';
+                    statusText.style.color = '#28a745';
+                    updateNotice.style.display = 'none';
+                    console.log('Columnas de imagen disponibles');
+                }
+            } catch (error) {
+                hasImageColumns = false;
+                const statusText = document.getElementById('columns-status-text');
+                statusText.textContent = '❌ Error verificando';
+                statusText.style.color = '#dc3545';
+                console.log('Error verificando columnas de imagen:', error);
+            }
+        }
+
+        // Función para mostrar instrucciones de actualización de base de datos
+        function showDatabaseUpdateInstructions() {
+            const instructions = `
+📋 INSTRUCCIONES PARA ACTUALIZAR LA BASE DE DATOS:
+
+1. Ve a tu Dashboard de Supabase
+2. Navega a "SQL Editor"
+3. Copia y pega el siguiente código SQL:
+
+-- Añadir columnas de imagen a la tabla products
+ALTER TABLE products 
+ADD COLUMN IF NOT EXISTS image_url TEXT,
+ADD COLUMN IF NOT EXISTS image_data JSONB;
+
+-- Crear índice para mejorar el rendimiento
+CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE image_url IS NOT NULL;
+
+4. Haz clic en "Run" para ejecutar el script
+5. Recarga esta página para verificar los cambios
+
+✅ Una vez completado, las imágenes se almacenarán correctamente.
+            `;
+            
+            alert(instructions);
+        }
+
+        // ===== GESTIÓN DE USUARIOS =====
+
+        // Función para crear un nuevo usuario
+        async function createUser() {
+            const name = document.getElementById('user-name').value;
+            const email = document.getElementById('user-email').value;
+            const password = document.getElementById('user-password').value;
+            const role = document.getElementById('user-role').value;
+            const isActive = document.getElementById('user-active').checked;
+
+            if (!name || !email || !password) {
+                alert('❌ Por favor, completa todos los campos obligatorios');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('❌ La contraseña debe tener al menos 6 caracteres');
+                return;
+            }
+
+            try {
+                // Crear usuario en Supabase Auth
+                const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+                    email: email,
+                    password: password,
+                    email_confirm: true
+                });
+
+                if (authError) {
+                    throw authError;
+                }
+
+                // Crear registro en la tabla admin_users
+                const { data: userData, error: userError } = await supabase
+                    .from('admin_users')
+                    .insert([
+                        {
+                            id: authData.user.id,
+                            email: email,
+                            name: name,
+                            role: role,
+                            is_active: isActive,
+                            created_at: new Date().toISOString()
+                        }
+                    ]);
+
+                if (userError) {
+                    // Si falla la inserción en admin_users, eliminar el usuario de auth
+                    await supabase.auth.admin.deleteUser(authData.user.id);
+                    throw userError;
+                }
+
+                alert('✅ Usuario creado correctamente');
+                document.getElementById('user-form').reset();
+                loadUsers();
+
+            } catch (error) {
+                console.error('Error creando usuario:', error);
+                alert('❌ Error al crear usuario: ' + error.message);
+            }
+        }
+
+        // Función para cargar la lista de usuarios
+        async function loadUsers() {
+            try {
+                const { data, error } = await supabase
+                    .from('admin_users')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('Error cargando usuarios:', error);
+                    return;
+                }
+
+                const usersList = document.getElementById('users-list');
+                if (data && data.length > 0) {
+                    usersList.innerHTML = data.map(user => `
+                        <div class="user-item">
+                            <div class="user-info">
+                                <h5>${user.name || 'Sin nombre'}</h5>
+                                <p>📧 ${user.email}</p>
+                                <p>
+                                    <span class="user-role ${user.role || 'user'}">${getRoleDisplayName(user.role)}</span>
+                                    <span class="user-status ${user.is_active ? 'active' : 'inactive'}">
+                                        ${user.is_active ? '✅ Activo' : '❌ Inactivo'}
+                                    </span>
+                                </p>
+                                <p class="session-time">Creado: ${new Date(user.created_at).toLocaleDateString()}</p>
+                            </div>
+                            <div class="user-actions">
+                                <button class="user-action-btn edit" onclick="editUser('${user.id}')">
+                                    ✏️ Editar
+                                </button>
+                                <button class="user-action-btn toggle" onclick="toggleUserStatus('${user.id}', ${user.is_active})">
+                                    ${user.is_active ? '⏸️ Desactivar' : '▶️ Activar'}
+                                </button>
+                                <button class="user-action-btn delete" onclick="deleteUser('${user.id}')">
+                                    🗑️ Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    usersList.innerHTML = '<p>📭 No hay usuarios registrados</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('users-list').innerHTML = '<p>❌ Error al cargar usuarios</p>';
+            }
+        }
+
+        // Función para obtener el nombre de visualización del rol
+        function getRoleDisplayName(role) {
+            const roles = {
+                'admin': '👑 Admin',
+                'manager': '👨‍💼 Gestor',
+                'user': '👤 Usuario'
+            };
+            return roles[role] || '👤 Usuario';
+        }
+
+        // Función para editar usuario
+        async function editUser(userId) {
+            // Por simplicidad, aquí podrías abrir un modal o redirigir a una página de edición
+            alert('🔄 Función de edición en desarrollo. Por ahora, puedes eliminar y recrear el usuario.');
+        }
+
+        // Función para cambiar el estado del usuario
+        async function toggleUserStatus(userId, currentStatus) {
+            const newStatus = !currentStatus;
+            const action = newStatus ? 'activar' : 'desactivar';
+            
+            if (!confirm(`¿Estás seguro de que quieres ${action} este usuario?`)) {
+                return;
+            }
+
+            try {
+                const { error } = await supabase
+                    .from('admin_users')
+                    .update({ is_active: newStatus })
+                    .eq('id', userId);
+
+                if (error) throw error;
+
+                alert(`✅ Usuario ${newStatus ? 'activado' : 'desactivado'} correctamente`);
+                loadUsers();
+            } catch (error) {
+                console.error('Error cambiando estado:', error);
+                alert('❌ Error al cambiar estado: ' + error.message);
+            }
+        }
+
+        // Función para eliminar usuario
+        async function deleteUser(userId) {
+            if (!confirm('⚠️ ¿Estás seguro de que quieres eliminar este usuario?\n\nEsta acción no se puede deshacer.')) {
+                return;
+            }
+
+            try {
+                // Eliminar de admin_users
+                const { error: userError } = await supabase
+                    .from('admin_users')
+                    .delete()
+                    .eq('id', userId);
+
+                if (userError) throw userError;
+
+                // Eliminar de Supabase Auth (requiere permisos de admin)
+                try {
+                    await supabase.auth.admin.deleteUser(userId);
+                } catch (authError) {
+                    console.warn('No se pudo eliminar de Auth:', authError);
+                }
+
+                alert('✅ Usuario eliminado correctamente');
+                loadUsers();
+            } catch (error) {
+                console.error('Error eliminando usuario:', error);
+                alert('❌ Error al eliminar usuario: ' + error.message);
+            }
+        }
+
+        // Función para verificar usuarios autenticados
+        async function checkAuthenticatedUsers() {
+            try {
+                // Obtener usuarios activos de admin_users
+                const { data: users, error } = await supabase
+                    .from('admin_users')
+                    .select('*')
+                    .eq('is_active', true);
+
+                if (error) throw error;
+
+                const authUsersList = document.getElementById('authenticated-users');
+                
+                if (users && users.length > 0) {
+                    authUsersList.innerHTML = users.map(user => `
+                        <div class="authenticated-user">
+                            <div class="auth-info">
+                                <h6>👤 ${user.name || 'Sin nombre'}</h6>
+                                <p>📧 ${user.email}</p>
+                                <p>🔑 ${getRoleDisplayName(user.role)}</p>
+                            </div>
+                            <div class="session-time">
+                                Última actualización: ${new Date(user.updated_at || user.created_at).toLocaleString()}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    authUsersList.innerHTML = '<p>📭 No hay usuarios activos</p>';
+                }
+            } catch (error) {
+                console.error('Error verificando usuarios:', error);
+                document.getElementById('authenticated-users').innerHTML = '<p>❌ Error al verificar usuarios</p>';
+            }
+        }
+
+        // Función para cerrar todas las sesiones
+        async function logoutAllUsers() {
+            if (!confirm('⚠️ ¿Estás seguro de que quieres cerrar todas las sesiones?\n\nEsto desconectará a todos los usuarios.')) {
+                return;
+            }
+
+            try {
+                // Esta función requeriría permisos especiales de admin
+                alert('🔄 Función en desarrollo. Los usuarios se desconectarán automáticamente al cerrar el navegador.');
+                checkAuthenticatedUsers();
+            } catch (error) {
+                console.error('Error cerrando sesiones:', error);
+                alert('❌ Error al cerrar sesiones: ' + error.message);
+            }
+        }
+
+        // Función para exportar usuarios
+        async function exportUsers() {
+            try {
+                const { data: users, error } = await supabase
+                    .from('admin_users')
+                    .select('*');
+
+                if (error) throw error;
+
+                const exportData = {
+                    timestamp: new Date().toISOString(),
+                    users: users || [],
+                    totalUsers: users?.length || 0
+                };
+
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `usuarios-backup-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                alert('✅ Usuarios exportados correctamente');
+            } catch (error) {
+                console.error('Error exportando usuarios:', error);
+                alert('❌ Error al exportar usuarios: ' + error.message);
+            }
+        }
+
+        // Función para obtener emoji según el tipo de notificación
+        function getNotificationEmoji(type) {
+            const emojis = {
+                'info': '📢',
+                'warning': '⚠️',
+                'error': '❌',
+                'success': '✅',
+                'push': '🚀',
+                'new': '🆕',
+                'urgent': '🔥',
+                'sale': '💰',
+                'stock': '📦',
+                'discount': '🏷️',
+                'promotion': '🎉',
+                'maintenance': '🔧',
+                'update': '🔄',
+                'security': '🔒',
+                'delivery': '🚚',
+                'quality': '⭐',
+                'price': '💲',
+                'offer': '🎁',
+                'limited': '⏰',
+                'exclusive': '👑'
+            };
+            return emojis[type] || '📢';
+        }
+
+        // Función para obtener color de fondo según el tipo de notificación
+        function getNotificationBgColor(type) {
+            const colors = {
+                'info': '#007bff',        // Azul
+                'warning': '#ffc107',     // Amarillo
+                'error': '#dc3545',       // Rojo
+                'success': '#28a745',     // Verde
+                'push': '#17a2b8',        // Azul claro
+                'new': '#28a745',         // Verde
+                'urgent': '#dc3545',      // Rojo
+                'sale': '#ffc107',        // Amarillo
+                'stock': '#6f42c1',       // Morado
+                'discount': '#fd7e14',    // Naranja
+                'promotion': '#e83e8c',   // Rosa
+                'maintenance': '#6c757d', // Gris
+                'update': '#20c997',      // Verde azulado
+                'security': '#343a40',    // Negro
+                'delivery': '#17a2b8',    // Azul claro
+                'quality': '#ffc107',     // Amarillo
+                'price': '#28a745',       // Verde
+                'offer': '#e83e8c',       // Rosa
+                'limited': '#dc3545',     // Rojo
+                'exclusive': '#6f42c1'    // Morado
+            };
+            return colors[type] || '#007bff';
+        }
+
+        // Función para obtener color de texto según el tipo de notificación
+        function getNotificationTextColor(type) {
+            const textColors = {
+                'info': '#004085',        // Azul oscuro
+                'warning': '#856404',     // Amarillo oscuro
+                'error': '#721c24',       // Rojo oscuro
+                'success': '#155724',     // Verde oscuro
+                'push': '#0c5460',        // Azul oscuro
+                'new': '#155724',         // Verde oscuro
+                'urgent': '#721c24',      // Rojo oscuro
+                'sale': '#856404',        // Amarillo oscuro
+                'stock': '#4a2c7a',       // Morado oscuro
+                'discount': '#a0522d',    // Naranja oscuro
+                'promotion': '#8e2a5c',   // Rosa oscuro
+                'maintenance': '#495057', // Gris oscuro
+                'update': '#0f5132',      // Verde oscuro
+                'security': '#212529',    // Negro
+                'delivery': '#0c5460',    // Azul oscuro
+                'quality': '#856404',     // Amarillo oscuro
+                'price': '#155724',       // Verde oscuro
+                'offer': '#8e2a5c',       // Rosa oscuro
+                'limited': '#721c24',     // Rojo oscuro
+                'exclusive': '#4a2c7a'    // Morado oscuro
+            };
+            return textColors[type] || '#004085';
+        }
+
+        // Función para obtener clase de animación según el tipo de notificación
+        function getNotificationPulseClass(type) {
+            const pulseClasses = {
+                'urgent': 'pulse-urgent',
+                'error': 'pulse-error',
+                'limited': 'pulse-limited',
+                'exclusive': 'pulse-exclusive',
+                'new': 'pulse-new',
+                'sale': 'pulse-sale',
+                'promotion': 'pulse-promotion',
+                'offer': 'pulse-offer'
+            };
+            return pulseClasses[type] || '';
+        }
+
+        // Variables globales para gestión de imágenes
+        let uploadedImageData = null;
+        let processedImageUrl = '';
+        let hasImageColumns = false; // Flag para detectar si las columnas de imagen existen
+
+        // Función para manejar la carga de imágenes
+        async function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Validar tipo de archivo
+            if (!file.type.startsWith('image/')) {
+                alert('❌ Por favor, selecciona un archivo de imagen válido');
+                return;
+            }
+
+            // Validar tamaño (máximo 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('❌ La imagen es demasiado grande. Máximo 10MB');
+                return;
+            }
+
+            try {
+                // Mostrar preview inmediatamente
+                showImagePreview(file);
+
+                // Procesar la imagen
+                const processedImage = await processImage(file);
+                uploadedImageData = processedImage;
+                processedImageUrl = processedImage.dataUrl;
+
+                // Actualizar estado
+                updateImageStatus('✅ Imagen procesada correctamente', 'success');
+                
+                console.log('Imagen procesada:', {
+                    originalSize: file.size,
+                    processedSize: processedImage.blob.size,
+                    dimensions: `${processedImage.width}x${processedImage.height}`
+                });
+
+            } catch (error) {
+                console.error('Error procesando imagen:', error);
+                updateImageStatus('❌ Error al procesar la imagen', 'error');
+            }
+        }
+
+        // Función para procesar la imagen (redimensionar y convertir a JPG)
+        function processImage(file) {
+            return new Promise((resolve, reject) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+
+                img.onload = function() {
+                    // Calcular nuevas dimensiones (máximo 500x500, mantener proporción)
+                    const maxSize = 500;
+                    let { width, height } = img;
+
+                    if (width > height) {
+                        if (width > maxSize) {
+                            height = (height * maxSize) / width;
+                            width = maxSize;
+                        }
+                    } else {
+                        if (height > maxSize) {
+                            width = (width * maxSize) / height;
+                            height = maxSize;
+                        }
+                    }
+
+                    // Configurar canvas
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    // Dibujar imagen redimensionada
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Convertir a blob JPG con calidad 70% (reducir más el tamaño)
+                    canvas.toBlob((blob) => {
+                        if (!blob) {
+                            reject(new Error('Error al convertir imagen'));
+                            return;
+                        }
+
+                        // Crear un DataURL más pequeño para almacenamiento
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                        
+                        // Generar un ID único para la imagen
+                        const imageId = 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        
+                        // Almacenar en localStorage como respaldo
+                        try {
+                            localStorage.setItem('product_image_' + imageId, dataUrl);
+                        } catch (e) {
+                            console.warn('No se pudo almacenar imagen en localStorage:', e);
+                        }
+                        
+                        resolve({
+                            blob: blob,
+                            dataUrl: dataUrl,
+                            imageId: imageId,
+                            width: width,
+                            height: height,
+                            size: blob.size
+                        });
+                    }, 'image/jpeg', 0.7);
+                };
+
+                img.onerror = () => reject(new Error('Error al cargar la imagen'));
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        // Función para mostrar preview de la imagen
+        function showImagePreview(file) {
+            const preview = document.getElementById('image-preview-container');
+            const previewImg = document.getElementById('uploaded-image-preview');
+            const previewName = document.getElementById('uploaded-image-name');
+            const previewSize = document.getElementById('uploaded-image-size');
+
+            // Mostrar preview inmediato
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                previewName.textContent = file.name;
+                previewSize.textContent = `Tamaño original: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+
+            // Ocultar zona de carga
+            document.querySelector('.upload-zone').style.display = 'none';
+        }
+
+        // Función para actualizar el estado de la imagen
+        function updateImageStatus(message, type) {
+            const statusElement = document.getElementById('uploaded-image-status');
+            statusElement.textContent = message;
+            statusElement.style.color = type === 'success' ? '#28a745' : '#dc3545';
+        }
+
+        // Función para eliminar imagen cargada
+        function removeUploadedImage() {
+            uploadedImageData = null;
+            processedImageUrl = '';
+            
+            document.getElementById('image-preview-container').style.display = 'none';
+            document.querySelector('.upload-zone').style.display = 'block';
+            document.getElementById('image-upload').value = '';
+        }
+
+        // Función para recuperar imagen desde localStorage
+        function getImageFromStorage(imageId) {
+            try {
+                return localStorage.getItem('product_image_' + imageId);
+            } catch (e) {
+                console.warn('No se pudo recuperar imagen desde localStorage:', e);
+                return null;
+            }
+        }
+
+        // Función para limpiar imágenes antiguas del localStorage
+        function cleanupOldImages() {
+            try {
+                const keys = Object.keys(localStorage);
+                const imageKeys = keys.filter(key => key.startsWith('product_image_'));
+                
+                // Mantener solo las últimas 50 imágenes
+                if (imageKeys.length > 50) {
+                    imageKeys.sort().slice(0, imageKeys.length - 50).forEach(key => {
+                        localStorage.removeItem(key);
+                    });
+                }
+            } catch (e) {
+                console.warn('Error limpiando imágenes antiguas:', e);
+            }
+        }
+
+        // Función para arrastrar y soltar archivos
+        function setupDragAndDrop() {
+            const uploadZone = document.querySelector('.upload-zone');
+            
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('dragover');
+            });
+
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.classList.remove('dragover');
+            });
+
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    const fakeEvent = { target: { files: files } };
+                    handleImageUpload(fakeEvent);
+                }
+            });
         }
 
         // Mostrar/ocultar campo de cantidad mínima
@@ -731,6 +2557,8 @@
         // Inicializar cuando se carga la página
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Panel de administración cargado');
+            setupDragAndDrop();
+            cleanupOldImages(); // Limpiar imágenes antiguas del localStorage
         });
     </script>
 </body>
