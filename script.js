@@ -4795,9 +4795,18 @@ function displayAdminNotifications() {
 
 // Función para cerrar una notificación específica
 function closeNotification(index) {
+  console.log('🔴 Intentando cerrar notificación:', index);
+  console.log('🔴 adminNotifications:', adminNotifications);
+  console.log('🔴 Longitud:', adminNotifications ? adminNotifications.length : 'undefined');
+  
   if (adminNotifications && adminNotifications.length > index) {
+    console.log('🔴 Eliminando notificación en índice:', index);
     adminNotifications.splice(index, 1);
+    console.log('🔴 adminNotifications después de eliminar:', adminNotifications);
     displayAdminNotifications();
+    console.log('🔴 Notificaciones actualizadas');
+  } else {
+    console.log('🔴 No se pudo eliminar la notificación - índice inválido o array vacío');
   }
 }
 
