@@ -4798,6 +4798,7 @@ function displayAdminNotifications() {
 // Función para cerrar una notificación específica - VERSIÓN ACTUALIZADA 2024-12-19
 function closeNotification(index) {
   console.log('🔴 [VERSIÓN ACTUALIZADA 2024-12-19] Intentando cerrar notificación:', index);
+  console.log('🔴 [CACHE BUST] Timestamp:', Date.now());
   console.log('🔴 adminNotifications:', adminNotifications);
   console.log('🔴 Longitud:', adminNotifications ? adminNotifications.length : 'undefined');
   
