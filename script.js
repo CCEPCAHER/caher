@@ -4795,9 +4795,9 @@ function displayAdminNotifications() {
   }).join('');
 }
 
-// Función para cerrar una notificación específica - VERSIÓN ACTUALIZADA
+// Función para cerrar una notificación específica - VERSIÓN ACTUALIZADA 2024-12-19
 function closeNotification(index) {
-  console.log('🔴 [VERSIÓN ACTUALIZADA] Intentando cerrar notificación:', index);
+  console.log('🔴 [VERSIÓN ACTUALIZADA 2024-12-19] Intentando cerrar notificación:', index);
   console.log('🔴 adminNotifications:', adminNotifications);
   console.log('🔴 Longitud:', adminNotifications ? adminNotifications.length : 'undefined');
   
@@ -4819,8 +4819,31 @@ function closeNotification(index) {
     displayAdminNotifications();
     console.log('🔴 Notificaciones actualizadas');
     
-    // Mostrar confirmación visual
-    showToast('Notificación cerrada');
+    // Mostrar confirmación visual - FUNCIÓN CORREGIDA
+    try {
+      if (typeof showToast === 'function') {
+        showToast('Notificación cerrada');
+      } else {
+        // Función de respaldo
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #4CAF50;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 4px;
+          z-index: 10000;
+          font-family: Arial, sans-serif;
+        `;
+        toast.textContent = 'Notificación cerrada';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+    } catch (error) {
+      console.log('✅ Notificación cerrada correctamente');
+    }
   } else {
     console.log('🔴 No se pudo eliminar la notificación - índice inválido o array vacío');
     console.log('🔴 adminNotifications es:', typeof adminNotifications);
