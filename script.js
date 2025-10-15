@@ -4559,8 +4559,169 @@ if (product.discountOptions) {
 });
 
 // Service Worker para PWA
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   navigator.serviceWorker.register('/sw.js')
     .then(() => console.log("✅ Service Worker registrado correctamente"))
     .catch(err => console.log("❌ Error en Service Worker:", err));
 }
+
+// Integración con Supabase para productos del panel de administración
+let supabase = null;
+let adminProducts = [];
+let adminNotifications = [];
+
+// Inicializar Supabase
+async function initSupabase() {
+  try {
+    // Cargar configuración de Supabase
+    const response = await fetch('supabase-config.js');
+    const configText = await response.text();
+    
+    // Extraer configuración usando regex
+    const urlMatch = configText.match(/url:\s*['"`]([^'"`]+)['"`]/);
+    const keyMatch = configText.match(/anonKey:\s*['"`]([^'"`]+)['"`]/);
+    
+    if (!urlMatch || !keyMatch) {
+      console.warn('⚠️ No se pudo cargar la configuración de Supabase');
+      return false;
+    }
+    
+    // Cargar Supabase dinámicamente
+    const supabaseScript = document.createElement('script');
+    supabaseScript.src = 'https://unpkg.com/@supabase/supabase-js@2';
+    supabaseScript.onload = () => {
+      supabase = window.supabase.createClient(urlMatch[1], keyMatch[1]);
+      console.log('✅ Supabase inicializado para la aplicación principal');
+      loadAdminData();
+    };
+    document.head.appendChild(supabaseScript);
+    
+    return true;
+  } catch (error) {
+    console.warn('⚠️ Error al inicializar Supabase:', error);
+    return false;
+  }
+}
+
+// Cargar datos del panel de administración
+async function loadAdminData() {
+  if (!supabase) return;
+  
+  try {
+    // Cargar productos del admin
+    const { data: products, error: productsError } = await supabase
+      .from('products')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (productsError) {
+      console.warn('⚠️ Error al cargar productos del admin:', productsError);
+    } else {
+      adminProducts = products || [];
+      console.log(`📦 ${adminProducts.length} productos del panel de administración cargados`);
+    }
+    
+    // Cargar notificaciones del admin
+    const { data: notifications, error: notificationsError } = await supabase
+      .from('notifications')
+      .select('*')
+      .eq('is_active', true)
+      .order('created_at', { ascending: false });
+    
+    if (notificationsError) {
+      console.warn('⚠️ Error al cargar notificaciones del admin:', notificationsError);
+    } else {
+      adminNotifications = notifications || [];
+      console.log(`🔔 ${adminNotifications.length} notificaciones del panel de administración cargadas`);
+      displayAdminNotifications();
+    }
+    
+    // Actualizar la lista de productos
+    updateProductList();
+    
+  } catch (error) {
+    console.warn('⚠️ Error al cargar datos del admin:', error);
+  }
+}
+
+// Mostrar notificaciones del panel de administración
+function displayAdminNotifications() {
+  if (adminNotifications.length === 0) return;
+  
+  const notificationContainer = document.getElementById('admin-notifications');
+  if (!notificationContainer) {
+    // Crear contenedor si no existe
+    const container = document.createElement('div');
+    container.id = 'admin-notifications';
+    container.style.cssText = `
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      max-width: 300px;
+    `;
+    document.body.appendChild(container);
+  }
+  
+  const container = document.getElementById('admin-notifications');
+  container.innerHTML = adminNotifications.map(notification => `
+    <div class="admin-notification" style="
+      background: ${getNotificationColor(notification.type)};
+      color: white;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      font-size: 0.9em;
+    ">
+      <strong>${notification.title}</strong><br>
+      ${notification.message}
+    </div>
+  `).join('');
+}
+
+// Obtener color según el tipo de notificación
+function getNotificationColor(type) {
+  const colors = {
+    'info': '#3498db',
+    'warning': '#f39c12',
+    'success': '#27ae60',
+    'error': '#e74c3c'
+  };
+  return colors[type] || colors['info'];
+}
+
+// Función para combinar productos originales con productos del admin
+function combineProductsWithAdmin(originalProducts) {
+  const combined = [...originalProducts];
+  
+  // Agregar productos del admin a sus respectivas secciones
+  adminProducts.forEach(adminProduct => {
+    const product = {
+      name: adminProduct.name,
+      price: adminProduct.price,
+      previousPrice: adminProduct.previous_price,
+      isNew: adminProduct.is_new,
+      hasQuantityAlert: adminProduct.has_quantity_alert,
+      minQuantity: adminProduct.min_quantity
+    };
+    
+    // Buscar la sección correspondiente
+    if (sections[adminProduct.section]) {
+      sections[adminProduct.section].push(product);
+    } else {
+      // Si la sección no existe, crearla
+      sections[adminProduct.section] = [product];
+    }
+  });
+  
+  return combined;
+}
+
+// Inicializar Supabase cuando se carga la página
+document.addEventListener('DOMContentLoaded', () => {
+  // Intentar inicializar Supabase después de un pequeño delay
+  setTimeout(() => {
+    initSupabase();
+  }, 1000);
+});
