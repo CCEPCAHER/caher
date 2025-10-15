@@ -394,6 +394,70 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-btn:active {
+            transform: translateX(-1px);
+        }
+
+        /* Responsive para el botón de volver */
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: 20px 15px;
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .header-left {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .back-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+                order: -1;
+            }
+
+            .admin-header h1 {
+                font-size: 1.8rem;
+                order: 1;
+            }
+
+            .user-info {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
         .admin-header h1 {
             margin: 0;
             font-size: 2.2rem;
@@ -923,10 +987,15 @@
         <!-- Panel de Administración -->
         <div id="admin-panel" class="admin-panel">
             <div class="admin-header">
-                <h1>
-                    <div class="logo">⚙️</div>
-                    Panel de Administración Caher
-                </h1>
+                <div class="header-left">
+                    <button class="back-btn" onclick="goBackToMain()" title="Volver a la pantalla principal">
+                        ← Volver
+                    </button>
+                    <h1>
+                        <div class="logo">⚙️</div>
+                        Panel de Administración Caher
+                    </h1>
+                </div>
                 <div class="user-info">
                     <div class="user-avatar" id="user-avatar">A</div>
                     <div>
@@ -2553,6 +2622,15 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                 minQuantityGroup.style.display = 'none';
             }
         });
+
+        // Función para volver a la pantalla principal
+        function goBackToMain() {
+            // Cerrar sesión del admin
+            adminLogout();
+            
+            // Redirigir a la pantalla principal
+            window.location.href = 'index.html';
+        }
 
         // Inicializar cuando se carga la página
         document.addEventListener('DOMContentLoaded', function() {
