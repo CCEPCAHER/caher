@@ -4815,6 +4815,7 @@ function displayAdminNotifications() {
 function closeNotification(index) {
   console.log('🔴 [VERSIÓN ACTUALIZADA 2024-12-19] Intentando cerrar notificación:', index);
   console.log('🔴 [CACHE BUST] Timestamp:', Date.now());
+  console.log('🔴 [VERSIÓN 3] Esta es la versión corregida del problema de notificaciones persistentes');
   console.log('🔴 adminNotifications:', adminNotifications);
   console.log('🔴 Longitud:', adminNotifications ? adminNotifications.length : 'undefined');
   
@@ -4835,6 +4836,16 @@ function closeNotification(index) {
     // Actualizar la visualización
     displayAdminNotifications();
     console.log('🔴 Notificaciones actualizadas');
+    
+    // Limpieza adicional para notificaciones persistentes
+    setTimeout(() => {
+      const container = document.getElementById('admin-notifications');
+      if (container && adminNotifications.length === 0) {
+        console.log('🔴 [LIMPIEZA] Forzando limpieza del contenedor de notificaciones');
+        container.innerHTML = '';
+        container.style.display = 'none';
+      }
+    }, 100);
     
     // Mostrar confirmación visual - FUNCIÓN CORREGIDA
     try {
