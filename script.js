@@ -4820,7 +4820,7 @@ function closeNotification(index) {
     console.log('🔴 Notificaciones actualizadas');
     
     // Mostrar confirmación visual
-    showNotification('Notificación cerrada', 'success');
+    showToast('Notificación cerrada');
   } else {
     console.log('🔴 No se pudo eliminar la notificación - índice inválido o array vacío');
     console.log('🔴 adminNotifications es:', typeof adminNotifications);
