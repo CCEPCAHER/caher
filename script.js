@@ -4816,6 +4816,7 @@ function closeNotification(index) {
   console.log('🔴 [VERSIÓN ACTUALIZADA 2024-12-19] Intentando cerrar notificación:', index);
   console.log('🔴 [CACHE BUST] Timestamp:', Date.now());
   console.log('🔴 [VERSIÓN 3] Esta es la versión corregida del problema de notificaciones persistentes');
+  console.log('🔴 [SOLUCIÓN DIRECTA] Implementada limpieza inmediata del contenedor');
   console.log('🔴 adminNotifications:', adminNotifications);
   console.log('🔴 Longitud:', adminNotifications ? adminNotifications.length : 'undefined');
   
@@ -4836,6 +4837,17 @@ function closeNotification(index) {
     // Actualizar la visualización
     displayAdminNotifications();
     console.log('🔴 Notificaciones actualizadas');
+    
+    // SOLUCIÓN DIRECTA: Limpiar notificaciones persistentes inmediatamente
+    if (adminNotifications.length === 0) {
+      console.log('🔴 [SOLUCIÓN DIRECTA] Array vacío, limpiando contenedor inmediatamente');
+      const container = document.getElementById('admin-notifications');
+      if (container) {
+        container.innerHTML = '';
+        container.style.display = 'none';
+        console.log('🔴 [SOLUCIÓN DIRECTA] Contenedor limpiado y ocultado');
+      }
+    }
     
     // Limpieza adicional para notificaciones persistentes
     setTimeout(() => {
