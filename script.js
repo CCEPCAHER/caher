@@ -4690,13 +4690,16 @@ function displayAdminNotifications() {
       top: 20px;
       left: 20px;
       z-index: 1000;
-      max-width: 300px;
+      max-width: 400px;
+      max-height: 80vh;
+      overflow-y: auto;
+      pointer-events: none;
     `;
     document.body.appendChild(container);
   }
   
   const container = document.getElementById('admin-notifications');
-  container.innerHTML = adminNotifications.map(notification => {
+  container.innerHTML = adminNotifications.map((notification, index) => {
     const emoji = getNotificationEmoji(notification.type);
     const bgColor = getNotificationBgColor(notification.type);
     const textColor = getNotificationTextColor(notification.type);
@@ -4704,33 +4707,48 @@ function displayAdminNotifications() {
     
     return `
       <div class="admin-notification ${pulseClass}" style="
-        border-left: 6px solid ${bgColor};
-        background: linear-gradient(135deg, ${bgColor}20, ${bgColor}10);
-        box-shadow: 0 4px 15px ${bgColor}30;
-        color: ${textColor};
-        padding: 12px 15px;
-        margin-bottom: 10px;
-        border-radius: 8px;
-        font-size: 0.9em;
+        border-left: 8px solid ${bgColor};
+        background: ${bgColor};
+        color: white;
+        padding: 16px 20px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        font-size: 1rem;
         position: relative;
         overflow: hidden;
-      ">
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
-          <span style="font-size: 1.2em; animation: bounce 2s infinite;">${emoji}</span>
-          <strong>${notification.title}</strong>
-          <span style="
-            background: ${bgColor};
-            color: white;
-            padding: 2px 6px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-          ">${notification.type.toUpperCase()}</span>
-        </div>
-        <div style="color: ${textColor}80; line-height: 1.4;">
-          ${notification.message}
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        pointer-events: auto;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        transform: translateX(${index * 5}px);
+        z-index: ${1000 - index};
+      " onmouseover="this.style.transform='translateX(0px) scale(1.02)'" onmouseout="this.style.transform='translateX(${index * 5}px) scale(1)'">
+        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
+          <span style="font-size: 1.8em; animation: bounce 2s infinite; flex-shrink: 0;">${emoji}</span>
+          <div style="flex: 1; min-width: 0;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <strong style="font-size: 1.1rem; line-height: 1.2;">${notification.title}</strong>
+              <span style="
+                background: rgba(255,255,255,0.2);
+                color: white;
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 0.75rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+              ">${notification.type.toUpperCase()}</span>
+            </div>
+            <div style="
+              color: rgba(255,255,255,0.95);
+              line-height: 1.5;
+              font-size: 0.95rem;
+              word-wrap: break-word;
+            ">
+              ${notification.message}
+            </div>
+          </div>
         </div>
         <div style="
           position: absolute;
@@ -4738,13 +4756,49 @@ function displayAdminNotifications() {
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(45deg, transparent 30%, ${bgColor}10 50%, transparent 70%);
+          background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
           pointer-events: none;
           animation: shimmer 3s infinite;
         "></div>
+        <div style="
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          width: 8px;
+          height: 8px;
+          background: rgba(255,255,255,0.8);
+          border-radius: 50%;
+          animation: pulse-dot 2s infinite;
+        "></div>
+        <div style="
+          position: absolute;
+          top: 8px;
+          right: 24px;
+          width: 20px;
+          height: 20px;
+          background: rgba(255,255,255,0.2);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          font-size: 12px;
+          color: white;
+          transition: all 0.2s ease;
+        " onclick="closeNotification(${index})" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+          ×
+        </div>
       </div>
     `;
   }).join('');
+}
+
+// Función para cerrar una notificación específica
+function closeNotification(index) {
+  if (adminNotifications && adminNotifications.length > index) {
+    adminNotifications.splice(index, 1);
+    displayAdminNotifications();
+  }
 }
 
 // Obtener color según el tipo de notificación (función legacy)
