@@ -4678,10 +4678,22 @@ async function loadAdminData() {
 
 // Mostrar notificaciones del panel de administración
 function displayAdminNotifications() {
-  if (adminNotifications.length === 0) return;
+  console.log('🔄 [DISPLAY] Actualizando visualización de notificaciones. Total:', adminNotifications.length);
   
   const notificationContainer = document.getElementById('admin-notifications');
+  
+  // Si no hay notificaciones, limpiar el contenedor y ocultarlo
+  if (adminNotifications.length === 0) {
+    console.log('🔄 [DISPLAY] No hay notificaciones, limpiando contenedor');
+    if (notificationContainer) {
+      notificationContainer.innerHTML = '';
+      notificationContainer.style.display = 'none';
+    }
+    return;
+  }
+  
   if (!notificationContainer) {
+    console.log('🔄 [DISPLAY] Creando nuevo contenedor de notificaciones');
     // Crear contenedor si no existe
     const container = document.createElement('div');
     container.id = 'admin-notifications';
@@ -4696,6 +4708,8 @@ function displayAdminNotifications() {
       pointer-events: none;
     `;
     document.body.appendChild(container);
+  } else {
+    console.log('🔄 [DISPLAY] Usando contenedor existente');
   }
   
   const container = document.getElementById('admin-notifications');
@@ -4793,6 +4807,8 @@ function displayAdminNotifications() {
       </div>
     `;
   }).join('');
+  
+  console.log('🔄 [DISPLAY] Contenedor actualizado con', adminNotifications.length, 'notificaciones');
 }
 
 // Función para cerrar una notificación específica - VERSIÓN ACTUALIZADA 2024-12-19
