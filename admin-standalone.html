@@ -1233,22 +1233,22 @@
                     <form id="user-form" onsubmit="createUser(); return false;">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="user-name">Nombre Completo</label>
-                                <input type="text" id="user-name" required placeholder="Ej: Juan Pérez">
+                                <label for="new-user-name">Nombre Completo</label>
+                                <input type="text" id="new-user-name" required placeholder="Ej: Juan Pérez">
                             </div>
                             <div class="form-group">
-                                <label for="user-email">Email</label>
-                                <input type="email" id="user-email" required placeholder="usuario@empresa.com">
+                                <label for="new-user-email">Email</label>
+                                <input type="email" id="new-user-email" required placeholder="usuario@empresa.com">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="user-password">Contraseña</label>
-                                <input type="password" id="user-password" required placeholder="Mínimo 6 caracteres">
+                                <label for="new-user-password">Contraseña</label>
+                                <input type="password" id="new-user-password" required placeholder="Mínimo 6 caracteres">
                             </div>
                             <div class="form-group">
-                                <label for="user-role">Rol</label>
-                                <select id="user-role" required>
+                                <label for="new-user-role">Rol</label>
+                                <select id="new-user-role" required>
                                     <option value="admin">👑 Administrador</option>
                                     <option value="manager">👨‍💼 Gestor</option>
                                     <option value="user">👤 Usuario</option>
@@ -1257,7 +1257,7 @@
                         </div>
                         <div class="form-group">
                             <label>
-                                <input type="checkbox" id="user-active"> ✅ Usuario Activo
+                                <input type="checkbox" id="new-user-active"> ✅ Usuario Activo
                             </label>
                         </div>
                         <button type="submit" class="btn">👤 Crear Usuario</button>
@@ -2137,11 +2137,11 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
 
         // Función para crear un nuevo usuario
         async function createUser() {
-            const name = document.getElementById('user-name').value;
-            const email = document.getElementById('user-email').value;
-            const password = document.getElementById('user-password').value;
-            const role = document.getElementById('user-role').value;
-            const isActive = document.getElementById('user-active').checked;
+            const name = document.getElementById('new-user-name').value;
+            const email = document.getElementById('new-user-email').value;
+            const password = document.getElementById('new-user-password').value;
+            const role = document.getElementById('new-user-role').value;
+            const isActive = document.getElementById('new-user-active').checked;
 
             if (!name || !email || !password) {
                 alert('❌ Por favor, completa todos los campos obligatorios');
