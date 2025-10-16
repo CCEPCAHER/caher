@@ -4221,10 +4221,7 @@ if (product.discountOptions) {
 
   function collectCartData() {
     const cartItems = document.querySelectorAll("#cart-items-modal .cart-item");
-    if (
-      cartItems.length === 0 ||
-      (cartItems[0].innerText && cartItems[0].innerText.includes('No hay productos'))
-    ) {
+    if (cartItems.length === 0) {
       alert("El carrito está vacío. No puedes enviar un pedido sin productos.");
       return null;
     }
@@ -4321,7 +4318,7 @@ if (product.discountOptions) {
     const orderItems = collectCartData();
     if (!orderItems) return;
     const loggedUser = localStorage.getItem("loggedInUser") || "Usuario no identificado";
-    const loggedPassword = localStorage.getItem("loggedInPassword") || "1234";
+    const loggedPassword = localStorage.getItem("savedPassword") || "1234";
     const storeName = localStorage.getItem("userStore") || "Supermercado desconocido";
     const order = {
       username: loggedUser,
