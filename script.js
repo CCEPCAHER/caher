@@ -4008,7 +4008,17 @@ function createSection(sectionName, products) {
   products.forEach((product, index) => {
     const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
     const quantities = PRODUCT_QUANTITIES[product.name] || [0, 0, 0];
-    let imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
+    
+    // Determinar la imagen a usar: Supabase URL si existe, sino imagen local
+    let imageSrc;
+    if (product.imageUrl) {
+      // Usar imagen de Supabase
+      imageSrc = product.imageUrl;
+    } else {
+      // Usar imagen local por defecto
+      const imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
+      imageSrc = `images/${imageName}`;
+    }
 
     let offerHTML = product.offer ? '<div class="offer-tag">Oferta</div>' : '';
 
@@ -4113,7 +4123,7 @@ if (product.discountOptions) {
           ${discountHTML}
           ${focusLogoHTML}
           ${adminIndicatorsHTML}
-          <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
+          <img data-src="${imageSrc}" alt="${product.name}" class="lazy">
           <h3>${product.name}</h3>
         </div>
       `;
@@ -4126,7 +4136,7 @@ if (product.discountOptions) {
           ${discountHTML}
           ${focusLogoHTML}
           ${adminIndicatorsHTML}
-          <img data-src="images/${imageName}" alt="${product.name}" class="lazy">
+          <img data-src="${imageSrc}" alt="${product.name}" class="lazy">
           <h3>${product.name}</h3>
           ${priceHTML ? `<p class="price">${priceHTML}</p>` : ''}
           <div class="quantity-buttons">
@@ -5012,6 +5022,9 @@ function combineProductsWithAdmin(originalSections) {
       isNew: adminProduct.is_new,
       hasQuantityAlert: adminProduct.has_quantity_alert,
       minQuantity: adminProduct.min_quantity,
+      // Añadir información de imagen si existe
+      imageUrl: adminProduct.image_url || null,
+      imageData: adminProduct.image_data || null,
       // Añadir propiedades adicionales para compatibilidad
       focus1: false,
       focus2: false,
