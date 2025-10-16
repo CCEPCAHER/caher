@@ -2119,16 +2119,41 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                 return;
             }
 
+            // Validar formato de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('❌ Por favor, ingresa un email válido');
+                return;
+            }
+
             try {
-                // Crear usuario en Supabase Auth
-                const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+                // Verificar si el email ya existe
+                const { data: existingUser, error: checkError } = await supabase
+                    .from('admin_users')
+                    .select('email')
+                    .eq('email', email)
+                    .single();
+
+                if (existingUser) {
+                    alert('❌ Este email ya está registrado');
+                    return;
+                }
+
+                // Crear usuario usando signUp (método correcto para frontend)
+                const { data: authData, error: authError } = await supabase.auth.signUp({
                     email: email,
                     password: password,
-                    email_confirm: true
+                    options: {
+                        emailRedirectTo: window.location.origin
+                    }
                 });
 
                 if (authError) {
                     throw authError;
+                }
+
+                if (!authData.user) {
+                    throw new Error('No se pudo crear el usuario');
                 }
 
                 // Crear registro en la tabla admin_users
@@ -2146,12 +2171,12 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                     ]);
 
                 if (userError) {
-                    // Si falla la inserción en admin_users, eliminar el usuario de auth
-                    await supabase.auth.admin.deleteUser(authData.user.id);
-                    throw userError;
+                    console.error('Error insertando en admin_users:', userError);
+                    // No podemos eliminar el usuario de auth desde el frontend, pero mostramos el error
+                    throw new Error('Usuario creado en auth pero error al guardar en base de datos: ' + userError.message);
                 }
 
-                alert('✅ Usuario creado correctamente');
+                alert('✅ Usuario creado correctamente. Se ha enviado un email de confirmación.');
                 document.getElementById('user-form').reset();
                 loadUsers();
 
@@ -2866,6 +2891,33 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             }
             
             return null;
+        }
+
+        // Función para cerrar notificaciones en el frontend principal
+        function closeNotification(index) {
+            console.log('🔴 [ADMIN] Intentando cerrar notificación:', index);
+            
+            // Verificar si estamos en el panel de administración
+            if (document.getElementById('admin-panel')) {
+                console.log('🔴 [ADMIN] Estamos en el panel de administración, redirigiendo al frontend');
+                // Si estamos en el admin, redirigir al frontend principal
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Si estamos en el frontend principal, usar la función del script.js
+            if (window.adminNotifications && window.adminNotifications.length > index) {
+                console.log('🔴 [ADMIN] Eliminando notificación en índice:', index);
+                window.adminNotifications.splice(index, 1);
+                
+                // Llamar a la función de mostrar notificaciones del script principal
+                if (typeof window.displayAdminNotifications === 'function') {
+                    window.displayAdminNotifications();
+                }
+                console.log('🔴 [ADMIN] Notificaciones actualizadas');
+            } else {
+                console.log('🔴 [ADMIN] No se pudo eliminar la notificación - índice inválido o array vacío');
+            }
         }
 
         // Inicializar cuando se carga la página
