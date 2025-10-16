@@ -1553,9 +1553,9 @@
                     min_quantity: minQuantity
                 };
 
-                // Añadir imagen si está cargada (solo metadatos y ID, no la imagen completa)
+                // Añadir imagen si está cargada
                 if (processedImageUrl && uploadedImageData) {
-                    // Solo almacenar metadatos básicos y ID de la imagen
+                    // Almacenar metadatos de la imagen
                     const imageMetadata = {
                         imageId: uploadedImageData.imageId,
                         width: uploadedImageData.width,
@@ -1564,17 +1564,20 @@
                         format: 'jpg',
                         quality: 70,
                         hasImage: true,
-                        storedIn: 'localStorage'
+                        storedIn: uploadedImageData.uploadSuccess ? 'supabase' : 'localStorage',
+                        uploadSuccess: uploadedImageData.uploadSuccess
                     };
                     
                     if (hasImageColumns) {
                         // Usar las columnas dedicadas si existen
-                        productData.image_url = uploadedImageData.imageId; // Solo el ID, no la imagen completa
+                        // Usar la URL de Supabase si está disponible, sino el ID
+                        productData.image_url = uploadedImageData.supabaseUrl || uploadedImageData.imageId;
                         productData.image_data = imageMetadata;
                     } else {
                         // Usar el campo quantities como almacenamiento temporal
                         const imageInfo = {
                             image_id: uploadedImageData.imageId,
+                            image_url: uploadedImageData.supabaseUrl || null,
                             image_metadata: imageMetadata
                         };
                         
@@ -2566,7 +2569,7 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                     ctx.drawImage(img, 0, 0, width, height);
 
                     // Convertir a blob JPG con calidad 70% (reducir más el tamaño)
-                    canvas.toBlob((blob) => {
+                    canvas.toBlob(async (blob) => {
                         if (!blob) {
                             reject(new Error('Error al convertir imagen'));
                             return;
@@ -2584,22 +2587,58 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                         
                         const imageId = finalImageName.replace(/\.(jpg|jpeg|png|gif|webp)$/i, '');
                         
-                        // Almacenar en localStorage como respaldo
                         try {
-                            localStorage.setItem('product_image_' + imageId, dataUrl);
-                        } catch (e) {
-                            console.warn('No se pudo almacenar imagen en localStorage:', e);
+                            // Subir imagen a Supabase Storage
+                            const { data: uploadData, error: uploadError } = await supabase.storage
+                                .from('product-images')
+                                .upload(imageId + '.jpg', blob, {
+                                    cacheControl: '3600',
+                                    upsert: true
+                                });
+
+                            if (uploadError) {
+                                console.error('Error subiendo imagen a Supabase:', uploadError);
+                                // Continuar con localStorage como respaldo
+                            }
+
+                            // Obtener URL pública de la imagen
+                            const { data: urlData } = supabase.storage
+                                .from('product-images')
+                                .getPublicUrl(imageId + '.jpg');
+
+                            // Almacenar en localStorage como respaldo
+                            try {
+                                localStorage.setItem('product_image_' + imageId, dataUrl);
+                            } catch (e) {
+                                console.warn('No se pudo almacenar imagen en localStorage:', e);
+                            }
+                            
+                            resolve({
+                                blob: blob,
+                                dataUrl: dataUrl,
+                                imageId: imageId,
+                                fileName: finalImageName,
+                                width: width,
+                                height: height,
+                                size: blob.size,
+                                supabaseUrl: urlData?.publicUrl || null,
+                                uploadSuccess: !uploadError
+                            });
+                        } catch (error) {
+                            console.error('Error en proceso de subida:', error);
+                            // Continuar con localStorage como respaldo
+                            resolve({
+                                blob: blob,
+                                dataUrl: dataUrl,
+                                imageId: imageId,
+                                fileName: finalImageName,
+                                width: width,
+                                height: height,
+                                size: blob.size,
+                                supabaseUrl: null,
+                                uploadSuccess: false
+                            });
                         }
-                        
-                        resolve({
-                            blob: blob,
-                            dataUrl: dataUrl,
-                            imageId: imageId,
-                            fileName: finalImageName,
-                            width: width,
-                            height: height,
-                            size: blob.size
-                        });
                     }, 'image/jpeg', 0.7);
                 };
 
