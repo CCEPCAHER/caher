@@ -4007,7 +4007,16 @@ function createSection(sectionName, products) {
   let sectionHTML = `<h2 class="section-title">${sectionName}</h2><div class="carousel-container">`;
   products.forEach((product, index) => {
     const buttonId = `${sectionName}-${index}`.replace(/\s+/g, '-');
-    const quantities = PRODUCT_QUANTITIES[product.name] || [0, 0, 0];
+    
+    // Determinar las cantidades: usar las del producto del admin si existen, sino las predefinidas
+    let quantities;
+    if (product.quantities && Array.isArray(product.quantities) && product.quantities.length > 0) {
+      // Usar las cantidades del producto del admin
+      quantities = product.quantities;
+    } else {
+      // Usar las cantidades predefinidas o valores por defecto
+      quantities = PRODUCT_QUANTITIES[product.name] || [0, 0, 0];
+    }
     
     // Determinar la imagen a usar: Supabase URL si existe, sino imagen local
     let imageSrc;
@@ -5022,6 +5031,8 @@ function combineProductsWithAdmin(originalSections) {
       isNew: adminProduct.is_new,
       hasQuantityAlert: adminProduct.has_quantity_alert,
       minQuantity: adminProduct.min_quantity,
+      // Añadir cantidades del admin
+      quantities: adminProduct.quantities || [],
       // Añadir información de imagen si existe
       imageUrl: adminProduct.image_url || null,
       imageData: adminProduct.image_data || null,
