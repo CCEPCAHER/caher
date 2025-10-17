@@ -4021,8 +4021,24 @@ function createSection(sectionName, products) {
     // Determinar la imagen a usar: Supabase URL si existe, sino imagen local
     let imageSrc;
     if (product.imageUrl) {
-      // Usar imagen de Supabase
-      imageSrc = product.imageUrl;
+      // Verificar si es una URL de Supabase o un ID local
+      if (product.imageUrl.startsWith('http')) {
+        // Es una URL completa de Supabase
+        imageSrc = product.imageUrl;
+      } else {
+        // Es un ID local, intentar obtener desde Supabase Storage
+        try {
+          const { data } = supabase.storage
+            .from('product-images')
+            .getPublicUrl(product.imageUrl + '.jpg');
+          imageSrc = data.publicUrl;
+        } catch (error) {
+          console.warn('Error obteniendo URL de Supabase:', error);
+          // Fallback a imagen local
+          const imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
+          imageSrc = `images/${imageName}`;
+        }
+      }
     } else {
       // Usar imagen local por defecto
       const imageName = `${sectionName.toLowerCase().replace(/\s+/g, '_')}_${index}.jpg`;
