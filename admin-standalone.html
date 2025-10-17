@@ -2608,7 +2608,7 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                         const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
                         
                         // Obtener el nombre final de la imagen (manual o automático)
-                        const finalImageName = await getFinalImageName();
+                        const finalImageName = await getFinalImageName(file);
                         if (!finalImageName) {
                             reject(new Error('No se pudo generar nombre para la imagen'));
                             return;
@@ -2995,11 +2995,14 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
         }
 
         // Función para obtener el nombre final de la imagen
-        async function getFinalImageName() {
+        async function getFinalImageName(file = null) {
+            console.log('🔍 getFinalImageName llamada con archivo:', file ? file.name : 'null');
+            
             const customNameInput = document.getElementById('custom-image-name');
             const customName = customNameInput ? customNameInput.value.trim() : '';
             
             if (customName) {
+                console.log('📝 Usando nombre personalizado:', customName);
                 const validation = validateCustomImageName(customName);
                 if (!validation.valid) {
                     showNotification(validation.message, 'error');
@@ -3010,14 +3013,29 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             
             // Usar nombre automático
             const sectionSelect = document.getElementById('product-section');
-            const fileInput = document.getElementById('product-image');
             
-            if (sectionSelect && fileInput && fileInput.files && fileInput.files[0]) {
+            // Si se pasa un archivo como parámetro, usarlo; sino buscar en el input
+            let fileName = null;
+            if (file) {
+                fileName = file.name;
+                console.log('📁 Usando archivo del parámetro:', fileName);
+            } else {
+                const fileInput = document.getElementById('product-image');
+                if (fileInput && fileInput.files && fileInput.files[0]) {
+                    fileName = fileInput.files[0].name;
+                    console.log('📁 Usando archivo del input:', fileName);
+                }
+            }
+            
+            if (sectionSelect && fileName) {
                 const selectedSection = sectionSelect.value || 'general';
-                const imageInfo = await generateImageName(selectedSection, fileInput.files[0].name);
+                console.log('🏷️ Generando nombre automático para sección:', selectedSection, 'archivo:', fileName);
+                const imageInfo = await generateImageName(selectedSection, fileName);
+                console.log('✅ Nombre generado:', imageInfo.fileName);
                 return imageInfo.fileName;
             }
             
+            console.error('❌ No se pudo generar nombre - sectionSelect:', !!sectionSelect, 'fileName:', fileName);
             return null;
         }
 
