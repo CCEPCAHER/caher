@@ -2608,7 +2608,7 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
                         const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
                         
                         // Obtener el nombre final de la imagen (manual o automático)
-                        const finalImageName = getFinalImageName();
+                        const finalImageName = await getFinalImageName();
                         if (!finalImageName) {
                             reject(new Error('No se pudo generar nombre para la imagen'));
                             return;
@@ -2688,30 +2688,45 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             const selectedSection = sectionSelect ? sectionSelect.value : 'general';
             
             // Generar nombre automático para mostrar
-            const imageInfo = generateImageName(selectedSection, file.name);
-            
-            // Establecer el nombre automático en el campo personalizado
-            const customNameInput = document.getElementById('custom-image-name');
-            if (customNameInput) {
-                customNameInput.value = imageInfo.fileName;
-            }
+            generateImageName(selectedSection, file.name).then(imageInfo => {
+                // Establecer el nombre automático en el campo personalizado
+                const customNameInput = document.getElementById('custom-image-name');
+                if (customNameInput) {
+                    customNameInput.value = imageInfo.fileName;
+                }
 
-            // Mostrar preview inmediato
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                previewImg.src = e.target.result;
-                previewName.innerHTML = `
-                    <strong>Archivo original:</strong> ${file.name}<br>
-                    <strong>Nombre automático:</strong> ${imageInfo.fileName}<br>
-                    <small style="color: #666;">Producto #${imageInfo.nextNumber} en sección "${selectedSection}"</small>
-                `;
-                previewSize.textContent = `Tamaño original: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
-                preview.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
+                // Mostrar preview inmediato
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewName.innerHTML = `
+                        <strong>Archivo original:</strong> ${file.name}<br>
+                        <strong>Nombre automático:</strong> ${imageInfo.fileName}<br>
+                        <small style="color: #666;">Imagen #${imageInfo.nextNumber} en sección "${selectedSection}"</small>
+                    `;
+                    previewSize.textContent = `Tamaño original: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
 
-            // Ocultar zona de carga
-            document.querySelector('.upload-zone').style.display = 'none';
+                // Ocultar zona de carga
+                document.querySelector('.upload-zone').style.display = 'none';
+            }).catch(error => {
+                console.error('Error generando nombre de imagen:', error);
+                
+                // Mostrar preview sin nombre automático
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewName.textContent = file.name;
+                    previewSize.textContent = `Tamaño original: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+
+                // Ocultar zona de carga
+                document.querySelector('.upload-zone').style.display = 'none';
+            });
         }
 
         // Función para actualizar el estado de la imagen
@@ -2829,7 +2844,7 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
         }
 
         // Función para generar nombre único de imagen
-        function generateImageName(sectionName, originalFileName) {
+        async function generateImageName(sectionName, originalFileName) {
             // Limpiar el nombre de la sección para el archivo
             const cleanSectionName = sectionName
                 .toLowerCase()
@@ -2840,22 +2855,62 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             const extension = originalFileName.split('.').pop().toLowerCase();
             const finalExtension = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension) ? 'jpg' : 'jpg';
             
-            // Contar productos existentes en la sección
-            const existingCount = countProductsInSection(sectionName);
-            
-            // Generar número secuencial (empezar desde el siguiente)
-            const nextNumber = existingCount + 1;
-            
-            // Crear nombre único
-            const imageName = `${cleanSectionName}_${nextNumber}.${finalExtension}`;
-            
-            console.log(`Generando nombre de imagen: ${imageName} (sección: ${sectionName}, productos existentes: ${existingCount})`);
-            
-            return {
-                fileName: imageName,
-                sectionCount: existingCount,
-                nextNumber: nextNumber
-            };
+            try {
+                // Buscar imágenes existentes en Supabase Storage para esta sección
+                const { data: existingImages, error } = await supabase.storage
+                    .from('product-images')
+                    .list('', {
+                        search: `${cleanSectionName}_`
+                    });
+                
+                let nextNumber = 1;
+                
+                if (!error && existingImages && existingImages.length > 0) {
+                    // Extraer números de las imágenes existentes y encontrar el siguiente disponible
+                    const existingNumbers = existingImages
+                        .filter(img => img.name.startsWith(`${cleanSectionName}_`) && img.name.endsWith('.jpg'))
+                        .map(img => {
+                            const match = img.name.match(new RegExp(`${cleanSectionName}_(\\d+)\\.jpg`));
+                            return match ? parseInt(match[1]) : 0;
+                        })
+                        .filter(num => num > 0)
+                        .sort((a, b) => b - a); // Ordenar de mayor a menor
+                    
+                    // Encontrar el siguiente número disponible
+                    if (existingNumbers.length > 0) {
+                        nextNumber = existingNumbers[0] + 1;
+                    }
+                    
+                    console.log(`Imágenes existentes para ${cleanSectionName}:`, existingNumbers, `Siguiente número: ${nextNumber}`);
+                } else if (error) {
+                    console.warn('Error al verificar imágenes existentes:', error);
+                    // Fallback: usar timestamp para evitar conflictos
+                    nextNumber = Date.now();
+                }
+                
+                // Crear nombre único
+                const imageName = `${cleanSectionName}_${nextNumber}.${finalExtension}`;
+                
+                console.log(`Generando nombre de imagen: ${imageName} (sección: ${sectionName})`);
+                
+                return {
+                    fileName: imageName,
+                    nextNumber: nextNumber,
+                    isUnique: true
+                };
+                
+            } catch (error) {
+                console.error('Error generando nombre de imagen:', error);
+                // Fallback: usar timestamp para garantizar unicidad
+                const timestamp = Date.now();
+                const imageName = `${cleanSectionName}_${timestamp}.${finalExtension}`;
+                
+                return {
+                    fileName: imageName,
+                    nextNumber: timestamp,
+                    isUnique: true
+                };
+            }
         }
 
         // Función para volver a la pantalla principal
@@ -2887,11 +2942,16 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             
             if (customNameInput && sectionSelect && fileInput && fileInput.files && fileInput.files[0]) {
                 const selectedSection = sectionSelect.value || 'general';
-                const imageInfo = generateImageName(selectedSection, fileInput.files[0].name);
-                customNameInput.value = imageInfo.fileName;
-                
-                // Actualizar el preview
-                showImagePreview(fileInput.files[0]);
+                generateImageName(selectedSection, fileInput.files[0].name).then(imageInfo => {
+                    customNameInput.value = imageInfo.fileName;
+                    
+                    // Actualizar el preview
+                    showImagePreview(fileInput.files[0]);
+                }).catch(error => {
+                    console.error('Error generando nombre de imagen:', error);
+                    // Actualizar el preview sin nombre automático
+                    showImagePreview(fileInput.files[0]);
+                });
             }
         }
 
@@ -2935,7 +2995,7 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
         }
 
         // Función para obtener el nombre final de la imagen
-        function getFinalImageName() {
+        async function getFinalImageName() {
             const customNameInput = document.getElementById('custom-image-name');
             const customName = customNameInput ? customNameInput.value.trim() : '';
             
@@ -2954,7 +3014,7 @@ CREATE INDEX IF NOT EXISTS idx_products_image_url ON products(image_url) WHERE i
             
             if (sectionSelect && fileInput && fileInput.files && fileInput.files[0]) {
                 const selectedSection = sectionSelect.value || 'general';
-                const imageInfo = generateImageName(selectedSection, fileInput.files[0].name);
+                const imageInfo = await generateImageName(selectedSection, fileInput.files[0].name);
                 return imageInfo.fileName;
             }
             
